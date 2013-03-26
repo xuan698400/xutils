@@ -10,7 +10,7 @@ import java.sql.Types;
 import com.xuan.utils.interfaces.InSQLProcessor;
 
 /**
- * JDBC 工具类
+ * JDBC 工具类,
  * 
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:13:34 $
