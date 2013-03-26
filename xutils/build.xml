@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="${app.name}" default="help">
+
+    <property file="build.properties" />
+    
+    <target name="help">
+        <echo message="" />
+        <echo message="${app.name} build file" />
+        <echo message="-----------------------------------" />
+        <echo message="" />
+        <echo message="Available targets are:" />
+        <echo message="" />
+        <echo message="compile                 --> Compile sources" />
+        <echo message="" />
+        <echo message="jar                     --> Jar classes" />
+        <echo message="" />
+        <echo message="clean                   --> Delete package dir" />
+        <echo message="" />
+    </target>
+    
+    <!-- 删除package文件夹 -->
+    <target name="clean">
+        <delete dir="${package.dir}" />
+    </target>
+    
+    <!-- 编译源文件 -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${package.classes.dir}" />
+        <javac srcdir="${src.dir}" destdir="${package.classes.dir}" failonerror="true" verbose="true" />
+    </target>
+    
+    <!-- 归档字节码 -->
+    <target name="jar" depends="compile">
+        <jar destfile="${package.dir}/${app.name}-${app.version}.jar" basedir="${package.classes.dir}" />
+    </target>
+    
+</project>
