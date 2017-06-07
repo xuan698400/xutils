@@ -1,6 +1,9 @@
-package com.xuan.xutils;
+package com.xuan.xutils.jdbc;
 
-import com.xuan.xutils.interfaces.InSQLProcessor;
+import com.xuan.xutils.DateUtils;
+import com.xuan.xutils.jdbc.helper.InSQLProcessor;
+import com.xuan.xutils.jdbc.helper.PairKeyword;
+import com.xuan.xutils.jdbc.helper.PairKeywordComparator;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -8,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * JDBC 工具类,
@@ -82,12 +87,12 @@ public abstract class JdbcUtils {
             lowerCaseSql = normalSql.toLowerCase();
         }
 
-        int fromIndex = StringUtils.getFirstPairIndex(lowerCaseSql, "select ", " from ");
+        int fromIndex = getFirstPairIndex(lowerCaseSql, "select ", " from ");
         if (fromIndex == -1) {
             throw new IllegalArgumentException("Could not get count sql[" + sql + "]");
         }
 
-        int groupByIndex = StringUtils.getFirstPairIndex(lowerCaseSql, " group ", " by ");
+        int groupByIndex = getFirstPairIndex(lowerCaseSql, " group ", " by ");
         if (groupByIndex != -1 || lowerCaseSql.contains(" union ")) {
             return "SELECT COUNT(1) FROM (" + normalSql + ") temp_rs";
         }
@@ -282,6 +287,70 @@ public abstract class JdbcUtils {
         default:
             return rs.getObject(columnIndex);
         }
+    }
+
+    /**
+     * 获得成对出现的第一个关键字对应的关键字的位置。
+     *
+     * @param str
+     * @param keyword
+     *            关键字，例如：select
+     * @param oppositeKeyword
+     *            对应的关键字，例如：from
+     * @return 第一个关键字对应的关键字的位置
+     */
+    private static int getFirstPairIndex(String str, String keyword, String oppositeKeyword) {
+        ArrayList<PairKeyword> keywordArray = new ArrayList<PairKeyword>();
+        int index = -1;
+        while ((index = str.indexOf(keyword, index)) != -1) {
+            keywordArray.add(new PairKeyword(keyword, index));
+            index += keyword.length();
+        }
+
+        index = -1;
+        while ((index = str.indexOf(oppositeKeyword, index)) != -1) {
+            keywordArray.add(new PairKeyword(oppositeKeyword, index));
+            index += oppositeKeyword.length();
+        }
+
+        if (keywordArray.size() < 2) {
+            return -1;
+        }
+
+        Collections.sort(keywordArray, new PairKeywordComparator());
+
+        PairKeyword firstKeyword = keywordArray.get(0);
+        if (!firstKeyword.getName().equals(keyword)) {
+            return -1;
+        }
+
+        while (keywordArray.size() > 2) {
+            boolean hasOpposite = false;
+            for (int i = 2; i < keywordArray.size(); i++) {
+                PairKeyword keyword0 = keywordArray.get(i - 1);
+                PairKeyword keyword1 = keywordArray.get(i);
+                if (keyword0.getName().equals(keyword) && keyword1.getName().equals(oppositeKeyword)) {
+                    keywordArray.remove(i);
+                    keywordArray.remove(i - 1);
+                    hasOpposite = true;
+                    break;
+                }
+            }
+            if (!hasOpposite) {
+                return -1;
+            }
+        }
+
+        if (keywordArray.size() != 2) {
+            return -1;
+        }
+
+        PairKeyword lastKeyword = keywordArray.get(1);
+        if (!lastKeyword.getName().equals(oppositeKeyword)) {
+            return -1;
+        }
+
+        return lastKeyword.getIndex();
     }
 
 }

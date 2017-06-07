@@ -31,7 +31,7 @@ public abstract class URLUtils {
 
     private static int BUFFER_SIZE = 1024 * 4; // 4K
 
-    private static String charSet = "GBK";
+    private static String charSet = "UTF-8";
 
     /**
      * 设置字母集
@@ -43,7 +43,7 @@ public abstract class URLUtils {
     }
 
     /**
-     * 拼接URL，参数从obj中通过反射取得
+     * 拼接URL，参数值从obj中通过反射取得
      * 
      * @param url
      *            URL

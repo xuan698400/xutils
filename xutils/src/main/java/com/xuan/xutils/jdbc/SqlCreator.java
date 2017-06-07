@@ -1,28 +1,27 @@
-package com.xuan.xutils;
+package com.xuan.xutils.jdbc;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 动态查询 SQL 语句生成工具类
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:35:37 $
  */
 public class SqlCreator {
 
     private final StringBuilder sql;
-    private final List<Object> args;
+    private final List<Object>  args;
     private final List<Integer> argTypes;
     private boolean hasOrderBy = false;
-    private boolean hasWhere = true;
-    private boolean isFirst = true;
+    private boolean hasWhere   = true;
+    private boolean isFirst    = true;
 
     /**
      * 构造方法。
-     * 
-     * @param baseSQL
-     *            带有 WHERE 关键字的原始 sql
+     *
+     * @param baseSQL 带有 WHERE 关键字的原始 sql
      */
     public SqlCreator(String baseSQL) {
         this(baseSQL, true);
@@ -30,14 +29,12 @@ public class SqlCreator {
 
     /**
      * 构造方法。
-     * 
-     * @param baseSQL
-     *            原始 sql
-     * @param hasWhere
-     *            原始 sql 是否带有 WHERE 关键字
+     *
+     * @param baseSQL  原始 sql
+     * @param hasWhere 原始 sql 是否带有 WHERE 关键字
      */
     public SqlCreator(String baseSQL, boolean hasWhere) {
-        if (Validators.isEmpty(baseSQL)) {
+        if (baseSQL == null || baseSQL.trim().length() == 0) {
             throw new IllegalArgumentException("baseSQL can't be null");
         }
 
@@ -50,13 +47,10 @@ public class SqlCreator {
 
     /**
      * 增加查询条件
-     * 
-     * @param operator
-     *            操作，比如：AND、OR
-     * @param expression
-     *            表达式，比如：id=1
-     * @param precondition
-     *            先决条件，当为true时才会增加查询条件，比如 user != null
+     *
+     * @param operator     操作，比如：AND、OR
+     * @param expression   表达式，比如：id=1
+     * @param precondition 先决条件，当为true时才会增加查询条件，比如 user != null
      */
     public void addExpression(String operator, String expression, boolean precondition) {
         addExpression(operator, expression, null, precondition);
@@ -64,15 +58,11 @@ public class SqlCreator {
 
     /**
      * 增加查询条件
-     * 
-     * @param operator
-     *            操作，比如：AND、OR
-     * @param expression
-     *            表达式，比如：id=?
-     * @param arg
-     *            表达式中的参数的值
-     * @param precondition
-     *            先决条件，当为true时才会增加查询条件，比如 id != null
+     *
+     * @param operator     操作，比如：AND、OR
+     * @param expression   表达式，比如：id=?
+     * @param arg          表达式中的参数的值
+     * @param precondition 先决条件，当为true时才会增加查询条件，比如 id != null
      */
     public void addExpression(String operator, String expression, Object arg, boolean precondition) {
         addExpression(operator, expression, arg, Integer.MIN_VALUE, precondition);
@@ -80,17 +70,12 @@ public class SqlCreator {
 
     /**
      * 增加查询条件
-     * 
-     * @param operator
-     *            操作，比如：AND、OR
-     * @param expression
-     *            表达式，比如：id=?
-     * @param arg
-     *            表达式中的参数的值
-     * @param argType
-     *            表达式中的参数的类型
-     * @param precondition
-     *            先决条件，当为true时才会增加查询条件，比如 id != null
+     *
+     * @param operator     操作，比如：AND、OR
+     * @param expression   表达式，比如：id=?
+     * @param arg          表达式中的参数的值
+     * @param argType      表达式中的参数的类型
+     * @param precondition 先决条件，当为true时才会增加查询条件，比如 id != null
      */
     public void addExpression(String operator, String expression, Object arg, int argType, boolean precondition) {
         if (precondition) {
@@ -99,13 +84,11 @@ public class SqlCreator {
                     if (!sql.toString().toLowerCase().endsWith("where")) {
                         sql.append(" " + operator);
                     }
-                }
-                else {
+                } else {
                     sql.append(" WHERE");
                 }
                 isFirst = false;
-            }
-            else {
+            } else {
                 sql.append(" " + operator);
             }
 
@@ -123,11 +106,9 @@ public class SqlCreator {
 
     /**
      * 增加AND查询条件
-     * 
-     * @param expression
-     *            表达式
-     * @param precondition
-     *            先决条件
+     *
+     * @param expression   表达式
+     * @param precondition 先决条件
      */
     public void and(String expression, boolean precondition) {
         addExpression("AND", expression, precondition);
@@ -135,13 +116,10 @@ public class SqlCreator {
 
     /**
      * 增加AND查询条件
-     * 
-     * @param expression
-     *            表达式
-     * @param arg
-     *            参数的值
-     * @param precondition
-     *            先决条件
+     *
+     * @param expression   表达式
+     * @param arg          参数的值
+     * @param precondition 先决条件
      */
     public void and(String expression, Object arg, boolean precondition) {
         addExpression("AND", expression, arg, precondition);
@@ -149,15 +127,11 @@ public class SqlCreator {
 
     /**
      * 增加AND查询条件
-     * 
-     * @param expression
-     *            表达式
-     * @param arg
-     *            参数的值
-     * @param argType
-     *            参数的类型
-     * @param precondition
-     *            先决条件
+     *
+     * @param expression   表达式
+     * @param arg          参数的值
+     * @param argType      参数的类型
+     * @param precondition 先决条件
      */
     public void and(String expression, Object arg, int argType, boolean precondition) {
         addExpression("AND", expression, arg, argType, precondition);
@@ -165,15 +139,11 @@ public class SqlCreator {
 
     /**
      * 增加 AND IN 查询条件，比如AND id IN (?, ?, ?);
-     * 
-     * @param columnName
-     *            列名称，比如 id
-     * @param args
-     *            参数的值数组，比如 new String[] {"1", "2", "3"}
-     * @param argType
-     *            参数的类型
-     * @param precondition
-     *            先决条件
+     *
+     * @param columnName   列名称，比如 id
+     * @param args         参数的值数组，比如 new String[] {"1", "2", "3"}
+     * @param argType      参数的类型
+     * @param precondition 先决条件
      */
     public void andIn(String columnName, Object[] args, int argType, boolean precondition) {
         if (precondition && args.length > 0) {
@@ -182,14 +152,12 @@ public class SqlCreator {
                     if (!sql.toString().toLowerCase().endsWith("where")) {
                         sql.append(" AND");
                     }
-                }
-                else {
+                } else {
                     sql.append(" WHERE");
                 }
                 sql.append(" ");
                 isFirst = false;
-            }
-            else {
+            } else {
                 sql.append(" AND ");
             }
 
@@ -205,11 +173,9 @@ public class SqlCreator {
 
     /**
      * 增加OR查询条件
-     * 
-     * @param expression
-     *            表达式
-     * @param precondition
-     *            先决条件
+     *
+     * @param expression   表达式
+     * @param precondition 先决条件
      */
     public void or(String expression, boolean precondition) {
         addExpression("OR", expression, precondition);
@@ -217,13 +183,10 @@ public class SqlCreator {
 
     /**
      * 增加OR查询条件
-     * 
-     * @param expression
-     *            表达式
-     * @param arg
-     *            参数的值
-     * @param precondition
-     *            先决条件
+     *
+     * @param expression   表达式
+     * @param arg          参数的值
+     * @param precondition 先决条件
      */
     public void or(String expression, Object arg, boolean precondition) {
         addExpression("OR", expression, arg, precondition);
@@ -231,15 +194,11 @@ public class SqlCreator {
 
     /**
      * 增加OR查询条件
-     * 
-     * @param expression
-     *            表达式
-     * @param arg
-     *            参数的值
-     * @param argType
-     *            参数的类型
-     * @param precondition
-     *            先决条件
+     *
+     * @param expression   表达式
+     * @param arg          参数的值
+     * @param argType      参数的类型
+     * @param precondition 先决条件
      */
     public void or(String expression, Object arg, int argType, boolean precondition) {
         addExpression("OR", expression, arg, argType, precondition);
@@ -247,12 +206,11 @@ public class SqlCreator {
 
     /**
      * 添加 GROUP BY 语句。
-     * 
-     * @param columnNames
-     *            列名
+     *
+     * @param columnNames 列名
      */
     public void groupBy(String... columnNames) {
-        if (Validators.isEmpty(columnNames)) {
+        if (columnNames == null || columnNames.length == 0 || (columnNames.length == 1 && columnNames[0] == null)) {
             return;
         }
 
@@ -265,9 +223,8 @@ public class SqlCreator {
 
     /**
      * 升序排序
-     * 
-     * @param columnName
-     *            列名
+     *
+     * @param columnName 列名
      */
     public void orderBy(String columnName) {
         orderBy(columnName, false);
@@ -275,9 +232,8 @@ public class SqlCreator {
 
     /**
      * 降序排序
-     * 
-     * @param columnName
-     *            列名
+     *
+     * @param columnName 列名
      */
     public void orderByDesc(String columnName) {
         orderBy(columnName, true);
@@ -285,17 +241,14 @@ public class SqlCreator {
 
     /**
      * 排序
-     * 
-     * @param columnName
-     *            列名
-     * @param isDesc
-     *            是否降序
+     *
+     * @param columnName 列名
+     * @param isDesc     是否降序
      */
     public void orderBy(String columnName, boolean isDesc) {
         if (!hasOrderBy) {
             sql.append(" ORDER BY ");
-        }
-        else {
+        } else {
             sql.append(", ");
         }
 
@@ -309,7 +262,7 @@ public class SqlCreator {
 
     /**
      * 取得所有参数的值数组
-     * 
+     *
      * @return 所有参数的值数组
      */
     public Object[] getArgs() {
@@ -318,7 +271,7 @@ public class SqlCreator {
 
     /**
      * 取得所有参数的类型数组
-     * 
+     *
      * @return 所有参数的类型数组
      */
     public int[] getArgTypes() {
@@ -332,7 +285,7 @@ public class SqlCreator {
 
     /**
      * 取得最后生成查询sql
-     * 
+     *
      * @return 查询sql
      */
     public String getSQL() {

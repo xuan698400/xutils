@@ -1,4 +1,4 @@
-package com.xuan.xutils.helper;
+package com.xuan.xutils.jdbc.helper;
 
 import java.util.Comparator;
 

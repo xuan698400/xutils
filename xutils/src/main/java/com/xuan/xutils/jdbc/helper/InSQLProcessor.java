@@ -1,4 +1,4 @@
-package com.xuan.xutils.interfaces;
+package com.xuan.xutils.jdbc.helper;
 
 /**
  * SQL执行处理器接口, 用于处理带IN子句的SQL语句中IN中参数过长的问题

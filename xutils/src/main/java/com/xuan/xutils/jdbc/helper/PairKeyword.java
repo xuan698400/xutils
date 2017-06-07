@@ -1,4 +1,4 @@
-package com.xuan.xutils.helper;
+package com.xuan.xutils.jdbc.helper;
 
 /**
  * 关键字对，用于列表排序

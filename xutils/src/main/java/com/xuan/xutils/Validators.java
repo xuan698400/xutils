@@ -1,11 +1,12 @@
 package com.xuan.xutils;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
  * 一些基本的字符串,集合,数字等校验工具
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午9:44:21 $
  */
@@ -36,12 +37,10 @@ public abstract class Validators {
      */
     private static final String REGEX_EMAIL = ".+@.+\\.[a-z]+";
 
-
     /**
      * 判断字符串是否只包含字母和数字.
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return 如果字符串只包含字母和数字, 则返回 <code>true</code>, 否则返回 <code>false</code>.
      */
     public static boolean isAlphanumeric(String str) {
@@ -52,7 +51,7 @@ public abstract class Validators {
      * <p>
      * Checks if a String is whitespace, empty ("") or null.
      * </p>
-     *
+     * <p>
      * <pre>
      *   Validators.isBlank(null)                = true
      *   Validators.isBlank(&quot;&quot;)        = true
@@ -60,9 +59,8 @@ public abstract class Validators {
      *   Validators.isBlank(&quot;bob&quot;)     = false
      *   Validators.isBlank(&quot;  bob  &quot;) = false
      * </pre>
-     * 
-     * @param str
-     *            the String to check, may be null
+     *
+     * @param str the String to check, may be null
      * @return <code>true</code> if the String is null, empty or whitespace
      */
     public static boolean isBlank(String str) {
@@ -80,14 +78,13 @@ public abstract class Validators {
 
     /**
      * 是否是合法的日期字符串(类似格式:2017-03-01是合法的)
-     *
+     * <p>
      * <pre>
      *   Validators.isBlank(&quot;2017-03-01&quot;)       = true
      *   Validators.isBlank(&quot;2017-0301&quot;)        = false
      * </pre>
      *
-     * @param str
-     *            日期字符串
+     * @param str 日期字符串
      * @return 是true，否则false
      */
     public static boolean isDate(String str) {
@@ -113,14 +110,13 @@ public abstract class Validators {
 
     /**
      * 是否是合法的日期时间字符串
-     *
+     * <p>
      * <pre>
      *   Validators.isDateTime(&quot;2017-03-01 12:03:01&quot;)       = true
      *   Validators.isDateTime(&quot;2017-03-01 12:0301&quot;)        = false
      * </pre>
-     * 
-     * @param str
-     *            日期时间字符串
+     *
+     * @param str 日期时间字符串
      * @return 是true，否则false
      */
     public static boolean isDateTime(String str) {
@@ -139,9 +135,8 @@ public abstract class Validators {
 
     /**
      * 判断字符串是否是合法的电子邮箱地址.
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return 是true，否则false
      */
     public static boolean isEmail(String str) {
@@ -150,7 +145,7 @@ public abstract class Validators {
 
     /**
      * 当数组为<code>null</code>, 或者长度为0, 或者长度为1且元素的值为<code>null</code>时返回 <code>true</code>.
-     * 
+     *
      * @param args
      * @return true/false
      */
@@ -160,9 +155,8 @@ public abstract class Validators {
 
     /**
      * 字符串是否为Empty，null和空格都算是Empty
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return true/false
      */
     public static boolean isEmpty(String str) {
@@ -171,11 +165,9 @@ public abstract class Validators {
 
     /**
      * 判断集合是否为空。
-     * 
-     * @param <T>
-     *            集合泛型
-     * @param collection
-     *            集合对象
+     *
+     * @param <T>        集合泛型
+     * @param collection 集合对象
      * @return 当集合对象为 <code>null</code> 或者长度为零时返回 <code>true</code>，否则返回 <code>false</code>。
      */
     public static <T> boolean isEmpty(Collection<T> collection) {
@@ -183,12 +175,23 @@ public abstract class Validators {
     }
 
     /**
+     * 判断Map是否为空
+     *
+     * @param map Map对象
+     * @param <K>
+     * @param <V>
+     * @return 当Map对象为 <code>null</code> 或者元素为空是返回 <code>true</code>，否则返回 <code>false</code>。
+     */
+    public static <K, V> boolean isEmptyMap(Map<K, V> map) {
+        return map == null || map.isEmpty();
+    }
+
+    /**
      * <p>
      * Validating for ID card number.
      * </p>
-     * 
-     * @param str
-     *            string to be validated
+     *
+     * @param str string to be validated
      * @return If the str is valid ID card number return <code>true</code>, otherwise return <code>false</code>.
      */
     public static boolean isIdCardNumber(String str) {
@@ -198,9 +201,8 @@ public abstract class Validators {
 
     /**
      * 是否为数字的字符串。
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return true/false
      */
     public static boolean isNumber(String str) {
@@ -218,7 +220,7 @@ public abstract class Validators {
 
     /**
      * 是否是固定范围内的数字的字符串
-     * 
+     *
      * @param str
      * @param min
      * @param max
@@ -235,9 +237,8 @@ public abstract class Validators {
 
     /**
      * 判断字符是否为整数或浮点数. <br>
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return 若为整数或浮点数则返回 <code>true</code>, 否则返回 <code>false</code>
      */
     public static boolean isNumeric(String str) {
@@ -246,11 +247,9 @@ public abstract class Validators {
 
     /**
      * 判断字符是否为符合精度要求的整数或浮点数。
-     * 
-     * @param str
-     *            字符串
-     * @param fractionNum
-     *            小数部分的最多允许的位数
+     *
+     * @param str         字符串
+     * @param fractionNum 小数部分的最多允许的位数
      * @return 若为整数或浮点数则返回 <code>true</code>, 否则返回 <code>false</code>
      */
     public static boolean isNumeric(String str, int fractionNum) {
@@ -265,9 +264,8 @@ public abstract class Validators {
 
     /**
      * 判断是否是合法的邮编
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return true/false
      */
     public static boolean isPostcode(String str) {
@@ -284,7 +282,7 @@ public abstract class Validators {
 
     /**
      * 判断是否是固定长度范围内的字符串
-     * 
+     *
      * @param str
      * @param minLength
      * @param maxLength
@@ -297,20 +295,17 @@ public abstract class Validators {
 
         if (minLength < 0) {
             return str.length() <= maxLength;
-        }
-        else if (maxLength < 0) {
+        } else if (maxLength < 0) {
             return str.length() >= minLength;
-        }
-        else {
+        } else {
             return str.length() >= minLength && str.length() <= maxLength;
         }
     }
 
     /**
      * 判断是否是合法的时间字符串。
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return true/false
      */
     public static boolean isTime(String str) {
@@ -336,9 +331,8 @@ public abstract class Validators {
 
     /**
      * 是否是简体中文字符串。
-     * 
-     * @param str
-     *            字符串
+     *
+     * @param str 字符串
      * @return true/false
      */
     public static boolean isSimpleChinese(String str) {
@@ -347,11 +341,9 @@ public abstract class Validators {
 
     /**
      * 判断字符串是否匹配了正则表达式。
-     * 
-     * @param str
-     *            字符串
-     * @param regex
-     *            正则表达式
+     *
+     * @param str   字符串
+     * @param regex 正则表达式
      * @return true/false
      */
     public static boolean isRegexMatch(String str, String regex) {
