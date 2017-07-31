@@ -12,16 +12,17 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-
 /**
  * 默认的简单缓存实现类
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:44:23 $
  */
 public class SimpleCache implements Cache<String, Object> {
 
-    /** 缓存类的名称 */
+    /**
+     * 缓存类的名称
+     */
     private final String CACHE_NAME = SimpleCache.class.getName();
 
     /**
@@ -29,16 +30,24 @@ public class SimpleCache implements Cache<String, Object> {
      */
     private static final int MODULE_SIZE = 10;
 
-    /** 清理超时缓存的服务运行的时间间隔，默认 10 分钟 */
+    /**
+     * 清理超时缓存的服务运行的时间间隔，默认 10 分钟
+     */
     private static final int EXPIRY_INTERVAL = 10;
 
-    /** 具体存放缓存的 map 数组 */
+    /**
+     * 具体存放缓存的 map 数组
+     */
     private final ConcurrentMap<String, Object>[] cacheMaps;
 
-    /** 存放缓存超时时间的 map */
+    /**
+     * 存放缓存超时时间的 map
+     */
     private final Map<String, Long> cacheTimeMap;
 
-    /** 清理超时缓存的服务 */
+    /**
+     * 清理超时缓存的服务
+     */
     private final ScheduledExecutorService executorService;
 
     @SuppressWarnings("unchecked")
@@ -68,8 +77,7 @@ public class SimpleCache implements Cache<String, Object> {
 
         if (executorService.isShutdown()) {
             System.out.println(CACHE_NAME + " already destroyed");
-        }
-        else {
+        } else {
             executorService.shutdown();
             System.out.println(CACHE_NAME + " destroyed");
         }
@@ -231,8 +239,7 @@ public class SimpleCache implements Cache<String, Object> {
         countValue = counter.addAndGet(delta);
         if (countValue >= 0) {
             return countValue;
-        }
-        else {
+        } else {
             counter.compareAndSet(countValue, 0);
             return 0;
         }
@@ -298,6 +305,9 @@ public class SimpleCache implements Cache<String, Object> {
         return time != null && time > 0 && time <= System.currentTimeMillis();
     }
 
+    /**
+     * 清理获取缓存的任务
+     */
     private class CacheExpiryTask implements Runnable {
         @Override
         public void run() {

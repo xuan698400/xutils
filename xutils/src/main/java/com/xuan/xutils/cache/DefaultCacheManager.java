@@ -8,16 +8,20 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 默认的缓存管理器接口实现类
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:41:14 $
  */
 public class DefaultCacheManager implements CacheManager<Cache<String, Object>> {
 
-    // 缓存管理器是否已经被关闭
+    /**
+     * 缓存管理器是否已经被关闭
+     */
     private volatile boolean isShutdown = false;
 
-    // 缓存池
+    /**
+     * 缓存池
+     */
     private final ConcurrentHashMap<String, Cache<String, Object>> cachePool = new ConcurrentHashMap<String, Cache<String, Object>>();
 
     public DefaultCacheManager() {
@@ -60,11 +64,9 @@ public class DefaultCacheManager implements CacheManager<Cache<String, Object>> 
 
         try {
             cache.destroy();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // Ignore
-        }
-        finally {
+        } finally {
             cachePool.remove(cacheName);
         }
     }
@@ -108,8 +110,7 @@ public class DefaultCacheManager implements CacheManager<Cache<String, Object>> 
 
         try {
             destroyCaches();
-        }
-        finally {
+        } finally {
             cachePool.clear();
         }
     }
@@ -134,8 +135,7 @@ public class DefaultCacheManager implements CacheManager<Cache<String, Object>> 
 
             try {
                 cache.destroy();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // Ignore
             }
         }

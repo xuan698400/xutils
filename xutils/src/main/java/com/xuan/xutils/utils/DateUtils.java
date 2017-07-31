@@ -1,4 +1,4 @@
-package com.xuan.xutils;
+package com.xuan.xutils.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

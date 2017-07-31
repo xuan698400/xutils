@@ -26,7 +26,7 @@ public interface Cache<K, V> {
     V get(K key);
 
     /**
-     * 将数据新添加到缓存中。
+     * 将数据新添加到缓存中。如果相同 key 的缓存已经存在的话，不会替换原来,直接返回true.
      * 
      * @param key
      *            缓存键
@@ -37,7 +37,7 @@ public interface Cache<K, V> {
     boolean add(K key, V value);
 
     /**
-     * 将数据新添加到缓存中，并设置过期的时间点。
+     * 将数据新添加到缓存中，并设置过期的时间点。如果相同 key 的缓存已经存在的话，不会替换原来,直接返回true.
      * 
      * @param key
      *            缓存键
@@ -50,7 +50,7 @@ public interface Cache<K, V> {
     boolean add(K key, V value, Date expiry);
 
     /**
-     * 将数据新添加到缓存中，并设置超时时间。
+     * 将数据新添加到缓存中，并设置超时时间。如果相同 key 的缓存已经存在的话，不会替换原来,直接返回true.
      * 
      * @param key
      *            缓存键

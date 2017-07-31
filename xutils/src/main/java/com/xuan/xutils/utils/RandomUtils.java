@@ -1,4 +1,4 @@
-package com.xuan.xutils;
+package com.xuan.xutils.utils;
 
 /**
  * 生成随机数字、字符串的工具类

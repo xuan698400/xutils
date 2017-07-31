@@ -1,7 +1,7 @@
 package com.xuan.xutils.tabooed;
 
-import com.xuan.xutils.FileUtils;
-import com.xuan.xutils.Validators;
+import com.xuan.xutils.utils.FileUtils;
+import com.xuan.xutils.utils.Validators;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

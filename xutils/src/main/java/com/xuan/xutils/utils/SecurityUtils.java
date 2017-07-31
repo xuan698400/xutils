@@ -1,28 +1,27 @@
-package com.xuan.xutils;
+package com.xuan.xutils.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
  * 加解密工具类
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:10:59 $
  */
 public abstract class SecurityUtils {
 
-    private static final char[] chs = { 'L', 'K', 'J', '4', 'D', 'G', 'F', 'V', 'R', 'T', 'Y', 'B', 'N', 'U', 'P', 'W',
-            '3', 'E', '5', 'H', 'M', '7', 'Q', '9', 'S', 'A', 'Z', 'X', '8', 'C', '6', '2' };
+    private static final char[] chs = {'L', 'K', 'J', '4', 'D', 'G', 'F', 'V', 'R', 'T', 'Y', 'B', 'N', 'U', 'P', 'W',
+            '3', 'E', '5', 'H', 'M', '7', 'Q', '9', 'S', 'A', 'Z', 'X', '8', 'C', '6', '2'};
 
     /**
      * 自身混淆加密，最多只能加密 30 个字节长度的字符串。
-     * 
+     * <p>
      * <p>
      * <b>对同一个字符串，加密后的密文可能是不相同的，所以在判断密码是否相等时，不能采用密文进行比对，必须采用明文比对。</b>
      * </p>
-     * 
-     * @param source
-     *            源字符串
+     *
+     * @param source 源字符串
      * @return 加密后字符串
      * @see {@link #decodeBySelf(String)}
      */
@@ -47,8 +46,7 @@ public abstract class SecurityUtils {
             if ((i + 1) % 2 != 0) { // 奇数位
                 encodedBytes1[n1++] = (byte) get32Hi(plainTextBytes[i] * 4);
                 encodedBytes1[n1++] = (byte) get32Low(plainTextBytes[i] * 4);
-            }
-            else { // 偶数位
+            } else { // 偶数位
                 encodedBytes2[n2++] = (byte) get32Hi(plainTextBytes[i] * 4);
                 encodedBytes2[n2++] = (byte) get32Low(plainTextBytes[i] * 4);
             }
@@ -86,9 +84,8 @@ public abstract class SecurityUtils {
 
     /**
      * 自身混淆解密。如果不是合法的加密串（长度不是64个字节），会直接返回原字符串。
-     * 
-     * @param str
-     *            加密的字符串
+     *
+     * @param str 加密的字符串
      * @return 解密后字符串
      * @see {@link #encodeBySelf(String)}
      */
@@ -120,8 +117,7 @@ public abstract class SecurityUtils {
         int bb2l;
         if (sl % 2 == 0) {
             bb2l = sl;
-        }
-        else {
+        } else {
             bb2l = sl - 1;
         }
 
@@ -143,27 +139,24 @@ public abstract class SecurityUtils {
 
     /**
      * 使用 SHA1 加密。
-     * 
-     * @param str
-     *            源字符串
+     *
+     * @param str 源字符串
      * @return 加密后字符串
      */
     public static String encodeBySHA1(String str) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             md.update(str.getBytes());
-            return StringUtils.toHexString(md.digest());
-        }
-        catch (NoSuchAlgorithmException e) {
+            return com.xuan.xutils.utils.StringUtils.toHexString(md.digest());
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Could not encodeBySHA1", e);
         }
     }
 
     /**
      * 使用 MD5 对字符串加密。
-     * 
-     * @param str
-     *            源字符串
+     *
+     * @param str 源字符串
      * @return 加密后字符串
      */
     public static String encodeByMD5(String str) {
@@ -171,17 +164,15 @@ public abstract class SecurityUtils {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(str.getBytes());
             return StringUtils.toHexString(md.digest());
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Could not encodeByMD5", e);
         }
     }
 
     /**
      * 使用 MD5 对字节数组加密。
-     * 
-     * @param bytes
-     *            源字符 byte 数组
+     *
+     * @param bytes 源字符 byte 数组
      * @return 加密后字符串
      */
     public static String encodeByMD5(byte[] bytes) {
@@ -189,17 +180,15 @@ public abstract class SecurityUtils {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(bytes);
             return StringUtils.toHexString(md.digest());
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Could not encodeByMD5", e);
         }
     }
 
     /**
      * 使用36进制解码。
-     * 
-     * @param str
-     *            编码的字符串
+     *
+     * @param str 编码的字符串
      * @return 解码后字符串
      * @see {@link #encodeBy36Radix(String)}
      */
@@ -209,8 +198,7 @@ public abstract class SecurityUtils {
         byte[] bytes = null;
         if (length % 11 == 0) {
             bytes = new byte[length / 11 * 7];
-        }
-        else {
+        } else {
             bytes = new byte[(length / 11 + 1) * 7];
         }
 
@@ -220,8 +208,7 @@ public abstract class SecurityUtils {
             String sub = null;
             if (index + 11 < length) {
                 sub = str.substring(index, index + 11);
-            }
-            else {
+            } else {
                 sub = str.substring(index);
             }
 
@@ -242,9 +229,8 @@ public abstract class SecurityUtils {
 
     /**
      * 使用36进制进行编码。
-     * 
-     * @param str
-     *            源字符串
+     *
+     * @param str 源字符串
      * @return 编码后字符串
      * @see {@link #decodeBy36Radix(String)}
      */
@@ -259,8 +245,7 @@ public abstract class SecurityUtils {
 
             if (index + 7 < bytes.length) {
                 System.arraycopy(bytes, index, longBytes, 1, 7);
-            }
-            else {
+            } else {
                 int i = bytes.length - index;
                 System.arraycopy(bytes, index, longBytes, 8 - i, i);
                 isSeven = false;
@@ -270,8 +255,7 @@ public abstract class SecurityUtils {
 
             if (isSeven) {
                 StringBuilder.append(StringUtils.enoughZero(Long.toString(longval, 36), 11));
-            }
-            else {
+            } else {
                 StringBuilder.append(Long.toString(longval, 36));
             }
 

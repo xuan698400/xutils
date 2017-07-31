@@ -1,5 +1,6 @@
 package com.xuan.xutils;
 
+import com.xuan.xutils.utils.Validators;
 import org.junit.Assert;
 import org.junit.Test;
 

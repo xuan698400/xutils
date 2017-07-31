@@ -1,6 +1,6 @@
 package com.xuan.xutils.tabooed;
 
-import com.xuan.xutils.Validators;
+import com.xuan.xutils.utils.Validators;
 
 import java.util.Collection;
 import java.util.Collections;

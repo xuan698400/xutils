@@ -1,4 +1,4 @@
-package com.xuan.xutils;
+package com.xuan.xutils.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;

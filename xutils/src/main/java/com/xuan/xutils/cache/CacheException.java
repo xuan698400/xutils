@@ -7,8 +7,7 @@ package com.xuan.xutils.cache;
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:39:10 $
  */
 public class CacheException extends RuntimeException {
-
-    private static final long serialVersionUID = 7658954499327650558L;
+    private static final long serialVersionUID = 1L;
 
     public CacheException() {
         super();
