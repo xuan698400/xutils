@@ -1,6 +1,6 @@
 package com.xuan.xutils.tabooed;
 
-import com.xuan.xutils.utils.FileUtils;
+import com.xuan.xutils.io.IOUtils;
 import com.xuan.xutils.utils.Validators;
 
 import java.io.BufferedReader;
@@ -50,7 +50,8 @@ public class TabooedWords {
             // Ignore
         }
         finally {
-            FileUtils.close(reader);
+            IOUtils.closeQuietly(reader);
+
         }
     }
 

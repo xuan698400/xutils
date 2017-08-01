@@ -1,5 +1,7 @@
 package com.xuan.xutils.utils;
 
+import com.xuan.xutils.io.IOUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -294,8 +296,8 @@ public abstract class URLUtils {
             }
             return new String(out.toByteArray());
         } finally {
-            FileUtils.close(in);
-            FileUtils.close(out);
+            IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(out);
         }
     }
 
