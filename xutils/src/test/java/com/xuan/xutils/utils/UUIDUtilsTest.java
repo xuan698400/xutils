@@ -1,6 +1,5 @@
-package com.xuan.xutils;
+package com.xuan.xutils.utils;
 
-import com.xuan.xutils.utils.UUIDUtils;
 import org.junit.Test;
 
 /**
