@@ -1,11 +1,10 @@
-package com.xuan.xutils.tabooed;
+package com.xuan.xutils.bt.tabooed;
 
 import com.xuan.xutils.utils.Validators;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
 
 /**
  * 对文本内容进行敏感词汇过滤的工具类。
@@ -19,7 +18,7 @@ public abstract class TabooedUtils {
 
     /**
      * 对文本内容进行过滤，获取所有存在的敏感词汇。
-     * 
+     *
      * @param content
      *            需要进行过滤的内容
      * @return 过滤的敏感词汇列表

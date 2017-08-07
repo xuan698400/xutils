@@ -1,4 +1,4 @@
-package com.xuan.xutils.tabooed;
+package com.xuan.xutils.bt.tabooed;
 
 import com.xuan.xutils.io.IOUtils;
 import com.xuan.xutils.utils.Validators;

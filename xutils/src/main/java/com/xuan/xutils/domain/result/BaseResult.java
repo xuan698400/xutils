@@ -5,7 +5,7 @@ import com.xuan.xutils.domain.BaseDO;
 import java.util.Date;
 
 /**
- * 返回接口基类
+ * 一般RPC调用或者HTTP接口返回,我们会统一封装类似下面的Result对象
  * <p>
  * Created by xuan on 17/8/2.
  */
@@ -13,7 +13,8 @@ public class BaseResult extends BaseDO {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 结果状态码,一般用来表示这次调用是否成功
+     * 结果状态码,一般用来表示这次调用是否成功,
+     * 参看枚举: CodeEnum
      */
     private int code;
 
@@ -24,6 +25,7 @@ public class BaseResult extends BaseDO {
 
     /**
      * 当返回一种错误结果时,不光要设置message错误信息,最好再设置一个bizCode,调用方可以根据这个bizCode来做响应的业务处理
+     * 参看枚举: BizCodeEnum
      */
     private String bizCode;
 

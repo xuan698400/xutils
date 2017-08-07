@@ -45,4 +45,16 @@ public enum YNEnum {
         return null;
     }
 
+    public void setValue(boolean value) {
+        this.value = value;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
 }

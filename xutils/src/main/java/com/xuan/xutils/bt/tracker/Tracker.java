@@ -105,6 +105,7 @@ public abstract class Tracker {
         Long interval = tkPointLine.getPointList().get(size - 1).getTimestamp().longValue() - tkPointLine.getPointList().get(0).getTimestamp().longValue();
         if (interval - DEFAULT_LOG_INTERVAL > 0) {
             Tracker.on("总耗时间", String.valueOf(interval));//多加一个点,记录总耗时
+            //这里可以输入日志,或者上报到日志平台
             //log.warn("Tracker OPS:" + JSON.toJSONString(tkPointLine.getPointList()));
             System.out.println("Tracker OPS: " + tkPointLine.getPointList().toString());
         }

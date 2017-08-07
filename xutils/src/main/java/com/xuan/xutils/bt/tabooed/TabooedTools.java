@@ -1,4 +1,4 @@
-package com.xuan.xutils.tabooed;
+package com.xuan.xutils.bt.tabooed;
 
 import java.util.ArrayList;
 import java.util.Collection;
