@@ -58,4 +58,7 @@ public abstract class TabooedUtils {
         tabooedTools.setTabooedWords(tabooedWords);
     }
 
+    public static TabooedTools getTabooedTools() {
+        return tabooedTools;
+    }
 }

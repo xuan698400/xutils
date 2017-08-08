@@ -31,7 +31,7 @@ public class TabooedTools {
 
     public synchronized void setTabooedWords(Collection<String> tabooedWords) {
         this.tabooedWords = tabooedWords;
-        claerNode();
+        clearNode();
         // 创建字符节点树
         createNodeTree();
 
@@ -159,7 +159,7 @@ public class TabooedTools {
     /**
      * 清除根节点的子节点
      */
-    private void claerNode() {
+    private void  clearNode() {
         rootNode.getChilds().clear();
     }
 
@@ -227,4 +227,7 @@ public class TabooedTools {
         }
     }
 
+    public Collection<String> getTabooedWords() {
+        return tabooedWords;
+    }
 }

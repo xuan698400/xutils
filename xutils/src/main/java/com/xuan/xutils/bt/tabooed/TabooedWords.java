@@ -6,8 +6,8 @@ import com.xuan.xutils.utils.Validators;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 敏感词汇类. 此类会读取资源文件(默认为tabooed.words)中的词汇.
@@ -17,7 +17,7 @@ import java.util.HashSet;
  */
 public class TabooedWords {
 
-    private final Collection<String> tabooedWords = new HashSet<String>();
+    private final Set<String> tabooedWords = new HashSet<String>();
 
     /**
      * 从默认的敏感词汇文件中读取词汇, 初始化敏感词汇列表.
@@ -29,7 +29,7 @@ public class TabooedWords {
 
     /**
      * 从指定的敏感词汇输入流中读取词汇, 初始化敏感词汇列表.
-     * 
+     *
      * @param in
      *            敏感词汇输入流
      * @param charset
@@ -60,7 +60,7 @@ public class TabooedWords {
      * 
      * @return 敏感词汇
      */
-    public Collection<String> getTabooedWords() {
+    public Set<String> getTabooedWords() {
         return tabooedWords;
     }
 
