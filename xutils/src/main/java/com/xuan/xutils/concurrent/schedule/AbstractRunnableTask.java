@@ -1,4 +1,4 @@
-package com.xuan.xutils.concurrent;
+package com.xuan.xutils.concurrent.schedule;
 
 /**
  * 描述某个系统任务的抽象基类
@@ -30,17 +30,30 @@ public abstract class AbstractRunnableTask extends AbstractTask implements Runna
         }
 
         try {
-            System.out.println("Task[" + getName() + "] begin");
+            beforeProcessTask();
 
             long current = System.currentTimeMillis();
             processTask();
             long elapsed = System.currentTimeMillis() - current;
+            afterProcessTask();
 
             System.out.println("Task[" + getName() + "] finished, elapsed " + elapsed + " ms");
         }
         catch (Exception e) {
-            System.out.println("Process task[" + getName() + "] error" + e);
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * 任务执行前操作,子类根据自己要求可复写
+     */
+    protected void beforeProcessTask(){
+    }
+
+    /**
+     * 任务执行后操作,子类根据自己要求可复写
+     */
+    protected void afterProcessTask(){
     }
 
 }

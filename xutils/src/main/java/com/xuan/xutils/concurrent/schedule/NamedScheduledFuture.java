@@ -1,4 +1,4 @@
-package com.xuan.xutils.concurrent;
+package com.xuan.xutils.concurrent.schedule;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.ExecutionException;
@@ -8,14 +8,24 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * 带有名字修饰的定时任务描述类
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:31:00 $
  */
 public class NamedScheduledFuture<V> implements RunnableScheduledFuture<V> {
 
-    private final String name;
+    /**
+     * 任务名称
+     */
+    private final String       name;
+    /**
+     * 任务类
+     */
     private final AbstractTask task;
+
+    /**
+     * 运行结果
+     */
     private final RunnableScheduledFuture<V> future;
 
     public NamedScheduledFuture(AbstractTask task, RunnableScheduledFuture<V> future) {

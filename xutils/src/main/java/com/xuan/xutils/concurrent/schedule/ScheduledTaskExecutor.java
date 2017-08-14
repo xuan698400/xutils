@@ -1,4 +1,4 @@
-package com.xuan.xutils.concurrent;
+package com.xuan.xutils.concurrent.schedule;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,15 +24,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class ScheduledTaskExecutor extends ScheduledThreadPoolExecutor {
 
-    // 活动的(正在执行的)服务对象列表
+    /**
+     * 正在执行的任务列表
+     */
     private final List<AbstractTask> activeTasks = new CopyOnWriteArrayList<AbstractTask>();
 
-    // 所有提交的服务对象列表
+    /**
+     * 所有提交的任务列表
+     */
     private final List<AbstractTask> allTasks = new CopyOnWriteArrayList<AbstractTask>();
 
     /**
      * 使用给定的核心池大小创建一个新的 ScheduledTaskExecutor。
-     * 
+     *
      * @param corePoolSize
      *            线程池中所保留的线程数（包括空闲线程）
      * @throws IllegalArgumentException
@@ -44,7 +48,7 @@ public class ScheduledTaskExecutor extends ScheduledThreadPoolExecutor {
 
     /**
      * 使用给定的核心池大小创建一个新的 ScheduledTaskExecutor。
-     * 
+     *
      * @param corePoolSize
      *            线程池中所保留的线程数（包括空闲线程）
      * @param threadFactory

@@ -9,19 +9,10 @@ public enum YNEnum {
 
     Y(true, 1, "是"), N(false, 0, "否");
 
-    /**
-     * true / false
-     */
     private boolean value;
 
-    /**
-     * 1 / 0
-     */
     private int code;
 
-    /**
-     * 是 / 否
-     */
     private String msg;
 
     YNEnum(boolean value, int code, String msg) {
@@ -31,7 +22,7 @@ public enum YNEnum {
     }
 
     /**
-     * 根据code获取到YNEnum,取不到返回YNEnum.N
+     * 根据code获取到YNEnum,取不到返回null
      *
      * @param code
      * @return
@@ -45,16 +36,16 @@ public enum YNEnum {
         return null;
     }
 
-    public void setValue(boolean value) {
-        this.value = value;
+    public boolean isValue() {
+        return value;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public int getCode() {
+        return code;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public String getMsg() {
+        return msg;
     }
-    
+
 }

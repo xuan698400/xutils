@@ -1,4 +1,4 @@
-package com.xuan.xutils.concurrent;
+package com.xuan.xutils.concurrent.schedule;
 
 import java.util.concurrent.Callable;
 
@@ -35,19 +35,33 @@ public abstract class AbstractCallableTask<V> extends AbstractTask implements Ca
         V result = null;
 
         try {
-            System.out.println("Task[" + getName() + "] begin");
+            beforeProcessTask();
 
             long current = System.currentTimeMillis();
             result = processTask();
             long elapsed = System.currentTimeMillis() - current;
 
+            afterProcessTask();
+
             System.out.println("Task[" + getName() + "] finished, elapsed " + elapsed + " ms");
         }
         catch (Exception e) {
-            System.out.println("Process task[" + getName() + "] error" + e);
+            e.printStackTrace();;
         }
 
         return result;
+    }
+
+    /**
+     * 任务执行前操作,子类根据自己要求可复写
+     */
+    protected void beforeProcessTask(){
+    }
+
+    /**
+     * 任务执行后操作,子类根据自己要求可复写
+     */
+    protected void afterProcessTask(){
     }
 
 }

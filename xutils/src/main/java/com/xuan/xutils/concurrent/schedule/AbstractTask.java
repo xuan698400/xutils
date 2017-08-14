@@ -1,4 +1,4 @@
-package com.xuan.xutils.concurrent;
+package com.xuan.xutils.concurrent.schedule;
 
 import java.util.Date;
 
@@ -51,6 +51,7 @@ public abstract class AbstractTask {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName()).append("[");
         sb.append("name=").append(name).append(",");
+        sb.append("isWorking=").append(isWorking).append(",");
         sb.append("timestamp=").append(timestamp).append("]");
         return sb.toString();
     }
