@@ -1,54 +1,60 @@
 package com.xuan.xutils.concurrent.threadpool;
 
-import com.sun.istack.internal.Nullable;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 来自guava
- *
+ * 构建ThreadFactory工具类(来自guava)
+ * <p>
  * Created by xuan on 17/8/14.
  */
 public class ThreadFactoryBuilder {
-    private String                          nameFormat               = null;
-    private Boolean                         daemon                   = null;
-    private Integer                         priority                 = null;
-    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler = null;
-    private ThreadFactory                   backingThreadFactory     = null;
+    /**
+     * 名称格式化串
+     */
+    private String nameFormat = null;
 
     /**
-     * Creates a new {@link ThreadFactory} builder.
+     * 是否是守护线程
      */
+    private Boolean daemon = null;
+
+    /**
+     * 线程优先级
+     */
+    private Integer priority = null;
+
+    /**
+     * 线程发生异常后,未正常捕获时,会回调这个异常处理器
+     */
+    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler = null;
+
+    /**
+     * 线程工厂
+     */
+    private ThreadFactory backingThreadFactory = null;
+
     public ThreadFactoryBuilder() {
     }
 
     /**
-     * Sets the naming format to use when naming threads ({@link Thread#setName})
-     * which are created with this ThreadFactory.
+     * 给线程设置名称,支持format
      *
-     * @param nameFormat a {@link String#format(String, Object...)}-compatible
-     *                   format String, to which a unique integer (0, 1, etc.) will be supplied
-     *                   as the single parameter. This integer will be unique to the built
-     *                   instance of the ThreadFactory and will be assigned sequentially. For
-     *                   example, {@code "rpc-pool-%d"} will generate thread names like
-     *                   {@code "rpc-pool-0"}, {@code "rpc-pool-1"}, {@code "rpc-pool-2"}, etc.
-     * @return this for the builder pattern
+     * @param nameFormat
+     * @return
      */
-    @SuppressWarnings("ReturnValueIgnored")
     public ThreadFactoryBuilder setNameFormat(String nameFormat) {
-        String.format(nameFormat, 0); // fail fast if the format is bad or null
+        String.format(nameFormat, 0);//如果nameFormat是null或者format格式不对,就能立马返回错误
         this.nameFormat = nameFormat;
         return this;
     }
 
     /**
-     * Sets daemon or not for new threads created with this ThreadFactory.
+     * 设置是否守护
      *
-     * @param daemon whether or not new Threads created with this ThreadFactory
-     *               will be daemon threads
-     * @return this for the builder pattern
+     * @param daemon
+     * @return
      */
     public ThreadFactoryBuilder setDaemon(boolean daemon) {
         this.daemon = daemon;
@@ -56,74 +62,62 @@ public class ThreadFactoryBuilder {
     }
 
     /**
-     * Sets the priority for new threads created with this ThreadFactory.
+     * 设置优先级
      *
-     * @param priority the priority for new Threads created with this
-     *                 ThreadFactory
-     * @return this for the builder pattern
+     * @param priority
+     * @return
      */
     public ThreadFactoryBuilder setPriority(int priority) {
-        // Thread#setPriority() already checks for validity. These error messages
-        // are nicer though and will fail-fast.
-        checkArgument(priority >= Thread.MIN_PRIORITY,
-                "Thread priority (%s) must be >= %s", priority, Thread.MIN_PRIORITY);
-        checkArgument(priority <= Thread.MAX_PRIORITY,
-                "Thread priority (%s) must be <= %s", priority, Thread.MAX_PRIORITY);
+        //虽然在Thread#setPriority()时会校验有限级的有效性.但是这里提前校验一下,提示效果更好,如果是无效还能提前校验出来
+        checkArgument(priority >= Thread.MIN_PRIORITY, "Thread priority (%s) must be >= %s", priority, Thread.MIN_PRIORITY);
+        checkArgument(priority <= Thread.MAX_PRIORITY, "Thread priority (%s) must be <= %s", priority, Thread.MAX_PRIORITY);
         this.priority = priority;
         return this;
     }
 
     /**
-     * Sets the {@link Thread.UncaughtExceptionHandler} for new threads created with this
-     * ThreadFactory.
+     * 设置未捕捉异常处理器
      *
-     * @param uncaughtExceptionHandler the uncaught exception handler for new
-     *                                 Threads created with this ThreadFactory
-     * @return this for the builder pattern
+     * @param uncaughtExceptionHandler
+     * @return
      */
-    public ThreadFactoryBuilder setUncaughtExceptionHandler(
-            Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+    public ThreadFactoryBuilder setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
         this.uncaughtExceptionHandler = checkNotNull(uncaughtExceptionHandler);
         return this;
     }
 
     /**
-     * Sets the backing {@link ThreadFactory} for new threads created with this
-     * ThreadFactory. Threads will be created by invoking #newThread(Runnable) on
-     * this backing {@link ThreadFactory}.
+     * 设置ThreadFactory
      *
-     * @param backingThreadFactory the backing {@link ThreadFactory} which will
-     *                             be delegated to during thread creation.
-     * @return this for the builder pattern
+     * @param backingThreadFactory
+     * @return
      */
-    public ThreadFactoryBuilder setThreadFactory(
-            ThreadFactory backingThreadFactory) {
+    public ThreadFactoryBuilder setThreadFactory(ThreadFactory backingThreadFactory) {
         this.backingThreadFactory = checkNotNull(backingThreadFactory);
         return this;
     }
 
     /**
-     * Returns a new thread factory using the options supplied during the building
-     * process. After building, it is still possible to change the options used to
-     * build the ThreadFactory and/or build again. State is not shared amongst
-     * built instances.
+     * 根据参数开始构建
      *
-     * @return the fully constructed {@link ThreadFactory}
+     * @return
      */
     public ThreadFactory build() {
         return build(this);
     }
 
+    /**
+     * 内部构建
+     *
+     * @param builder
+     * @return
+     */
     private static ThreadFactory build(ThreadFactoryBuilder builder) {
         final String nameFormat = builder.nameFormat;
         final Boolean daemon = builder.daemon;
         final Integer priority = builder.priority;
-        final Thread.UncaughtExceptionHandler uncaughtExceptionHandler =
-                builder.uncaughtExceptionHandler;
-        final ThreadFactory backingThreadFactory =
-                (builder.backingThreadFactory != null)
-                        ? builder.backingThreadFactory
-                        : Executors.defaultThreadFactory();
+        final Thread.UncaughtExceptionHandler uncaughtExceptionHandler = builder.uncaughtExceptionHandler;
+        final ThreadFactory backingThreadFactory = (builder.backingThreadFactory != null) ? builder.backingThreadFactory : Executors.defaultThreadFactory();
         final AtomicLong count = (nameFormat != null) ? new AtomicLong(0) : null;
         return new ThreadFactory() {
             @Override
@@ -146,16 +140,27 @@ public class ThreadFactoryBuilder {
         };
     }
 
-
-    private void checkArgument(boolean expression,
-                                     @Nullable String errorMessageTemplate,
-                                     @Nullable Object... errorMessageArgs) {
+    /**
+     * expression校验
+     *
+     * @param expression
+     * @param errorMessageTemplate
+     * @param errorMessageArgs
+     */
+    private void checkArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
         if (!expression) {
             throw new IllegalArgumentException(format(errorMessageTemplate, errorMessageArgs));
         }
     }
 
-    private String format(String template, @Nullable Object... args) {
+    /**
+     * %s标识符号替换成真实值
+     *
+     * @param template
+     * @param args
+     * @return
+     */
+    private String format(String template, Object... args) {
         template = String.valueOf(template); // null -> "null"
 
         // start substituting the arguments into the '%s' placeholders
@@ -187,6 +192,13 @@ public class ThreadFactoryBuilder {
         return builder.toString();
     }
 
+    /**
+     * 判空
+     *
+     * @param reference
+     * @param <T>
+     * @return
+     */
     private <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();

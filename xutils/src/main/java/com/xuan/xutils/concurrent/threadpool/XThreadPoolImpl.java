@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 通用配置实现(还有待进一步整理)
- *
+ * <p>
  * Created by xuan on 17/8/14.
  */
 public class XThreadPoolImpl implements XThreadPool {
@@ -39,7 +39,7 @@ public class XThreadPoolImpl implements XThreadPool {
     /**
      * 阻塞队列长度
      */
-    private int     queueCapacity                    = 1024;
+    private int queueCapacity = 1024;
 
     /**
      * 核心线程数，这个是肯定会分配的线程数
@@ -89,17 +89,17 @@ public class XThreadPoolImpl implements XThreadPool {
         awaitTerminationIfNecessary();
     }
 
+    /**
+     * 等待关闭
+     */
     private void awaitTerminationIfNecessary() {
         if (this.shutdownTimeout > 0) {
             try {
                 if (!this.executor.awaitTermination(this.shutdownTimeout, TimeUnit.SECONDS)) {
-                    System.out.println("Timed out while waiting for executor" +
-                            (this.name != null ? " '" + this.name + "'" : "") + " to terminate");
+                    System.out.println("Timed out while waiting for executor" + (this.name != null ? " '" + this.name + "'" : "") + " to terminate");
                 }
             } catch (InterruptedException ex) {
-                System.out.println("Interrupted while waiting for executor" +
-                        (this.name != null ? " '" + this.name + "'" : "") + " to terminate");
-
+                System.out.println("Interrupted while waiting for executor" + (this.name != null ? " '" + this.name + "'" : "") + " to terminate");
                 // (Re-)Cancel if current thread also interrupted
                 this.executor.shutdownNow();
                 Thread.currentThread().interrupt();
@@ -107,34 +107,49 @@ public class XThreadPoolImpl implements XThreadPool {
         }
     }
 
-    public void afterPropertiesSet() throws Exception {
+    /**
+     * 初始化
+     *
+     * @throws Exception
+     */
+    public void init() throws Exception {
         if (StringUtils.isBlank(name)) {
             name = this.getClass().getName();
         }
+
         /*
          * 能定制Thread name的ThreadFactory 非常重要，使得创建的线程有自己的名字而不是默认的"pool-x-thread-y"，
-         * 在用threaddump查看线程时特别有用。 格式如"YTASD-Thread-%d"，使用了Guava的工具类
+         * 在用threaddump查看线程时特别有用。 格式如: "X-Thread-xxx-%d"
          */
-
-        String threadNameFormat = "YTASD-Thread-" + name + "-%d";
+        String threadNameFormat = "X-Thread-" + name + "-%d";
         ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat(threadNameFormat).build();
         this.executor = initializeExecutor(threadFactory, rejectedExecutionHandler);
     }
 
-
-    protected ExecutorService initializeExecutor(
-            ThreadFactory threadFactory, RejectedExecutionHandler rejectedExecutionHandler) {
+    /**
+     * 初始化线程池
+     *
+     * @param threadFactory
+     * @param rejectedExecutionHandler
+     * @return
+     */
+    protected ExecutorService initializeExecutor(ThreadFactory threadFactory, RejectedExecutionHandler rejectedExecutionHandler) {
         BlockingQueue<Runnable> queue = createQueue(this.queueCapacity);
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(
-                this.corePoolSize, this.maxPoolSize, this.keepAliveSeconds, TimeUnit.SECONDS,
-                queue, threadFactory, rejectedExecutionHandler);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(this.corePoolSize, this.maxPoolSize, this.keepAliveSeconds, TimeUnit.SECONDS, queue, threadFactory, rejectedExecutionHandler);
         return executor;
     }
 
+    /**
+     * 创建一个有界队列
+     *
+     * @param queueCapacity
+     * @return
+     */
     protected BlockingQueue<Runnable> createQueue(int queueCapacity) {
         if (queueCapacity > 0) {
             return new LinkedBlockingQueue<Runnable>(queueCapacity);
         } else {
+            //一个没有数据缓冲的队列,消费者要get,必须等待生产者put,反之亦然
             return new SynchronousQueue<Runnable>();
         }
     }
@@ -203,6 +218,9 @@ public class XThreadPoolImpl implements XThreadPool {
         }
     }
 
+    /**
+     * 保证不会有Exception抛出到线程池的Runnable，防止用户没有捕捉异常导致中断了线程池中的线程。
+     */
     public static class WrapExceptionCallable<T> implements Callable<T> {
         private Callable<T> callable;
 
@@ -233,49 +251,80 @@ public class XThreadPoolImpl implements XThreadPool {
         }
     }
 
-    /*
-     *----------set and get----------------
+    //====================set and get====================
+
+    /**
+     * 设置是否等待任务结束才关闭
+     *
+     * @param waitForTasksToCompleteOnShutdown
      */
     public void setWaitForTasksToCompleteOnShutdown(boolean waitForTasksToCompleteOnShutdown) {
         this.waitForTasksToCompleteOnShutdown = waitForTasksToCompleteOnShutdown;
     }
 
+    /**
+     * 设置关闭超时
+     *
+     * @param shutdownTimeout
+     */
     public void setShutdownTimeout(int shutdownTimeout) {
         this.shutdownTimeout = shutdownTimeout;
     }
 
     /**
-     * Set the RejectedExecutionHandler to use for the ExecutorService.
-     * Default is the ExecutorService's default abort policy.
+     * 默认是拒绝策略
      *
-     * @see java.util.concurrent.ThreadPoolExecutor.AbortPolicy
+     * @param rejectedExecutionHandler
      */
     public void setRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler) {
-        this.rejectedExecutionHandler =
-                (rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy());
+        this.rejectedExecutionHandler = (rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy());
     }
 
+    /**
+     * 设置队列容量
+     *
+     * @param queueCapacity
+     */
     public void setQueueCapacity(int queueCapacity) {
         this.queueCapacity = queueCapacity;
     }
 
+    /**
+     * 设置核心线程数
+     *
+     * @param corePoolSize
+     */
     public void setCorePoolSize(int corePoolSize) {
         this.corePoolSize = corePoolSize;
     }
 
+    /**
+     * 设置最大线程数
+     *
+     * @param maxPoolSize
+     */
     public void setMaxPoolSize(int maxPoolSize) {
         this.maxPoolSize = maxPoolSize;
     }
 
+    /**
+     * 设置线程保活秒
+     *
+     * @param keepAliveSeconds
+     */
     public void setKeepAliveSeconds(int keepAliveSeconds) {
         this.keepAliveSeconds = keepAliveSeconds;
     }
 
+    /**
+     * 获取执行器
+     *
+     * @return
+     */
     public ExecutorService getExecutor() {
-        if(this.executor != null){
+        if (this.executor != null) {
             throw new RuntimeException("executor not initialized");
         }
-
         return executor;
     }
 
