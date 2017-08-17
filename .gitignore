@@ -1,6 +1,6 @@
 # Mac crap
 .DS_Store
 
-xutils/.idea/*
-xutils/target/*
-xutils/xutils.iml
+.idea/*
+target/*
+xutils.iml
