@@ -18,49 +18,79 @@ public class ForkJoinTest {
 
     @Test
     public void testListTask() {
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(String.valueOf(i));
-        }
-
-        long start = System.currentTimeMillis();
-        List<String> resultList = getResultList2(list);
-
-        System.out.println("++++++++++time:" + (System.currentTimeMillis() - start));
-        System.out.println("++++++++++result:" + resultList);
+        run1();
+        run2();
     }
 
     /**
      * 串行：耗时在450左右
      *
-     * @param list
      * @return
      */
-    private List<String> getResultList1(List<String> list) {
+    private void run1() {
+        List<String> list = initList();
+        //
+        long start = System.currentTimeMillis();
         List<String> resultList = new ArrayList<>();
         for (String str : list) {
-            HttpResponse response = HttpUtils.get("http://www.baidu.com", null);
-            resultList.add(response.getResultStr());
+            resultList.add(doThing(str));
         }
-        return resultList;
+        //
+        System.out.println("++++++++++run1-time:" + (System.currentTimeMillis() - start));
+        System.out.println("++++++++++run1-result:" + resultList);
     }
 
     /**
      * 并发执行：耗时150左右
      *
-     * @param list
      * @return
      */
-    private List<String> getResultList2(List<String> list) {
+    private void run2() {
+        List<String> list = initList();
+        //
+        long start = System.currentTimeMillis();
         ListTaskExcutor<String, String> listTaskExcutor = TaskExecutorFactory.getListTaskExcutor();
         ListTaskResult<String> listTaskResult = listTaskExcutor.execute(list, new ListTaskCallable<String, String>() {
             @Override
             public String call(String str) {
-                HttpResponse response = HttpUtils.get("http://www.baidu.com", null);
-                return response.getResultStr();
+                return doThing(str);
             }
         });
-        return listTaskResult.getList();
+        //
+        System.out.println("++++++++++run2-time:" + (System.currentTimeMillis() - start));
+        System.out.println("++++++++++run2-result:" + listTaskResult.getList());
+    }
+
+    /**
+     * 初始化原始数据
+     *
+     * @return
+     */
+    private List<String> initList() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            list.add(String.valueOf(i));
+        }
+        return list;
+    }
+
+    /**
+     * 实际一个小任务要做的事情
+     *
+     * @param str
+     * @return
+     */
+    private String doThing(String str) {
+        sleep();
+        return str + "_deal";
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
