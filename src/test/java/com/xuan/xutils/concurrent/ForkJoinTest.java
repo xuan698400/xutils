@@ -1,21 +1,15 @@
 package com.xuan.xutils.concurrent;
 
-import com.xuan.xutils.concurrent.forkjoin.TaskExecutorFactory;
-import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskExcutor;
-import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskResult;
-import com.xuan.xutils.concurrent.forkjoin.listtask.SingleSizeListTaskCallable;
+import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskExecutorFactory;
+import com.xuan.xutils.concurrent.forkjoin.listtask.callback.SingleSizeListTaskCallable;
+import com.xuan.xutils.concurrent.forkjoin.listtask.executor.ListTaskExecutor;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 单任务执行时间：20MS
- * 总任务数：200
- * [4617,394]  [4612,327]  [4645,359]  [4553,334]
- * [4600,290]  [4609,389]  [4621,353]  [4600,382]
- * [4591,284]  [4604,332]  [4579,350]  [4603,377]
- * [4600,524]  [4609,425]  [4621,510]  [4600,522]
+ * 需求描述：我有一定数量的字符串列表，现在要给这些字符串加上"_deal".
  * <p>
  * Created by xuan on 17/8/24.
  */
@@ -54,16 +48,16 @@ public class ForkJoinTest {
         List<String> list = initList();
         //
         long start = System.currentTimeMillis();
-        ListTaskExcutor<String, String> excutor = TaskExecutorFactory.getListTaskExcutor();
-        ListTaskResult<String> listTaskResult = excutor.execute(list, new SingleSizeListTaskCallable<String, String>() {
+        ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getExecutor();
+        List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable<String, String>() {
             @Override
             protected String call(String s) {
                 return doThing(s);
             }
-        }, 1);
+        });
         //
         System.out.println("++++++++++run2-time:" + (System.currentTimeMillis() - start));
-        System.out.println("++++++++++run2-result:" + listTaskResult.getList());
+        System.out.println("++++++++++run2-result:" + resultList);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.xuan.xutils.concurrent.forkjoin.listtask;
+package com.xuan.xutils.concurrent.forkjoin.listtask.config;
 
 /**
  * 配置参数,后期可以用这个配置，让用户定制一些参数
