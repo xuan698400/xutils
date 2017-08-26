@@ -11,21 +11,25 @@ import java.util.List;
 public class ListTaskResult<R> {
 
     /**
-     * 中间小任务处理接口临时存放
+     * 合并后的结果列表
      */
-    private R r;
+    private List<R> list;
 
     /**
-     * 合并的结果
+     * 把from的结果对象数据合并到this
+     *
+     * @param from
+     * @return
      */
-    private List<R> list = new ArrayList<>();
-
-    public R getR() {
-        return r;
-    }
-
-    public void setR(R r) {
-        this.r = r;
+    public ListTaskResult<R> mergeFrom(ListTaskResult<R> from) {
+        if (null == from || null == from.getList() || from.getList().size() == 0) {
+            return this;
+        }
+        if (null == this.getList()) {
+            this.setList(new ArrayList<>());
+        }
+        this.getList().addAll(from.getList());
+        return this;
     }
 
     public List<R> getList() {
@@ -35,5 +39,4 @@ public class ListTaskResult<R> {
     public void setList(List<R> list) {
         this.list = list;
     }
-    
 }

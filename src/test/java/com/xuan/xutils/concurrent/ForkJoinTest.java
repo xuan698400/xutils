@@ -1,17 +1,22 @@
 package com.xuan.xutils.concurrent;
 
 import com.xuan.xutils.concurrent.forkjoin.TaskExecutorFactory;
-import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskCallable;
 import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskExcutor;
 import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskResult;
-import com.xuan.xutils.http.HttpResponse;
-import com.xuan.xutils.http.HttpUtils;
+import com.xuan.xutils.concurrent.forkjoin.listtask.SingleSizeListTaskCallable;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 单任务执行时间：20MS
+ * 总任务数：200
+ * [4617,394]  [4612,327]  [4645,359]  [4553,334]
+ * [4600,290]  [4609,389]  [4621,353]  [4600,382]
+ * [4591,284]  [4604,332]  [4579,350]  [4603,377]
+ * [4600,524]  [4609,425]  [4621,510]  [4600,522]
+ * <p>
  * Created by xuan on 17/8/24.
  */
 public class ForkJoinTest {
@@ -23,7 +28,7 @@ public class ForkJoinTest {
     }
 
     /**
-     * 串行：耗时在450左右
+     * 串行
      *
      * @return
      */
@@ -41,7 +46,7 @@ public class ForkJoinTest {
     }
 
     /**
-     * 并发执行：耗时150左右
+     * 并行
      *
      * @return
      */
@@ -49,13 +54,13 @@ public class ForkJoinTest {
         List<String> list = initList();
         //
         long start = System.currentTimeMillis();
-        ListTaskExcutor<String, String> listTaskExcutor = TaskExecutorFactory.getListTaskExcutor();
-        ListTaskResult<String> listTaskResult = listTaskExcutor.execute(list, new ListTaskCallable<String, String>() {
+        ListTaskExcutor<String, String> excutor = TaskExecutorFactory.getListTaskExcutor();
+        ListTaskResult<String> listTaskResult = excutor.execute(list, new SingleSizeListTaskCallable<String, String>() {
             @Override
-            public String call(String str) {
-                return doThing(str);
+            protected String call(String s) {
+                return doThing(s);
             }
-        });
+        }, 1);
         //
         System.out.println("++++++++++run2-time:" + (System.currentTimeMillis() - start));
         System.out.println("++++++++++run2-result:" + listTaskResult.getList());
@@ -68,7 +73,7 @@ public class ForkJoinTest {
      */
     private List<String> initList() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 200; i++) {
             list.add(String.valueOf(i));
         }
         return list;
@@ -87,7 +92,7 @@ public class ForkJoinTest {
 
     private void sleep() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(20);
         } catch (Exception e) {
             e.printStackTrace();
         }
