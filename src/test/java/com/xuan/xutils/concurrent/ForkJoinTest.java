@@ -15,10 +15,13 @@ import java.util.List;
  */
 public class ForkJoinTest {
 
+    ListTaskExecutor executor = ListTaskExecutorFactory.getExecutor();
+
     @Test
     public void testListTask() {
         run1();
         run2();
+        run3();
     }
 
     /**
@@ -48,7 +51,7 @@ public class ForkJoinTest {
         List<String> list = initList();
         //
         long start = System.currentTimeMillis();
-        ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getExecutor();
+        //ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getExecutor();
         List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable<String, String>() {
             @Override
             protected String call(String s) {
@@ -58,6 +61,25 @@ public class ForkJoinTest {
         //
         System.out.println("++++++++++run2-time:" + (System.currentTimeMillis() - start));
         System.out.println("++++++++++run2-result:" + resultList);
+    }
+
+    /**
+     * 线程池
+     */
+    private void run3() {
+        List<String> list = initList();
+        //
+        long start = System.currentTimeMillis();
+        ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getCyclicBarrierExecutor();
+        List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable<String, String>() {
+            @Override
+            protected String call(String s) {
+                return doThing(s);
+            }
+        });
+        //
+        System.out.println("++++++++++run3-time:" + (System.currentTimeMillis() - start));
+        System.out.println("++++++++++run3-result:" + resultList);
     }
 
     /**

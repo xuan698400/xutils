@@ -16,9 +16,21 @@ import java.util.concurrent.Future;
  * Created by xuan on 17/8/23.
  */
 public class ListTaskExecutorImpl<T, R> implements ListTaskExecutor<T, R> {
+    /**
+     * ForkJoin线程池，为了可控，一个应用最好实例化一个ListTaskExecutor，虽然性能会打折扣，但是前提还是要保证资源不被耗尽而影响别的功能
+     */
+    private ForkJoinPool forkJoinPool;
+
+    public ListTaskExecutorImpl(int parallelism) {
+        forkJoinPool = new ForkJoinPool(parallelism);
+    }
+
+    public ListTaskExecutorImpl(){
+        this(10);
+    }
+
     @Override
     public ListTaskResult<R> execute(List<T> orignList, ListTaskCallable<T, R> callable, ListTaskConfig config) {
-        ForkJoinPool forkJoinPool = new ForkJoinPool();
         ListTask<T, R> listTask = new ListTask<T, R>(orignList, callable, config);
         Future<ListTaskResult<R>> future = forkJoinPool.submit(listTask);
         try {

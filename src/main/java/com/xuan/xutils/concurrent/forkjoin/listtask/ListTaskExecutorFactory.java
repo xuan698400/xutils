@@ -1,5 +1,6 @@
 package com.xuan.xutils.concurrent.forkjoin.listtask;
 
+import com.xuan.xutils.concurrent.forkjoin.listtask.executor.CyclicBarrierExecutorImpl;
 import com.xuan.xutils.concurrent.forkjoin.listtask.executor.ListTaskExecutor;
 import com.xuan.xutils.concurrent.forkjoin.listtask.executor.ListTaskExecutorImpl;
 
@@ -16,7 +17,16 @@ public abstract class ListTaskExecutorFactory {
      * @return
      */
     public static <T, R> ListTaskExecutor<T, R> getExecutor() {
-        return new ListTaskExecutorImpl<>();
+        return new ListTaskExecutorImpl<>(10);
+    }
+
+    /**
+     * 获取ListTask执行器
+     *
+     * @return
+     */
+    public static <T, R> ListTaskExecutor<T, R> getCyclicBarrierExecutor() {
+        return new CyclicBarrierExecutorImpl<>();
     }
 
 }
