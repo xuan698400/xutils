@@ -15,6 +15,8 @@ import java.util.concurrent.RecursiveTask;
  * Created by xuan on 17/8/23.
  */
 public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
+    private static final long serialVersionUID = 1;
+
     /**
      * 配置参数
      */

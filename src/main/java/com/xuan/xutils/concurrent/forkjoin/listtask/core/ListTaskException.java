@@ -6,6 +6,7 @@ package com.xuan.xutils.concurrent.forkjoin.listtask.core;
  * Created by xuan on 17/8/29.
  */
 public class ListTaskException extends Throwable {
+    private static final long serialVersionUID = 1;
 
     /**
      * 真实抛出的异常，方便用户对不用异常进行处理

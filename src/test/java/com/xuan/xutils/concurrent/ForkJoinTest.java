@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 /**
  * 需求描述：我有一定数量的字符串列表，现在要给这些字符串加上"_deal".
