@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 总任务返回结果
+ * 任务执行结果对象
+ * 注意：子任务执行成功后生成的结果对象也会使用他，最后结果汇总也使用的他
  * <p>
  * Created by xuan on 17/8/23.
  */
 public class ListTaskResult<R> {
 
     /**
-     * 合并后的结果列表
+     * 结果对象
      */
     private List<R> list;
 

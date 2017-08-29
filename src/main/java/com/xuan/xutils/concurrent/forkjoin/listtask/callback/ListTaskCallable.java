@@ -4,7 +4,7 @@ package com.xuan.xutils.concurrent.forkjoin.listtask.callback;
 import java.util.List;
 
 /**
- * 一个大任务被切割成小任务后，每个小任务需要执行的回调
+ * 任务的逻辑回调。尽管框架会自动帮你拆分成很多子任务，但是具体需要执行的逻辑还是由用户自己实现。
  * <p>
  * Created by xuan on 17/8/23.
  */

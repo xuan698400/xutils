@@ -2,11 +2,13 @@ package com.xuan.xutils.concurrent;
 
 import com.xuan.xutils.concurrent.forkjoin.listtask.ListTaskExecutorFactory;
 import com.xuan.xutils.concurrent.forkjoin.listtask.callback.SingleSizeListTaskCallable;
+import com.xuan.xutils.concurrent.forkjoin.listtask.core.ListTaskException;
 import com.xuan.xutils.concurrent.forkjoin.listtask.executor.ListTaskExecutor;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 /**
  * 需求描述：我有一定数量的字符串列表，现在要给这些字符串加上"_deal".
@@ -18,7 +20,7 @@ public class ForkJoinTest {
     ListTaskExecutor executor = ListTaskExecutorFactory.getExecutor();
 
     @Test
-    public void testListTask() {
+    public void testListTask() throws Throwable {
         run1();
         run2();
         run3();
@@ -47,11 +49,10 @@ public class ForkJoinTest {
      *
      * @return
      */
-    private void run2() {
+    private void run2() throws ListTaskException {
         List<String> list = initList();
         //
         long start = System.currentTimeMillis();
-        //ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getExecutor();
         List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable<String, String>() {
             @Override
             protected String call(String s) {
@@ -66,7 +67,7 @@ public class ForkJoinTest {
     /**
      * 线程池
      */
-    private void run3() {
+    private void run3() throws ListTaskException {
         List<String> list = initList();
         //
         long start = System.currentTimeMillis();
