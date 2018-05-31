@@ -8,20 +8,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 一些基本的字符串,集合,数字等校验工具
+ * Map和Bean之间转换工具，不支持复杂的组合关系，简单的继承关系支持
  *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2017-08-01 上午9:44:21 $
  */
-public abstract class XBeanUtils {
+public abstract class Map2BeanUtils {
+
     /**
      * Map --> Bean : 利用Introspector,PropertyDescriptor实现 Map --> Bean
      * map 中value 的类型必须对应到Bean中的类型
      *
-     * @param map
+     * @param map       Map对象
      * @param beanClass 必须提供公共的默认构造函数
-     * @param <T>
-     * @return
+     * @return obj对象
      */
     public static <T> T map2Bean(Map<String, Object> map, Class<T> beanClass) {
         T obj;
@@ -49,14 +49,14 @@ public abstract class XBeanUtils {
     /**
      * Bean --> Map 利用Introspector和PropertyDescriptor 将Bean --> Map,对getClass 做了过滤
      *
-     * @param obj
-     * @return
+     * @param obj obj对象
+     * @return Map对象
      */
     public static Map<String, Object> bean2Map(Object obj) {
         if (obj == null) {
             return null;
         }
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();

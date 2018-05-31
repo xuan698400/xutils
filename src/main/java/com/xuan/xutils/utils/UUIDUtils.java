@@ -4,7 +4,7 @@ import java.net.InetAddress;
 
 /**
  * UUID 生成工具类
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午9:54:58 $
  */
@@ -24,33 +24,28 @@ public class UUIDUtils {
         IP = ipadd;
     }
 
-    private static short counter = (short) 0;
-    private static final int JVM = (int) (System.currentTimeMillis() >>> 8);
+    private static       short counter = (short) 0;
+    private static final int   JVM     = (int) (System.currentTimeMillis() >>> 8);
 
     /**
      * 构造方法
      */
-    public UUIDUtils() {
+    private UUIDUtils() {
     }
 
     /**
      * 生成16进制表达的字符串 UUID。
-     * 
+     *
      * @return 32 字节长度的 UUID 字符串
      */
-    public String generateHex() {
-        StringBuilder sb = new StringBuilder(32);
-        sb.append(format(getIP()));
-        sb.append(format(getJVM()));
-        sb.append(format(getHighTime()));
-        sb.append(format(getLowTime()));
-        sb.append(format(getCount()));
-        return sb.toString().toUpperCase();
+    private String generateHex() {
+        return (format(getIP()) + format(getJVM()) + format(getHighTime()) + format(getLowTime()) + format(
+                getCount())).toUpperCase();
     }
 
     /**
      * 生成字节数组的UUID
-     * 
+     *
      * @return
      */
     public byte[] generateBytes() {

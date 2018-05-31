@@ -3,7 +3,7 @@ package com.xuan.xutils.utils.domain;
 /**
  * Created by xuan on 17/8/1.
  */
-public class User {
+public class Father {
     private String name;
     private int    age;
 

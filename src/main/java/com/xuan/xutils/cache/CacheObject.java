@@ -18,7 +18,7 @@ public class CacheObject implements Serializable {
     private volatile long creationTime;
 
     /**
-     * 缓存获取时间,单位:毫秒
+     * 缓存过期时间,单位:毫秒
      */
     private volatile long expiryTime;
 

@@ -11,8 +11,9 @@ import java.security.NoSuchAlgorithmException;
  */
 public abstract class SecurityUtils {
 
-    private static final char[] chs = {'L', 'K', 'J', '4', 'D', 'G', 'F', 'V', 'R', 'T', 'Y', 'B', 'N', 'U', 'P', 'W',
-            '3', 'E', '5', 'H', 'M', '7', 'Q', '9', 'S', 'A', 'Z', 'X', '8', 'C', '6', '2'};
+    private static final char[] chs = { 'L', 'K', 'J', '4', 'D', 'G', 'F', 'V', 'R', 'T', 'Y', 'B', 'N', 'U', 'P', 'W',
+                                        '3', 'E', '5', 'H', 'M', '7', 'Q', '9', 'S', 'A', 'Z', 'X', '8', 'C', '6',
+                                        '2' };
 
     /**
      * 自身混淆加密，最多只能加密 30 个字节长度的字符串。
@@ -31,8 +32,8 @@ public abstract class SecurityUtils {
         }
 
         if (source.length() > 30) {
-            throw new IllegalArgumentException("the length of source must be less than 31, actual was "
-                    + source.length());
+            throw new IllegalArgumentException(
+                    "the length of source must be less than 31, actual was " + source.length());
         }
 
         String plainText = source;
@@ -221,8 +222,7 @@ public abstract class SecurityUtils {
                 }
             }
             index += 11;
-        }
-        while (index < length);
+        } while (index < length);
 
         return new String(bytes, 0, offset);
     }
@@ -260,16 +260,15 @@ public abstract class SecurityUtils {
             }
 
             index += 7;
-        }
-        while (index < bytes.length);
+        } while (index < bytes.length);
 
         return StringBuilder.toString();
     }
 
     private static long toLong(byte[] bytes) {
         return ((((long) bytes[0] & 0xff) << 56) | (((long) bytes[1] & 0xff) << 48) | (((long) bytes[2] & 0xff) << 40)
-                | (((long) bytes[3] & 0xff) << 32) | (((long) bytes[4] & 0xff) << 24)
-                | (((long) bytes[5] & 0xff) << 16) | (((long) bytes[6] & 0xff) << 8) | (((long) bytes[7] & 0xff) << 0));
+                | (((long) bytes[3] & 0xff) << 32) | (((long) bytes[4] & 0xff) << 24) | (((long) bytes[5] & 0xff) << 16)
+                | (((long) bytes[6] & 0xff) << 8) | (((long) bytes[7] & 0xff) << 0));
     }
 
     private static int sumSqual(byte[] b) {
