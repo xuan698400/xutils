@@ -22,7 +22,7 @@ public class DefaultCacheManager implements CacheManager<Cache<String, Object>> 
     /**
      * 缓存池
      */
-    private final ConcurrentHashMap<String, Cache<String, Object>> cachePool = new ConcurrentHashMap<String, Cache<String, Object>>();
+    private final ConcurrentHashMap<String, Cache<String, Object>> cachePool = new ConcurrentHashMap<>();
 
     public DefaultCacheManager() {
     }

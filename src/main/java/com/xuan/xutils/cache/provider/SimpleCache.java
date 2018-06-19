@@ -19,12 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:44:23 $
  */
 public class SimpleCache implements Cache<String, Object> {
-
-    /**
-     * 缓存类的名称
-     */
-    private final String CACHE_NAME = SimpleCache.class.getName();
-
+    
     /**
      * 内部 map 的个数，根据 key 的 hash 对 moduleSize 取模来定位到具体的某一个内部的 map，减少阻塞情况发生。
      */
@@ -50,24 +45,20 @@ public class SimpleCache implements Cache<String, Object> {
      */
     private final ScheduledExecutorService executorService;
 
-    @SuppressWarnings("unchecked")
     public SimpleCache() {
         cacheMaps = new ConcurrentMap[MODULE_SIZE];
         for (int i = 0; i < MODULE_SIZE; i++) {
-            ConcurrentMap<String, Object> cacheMap = new ConcurrentHashMap<String, Object>();
-            cacheMaps[i] = cacheMap;
+            cacheMaps[i] = new ConcurrentHashMap<>();
         }
-        cacheTimeMap = new ConcurrentHashMap<String, Long>();
+        cacheTimeMap = new ConcurrentHashMap<>();
 
+        //定时扫描过期缓存
         executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleWithFixedDelay(new CacheExpiryTask(), 0, EXPIRY_INTERVAL, TimeUnit.MINUTES);
 
-        System.out.println(CACHE_NAME + " initialized");
+        //System.out.println(CACHE_NAME + " initialized");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public synchronized void destroy() {
         for (Map<String, Object> cacheMap : cacheMaps) {
@@ -75,26 +66,17 @@ public class SimpleCache implements Cache<String, Object> {
         }
         cacheTimeMap.clear();
 
-        if (executorService.isShutdown()) {
-            System.out.println(CACHE_NAME + " already destroyed");
-        } else {
+        if (!executorService.isShutdown()) {
             executorService.shutdown();
-            System.out.println(CACHE_NAME + " destroyed");
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object get(String key) {
         verifyCache(key);
         return getCacheMap(key).get(key);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(String key, Object value) {
         verifyCache(key);
@@ -102,6 +84,7 @@ public class SimpleCache implements Cache<String, Object> {
         boolean success = false;
         Object previous = getCacheMap(key).putIfAbsent(key, value);
         if (previous == null) {
+            //表示新值设置成功
             cacheTimeMap.put(key, -1L);
             success = true;
         }
@@ -109,9 +92,6 @@ public class SimpleCache implements Cache<String, Object> {
         return success;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(String key, Object value, Date expiry) {
         verifyCache(key);
@@ -126,9 +106,6 @@ public class SimpleCache implements Cache<String, Object> {
         return success;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(String key, Object value, long expiry, TimeUnit unit) {
         verifyCache(key);
@@ -144,9 +121,6 @@ public class SimpleCache implements Cache<String, Object> {
         return success;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void put(String key, Object value) {
         if (value == null) {
@@ -157,9 +131,6 @@ public class SimpleCache implements Cache<String, Object> {
         cacheTimeMap.put(key, -1L);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void put(String key, Object value, Date expiry) {
         if (value == null) {
@@ -170,9 +141,6 @@ public class SimpleCache implements Cache<String, Object> {
         cacheTimeMap.put(key, expiry.getTime());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void put(String key, Object value, long expiry, TimeUnit unit) {
         if (value == null) {
@@ -185,45 +153,28 @@ public class SimpleCache implements Cache<String, Object> {
         cacheTimeMap.put(key, _expiry);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void remove(String key) {
         getCacheMap(key).remove(key);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long decr(String key, long delta) {
         return decr(key, delta, 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long decr(String key, long delta, long initValue) {
         return incr(key, -delta, initValue);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long incr(String key, long delta) {
         return incr(key, delta, 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long incr(String key, long delta, long initValue) {
-        long countValue = 0;
-
         AtomicLong counter = (AtomicLong) get(key);
         if (counter == null) {
             // 表示计数器还没有存在，创建计数器并尝试添加
@@ -236,7 +187,7 @@ public class SimpleCache implements Cache<String, Object> {
             }
         }
 
-        countValue = counter.addAndGet(delta);
+        long countValue = counter.addAndGet(delta);
         if (countValue >= 0) {
             return countValue;
         } else {
@@ -245,9 +196,6 @@ public class SimpleCache implements Cache<String, Object> {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void flushAll() {
         for (Map<String, Object> cacheMap : cacheMaps) {
@@ -255,7 +203,7 @@ public class SimpleCache implements Cache<String, Object> {
         }
         cacheTimeMap.clear();
 
-        System.out.println(CACHE_NAME + " flushed");
+        //System.out.println(CACHE_NAME + " flushed");
     }
 
     public Set<String> keySet() {
@@ -290,7 +238,7 @@ public class SimpleCache implements Cache<String, Object> {
             cacheMap.remove(key);
             cacheTimeMap.remove(key);
 
-            System.out.println("Cache(key=" + key + ") is expiry");
+            //System.out.println("Cache(key=" + key + ") is expiry");
         }
     }
 
@@ -309,6 +257,7 @@ public class SimpleCache implements Cache<String, Object> {
      * 清理获取缓存的任务
      */
     private class CacheExpiryTask implements Runnable {
+
         @Override
         public void run() {
             verifyAllCaches();
