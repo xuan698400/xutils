@@ -49,18 +49,18 @@ public class ForkJoinTest {
      * @return
      */
     private void run2() throws ListTaskException {
-        List<String> list = initList();
-        //
-        long start = System.currentTimeMillis();
-        List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable() {
-            @Override
-            protected String call(String s) {
-                return doThing(s);
-            }
-        });
-        //
-        System.out.println("++++++++++run2-time:" + (System.currentTimeMillis() - start));
-        System.out.println("++++++++++run2-result:" + resultList);
+        //List<String> list = initList();
+        ////
+        //long start = System.currentTimeMillis();
+        //List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable() {
+        //    @Override
+        //    protected String call(String s) {
+        //        return doThing(s);
+        //    }
+        //});
+        ////
+        //System.out.println("++++++++++run2-time:" + (System.currentTimeMillis() - start));
+        //System.out.println("++++++++++run2-result:" + resultList);
     }
 
     /**
