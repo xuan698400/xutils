@@ -1,6 +1,6 @@
 package com.xuan.mix.http;
 
-import com.xuan.xutils.http.listener.HttpDownloadListener;
+import com.xuan.mix.http.listener.HttpDownloadListener;
 
 import java.io.File;
 import java.net.URLEncoder;

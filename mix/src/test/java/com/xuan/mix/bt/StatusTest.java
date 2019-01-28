@@ -1,8 +1,8 @@
 package com.xuan.mix.bt;
 
-import com.xuan.xutils.bt.status.StatusChecker;
-import com.xuan.xutils.bt.status.impl.LoadStatusChecker;
-import com.xuan.xutils.bt.status.impl.MemoryStatusChecker;
+import com.xuan.mix.bt.status.StatusChecker;
+import com.xuan.mix.bt.status.impl.LoadStatusChecker;
+import com.xuan.mix.bt.status.impl.MemoryStatusChecker;
 import org.junit.Test;
 
 public class StatusTest {

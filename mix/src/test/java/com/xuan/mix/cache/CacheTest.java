@@ -1,6 +1,6 @@
 package com.xuan.mix.cache;
 
-import com.xuan.xutils.cache.provider.SimpleCache;
+import com.xuan.mix.cache.provider.SimpleCache;
 import org.junit.Assert;
 import org.junit.Test;
 

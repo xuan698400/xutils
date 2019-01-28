@@ -1,6 +1,6 @@
 package com.xuan.mix.utils;
 
-import com.xuan.xutils.io.IOUtils;
+import com.xuan.mix.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

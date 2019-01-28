@@ -1,6 +1,6 @@
 package com.xuan.mix.http.impl;
 
-import com.xuan.xutils.http.HttpRequest;
+import com.xuan.mix.http.HttpRequest;
 
 import java.io.File;
 import java.io.FileInputStream;

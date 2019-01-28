@@ -1,8 +1,9 @@
 package com.xuan.mix.http.impl;
 
-import com.xuan.xutils.http.HttpClient;
-import com.xuan.xutils.http.HttpRequest;
-import com.xuan.xutils.http.HttpResponse;
+import com.xuan.mix.http.HttpClient;
+import com.xuan.mix.http.HttpRequest;
+import com.xuan.mix.http.HttpResponse;
+import com.xuan.mix.io.FileUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -280,7 +281,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             byte[] data = outStream.toByteArray();
 
             File file = new File(request.getDownloadFileName());
-            com.xuan.xutils.io.FileUtils.writeByteArrayToFile(file, data, false);
+            FileUtils.writeByteArrayToFile(file, data, false);
             response.setResultFile(file);
         } catch (Exception e) {
             response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);

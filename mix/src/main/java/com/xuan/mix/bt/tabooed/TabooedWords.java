@@ -1,9 +1,7 @@
 package com.xuan.mix.bt.tabooed;
 
-import com.xuan.xutils.io.IOUtils;
-import com.xuan.xutils.utils.Validators;
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
@@ -11,7 +9,7 @@ import java.util.Set;
 
 /**
  * 敏感词汇类. 此类会读取资源文件(默认为tabooed.words)中的词汇.
- * 
+ *
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:24:31 $
  */
@@ -30,10 +28,8 @@ public class TabooedWords {
     /**
      * 从指定的敏感词汇输入流中读取词汇, 初始化敏感词汇列表.
      *
-     * @param in
-     *            敏感词汇输入流
-     * @param charset
-     *            编码方式
+     * @param in      敏感词汇输入流
+     * @param charset 编码方式
      */
     public synchronized void initialize(InputStream in, String charset) {
 
@@ -41,23 +37,26 @@ public class TabooedWords {
         try {
             reader = new BufferedReader(new InputStreamReader(in, charset));
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                if (!Validators.isEmpty(line)) {
+                if (null != line && line.trim().length() > 0) {
                     tabooedWords.add(line.toLowerCase());
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // Ignore
-        }
-        finally {
-            IOUtils.closeQuietly(reader);
-
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException ioe) {
+                // ignore
+            }
         }
     }
 
     /**
      * 获取所有读取到的敏感词汇.
-     * 
+     *
      * @return 敏感词汇
      */
     public Set<String> getTabooedWords() {

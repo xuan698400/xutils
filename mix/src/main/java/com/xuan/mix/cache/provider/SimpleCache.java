@@ -1,6 +1,6 @@
 package com.xuan.mix.cache.provider;
 
-import com.xuan.xutils.cache.Cache;
+import com.xuan.mix.cache.Cache;
 
 import java.util.Date;
 import java.util.Map;

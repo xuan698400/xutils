@@ -1,7 +1,7 @@
 package com.xuan.mix.concurrent.forkjoin.listtask.core;
 
-import com.xuan.xutils.concurrent.forkjoin.listtask.callback.ListTaskCallable;
-import com.xuan.xutils.concurrent.forkjoin.listtask.config.ListTaskConfig;
+import com.xuan.mix.concurrent.forkjoin.listtask.callback.ListTaskCallable;
+import com.xuan.mix.concurrent.forkjoin.listtask.config.ListTaskConfig;
 
 import java.util.ArrayList;
 import java.util.List;

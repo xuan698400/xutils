@@ -148,7 +148,7 @@ public abstract class SecurityUtils {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             md.update(str.getBytes());
-            return com.xuan.xutils.utils.StringUtils.toHexString(md.digest());
+            return StringUtils.toHexString(md.digest());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Could not encodeBySHA1", e);
         }

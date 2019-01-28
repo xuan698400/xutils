@@ -1,9 +1,9 @@
 package com.xuan.mix.jdbc;
 
-import com.xuan.xutils.jdbc.helper.InSQLProcessor;
-import com.xuan.xutils.jdbc.helper.PairKeyword;
-import com.xuan.xutils.jdbc.helper.PairKeywordComparator;
-import com.xuan.xutils.utils.DateUtils;
+import com.xuan.mix.jdbc.helper.InSQLProcessor;
+import com.xuan.mix.jdbc.helper.PairKeyword;
+import com.xuan.mix.jdbc.helper.PairKeywordComparator;
+import com.xuan.mix.utils.DateUtils;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;

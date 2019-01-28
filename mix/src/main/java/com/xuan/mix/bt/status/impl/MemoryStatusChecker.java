@@ -1,8 +1,8 @@
 package com.xuan.mix.bt.status.impl;
 
-import com.xuan.xutils.bt.status.Level;
-import com.xuan.xutils.bt.status.Status;
-import com.xuan.xutils.bt.status.StatusChecker;
+import com.xuan.mix.bt.status.Level;
+import com.xuan.mix.bt.status.Status;
+import com.xuan.mix.bt.status.StatusChecker;
 
 /**
  * 内存使用检查

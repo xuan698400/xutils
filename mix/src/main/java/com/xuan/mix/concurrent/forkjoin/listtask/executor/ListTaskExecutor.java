@@ -1,9 +1,9 @@
 package com.xuan.mix.concurrent.forkjoin.listtask.executor;
 
-import com.xuan.xutils.concurrent.forkjoin.listtask.callback.ListTaskCallable;
-import com.xuan.xutils.concurrent.forkjoin.listtask.config.ListTaskConfig;
-import com.xuan.xutils.concurrent.forkjoin.listtask.core.ListTaskException;
-import com.xuan.xutils.concurrent.forkjoin.listtask.core.ListTaskResult;
+import com.xuan.mix.concurrent.forkjoin.listtask.callback.ListTaskCallable;
+import com.xuan.mix.concurrent.forkjoin.listtask.config.ListTaskConfig;
+import com.xuan.mix.concurrent.forkjoin.listtask.core.ListTaskException;
+import com.xuan.mix.concurrent.forkjoin.listtask.core.ListTaskResult;
 
 import java.util.List;
 

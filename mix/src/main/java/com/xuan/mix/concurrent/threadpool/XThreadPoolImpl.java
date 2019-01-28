@@ -1,7 +1,5 @@
 package com.xuan.mix.concurrent.threadpool;
 
-import com.xuan.xutils.utils.StringUtils;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -16,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 通用配置实现(还有待进一步整理)
- * <p>
  * Created by xuan on 17/8/14.
  */
 public class XThreadPoolImpl implements XThreadPool {
@@ -96,10 +93,14 @@ public class XThreadPoolImpl implements XThreadPool {
         if (this.shutdownTimeout > 0) {
             try {
                 if (!this.executor.awaitTermination(this.shutdownTimeout, TimeUnit.SECONDS)) {
-                    System.out.println("Timed out while waiting for executor" + (this.name != null ? " '" + this.name + "'" : "") + " to terminate");
+                    System.out.println(
+                            "Timed out while waiting for executor" + (this.name != null ? " '" + this.name + "'" : "")
+                            + " to terminate");
                 }
             } catch (InterruptedException ex) {
-                System.out.println("Interrupted while waiting for executor" + (this.name != null ? " '" + this.name + "'" : "") + " to terminate");
+                System.out.println(
+                        "Interrupted while waiting for executor" + (this.name != null ? " '" + this.name + "'" : "")
+                        + " to terminate");
                 // (Re-)Cancel if current thread also interrupted
                 this.executor.shutdownNow();
                 Thread.currentThread().interrupt();
@@ -113,7 +114,7 @@ public class XThreadPoolImpl implements XThreadPool {
      * @throws Exception
      */
     public void init() throws Exception {
-        if (StringUtils.isBlank(name)) {
+        if (null == name || name.trim().length() == 0) {
             name = this.getClass().getName();
         }
 
@@ -133,9 +134,12 @@ public class XThreadPoolImpl implements XThreadPool {
      * @param rejectedExecutionHandler
      * @return
      */
-    protected ExecutorService initializeExecutor(ThreadFactory threadFactory, RejectedExecutionHandler rejectedExecutionHandler) {
+    protected ExecutorService initializeExecutor(ThreadFactory threadFactory,
+                                                 RejectedExecutionHandler rejectedExecutionHandler) {
         BlockingQueue<Runnable> queue = createQueue(this.queueCapacity);
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(this.corePoolSize, this.maxPoolSize, this.keepAliveSeconds, TimeUnit.SECONDS, queue, threadFactory, rejectedExecutionHandler);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(this.corePoolSize, this.maxPoolSize, this.keepAliveSeconds,
+                                                             TimeUnit.SECONDS, queue, threadFactory,
+                                                             rejectedExecutionHandler);
         return executor;
     }
 
@@ -189,6 +193,7 @@ public class XThreadPoolImpl implements XThreadPool {
      * 保证不会有Exception抛出到线程池的Runnable，防止用户没有捕捉异常导致中断了线程池中的线程。
      */
     public static class WrapExceptionRunnable implements Runnable {
+
         private Runnable runnable;
 
         public WrapExceptionRunnable(Runnable runnable) {
@@ -196,6 +201,7 @@ public class XThreadPoolImpl implements XThreadPool {
             if (runnable == null) {
                 System.out.println("[WrapExceptionRunnable-WrapExceptionRunnable]error, runnable cann't be null");
                 this.runnable = new Runnable() {
+
                     @Override
                     public void run() {
                     }
@@ -222,6 +228,7 @@ public class XThreadPoolImpl implements XThreadPool {
      * 保证不会有Exception抛出到线程池的Runnable，防止用户没有捕捉异常导致中断了线程池中的线程。
      */
     public static class WrapExceptionCallable<T> implements Callable<T> {
+
         private Callable<T> callable;
 
         public WrapExceptionCallable(Callable<T> callable) {
@@ -229,6 +236,7 @@ public class XThreadPoolImpl implements XThreadPool {
             if (callable == null) {
                 System.out.println("[WrapExceptionCallable-WrapExceptionCallable]error, callable cann't be null");
                 this.callable = new Callable<T>() {
+
                     @Override
                     public T call() throws Exception {
                         return null;
@@ -277,7 +285,8 @@ public class XThreadPoolImpl implements XThreadPool {
      * @param rejectedExecutionHandler
      */
     public void setRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler) {
-        this.rejectedExecutionHandler = (rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy());
+        this.rejectedExecutionHandler = (
+                rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy());
     }
 
     /**

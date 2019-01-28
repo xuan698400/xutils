@@ -1,9 +1,9 @@
 package com.xuan.mix.utils;
 
-import com.xuan.xutils.utils.domain.Family;
-import com.xuan.xutils.utils.domain.Father;
-import com.xuan.xutils.utils.domain.Son;
-import com.xuan.xutils.utils.domain.Son2;
+import com.xuan.mix.utils.domain.Family;
+import com.xuan.mix.utils.domain.Father;
+import com.xuan.mix.utils.domain.Son;
+import com.xuan.mix.utils.domain.Son2;
 import org.junit.Test;
 
 import java.util.HashMap;

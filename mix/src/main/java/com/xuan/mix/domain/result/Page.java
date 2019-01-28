@@ -1,6 +1,6 @@
 package com.xuan.mix.domain.result;
 
-import com.xuan.xutils.domain.BaseDO;
+import com.xuan.mix.domain.BaseDO;
 
 /**
  * 分页对象
