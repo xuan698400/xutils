@@ -8,11 +8,10 @@ import java.io.OutputStream;
 
 /**
  * IO流操作工具类
- *
- * @author xuan
- * @version $Revision: 1.0 $, $Date: 2013-9-4 下午7:22:40 $
+ * Created by xuan on 2019/1/29.
  */
 public abstract class IOUtils {
+
     private static final int EOF                 = -1;
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
@@ -39,8 +38,7 @@ public abstract class IOUtils {
      * @param encoding 编码
      * @throws IOException
      */
-    public static void write(String data, OutputStream output, String encoding)
-            throws IOException {
+    public static void write(String data, OutputStream output, String encoding) throws IOException {
         if (data != null) {
             output.write(data.getBytes(Charsets.toCharset(encoding)));
         }
@@ -51,36 +49,33 @@ public abstract class IOUtils {
      *
      * @param input    输入流
      * @param encoding 编码
-     * @return
-     * @throws IOException
+     * @return 结果字符串
+     * @throws IOException IO异常
      */
-    public static String toString(InputStream input, String encoding)
-            throws IOException {
+    public static String toString(InputStream input, String encoding) throws IOException {
         // 把字节流转成字符流
         InputStreamReader in = new InputStreamReader(input, Charsets.toCharset(encoding));
 
-        int n = 0;
+        int n;
         StringBuilder builder = new StringBuilder();
         char[] buffer = new char[DEFAULT_BUFFER_SIZE];
         while (EOF != (n = in.read(buffer))) {
-            if (null != buffer) {
-                builder.append(buffer, 0, n);
-            }
+            builder.append(buffer, 0, n);
         }
 
         return builder.toString();
     }
 
     /**
-     * 从流中准确的读出指定字节，读取后会严格用读取后的字节数和传入的longSize进行比较，只要相等了才返回数据，否则抛出异常
+     * 从流中准确的读出指定字节，读取后会严格用读取后的字节数和传入的longSize进行比较，只有相等了才返回数据，否则抛出异常
+     * 如果流中的字节大于指定longSize的长度，只够读取出流中前longSize长度的字节数组
      *
      * @param input    输入流
      * @param longSize 该输入流的期望长度
-     * @return
-     * @throws IOException
+     * @return 读出的字节数组
+     * @throws IOException IO异常
      */
-    public static byte[] toByteArray(InputStream input, long longSize)
-            throws IOException {
+    public static byte[] toByteArray(InputStream input, long longSize) throws IOException {
         if (longSize > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("流的期望长度不能超过int能表示的范围，当前长度： " + longSize);
         }
@@ -104,8 +99,7 @@ public abstract class IOUtils {
         }
 
         if (offset != size) {
-            throw new IOException("实际读取的流的长度和期望的长度不一致，实际读取长度：" + offset
-                    + ", 期望长度: " + size);
+            throw new IOException("实际读取的流的长度和期望的长度不一致，实际读取长度：" + offset + ", 期望长度: " + size);
         }
 
         return data;

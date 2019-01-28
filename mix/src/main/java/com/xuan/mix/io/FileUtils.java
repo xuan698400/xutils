@@ -15,11 +15,10 @@ import java.util.Properties;
 
 /**
  * 文件操作工具类
- *
- * @author xuan
- * @version $Revision: 1.0 $, $Date: 2013-9-4 下午7:24:34 $
+ * Created by xuan on 2019/1/29.
  */
 public abstract class FileUtils {
+
     public static final String EMPTY = "";
 
     public static final long ONE_KB = 1024;
@@ -43,8 +42,8 @@ public abstract class FileUtils {
         }
 
         int pointIndex = fileName.lastIndexOf(".");
-        return pointIndex > 0 && pointIndex < fileName.length() ? fileName
-                .substring(pointIndex + 1).toLowerCase() : EMPTY;
+        return pointIndex > 0 && pointIndex < fileName.length() ? fileName.substring(
+                pointIndex + 1).toLowerCase() : EMPTY;
     }
 
     // ////////////////////字节写入读出文件方法，一般可以用来写图片，声音等////////////////////
@@ -57,8 +56,7 @@ public abstract class FileUtils {
      * @param append 是否从文件后面添加
      * @throws IOException
      */
-    public static void writeByteArrayToFile(File file, byte[] data,
-                                            boolean append) throws IOException {
+    public static void writeByteArrayToFile(File file, byte[] data, boolean append) throws IOException {
         OutputStream out = null;
         try {
             out = openOutputStream(file, append);
@@ -96,8 +94,7 @@ public abstract class FileUtils {
      * @param append   是否追加
      * @throws IOException
      */
-    public static void writeStringToFile(File file, String data,
-                                         String encoding, boolean append) throws IOException {
+    public static void writeStringToFile(File file, String data, String encoding, boolean append) throws IOException {
         OutputStream out = null;
         try {
             out = openOutputStream(file, append);
@@ -115,8 +112,7 @@ public abstract class FileUtils {
      * @return
      * @throws IOException
      */
-    public static String readFileToString(File file, String encoding)
-            throws IOException {
+    public static String readFileToString(File file, String encoding) throws IOException {
         InputStream in = null;
         try {
             in = openInputStream(file);
@@ -136,23 +132,19 @@ public abstract class FileUtils {
      * @return
      * @throws IOException
      */
-    public static FileOutputStream openOutputStream(File file, boolean append)
-            throws IOException {
+    public static FileOutputStream openOutputStream(File file, boolean append) throws IOException {
         if (file.exists()) {
             if (file.isDirectory()) {
-                throw new IOException("File '" + file
-                        + "' exists but is a directory");
+                throw new IOException("File '" + file + "' exists but is a directory");
             }
             if (file.canWrite() == false) {
-                throw new IOException("File '" + file
-                        + "' cannot be written to");
+                throw new IOException("File '" + file + "' cannot be written to");
             }
         } else {
             File parent = file.getParentFile();
             if (parent != null) {
                 if (!parent.mkdirs() && !parent.isDirectory()) {
-                    throw new IOException("Directory '" + parent
-                            + "' could not be created");
+                    throw new IOException("Directory '" + parent + "' could not be created");
                 }
             }
         }
@@ -169,16 +161,14 @@ public abstract class FileUtils {
     public static FileInputStream openInputStream(File file) throws IOException {
         if (file.exists()) {
             if (file.isDirectory()) {
-                throw new IOException("File '" + file
-                        + "' exists but is a directory");
+                throw new IOException("File '" + file + "' exists but is a directory");
             }
 
             if (file.canRead() == false) {
                 throw new IOException("File '" + file + "' cannot be read");
             }
         } else {
-            throw new FileNotFoundException("File '" + file
-                    + "' does not exist");
+            throw new FileNotFoundException("File '" + file + "' does not exist");
         }
 
         return new FileInputStream(file);
@@ -223,46 +213,40 @@ public abstract class FileUtils {
      * @param isCover 存在是否覆盖
      * @throws IOException
      */
-    public static void moveDirectoryToDirectory(File src, File destDir,
-                                                boolean isCover) throws IOException {
+    public static void moveDirectoryToDirectory(File src, File destDir, boolean isCover) throws IOException {
         if (src == null) {
             throw new NullPointerException("Source must not be null");
         }
         if (destDir == null) {
-            throw new NullPointerException(
-                    "Destination directory must not be null");
+            throw new NullPointerException("Destination directory must not be null");
         }
 
         if (destDir.exists()) {
             if (isCover) {
                 deleteFileOrDirectoryQuietly(destDir.getPath());
             } else {
-                throw new IOException(
-                        "Destination directory is exists and isCover=false");
+                throw new IOException("Destination directory is exists and isCover=false");
             }
         }
 
         destDir.mkdirs();
         if (!destDir.exists()) {
-            throw new FileNotFoundException("Destination directory '" + destDir
-                    + "' create failed]");
+            throw new FileNotFoundException("Destination directory '" + destDir + "' create failed]");
         }
         if (!destDir.isDirectory()) {
-            throw new IOException("Destination '" + destDir
-                    + "' is not a directory");
+            throw new IOException("Destination '" + destDir + "' is not a directory");
         }
 
         boolean rename = src.renameTo(destDir);
         if (!rename) {
             if (destDir.getCanonicalPath().startsWith(src.getCanonicalPath())) {
-                throw new IOException("Cannot move directory: " + src
-                        + " to a subdirectory of itself: " + destDir);
+                throw new IOException("Cannot move directory: " + src + " to a subdirectory of itself: " + destDir);
             }
             copyDirectoryToDirectory(src, destDir);
             deleteFileOrDirectoryQuietly(src.getPath());
             if (src.exists()) {
-                throw new IOException("Failed to delete original directory '"
-                        + src + "' after copy to '" + destDir + "'");
+                throw new IOException(
+                        "Failed to delete original directory '" + src + "' after copy to '" + destDir + "'");
             }
         }
     }
@@ -275,14 +259,12 @@ public abstract class FileUtils {
      * @param isCover 存在是否覆盖
      * @throws IOException
      */
-    public static void moveFileToDirectory(File srcFile, File destDir,
-                                           boolean isCover) throws IOException {
+    public static void moveFileToDirectory(File srcFile, File destDir, boolean isCover) throws IOException {
         if (srcFile == null) {
             throw new NullPointerException("Source must not be null");
         }
         if (destDir == null) {
-            throw new NullPointerException(
-                    "Destination directory must not be null");
+            throw new NullPointerException("Destination directory must not be null");
         }
 
         if (!destDir.exists()) {
@@ -290,13 +272,11 @@ public abstract class FileUtils {
         }
 
         if (!destDir.exists()) {
-            throw new FileNotFoundException("Destination directory '" + destDir
-                    + "' create failed]");
+            throw new FileNotFoundException("Destination directory '" + destDir + "' create failed]");
         }
 
         if (!destDir.isDirectory()) {
-            throw new IOException("Destination '" + destDir
-                    + "' is not a directory");
+            throw new IOException("Destination '" + destDir + "' is not a directory");
         }
 
         moveFile(srcFile, new File(destDir, srcFile.getName()), isCover);
@@ -310,8 +290,7 @@ public abstract class FileUtils {
      * @param isCover  存在是否覆盖
      * @throws IOException
      */
-    public static void moveFile(File srcFile, File destFile, boolean isCover)
-            throws IOException {
+    public static void moveFile(File srcFile, File destFile, boolean isCover) throws IOException {
         if (null == srcFile) {
             throw new NullPointerException("Source must not be null");
         }
@@ -320,24 +299,21 @@ public abstract class FileUtils {
         }
 
         if (!srcFile.exists()) {
-            throw new FileNotFoundException("Source '" + srcFile
-                    + "' does not exist");
+            throw new FileNotFoundException("Source '" + srcFile + "' does not exist");
         }
         if (srcFile.isDirectory()) {
             throw new IOException("Source '" + srcFile + "' is a directory");
         }
 
         if (destFile.isDirectory()) {
-            throw new IOException("Destination '" + destFile
-                    + "' is a directory");
+            throw new IOException("Destination '" + destFile + "' is a directory");
         }
 
         if (destFile.exists()) {
             if (isCover) {
                 deleteFileOrDirectoryQuietly(destFile.getPath());
             } else {
-                throw new IOException(
-                        "Destination directory is exists and isCover=false");
+                throw new IOException("Destination directory is exists and isCover=false");
             }
         }
 
@@ -346,8 +322,8 @@ public abstract class FileUtils {
             copyFile(srcFile, destFile);
             if (!srcFile.delete()) {
                 deleteFileOrDirectoryQuietly(destFile.getPath());
-                throw new IOException("Failed to delete original file '"
-                        + srcFile + "' after copy to '" + destFile + "'");
+                throw new IOException(
+                        "Failed to delete original file '" + srcFile + "' after copy to '" + destFile + "'");
             }
         }
     }
@@ -361,10 +337,8 @@ public abstract class FileUtils {
      * @param destDir 目的文件夹
      * @throws IOException
      */
-    public static void copyDirectoryToDirectory(File srcDir, File destDir)
-            throws IOException {
-        copyDirectoryToDirectory(srcDir, new File(destDir, srcDir.getName()),
-                null);
+    public static void copyDirectoryToDirectory(File srcDir, File destDir) throws IOException {
+        copyDirectoryToDirectory(srcDir, new File(destDir, srcDir.getName()), null);
     }
 
     /**
@@ -375,8 +349,7 @@ public abstract class FileUtils {
      * @param filter  文件过滤器
      * @throws IOException
      */
-    public static void copyDirectoryToDirectory(File srcDir, File destDir,
-                                                FileFilter filter) throws IOException {
+    public static void copyDirectoryToDirectory(File srcDir, File destDir, FileFilter filter) throws IOException {
         if (srcDir == null) {
             throw new NullPointerException("Source must not be null");
         }
@@ -385,30 +358,25 @@ public abstract class FileUtils {
         }
 
         if (srcDir.exists() && !srcDir.isDirectory()) {
-            throw new IllegalArgumentException("Source '" + destDir
-                    + "' is not a directory");
+            throw new IllegalArgumentException("Source '" + destDir + "' is not a directory");
         }
         if (destDir.exists() && !destDir.isDirectory()) {
-            throw new IllegalArgumentException("Destination '" + destDir
-                    + "' is not a directory");
+            throw new IllegalArgumentException("Destination '" + destDir + "' is not a directory");
         }
 
         if (!srcDir.exists()) {
-            throw new FileNotFoundException("Source '" + srcDir
-                    + "' does not exist");
+            throw new FileNotFoundException("Source '" + srcDir + "' does not exist");
         }
 
         if (srcDir.getCanonicalPath().equals(destDir.getCanonicalPath())) {
-            throw new IOException("Source '" + srcDir + "' and destination '"
-                    + destDir + "' are the same");
+            throw new IOException("Source '" + srcDir + "' and destination '" + destDir + "' are the same");
         }
 
         // Cater for destination being directory within the source directory
         // (see IO-141)
         List<String> exclusionList = null;
         if (destDir.getCanonicalPath().startsWith(srcDir.getCanonicalPath())) {
-            File[] srcFiles = null == filter ? srcDir.listFiles() : srcDir
-                    .listFiles(filter);
+            File[] srcFiles = null == filter ? srcDir.listFiles() : srcDir.listFiles(filter);
             if (srcFiles != null && srcFiles.length > 0) {
                 exclusionList = new ArrayList<String>(srcFiles.length);
                 for (File srcFile : srcFiles) {
@@ -420,39 +388,32 @@ public abstract class FileUtils {
         doCopyDirectory(srcDir, destDir, filter, true, exclusionList);
     }
 
-    private static void doCopyDirectory(File srcDir, File destDir,
-                                        FileFilter filter, boolean preserveFileDate,
+    private static void doCopyDirectory(File srcDir, File destDir, FileFilter filter, boolean preserveFileDate,
                                         List<String> exclusionList) throws IOException {
         // recurse
-        File[] srcFiles = (null == filter) ? srcDir.listFiles() : srcDir
-                .listFiles(filter);
+        File[] srcFiles = (null == filter) ? srcDir.listFiles() : srcDir.listFiles(filter);
         if (srcFiles == null) { // null if abstract pathname does not denote a
             // directory, or if an I/O error occurs
             throw new IOException("Failed to list contents of " + srcDir);
         }
         if (destDir.exists()) {
             if (!destDir.isDirectory()) {
-                throw new IOException("Destination '" + destDir
-                        + "' exists but is not a directory");
+                throw new IOException("Destination '" + destDir + "' exists but is not a directory");
             }
         } else {
             if (!destDir.mkdirs() && !destDir.isDirectory()) {
-                throw new IOException("Destination '" + destDir
-                        + "' directory cannot be created");
+                throw new IOException("Destination '" + destDir + "' directory cannot be created");
             }
         }
         if (!destDir.canWrite()) {
-            throw new IOException("Destination '" + destDir
-                    + "' cannot be written to");
+            throw new IOException("Destination '" + destDir + "' cannot be written to");
         }
 
         for (File srcFile : srcFiles) {
             File dstFile = new File(destDir, srcFile.getName());
-            if (exclusionList == null
-                    || !exclusionList.contains(srcFile.getCanonicalPath())) {
+            if (exclusionList == null || !exclusionList.contains(srcFile.getCanonicalPath())) {
                 if (srcFile.isDirectory()) {
-                    doCopyDirectory(srcFile, dstFile, filter, preserveFileDate,
-                            exclusionList);
+                    doCopyDirectory(srcFile, dstFile, filter, preserveFileDate, exclusionList);
                 } else {
                     doCopyFile(srcFile, dstFile, preserveFileDate);
                 }
@@ -473,8 +434,7 @@ public abstract class FileUtils {
      * @param destDir 目的文件夹
      * @throws IOException
      */
-    public static void copyFileToDirectory(File srcFile, File destDir)
-            throws IOException {
+    public static void copyFileToDirectory(File srcFile, File destDir) throws IOException {
         copyFileToDirectory(srcFile, destDir, true);
     }
 
@@ -486,14 +446,12 @@ public abstract class FileUtils {
      * @param preserveFileDate 是否修改时间
      * @throws IOException
      */
-    public static void copyFileToDirectory(File srcFile, File destDir,
-                                           boolean preserveFileDate) throws IOException {
+    public static void copyFileToDirectory(File srcFile, File destDir, boolean preserveFileDate) throws IOException {
         if (null == destDir) {
             throw new NullPointerException("Destination must not be null");
         }
         if (destDir.exists() && !destDir.isDirectory()) {
-            throw new IllegalArgumentException("Destination '" + destDir
-                    + "' is not a directory");
+            throw new IllegalArgumentException("Destination '" + destDir + "' is not a directory");
         }
         File destFile = new File(destDir, srcFile.getName());
         copyFile(srcFile, destFile, preserveFileDate);
@@ -520,8 +478,7 @@ public abstract class FileUtils {
      * @param preserveFileDate 是否修改时间
      * @throws IOException
      */
-    public static void copyFile(File srcFile, File destFile,
-                                boolean preserveFileDate) throws IOException {
+    public static void copyFile(File srcFile, File destFile, boolean preserveFileDate) throws IOException {
         if (srcFile == null) {
             throw new NullPointerException("Source must not be null");
         }
@@ -530,39 +487,33 @@ public abstract class FileUtils {
         }
 
         if (!srcFile.exists()) {// 源不存在
-            throw new FileNotFoundException("Source '" + srcFile
-                    + "' does not exist");
+            throw new FileNotFoundException("Source '" + srcFile + "' does not exist");
         }
 
         if (destFile.isDirectory()) {// 源存在，但是是个目录
-            throw new IOException("Destination '" + destFile
-                    + "' exists but is a directory");
+            throw new IOException("Destination '" + destFile + "' exists but is a directory");
         }
 
         if (srcFile.getCanonicalPath().equals(destFile.getCanonicalPath())) {// 指向了同一个文件
-            throw new IOException("Source '" + srcFile + "' and destination '"
-                    + destFile + "' are the same");
+            throw new IOException("Source '" + srcFile + "' and destination '" + destFile + "' are the same");
         }
 
         if (destFile.exists() && !destFile.canWrite()) {// 目标文件存在，没有写权限
-            throw new IOException("Destination '" + destFile
-                    + "' exists but is read-only");
+            throw new IOException("Destination '" + destFile + "' exists but is read-only");
         }
 
         // 创建父文件夹
         File parentFile = destFile.getParentFile();
         if (null != parentFile) {
             if (!parentFile.mkdirs() && !parentFile.isDirectory()) {
-                throw new IOException("Destination '" + parentFile
-                        + "' directory cannot be created");
+                throw new IOException("Destination '" + parentFile + "' directory cannot be created");
             }
         }
 
         doCopyFile(srcFile, destFile, preserveFileDate);
     }
 
-    private static void doCopyFile(File srcFile, File destFile,
-                                   boolean preserveFileDate) throws IOException {
+    private static void doCopyFile(File srcFile, File destFile, boolean preserveFileDate) throws IOException {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         FileChannel input = null;
@@ -576,8 +527,7 @@ public abstract class FileUtils {
             long pos = 0;
             long count = 0;
             while (pos < size) {
-                count = size - pos > FILE_COPY_BUFFER_SIZE ? FILE_COPY_BUFFER_SIZE
-                        : size - pos;
+                count = size - pos > FILE_COPY_BUFFER_SIZE ? FILE_COPY_BUFFER_SIZE : size - pos;
                 pos += output.transferFrom(input, pos, count);
             }
         } finally {
@@ -588,8 +538,7 @@ public abstract class FileUtils {
         }
 
         if (srcFile.length() != destFile.length()) {
-            throw new IOException("Failed to copy full contents from '"
-                    + srcFile + "' to '" + destFile + "'");
+            throw new IOException("Failed to copy full contents from '" + srcFile + "' to '" + destFile + "'");
         }
 
         if (preserveFileDate) {// 修改文件最后修改时间
@@ -618,8 +567,7 @@ public abstract class FileUtils {
      * @param filePath       文件或者文件夹路径
      * @param deleteThisPath 是否需要删除这个本身指定的文件或者文件夹
      */
-    public static void deleteFileOrDirectory(String filePath,
-                                             boolean deleteThisPath) throws IOException {
+    public static void deleteFileOrDirectory(String filePath, boolean deleteThisPath) throws IOException {
         if (null != filePath && filePath.length() > 0) {
             File file = new File(filePath);
 
@@ -664,8 +612,7 @@ public abstract class FileUtils {
     public static List<File> getFileListByPath(String path, FileFilter filter) {
         File directory = new File(path);
         if (!directory.exists() || !directory.isDirectory()) {
-            throw new IllegalArgumentException("Nonexistent directory[" + path
-                    + "]");
+            throw new IllegalArgumentException("Nonexistent directory[" + path + "]");
         }
 
         return new Recursiver().getFileList(directory, filter);
@@ -746,11 +693,11 @@ public abstract class FileUtils {
      * @version $Revision: 1.0 $, $Date: 2013-9-5 下午1:13:17 $
      */
     private static class Recursiver {
+
         private static ArrayList<File> files = new ArrayList<File>();
 
         public List<File> getFileList(File file, FileFilter filter) {
-            File children[] = null == filter ? file.listFiles() : file
-                    .listFiles(filter);
+            File children[] = null == filter ? file.listFiles() : file.listFiles(filter);
 
             for (int i = 0; i < children.length; i++) {
                 if (children[i].isDirectory()) {
