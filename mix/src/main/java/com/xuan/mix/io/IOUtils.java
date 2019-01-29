@@ -16,9 +16,9 @@ public abstract class IOUtils {
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
     /**
-     * 默默的关闭可关闭流
+     * 关闭流，隐藏关闭时出现的异常
      *
-     * @param closeable
+     * @param closeable 可关闭接口
      */
     public static void closeQuietly(Closeable closeable) {
         try {
@@ -36,7 +36,7 @@ public abstract class IOUtils {
      * @param data     字符串数据
      * @param output   输出流
      * @param encoding 编码
-     * @throws IOException
+     * @throws IOException IO异常
      */
     public static void write(String data, OutputStream output, String encoding) throws IOException {
         if (data != null) {
