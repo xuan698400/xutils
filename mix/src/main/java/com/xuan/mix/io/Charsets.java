@@ -9,28 +9,6 @@ import java.nio.charset.Charset;
  * @version $Revision: 1.0 $, $Date: 2013-9-4 下午7:32:50 $
  */
 public class Charsets {
-
-	/**
-	 * 获取字符编码对象
-	 * 
-	 * @param charset
-	 * @return
-	 */
-	public static Charset toCharset(Charset charset) {
-		return charset == null ? Charset.defaultCharset() : charset;
-	}
-
-	/**
-	 * 获取字符编码对象
-	 * 
-	 * @param charset
-	 * @return
-	 */
-	public static Charset toCharset(String charset) {
-		return charset == null ? Charset.defaultCharset() : Charset
-				.forName(charset);
-	}
-
 	public static final String UTF8 = "UTF-8";
 	public static final String ISO88591 = "ISO-8859-1";
 	public static final String USASCII = "US-ASCII";
@@ -45,4 +23,25 @@ public class Charsets {
 	public static final Charset UTF_16BE = Charset.forName(UTF16BE);
 	public static final Charset UTF_16LE = Charset.forName(UTF16LE);
 
+	/**
+	 * 获取字符编码对象，如果charset为空，使用默认编码
+	 * 
+	 * @param charset Charset编码
+	 * @return Charset对象
+	 */
+	public static Charset toCharset(Charset charset) {
+		return charset == null ? Charset.defaultCharset() : charset;
+	}
+
+	/**
+	 * 获取字符编码对象，如果charset为空，使用默认编码
+	 * 
+	 * @param charset 编码
+	 * @return Charset对象
+	 */
+	public static Charset toCharset(String charset) {
+		return charset == null ? Charset.defaultCharset() : Charset
+				.forName(charset);
+	}
+	
 }
