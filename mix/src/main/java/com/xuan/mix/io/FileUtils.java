@@ -460,23 +460,28 @@ public abstract class FileUtils {
     // ////////////////////文件拷贝到文件////////////////////
 
     /**
-     * 拷贝文件到文件
+     * 拷贝文件到文件，默认修改目的文件为当前时间
      *
      * @param srcFile  源文件
      * @param destFile 目的文件
-     * @throws IOException
+     * @throws IOException IO异常
      */
     public static void copyFile(File srcFile, File destFile) throws IOException {
         copyFile(srcFile, destFile, true);
     }
 
     /**
-     * 拷贝文件到文件
+     * 拷贝文件到文件，以下几种情况会有IO异常
+     * 1. 源文件地址和目标文件地址为空
+     * 2. 源文件不存在
+     * 3. 源文件是个目录
+     * 4. 目标文件没有写权限
+     * 5. 源文件和目标文件被指向了同一个文件
      *
      * @param srcFile          源文件
-     * @param destFile         目的文件
-     * @param preserveFileDate 是否修改时间
-     * @throws IOException
+     * @param destFile         目标文件
+     * @param preserveFileDate 目标文件产生后，是否修改为当前时间
+     * @throws IOException IO异常
      */
     public static void copyFile(File srcFile, File destFile, boolean preserveFileDate) throws IOException {
         if (srcFile == null) {
@@ -486,23 +491,26 @@ public abstract class FileUtils {
             throw new NullPointerException("Destination must not be null");
         }
 
-        if (!srcFile.exists()) {// 源不存在
+        if (!srcFile.exists()) {
             throw new FileNotFoundException("Source '" + srcFile + "' does not exist");
         }
-
-        if (destFile.isDirectory()) {// 源存在，但是是个目录
+        
+        // 源文件存在，但是个目录，不允许
+        if (destFile.isDirectory()) {
             throw new IOException("Destination '" + destFile + "' exists but is a directory");
         }
-
-        if (srcFile.getCanonicalPath().equals(destFile.getCanonicalPath())) {// 指向了同一个文件
+        
+        // 源文件和目标文件指向了同一个文件，不允许
+        if (srcFile.getCanonicalPath().equals(destFile.getCanonicalPath())) {
             throw new IOException("Source '" + srcFile + "' and destination '" + destFile + "' are the same");
         }
-
-        if (destFile.exists() && !destFile.canWrite()) {// 目标文件存在，没有写权限
+        
+        // 目标文件存在，没有写权限
+        if (destFile.exists() && !destFile.canWrite()) {
             throw new IOException("Destination '" + destFile + "' exists but is read-only");
         }
 
-        // 创建父文件夹
+        // 目标文件没有父目录，就创建之
         File parentFile = destFile.getParentFile();
         if (null != parentFile) {
             if (!parentFile.mkdirs() && !parentFile.isDirectory()) {
@@ -540,8 +548,9 @@ public abstract class FileUtils {
         if (srcFile.length() != destFile.length()) {
             throw new IOException("Failed to copy full contents from '" + srcFile + "' to '" + destFile + "'");
         }
-
-        if (preserveFileDate) {// 修改文件最后修改时间
+        
+        // 修改文件最后修改时间
+        if (preserveFileDate) {
             destFile.setLastModified(srcFile.lastModified());
         }
     }
@@ -562,7 +571,7 @@ public abstract class FileUtils {
     }
 
     /**
-     * 删除指定目录下文件及目录
+     * 递归删除指定目录下文件及目录（包括下级目录的所有文件）
      *
      * @param filePath       文件或者文件夹路径
      * @param deleteThisPath 是否需要删除这个本身指定的文件或者文件夹
@@ -570,19 +579,22 @@ public abstract class FileUtils {
     public static void deleteFileOrDirectory(String filePath, boolean deleteThisPath) throws IOException {
         if (null != filePath && filePath.length() > 0) {
             File file = new File(filePath);
-
-            if (file.isDirectory()) {// 处理目录
+            
+            //如果是目录，或者子文件或目录进行递归处理
+            if (file.isDirectory()) {
                 File files[] = file.listFiles();
                 for (int i = 0; i < files.length; i++) {
                     deleteFileOrDirectory(files[i].getAbsolutePath(), true);
                 }
             }
-
+            
             if (deleteThisPath) {
-                if (!file.isDirectory()) {// 如果是文件，删除
+                //如果是文件，直接删除
+                if (!file.isDirectory()) {
                     file.delete();
-                } else {// 目录
-                    if (file.listFiles().length == 0) {// 目录下没有文件或者目录，删除
+                } else {
+                    //如果是目录，在判定下面没有子文件目录时删除
+                    if (file.listFiles().length == 0) {
                         file.delete();
                     }
                 }
@@ -596,7 +608,7 @@ public abstract class FileUtils {
      * 获取指定路径下的所有文件
      *
      * @param path 指定路径
-     * @return
+     * @return 文件列表
      */
     public static List<File> getFileListByPath(String path) {
         return getFileListByPath(path, null);
@@ -607,7 +619,7 @@ public abstract class FileUtils {
      *
      * @param path   指定路径
      * @param filter 文件过滤器
-     * @return
+     * @return 文件列表
      */
     public static List<File> getFileListByPath(String path, FileFilter filter) {
         File directory = new File(path);
@@ -670,7 +682,7 @@ public abstract class FileUtils {
     /**
      * 把Properties对象写到指定路径的文件里
      *
-     * @param path       路进
+     * @param path       文件路径
      * @param properties Properties对象
      */
     public static void writeProperties(String path, Properties properties) {
