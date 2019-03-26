@@ -1,31 +1,4 @@
 package com.xuan.mix.utils;
-/*
- * Password Hashing With PBKDF2 (http://crackstation.net/hashing-security.htm).
- * Copyright (c) 2013, Taylor Hornby
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without 
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, 
- * this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation 
- * and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE 
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
- * POSSIBILITY OF SUCH DAMAGE.
- */
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -38,47 +11,97 @@ import java.security.spec.InvalidKeySpecException;
 /**
  * 密码加盐加密算法
  * 参看:http://crackstation.net/hashing-security.htm
- * <p>
- * Created by xuan on 17/8/2.
+ *
+ * @author xuan
+ * @date 17/8/2.
  */
 public class PasswordHash {
-    public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
-
-    // The following constants may be changed without breaking existing hashes.
-    public static final int SALT_BYTE_SIZE    = 24;
-    public static final int HASH_BYTE_SIZE    = 24;
-    public static final int PBKDF2_ITERATIONS = 1000;
-
-    public static final int ITERATION_INDEX = 0;
-    public static final int SALT_INDEX      = 1;
-    public static final int PBKDF2_INDEX    = 2;
+    private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
     /**
-     * 解析加密后的拿到salt
-     *
-     * @param correctHash
-     * @return
+     * The following constants may be changed without breaking existing hashes
      */
-    public static String getSaltByHash(String correctHash) {
-        String[] params = correctHash.split(":");
+    private static final int SALT_BYTE_SIZE = 24;
+    private static final int HASH_BYTE_SIZE = 24;
+    private static final int PBKDF2_ITERATIONS = 1000;
+
+    private static final int ITERATION_INDEX = 0;
+    private static final int SALT_INDEX = 1;
+    private static final int PBKDF2_INDEX = 2;
+
+    private static final String SEPERATOR = ":";
+    private static final String ENCODE = "UTF-8";
+
+    /**
+     * Get salt from hash
+     *
+     * @param hash hash
+     * @return salt
+     */
+    public static String getSaltByHash(String hash) {
+        String[] params = hash.split(SEPERATOR);
         return params[SALT_INDEX];
     }
 
     /**
-     * 解析加密后的密码
+     * Get password from hash
      *
-     * @param correctHash
-     * @return
+     * @param hash hash
+     * @return password
      */
-    public static String getPwdByHash(String correctHash) {
-        String[] params = correctHash.split(":");
+    public static String getPasswordByHash(String hash) {
+        String[] params = hash.split(SEPERATOR);
         return params[PBKDF2_INDEX];
     }
 
     /**
-     * 生成随机盐值
+     * Create password hash
      *
-     * @return
+     * @param password password
+     * @param salt     salt
+     * @return hash
+     */
+    public static String createHash(String password, String salt) {
+        String p = "";
+        try {
+            p = createHash(password.toCharArray(), salt.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+
+    /**
+     * Create password hash
+     *
+     * @param password password
+     * @return hash
+     */
+    public static String createHash(String password) {
+        return createHash(password, PasswordHash.createSalt());
+    }
+
+    /**
+     * Validate password
+     *
+     * @param password password
+     * @param hash     hash
+     * @return true/false
+     */
+    public static boolean validatePassword(String password, String hash) {
+        boolean r = false;
+        try {
+            r = validatePassword(password.toCharArray(), hash);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+
+    /**
+     * Create Salt
+     *
+     * @return salt
      */
     private static String createSalt() {
         // Generate a random salt
@@ -94,49 +117,12 @@ public class PasswordHash {
      * @param password the password to hash
      * @return a salted PBKDF2 hash of the password
      */
-    public static String createHash(String password, String salt) {
-        String p = "";
-        try {
-            p = createHash(password.toCharArray(), salt.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return p;
-    }
-
-    /**
-     * Returns a salted PBKDF2 hash of the password.
-     *
-     * @param password the password to hash
-     * @return a salted PBKDF2 hash of the password
-     */
     private static String createHash(char[] password, byte[] salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         // Hash the password
         byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
         // format iterations:salt:hash
-        return PBKDF2_ITERATIONS + ":" + new String(salt, Charset.forName("UTF-8")) + ":" + toHex(hash);
-    }
-
-    /**
-     * Validates a password using a hash.
-     *
-     * @param password    the password to check
-     * @param correctHash the hash of the valid password
-     * @return true if the password is correct, false if not
-     */
-    public static boolean validatePassword(String password, String correctHash) {
-        boolean r = false;
-        try {
-            r = validatePassword(password.toCharArray(), correctHash);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return r;
+        return PBKDF2_ITERATIONS + SEPERATOR + new String(salt, Charset.forName(ENCODE)) + SEPERATOR + toHex(hash);
     }
 
     /**
@@ -149,7 +135,7 @@ public class PasswordHash {
     private static boolean validatePassword(char[] password, String correctHash)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         // Decode the hash into its parameters
-        String[] params = correctHash.split(":");
+        String[] params = correctHash.split(SEPERATOR);
         int iterations = Integer.parseInt(params[ITERATION_INDEX]);
         byte[] salt = params[SALT_INDEX].getBytes();
         byte[] hash = fromHex(params[PBKDF2_INDEX]);
@@ -172,8 +158,9 @@ public class PasswordHash {
      */
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
-        for (int i = 0; i < a.length && i < b.length; i++)
+        for (int i = 0; i < a.length && i < b.length; i++) {
             diff |= a[i] ^ b[i];
+        }
         return diff == 0;
     }
 
@@ -217,24 +204,26 @@ public class PasswordHash {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
         int paddingLength = (array.length * 2) - hex.length();
-        if (paddingLength > 0)
+        if (paddingLength > 0) {
             return String.format("%0" + paddingLength + "d", 0) + hex;
-        else
+        } else {
             return hex;
+        }
     }
 
-    /**
-     * Tests the basic functionality of the PasswordHash class
-     *
-     * @param args ignored
-     */
     public static void main(String[] args) {
-        String 明文 = "12345";
-        String 密文 = PasswordHash.createHash("12345", UUIDUtils.uuid());
-        System.out.println("明文:" + 明文);
-        System.out.println("密文:" + 密文);
-        //校验
-        System.out.println(PasswordHash.validatePassword("12345", "1000:402880e4571c7e2701571c7e27640000:8c20eadbed225781e461d6802cbb3572ed1f7a02b281cf63"));
+        String password = "12345";
+        String salt = PasswordHash.createSalt();
+        String hash = PasswordHash.createHash("12345", salt);
+        System.out.println("password:" + password);
+        System.out.println("hash:" + hash);
+        System.out.println("salt:" + salt);
+
+        System.out.println("--------------------");
+
+        System.out.println("加密后的密码：" + PasswordHash.getPasswordByHash(hash));
+        System.out.println("salt：" + PasswordHash.getSaltByHash(hash));
+        System.out.println(PasswordHash.validatePassword("12345", "1000:6f9c1af7f36ce2b16705963c6b0024b2433c5e4d29591d34:64812be088c0a28668a27a4c4c8be921db0b0a5a59f79a6f"));
     }
 
 }
