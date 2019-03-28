@@ -1,7 +1,5 @@
 package com.xuan.mix.bt.diverter;
 
-import com.xuan.mix.bt.diverter.impl.DefaultDiverter;
-import com.xuan.mix.bt.diverter.impl.DefaultDiverterConfigMgr;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,8 +11,7 @@ import java.util.Set;
  */
 public class DiverterTest {
 
-    private DiverterConfigMgr configMgr;
-    private Diverter          diverter;
+    private Diverter diverter;
 
     @Before
     public void init() {
@@ -29,19 +26,14 @@ public class DiverterTest {
         whiteSet.add("80");
         config.setWhiteSet(whiteSet);
 
-        //配置工厂默认单例就行，模拟的配置放到配置工程里面
-        configMgr = new DefaultDiverterConfigMgr();
-        configMgr.putConfig("testName", config);
-
         //创建分流器
-        diverter = new DefaultDiverter();
-        diverter.setConfigMgr(configMgr);
+        diverter = new Diverter(config);
     }
 
     @Test
     public void test() {
         for (long i = 0; i < 100; i++) {
-            boolean hit = diverter.isHit("testName", i);
+            boolean hit = diverter.isHit(i);
             System.out.println("i=" + i + ".hit=" + hit);
         }
     }

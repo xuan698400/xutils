@@ -4,18 +4,22 @@ import java.util.Set;
 
 /**
  * 分流器配置
- * Created by xuan on 2019/1/29.
+ *
+ * @author xuan
+ * @date 2019/1/29
  */
 public class DiverterConfig {
+    public static final int DEFAULT_PERCENT = 0;
+    public static final int DEFAULT_TOTAL = 100;
 
     /**
      * 分流占比
      */
-    private Integer percent;
+    private int percent = DEFAULT_PERCENT;
     /**
      * 总份数
      */
-    private Integer total;
+    private int total = DEFAULT_TOTAL;
     /**
      * 白名单
      */
@@ -25,19 +29,19 @@ public class DiverterConfig {
      */
     private Set<String> blackSet;
 
-    public Integer getPercent() {
+    public int getPercent() {
         return percent;
     }
 
-    public void setPercent(Integer percent) {
+    public void setPercent(int percent) {
         this.percent = percent;
     }
 
-    public Integer getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
