@@ -1,9 +1,10 @@
-package com.xuan.mix.http.listener;
+package com.xuan.mix.http;
 
 /**
- * 下载监听
+ * 下载文件时的进度监听
  *
  * @author xuan
+ * @date 2019/5/19
  */
 public interface HttpDownloadListener {
     /**

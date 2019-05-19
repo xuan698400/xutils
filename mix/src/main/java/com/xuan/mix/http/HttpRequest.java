@@ -1,8 +1,7 @@
 package com.xuan.mix.http;
 
-import com.xuan.mix.http.listener.HttpDownloadListener;
-
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,12 +11,21 @@ import java.util.concurrent.ConcurrentHashMap;
  * Http请求对象
  *
  * @author xuan
+ * @date 2019/5/19
  */
 public class HttpRequest {
+    private final static int DEFAULT_CONNECTIONTIMEOUT = 1000 * 30;
+    private final static int DEFAULT_READTIMEOUT = 1000 * 30;
+    private final static String DEFAULT_ENCODE = "utf-8";
+    private final static String URL_PARAM_DIVISION = "?";
+    private final static String PARAM_PARAM_DIVISION = "&";
+    private final static String EQUAL = "=";
+    private final static String FILE_STR = "FILE";
+
     /**
      * 请求地址. 例如:http://xuanner.com
      */
-    private String              mUrl;
+    private String mUrl;
     /**
      * 普通参数
      */
@@ -25,27 +33,27 @@ public class HttpRequest {
     /**
      * 文件参数
      */
-    private Map<String, File>   mFileParamMap;
+    private Map<String, File> mFileParamMap;
     /**
      * 头部参数
      */
     private Map<String, String> mHeaderMap;
     /**
-     *  用请求体Json方式提交的Json内容
+     * 用请求体Json方式提交的Json内容
      */
-    private String              mBodyJson;
+    private String mBodyJson;
     /**
      * 提交或者获取的编码方式
      */
-    private String mEncode            = "utf-8";
+    private String mEncode = DEFAULT_ENCODE;
     /**
      * 连接超时
      */
-    private int    mConnectionTimeout = 1000 * 30;
+    private int mConnectionTimeout = DEFAULT_CONNECTIONTIMEOUT;
     /**
      * 读取超时
      */
-    private int    mReadTimeout       = 1000 * 30;
+    private int mReadTimeout = DEFAULT_READTIMEOUT;
     /**
      * 结果返回回调,只有下载文件时会被调用
      */
@@ -53,7 +61,7 @@ public class HttpRequest {
     /**
      * 下载时文件存放路径
      */
-    private String               mDownloadFileName;
+    private String mDownloadFileName;
 
     public HttpRequest() {
         init();
@@ -110,7 +118,7 @@ public class HttpRequest {
     /**
      * 放入请求体Json串
      *
-     * @param bodyJson
+     * @param bodyJson JSON格式
      */
     public void putBodyJson(String bodyJson) {
         if (null != bodyJson) {
@@ -121,8 +129,8 @@ public class HttpRequest {
     /**
      * 添加普通参数
      *
-     * @param key
-     * @param value
+     * @param key   参数key
+     * @param value 参数值
      */
     public void putParam(String key, String value) {
         if (key != null && value != null) {
@@ -133,8 +141,8 @@ public class HttpRequest {
     /**
      * 添加文件参数
      *
-     * @param key
-     * @param file
+     * @param key  参数key
+     * @param file 文件对象
      */
     public void putFile(String key, File file) {
         mFileParamMap.put(key, file);
@@ -143,8 +151,8 @@ public class HttpRequest {
     /**
      * 添加头部
      *
-     * @param key
-     * @param value
+     * @param key   参数key
+     * @param value 参数值
      */
     public void putHeader(String key, String value) {
         mHeaderMap.put(key, value);
@@ -153,7 +161,7 @@ public class HttpRequest {
     /**
      * 删除普通参数
      *
-     * @param key
+     * @param key 参数key
      */
     public void removeParam(String key) {
         mParamMap.remove(key);
@@ -162,7 +170,7 @@ public class HttpRequest {
     /**
      * 删除文件参数
      *
-     * @param key
+     * @param key 参数key
      */
     public void removeFile(String key) {
         mFileParamMap.remove(key);
@@ -171,22 +179,31 @@ public class HttpRequest {
     /**
      * 删除头部
      *
-     * @param key
+     * @param key 参数key
      */
     public void removeHeader(String key) {
         mHeaderMap.remove(key);
     }
 
     /**
-     * 返回参数的拼接
+     * 获取参数串
+     * 例如：a=b&c=d
      *
-     * @return
+     * @return 字符串
      */
     public String getParamsStr() {
         StringBuilder sb = new StringBuilder();
         for (Entry<String, String> entry : mParamMap.entrySet()) {
-            sb.append(entry.getKey()).append("=")
-                    .append(URLEncoder.encode(entry.getValue())).append("&");
+            String encodeValue = null;
+            try {
+                encodeValue = URLEncoder.encode(entry.getValue(), DEFAULT_ENCODE);
+            } catch (UnsupportedEncodingException e) {
+                //Ignore
+            }
+            if (null != encodeValue) {
+                sb.append(entry.getKey()).append(EQUAL).append(encodeValue).append(
+                    PARAM_PARAM_DIVISION);
+            }
         }
 
         if (sb.length() > 0) {
@@ -196,15 +213,16 @@ public class HttpRequest {
     }
 
     /**
-     * 获取GET参数串
+     * 获取地址参数
+     * 例如：http://xxx.com?a=b&c=d
      *
-     * @return
+     * @return 字符串
      */
     public String getGetUrl() {
-        if (!getUrl().contains("?")) {
-            return getUrl() + "?" + getParamsStr();
+        if (!getUrl().contains(URL_PARAM_DIVISION)) {
+            return getUrl() + URL_PARAM_DIVISION + getParamsStr();
         } else {
-            return getUrl() + "&" + getParamsStr();
+            return getUrl() + PARAM_PARAM_DIVISION + getParamsStr();
         }
     }
 
@@ -224,42 +242,41 @@ public class HttpRequest {
         return mBodyJson;
     }
 
-    // 初始化MAP
     private void init() {
-        mParamMap = new ConcurrentHashMap<String, String>();
-        mFileParamMap = new ConcurrentHashMap<String, File>();
-        mHeaderMap = new ConcurrentHashMap<String, String>();
+        mParamMap = new ConcurrentHashMap<>(16);
+        mFileParamMap = new ConcurrentHashMap<>(16);
+        mHeaderMap = new ConcurrentHashMap<>(16);
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (Entry<String, String> entry : mParamMap
-                .entrySet()) {
+            .entrySet()) {
             if (result.length() > 0) {
-                result.append("&");
+                result.append(PARAM_PARAM_DIVISION);
             }
 
             result.append(entry.getKey());
-            result.append("=");
+            result.append(EQUAL);
             result.append(entry.getValue());
         }
 
         for (Entry<String, File> entry : mFileParamMap
-                .entrySet()) {
+            .entrySet()) {
             if (result.length() > 0) {
-                result.append("&");
+                result.append(PARAM_PARAM_DIVISION);
             }
 
             result.append(entry.getKey());
-            result.append("=");
-            result.append("FILE");
+            result.append(EQUAL);
+            result.append(FILE_STR);
         }
 
-        if (!getUrl().contains("?")) {
-            return getUrl() + "?" + result.toString();
+        if (!getUrl().contains(URL_PARAM_DIVISION)) {
+            return getUrl() + URL_PARAM_DIVISION + result.toString();
         } else {
-            return getUrl() + "&" + result.toString();
+            return getUrl() + PARAM_PARAM_DIVISION + result.toString();
         }
     }
 

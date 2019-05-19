@@ -6,6 +6,7 @@ import java.io.File;
  * Http响应对象
  *
  * @author xuan
+ * @date 2019/5/19
  */
 public class HttpResponse {
     /**
@@ -21,7 +22,7 @@ public class HttpResponse {
     /**
      * 返回状态码；成功200
      */
-    private int    statusCode;
+    private int statusCode;
     /**
      * 返回状态短语
      */
@@ -33,7 +34,7 @@ public class HttpResponse {
     /**
      * 返回结果：当返回是文件时才有
      */
-    private File   resultFile;
+    private File resultFile;
 
     public HttpResponse() {
         this(STATUS_CODE_FAIL, null);
@@ -48,11 +49,6 @@ public class HttpResponse {
         this.reasonPhrase = reasonPhrase;
     }
 
-    /**
-     * 判断网络是否返回正常，正常码＝200
-     *
-     * @return
-     */
     public boolean isStatusOk() {
         return STATUS_CODE_SUCCESS == statusCode;
     }
@@ -91,11 +87,7 @@ public class HttpResponse {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("statusCode[" + statusCode + "]");
-        sb.append("reasonPhrase[" + reasonPhrase + "]");
-        sb.append("resultStr[" + resultStr + "]");
-        return sb.toString();
+        return "statusCode[" + statusCode + "]reasonPhrase[" + reasonPhrase + "]resultStr[" + resultStr + "]";
     }
 
 }

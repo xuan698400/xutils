@@ -1,9 +1,4 @@
-package com.xuan.mix.http.impl;
-
-import com.xuan.mix.http.HttpClient;
-import com.xuan.mix.http.HttpRequest;
-import com.xuan.mix.http.HttpResponse;
-import com.xuan.mix.io.FileUtils;
+package com.xuan.mix.http.core;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -13,6 +8,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
+
+import com.xuan.mix.http.HttpClient;
+import com.xuan.mix.http.HttpRequest;
+import com.xuan.mix.http.HttpResponse;
+import com.xuan.mix.io.FileUtils;
 
 /**
  * 用UrlConnect方式实现HTTP请求
@@ -36,7 +36,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         try {
             URL url = new URL(request.getGetUrl());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             initRequest(conn, request);
 
             return readResponseForFile(conn, request);
@@ -54,9 +54,11 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         try {
             URL url = new URL(request.getUrl());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod(METHOD_POST);// POST模式
-            conn.setDoOutput(true);//发送POST请求必须设置如下
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            // POST模式
+            conn.setRequestMethod(METHOD_POST);
+            //发送POST请求必须设置如下
+            conn.setDoOutput(true);
             conn.setUseCaches(false);
 
             initRequest(conn, request);
@@ -77,7 +79,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         try {
             URL url = new URL(request.getGetUrl());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             initRequest(conn, request);
 
             return readResponseForString(conn, request.getEncode());
@@ -94,9 +96,11 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         try {
             URL url = new URL(request.getUrl());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod(METHOD_POST);// POST模式
-            conn.setDoOutput(true);//发送POST请求必须设置如下
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            // POST模式
+            conn.setRequestMethod(METHOD_POST);
+            //发送POST请求必须设置如下
+            conn.setDoOutput(true);
             conn.setUseCaches(false);
 
             initRequest(conn, request);
@@ -117,10 +121,11 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         try {
             URL url = new URL(request.getUrl());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod(METHOD_POST);// POST模式
-            conn.setDoOutput(true);//发送POST请求必须设置如下
-
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            // POST模式
+            conn.setRequestMethod(METHOD_POST);
+            //发送POST请求必须设置如下
+            conn.setDoOutput(true);
             initRequest(conn, request);
             //设置POST参数
             putParamsToOutputStreamForJson(conn, request);
@@ -139,7 +144,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         try {
             URL url = new URL(request.getUrl());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
             initRequest(conn, request);
             putBodyEntityToOutputStream(conn, request);
@@ -153,12 +158,6 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         }
     }
 
-    /**
-     * 请求参数设置
-     *
-     * @param conn
-     * @param request
-     */
     private void initRequest(URLConnection conn, HttpRequest request) {
         //头部设置
         for (Map.Entry<String, String> entry : request.getHeaderMap().entrySet()) {
@@ -170,12 +169,6 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         conn.setReadTimeout(request.getReadTimeout());
     }
 
-    /**
-     * 把请求体放到输出流中
-     *
-     * @param conn
-     * @param request
-     */
     private static void putBodyEntityToOutputStream(HttpURLConnection conn, HttpRequest request) {
         try {
             UrlMultipartEntity bodyEntity = new UrlMultipartEntity();
@@ -185,12 +178,6 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         }
     }
 
-    /**
-     * 以Json的格式放入请求体
-     *
-     * @param conn
-     * @param request
-     */
     private static void putParamsToOutputStreamForJson(HttpURLConnection conn, HttpRequest request) {
         String bodyJson = request.getBodyJson();
         DataOutputStream dos = null;
@@ -202,20 +189,16 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             System.out.println(e.getMessage());
         } finally {
             try {
-                dos.flush();
-                dos.close();
+                if (null != dos) {
+                    dos.flush();
+                    dos.close();
+                }
             } catch (Exception e) {
                 //Ignore
             }
         }
     }
 
-    /**
-     * 把参数当作普通表单放到OutputStream中去
-     *
-     * @param conn
-     * @param request
-     */
     private static void putParamsToOutputStream(HttpURLConnection conn, HttpRequest request) {
         String paramStr = request.getParamsStr();
         DataOutputStream dos = null;
@@ -224,23 +207,19 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             //dos.writeBytes(paramStr);
             dos.write(paramStr.getBytes());
         } catch (Exception e) {
+            //Ignore
         } finally {
             try {
-                dos.flush();
-                dos.close();
+                if (null != dos) {
+                    dos.flush();
+                    dos.close();
+                }
             } catch (Exception e) {
                 //Ignore
             }
         }
     }
 
-    /**
-     * 读取结果为文件
-     *
-     * @param conn
-     * @param request
-     * @return
-     */
     private static HttpResponse readResponseForFile(HttpURLConnection conn, HttpRequest request) {
         boolean hasListener = false;
         if (null != request.getDownloadListener()) {
@@ -256,9 +235,11 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             inStream = conn.getInputStream();
 
             byte[] buffer = new byte[BUFFER_SIZE];
-            int len = 0;
-            int curCount = 0;//当前字节量
-            int total = -1;//总字节量
+            int len;
+            //当前字节量
+            int curCount = 0;
+            //总字节量
+            int total = -1;
             if (hasListener) {
                 total = conn.getContentLength();
             }
@@ -289,7 +270,9 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         } finally {
             try {
                 outStream.close();
-                inStream.close();
+                if (null != inStream) {
+                    inStream.close();
+                }
             } catch (Exception e) {
                 //Ignore
             }
@@ -298,13 +281,6 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         return response;
     }
 
-    /**
-     * 从HttpURLConnection对象中读取数据,并使用指定的编码进行编码成字符串
-     *
-     * @param conn
-     * @param encode
-     * @return
-     */
     private static HttpResponse readResponseForString(HttpURLConnection conn, String encode) {
         HttpResponse response = new HttpResponse();
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -314,7 +290,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             inStream = conn.getInputStream();
 
             byte[] buffer = new byte[BUFFER_SIZE];
-            int len = 0;
+            int len;
             while ((len = inStream.read(buffer)) != -1) {
                 outStream.write(buffer, 0, len);
             }
@@ -329,7 +305,9 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         } finally {
             try {
                 outStream.close();
-                inStream.close();
+                if (null != inStream) {
+                    inStream.close();
+                }
             } catch (Exception e) {
                 //Ignore
             }

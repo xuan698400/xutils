@@ -1,6 +1,5 @@
 package com.xuan.mix.http;
 
-import com.xuan.mix.http.listener.HttpDownloadListener;
 import org.junit.Test;
 
 /**
@@ -21,7 +20,7 @@ public class HttpTest {
 
     @Test
     public void testGetDowload() {
-        HttpResponse httpResponse = HttpUtils.getDowload("http://www.baidu.com", null, "/Users/xuan/Desktop/haha", new HttpDownloadListener() {
+        HttpResponse httpResponse = HttpUtils.getDowload("http://www.baidu.com", null, "/Users/xuan/Desktop/baidu.html", new HttpDownloadListener() {
             @Override
             public void callBack(long count, long current, boolean isFinish) {
                 System.out.println("++++++++++进度:count[" + count + "]current[" + current + "]isFinish[" + isFinish + "]");

@@ -1,6 +1,4 @@
-package com.xuan.mix.http.impl;
-
-import com.xuan.mix.http.HttpRequest;
+package com.xuan.mix.http.core;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,42 +11,38 @@ import java.net.URLConnection;
 import java.util.Map;
 import java.util.Random;
 
+import com.xuan.mix.http.HttpRequest;
+
 /**
  * 基于URLConnection实现的文件上传请求实体
- * <p>
- * Created by xuan on 16/2/25.
+ *
+ * @author xuan
+ * @date 2019/5/19
  */
 public class UrlMultipartEntity {
 
     /**
      * 标准的换行符结束
      */
-    private static final char[] CLRF = new char[]{'\r', '\n'};
+    private static final char[] CLRF = new char[] {'\r', '\n'};
 
     /**
      * 标准的两个换行符结束
      */
-    private static final char[] DOUBLE_CLRF = new char[]{'\r', '\n', '\r', '\n'};
+    private static final char[] DOUBLE_CLRF = new char[] {'\r', '\n', '\r', '\n'};
 
     /**
      * 分割线
      */
     private static final String BOUNDARY_START = "---------------------------HttpAPIFormBoundary";
-
-    /**
-     * 把数据写到请求体中去
-     *
-     * @param connection
-     * @param request
-     * @throws Exception
-     */
+    
     public void writeDataToBody(HttpURLConnection connection, HttpRequest request) throws Exception {
         String boundary = BOUNDARY_START + new Random().nextLong();
 
         // Open the connection and set the correct header
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-        connection.setRequestMethod("POST");// POST模式
+        connection.setRequestMethod("POST");
         connection.setUseCaches(false);
 
         boundary = "--" + boundary;
@@ -108,7 +102,9 @@ public class UrlMultipartEntity {
                     throw new Exception(e);
                 } finally {
                     try {
-                        input.close();
+                        if (null != input) {
+                            input.close();
+                        }
                     } catch (Exception e) {
                         //Ignore
                     }
@@ -127,7 +123,9 @@ public class UrlMultipartEntity {
             throw new Exception(e);
         } finally {
             try {
-                writer.close();
+                if (null != writer) {
+                    writer.close();
+                }
             } catch (Exception e) {
                 //Ignore
             }
