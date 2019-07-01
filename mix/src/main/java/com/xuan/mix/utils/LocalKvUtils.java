@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 /**
@@ -24,6 +26,20 @@ public class LocalKvUtils {
         }
 
         properties.put(key, value);
+        writeProperties(path, properties);
+    }
+
+    public static void put(String path, Map<String, String> map) {
+        if (null == map) {
+            return;
+        }
+
+        Properties properties = getPropertiesFromPath(path);
+        if (null == properties) {
+            return;
+        }
+
+        properties.putAll(map);
         writeProperties(path, properties);
     }
 
