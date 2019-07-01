@@ -1,7 +1,6 @@
 package com.xuan.mix.utils;
 
-import com.xuan.mix.io.IOUtils;
-
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -258,15 +257,15 @@ public abstract class CompressUtils {
      * 释放资源，关闭输入输出流。
      */
     private static void clean(InputStream in, OutputStream out) throws IOException {
-        IOUtils.closeQuietly(in);
-        IOUtils.closeQuietly(out);
+        closeQuietly(in);
+        closeQuietly(out);
     }
 
     /**
      * 释放资源，包括关闭输入输出流、关闭文件通道、释放文件锁。
      */
     private static void clean(InputStream in, OutputStream out, FileLock lock, FileChannel channel) throws IOException {
-        IOUtils.closeQuietly(in);
+        closeQuietly(in);
 
         // 释放文件锁
         if (lock != null) {
@@ -274,9 +273,19 @@ public abstract class CompressUtils {
         }
 
         // 在关闭压缩输出流之后再关闭通道，如果先关闭通道会导致 压缩文件的格式错误
-        IOUtils.closeQuietly(out);
+        closeQuietly(out);
         if (channel != null) {
             channel.close();
+        }
+    }
+
+    private static void closeQuietly(Closeable closeable) {
+        try {
+            if (closeable != null) {
+                closeable.close();
+            }
+        } catch (IOException ioe) {
+            // ignore
         }
     }
 

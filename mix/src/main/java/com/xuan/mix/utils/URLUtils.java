@@ -1,8 +1,7 @@
 package com.xuan.mix.utils;
 
-import com.xuan.mix.io.IOUtils;
-
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -25,10 +24,10 @@ import java.util.Map;
  */
 public abstract class URLUtils {
 
-    private static final char AND_SIGN       = '&';
-    private static final char EQUALS_SIGN    = '=';
-    private static final char POINT_SIGN     = '.';
-    private static final char QUESTION_MARK  = '?';
+    private static final char AND_SIGN = '&';
+    private static final char EQUALS_SIGN = '=';
+    private static final char POINT_SIGN = '.';
+    private static final char QUESTION_MARK = '?';
     private static final char SEPARATOR_SIGN = '/';
 
     private static int BUFFER_SIZE = 1024 * 4; // 4K
@@ -100,7 +99,7 @@ public abstract class URLUtils {
      * @return 拼接后的URL
      */
     public static String addQueryString(String url, String name, Object value) {
-        return addQueryString(url, new String[]{name}, new Object[]{value});
+        return addQueryString(url, new String[] {name}, new Object[] {value});
     }
 
     /**
@@ -128,7 +127,7 @@ public abstract class URLUtils {
                 }
 
                 if (value instanceof Object[]) {
-                    Object[] array = (Object[]) value;
+                    Object[] array = (Object[])value;
                     for (int j = 0; j < array.length; j++) {
                         if (j > 0) {
                             queryString.append(AND_SIGN);
@@ -137,7 +136,7 @@ public abstract class URLUtils {
                     }
                 } else if (value instanceof Collection<?>) {
                     int j = 0;
-                    Collection<?> clc = (Collection<?>) value;
+                    Collection<?> clc = (Collection<?>)value;
                     Iterator<?> iterator = clc.iterator();
                     while (iterator.hasNext()) {
                         if (j++ > 0) {
@@ -223,7 +222,7 @@ public abstract class URLUtils {
         int interrogationIndex = url.indexOf(QUESTION_MARK);
 
         return interrogationIndex == -1 ? url.substring(pointIndex + 1) : url.substring(pointIndex + 1,
-                interrogationIndex);
+            interrogationIndex);
     }
 
     /**
@@ -264,7 +263,7 @@ public abstract class URLUtils {
      */
     public static InputStream visitContent(String pageURL) throws IOException {
         URL url = new URL(pageURL);
-        HttpURLConnection client = (HttpURLConnection) url.openConnection();
+        HttpURLConnection client = (HttpURLConnection)url.openConnection();
 
         HttpURLConnection.setFollowRedirects(false);
         client.setInstanceFollowRedirects(false);
@@ -296,8 +295,8 @@ public abstract class URLUtils {
             }
             return new String(out.toByteArray());
         } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(out);
+            closeQuietly(in);
+            closeQuietly(out);
         }
     }
 
@@ -351,7 +350,7 @@ public abstract class URLUtils {
         }
 
         return !Validators.isEmpty(url) && !Validators.isEmpty(baseURL) && url.startsWith(baseURL) ? url
-                .substring(baseURL.length()) : url;
+            .substring(baseURL.length()) : url;
     }
 
     /**
@@ -367,9 +366,9 @@ public abstract class URLUtils {
         queryString.append(EQUALS_SIGN);
 
         if (value instanceof Boolean) {
-            value = ((Boolean) value).booleanValue() ? "1" : "0";
+            value = ((Boolean)value).booleanValue() ? "1" : "0";
         } else if (value instanceof Date) {
-            value = DateUtils.date2StringByDay((Date) value);
+            value = DateUtils.date2StringByDay((Date)value);
         }
 
         try {
@@ -378,6 +377,16 @@ public abstract class URLUtils {
             // ignore
         }
         return queryString;
+    }
+
+    public static void closeQuietly(Closeable closeable) {
+        try {
+            if (closeable != null) {
+                closeable.close();
+            }
+        } catch (IOException ioe) {
+            // ignore
+        }
     }
 
 }

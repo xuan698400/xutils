@@ -1,5 +1,6 @@
-package com.xuan.mix.io;
+package com.xuan.mix.utils;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -7,8 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -30,12 +33,9 @@ public abstract class FileUtils {
 
     private static final long FILE_COPY_BUFFER_SIZE = ONE_MB * 30;
 
-    /**
-     * 截取文件的后缀名，例如文件名是xuan.jpg时，返回的后缀名时jpg
-     *
-     * @param fileName 文件名
-     * @return 后缀名
-     */
+    private static final int EOF = -1;
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
+
     public static String getExtension(String fileName) {
         if (null == fileName) {
             return EMPTY;
@@ -43,150 +43,75 @@ public abstract class FileUtils {
 
         int pointIndex = fileName.lastIndexOf(".");
         return pointIndex > 0 && pointIndex < fileName.length() ? fileName.substring(
-                pointIndex + 1).toLowerCase() : EMPTY;
+            pointIndex + 1).toLowerCase() : EMPTY;
     }
 
     // ////////////////////字节写入读出文件方法，一般可以用来写图片，声音等////////////////////
 
-    /**
-     * 字节写入到文件中
-     *
-     * @param file   文件
-     * @param data   字节数据
-     * @param append 是否从文件后面添加
-     * @throws IOException
-     */
     public static void writeByteArrayToFile(File file, byte[] data, boolean append) throws IOException {
         OutputStream out = null;
         try {
             out = openOutputStream(file, append);
             out.write(data);
         } finally {
-            IOUtils.closeQuietly(out);
+            closeQuietly(out);
         }
     }
 
-    /**
-     * 读出文件中的字节
-     *
-     * @param file 文件
-     * @return 字节数组
-     * @throws IOException
-     */
     public static byte[] readFileToByteArray(File file) throws IOException {
         InputStream in = null;
         try {
             in = openInputStream(file);
-            return IOUtils.toByteArray(in, file.length());
+            return toByteArray(in, file.length());
         } finally {
-            IOUtils.closeQuietly(in);
+            closeQuietly(in);
         }
     }
 
     // ////////////////////字符串从文件中写入读出方法////////////////////
 
-    /**
-     * 数据写入文件
-     *
-     * @param file     要写入的文件
-     * @param data     数据
-     * @param encoding 指定编码
-     * @param append   是否追加
-     * @throws IOException
-     */
     public static void writeStringToFile(File file, String data, String encoding, boolean append) throws IOException {
         OutputStream out = null;
         try {
             out = openOutputStream(file, append);
-            IOUtils.write(data, out, encoding);
+            if (data != null) {
+                Charset charset = encoding == null ? Charset.defaultCharset() : Charset
+                    .forName(encoding);
+                out.write(data.getBytes(charset));
+            }
         } finally {
-            IOUtils.closeQuietly(out);
+            closeQuietly(out);
         }
     }
 
-    /**
-     * 从文件中以指定编码读取成字符串
-     *
-     * @param file     文件
-     * @param encoding 编码
-     * @return
-     * @throws IOException
-     */
     public static String readFileToString(File file, String encoding) throws IOException {
-        InputStream in = null;
+        InputStream input = null;
         try {
-            in = openInputStream(file);
-            return IOUtils.toString(in, encoding);
+            input = openInputStream(file);
+
+            Charset charset = encoding == null ? Charset.defaultCharset() : Charset
+                .forName(encoding);
+
+            InputStreamReader in = new InputStreamReader(input, charset);
+
+            int n;
+            StringBuilder builder = new StringBuilder();
+            char[] buffer = new char[DEFAULT_BUFFER_SIZE];
+            while (EOF != (n = in.read(buffer))) {
+                builder.append(buffer, 0, n);
+            }
+
+            return builder.toString();
         } finally {
-            IOUtils.closeQuietly(in);
+            closeQuietly(input);
         }
     }
 
-    // ////////////////////打开输入输出流方法////////////////////
-
-    /**
-     * 打开一个文件的写入流，文件不存在会自动创建
-     *
-     * @param file   文件
-     * @param append 是否以追加的方式写入
-     * @return
-     * @throws IOException
-     */
-    public static FileOutputStream openOutputStream(File file, boolean append) throws IOException {
-        if (file.exists()) {
-            if (file.isDirectory()) {
-                throw new IOException("File '" + file + "' exists but is a directory");
-            }
-            if (file.canWrite() == false) {
-                throw new IOException("File '" + file + "' cannot be written to");
-            }
-        } else {
-            File parent = file.getParentFile();
-            if (parent != null) {
-                if (!parent.mkdirs() && !parent.isDirectory()) {
-                    throw new IOException("Directory '" + parent + "' could not be created");
-                }
-            }
-        }
-        return new FileOutputStream(file, append);
-    }
-
-    /**
-     * 打开文件输入流，校验友好的提示
-     *
-     * @param file 要打开的文件
-     * @return
-     * @throws IOException
-     */
-    public static FileInputStream openInputStream(File file) throws IOException {
-        if (file.exists()) {
-            if (file.isDirectory()) {
-                throw new IOException("File '" + file + "' exists but is a directory");
-            }
-
-            if (file.canRead() == false) {
-                throw new IOException("File '" + file + "' cannot be read");
-            }
-        } else {
-            throw new FileNotFoundException("File '" + file + "' does not exist");
-        }
-
-        return new FileInputStream(file);
-    }
-
-    // ////////////////////文件单位字节友好输出////////////////////
-
-    /**
-     * 友好的显示单位，舍弃有点问题，例如：byteCountToDisplaySize(2047)显示1K，明显是舍弃了
-     *
-     * @param size byte单位值
-     * @return
-     */
     public static String byteCountToDisplaySize(long size) {
         String displaySize;
         if (size / ONE_EB > 0) {
             displaySize = String.valueOf(size / ONE_EB) + " EB";
-        } else if (size / ONE_EB > 0) {
+        } else if (size / ONE_PB > 0) {
             displaySize = String.valueOf(size / ONE_EB) + " PB";
         } else if (size / ONE_TB > 0) {
             displaySize = String.valueOf(size / ONE_TB) + " TB";
@@ -211,7 +136,7 @@ public abstract class FileUtils {
      * @param src     源文件夹
      * @param destDir 目的文件夹
      * @param isCover 存在是否覆盖
-     * @throws IOException
+     * @throws IOException IOException
      */
     public static void moveDirectoryToDirectory(File src, File destDir, boolean isCover) throws IOException {
         if (src == null) {
@@ -246,7 +171,7 @@ public abstract class FileUtils {
             deleteFileOrDirectoryQuietly(src.getPath());
             if (src.exists()) {
                 throw new IOException(
-                        "Failed to delete original directory '" + src + "' after copy to '" + destDir + "'");
+                    "Failed to delete original directory '" + src + "' after copy to '" + destDir + "'");
             }
         }
     }
@@ -257,7 +182,7 @@ public abstract class FileUtils {
      * @param srcFile 源文件
      * @param destDir 目的文件夹
      * @param isCover 存在是否覆盖
-     * @throws IOException
+     * @throws IOException IOException
      */
     public static void moveFileToDirectory(File srcFile, File destDir, boolean isCover) throws IOException {
         if (srcFile == null) {
@@ -288,7 +213,7 @@ public abstract class FileUtils {
      * @param srcFile  源文件
      * @param destFile 目的文件
      * @param isCover  存在是否覆盖
-     * @throws IOException
+     * @throws IOException IOException
      */
     public static void moveFile(File srcFile, File destFile, boolean isCover) throws IOException {
         if (null == srcFile) {
@@ -323,7 +248,7 @@ public abstract class FileUtils {
             if (!srcFile.delete()) {
                 deleteFileOrDirectoryQuietly(destFile.getPath());
                 throw new IOException(
-                        "Failed to delete original file '" + srcFile + "' after copy to '" + destFile + "'");
+                    "Failed to delete original file '" + srcFile + "' after copy to '" + destFile + "'");
             }
         }
     }
@@ -335,7 +260,7 @@ public abstract class FileUtils {
      *
      * @param srcDir  源文件夹
      * @param destDir 目的文件夹
-     * @throws IOException
+     * @throws IOException IOException
      */
     public static void copyDirectoryToDirectory(File srcDir, File destDir) throws IOException {
         copyDirectoryToDirectory(srcDir, new File(destDir, srcDir.getName()), null);
@@ -347,7 +272,7 @@ public abstract class FileUtils {
      * @param srcDir  源文件夹
      * @param destDir 目的文件夹
      * @param filter  文件过滤器
-     * @throws IOException
+     * @throws IOException IOException
      */
     public static void copyDirectoryToDirectory(File srcDir, File destDir, FileFilter filter) throws IOException {
         if (srcDir == null) {
@@ -378,7 +303,7 @@ public abstract class FileUtils {
         if (destDir.getCanonicalPath().startsWith(srcDir.getCanonicalPath())) {
             File[] srcFiles = null == filter ? srcDir.listFiles() : srcDir.listFiles(filter);
             if (srcFiles != null && srcFiles.length > 0) {
-                exclusionList = new ArrayList<String>(srcFiles.length);
+                exclusionList = new ArrayList<>(srcFiles.length);
                 for (File srcFile : srcFiles) {
                     File copiedFile = new File(destDir, srcFile.getName());
                     exclusionList.add(copiedFile.getCanonicalPath());
@@ -389,7 +314,7 @@ public abstract class FileUtils {
     }
 
     private static void doCopyDirectory(File srcDir, File destDir, FileFilter filter, boolean preserveFileDate,
-                                        List<String> exclusionList) throws IOException {
+        List<String> exclusionList) throws IOException {
         // recurse
         File[] srcFiles = (null == filter) ? srcDir.listFiles() : srcDir.listFiles(filter);
         if (srcFiles == null) { // null if abstract pathname does not denote a
@@ -494,17 +419,17 @@ public abstract class FileUtils {
         if (!srcFile.exists()) {
             throw new FileNotFoundException("Source '" + srcFile + "' does not exist");
         }
-        
+
         // 源文件存在，但是个目录，不允许
         if (destFile.isDirectory()) {
             throw new IOException("Destination '" + destFile + "' exists but is a directory");
         }
-        
+
         // 源文件和目标文件指向了同一个文件，不允许
         if (srcFile.getCanonicalPath().equals(destFile.getCanonicalPath())) {
             throw new IOException("Source '" + srcFile + "' and destination '" + destFile + "' are the same");
         }
-        
+
         // 目标文件存在，没有写权限
         if (destFile.exists() && !destFile.canWrite()) {
             throw new IOException("Destination '" + destFile + "' exists but is read-only");
@@ -533,22 +458,22 @@ public abstract class FileUtils {
             output = fos.getChannel();
             long size = input.size();
             long pos = 0;
-            long count = 0;
+            long count;
             while (pos < size) {
                 count = size - pos > FILE_COPY_BUFFER_SIZE ? FILE_COPY_BUFFER_SIZE : size - pos;
                 pos += output.transferFrom(input, pos, count);
             }
         } finally {
-            IOUtils.closeQuietly(output);
-            IOUtils.closeQuietly(fos);
-            IOUtils.closeQuietly(input);
-            IOUtils.closeQuietly(fis);
+            closeQuietly(output);
+            closeQuietly(fos);
+            closeQuietly(input);
+            closeQuietly(fis);
         }
 
         if (srcFile.length() != destFile.length()) {
             throw new IOException("Failed to copy full contents from '" + srcFile + "' to '" + destFile + "'");
         }
-        
+
         // 修改文件最后修改时间
         if (preserveFileDate) {
             destFile.setLastModified(srcFile.lastModified());
@@ -557,11 +482,6 @@ public abstract class FileUtils {
 
     // ////////////////////递归删除文件夹下的所有文件////////////////////
 
-    /**
-     * 删除指定目录下文件及目录，默认本身也会被删除
-     *
-     * @param filePath 文件或者文件夹路径
-     */
     public static void deleteFileOrDirectoryQuietly(String filePath) {
         try {
             deleteFileOrDirectory(filePath, true);
@@ -570,33 +490,29 @@ public abstract class FileUtils {
         }
     }
 
-    /**
-     * 递归删除指定目录下文件及目录（包括下级目录的所有文件）
-     *
-     * @param filePath       文件或者文件夹路径
-     * @param deleteThisPath 是否需要删除这个本身指定的文件或者文件夹
-     */
     public static void deleteFileOrDirectory(String filePath, boolean deleteThisPath) throws IOException {
-        if (null != filePath && filePath.length() > 0) {
-            File file = new File(filePath);
-            
-            //如果是目录，或者子文件或目录进行递归处理
-            if (file.isDirectory()) {
-                File files[] = file.listFiles();
-                for (int i = 0; i < files.length; i++) {
-                    deleteFileOrDirectory(files[i].getAbsolutePath(), true);
+        if (null == filePath || filePath.length() <= 0) {
+            return;
+        }
+
+        File file = new File(filePath);
+
+        //如果是目录，或者子文件或目录进行递归处理
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (null != files) {
+                for (File f : files) {
+                    deleteFileOrDirectory(f.getAbsolutePath(), true);
                 }
             }
-            
-            if (deleteThisPath) {
-                //如果是文件，直接删除
-                if (!file.isDirectory()) {
+        }
+
+        if (deleteThisPath) {
+            if (!file.isDirectory()) {
+                file.delete();
+            } else {
+                if (file.listFiles().length == 0) {
                     file.delete();
-                } else {
-                    //如果是目录，在判定下面没有子文件目录时删除
-                    if (file.listFiles().length == 0) {
-                        file.delete();
-                    }
                 }
             }
         }
@@ -604,27 +520,14 @@ public abstract class FileUtils {
 
     // ////////////////////递归获取文件夹下面的所有文件////////////////////
 
-    /**
-     * 获取指定路径下的所有文件
-     *
-     * @param path 指定路径
-     * @return 文件列表
-     */
     public static List<File> getFileListByPath(String path) {
         return getFileListByPath(path, null);
     }
 
-    /**
-     * 获取指定路径下的所有文件
-     *
-     * @param path   指定路径
-     * @param filter 文件过滤器
-     * @return 文件列表
-     */
     public static List<File> getFileListByPath(String path, FileFilter filter) {
         File directory = new File(path);
         if (!directory.exists() || !directory.isDirectory()) {
-            throw new IllegalArgumentException("Nonexistent directory[" + path + "]");
+            throw new IllegalArgumentException(String.format("Nonexistent directory[%s]", path));
         }
 
         return new Recursiver().getFileList(directory, filter);
@@ -632,12 +535,6 @@ public abstract class FileUtils {
 
     // ////////////////////操作Properties文件////////////////////
 
-    /**
-     * 读取指定路径的Properties文件
-     *
-     * @param path 路径
-     * @return Properties对象
-     */
     public static Properties readProperties(String path) {
         File file = new File(path);
         if (!file.exists()) {
@@ -653,18 +550,12 @@ public abstract class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException("Could not read Properties[" + path + "]", e);
         } finally {
-            IOUtils.closeQuietly(in);
+            closeQuietly(in);
         }
 
         return properties;
     }
 
-    /**
-     * 从输入流读取Properties对象
-     *
-     * @param in 输入流
-     * @return Properties对象
-     */
     public static Properties readProperties(InputStream in) {
         Properties properties = new Properties();
 
@@ -673,18 +564,12 @@ public abstract class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException("Could not read Properties", e);
         } finally {
-            IOUtils.closeQuietly(in);
+            closeQuietly(in);
         }
 
         return properties;
     }
 
-    /**
-     * 把Properties对象写到指定路径的文件里
-     *
-     * @param path       文件路径
-     * @param properties Properties对象
-     */
     public static void writeProperties(String path, Properties properties) {
         OutputStream out = null;
 
@@ -694,7 +579,7 @@ public abstract class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException("Could not write Properties[" + path + "]", e);
         } finally {
-            IOUtils.closeQuietly(out);
+            closeQuietly(out);
         }
     }
 
@@ -706,21 +591,97 @@ public abstract class FileUtils {
      */
     private static class Recursiver {
 
-        private static ArrayList<File> files = new ArrayList<File>();
+        private static List<File> fileList = new ArrayList<>();
 
-        public List<File> getFileList(File file, FileFilter filter) {
-            File children[] = null == filter ? file.listFiles() : file.listFiles(filter);
+        private List<File> getFileList(File file, FileFilter filter) {
+            File[] children = null == filter ? file.listFiles() : file.listFiles(filter);
 
-            for (int i = 0; i < children.length; i++) {
-                if (children[i].isDirectory()) {
-                    new Recursiver().getFileList(children[i], filter);
-                } else {
-                    files.add(children[i]);
+            if (null != children) {
+                for (File f : children) {
+                    if (f.isDirectory()) {
+                        new Recursiver().getFileList(f, filter);
+                    } else {
+                        fileList.add(f);
+                    }
                 }
             }
 
-            return files;
+            return fileList;
         }
+    }
+
+    private static FileOutputStream openOutputStream(File file, boolean append) throws IOException {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                throw new IOException(String.format("file %s exists but is a directory.", file.getPath()));
+            }
+            if (!file.canWrite()) {
+                throw new IOException(String.format("file %s cannot be written to.", file.getPath()));
+            }
+        } else {
+            File parent = file.getParentFile();
+            if (null != parent && !parent.mkdirs() && !parent.isDirectory()) {
+                throw new IOException(String.format("directory %s could not be created.", parent.getPath()));
+            }
+        }
+        return new FileOutputStream(file, append);
+    }
+
+    private static FileInputStream openInputStream(File file) throws IOException {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                throw new IOException(String.format("file %s exists but is a directory.", file.getPath()));
+            }
+
+            if (!file.canRead()) {
+                throw new IOException(String.format("file %s cannot be written to.", file.getPath()));
+            }
+        } else {
+            throw new FileNotFoundException(String.format("file %s does not exist.", file.getPath()));
+        }
+
+        return new FileInputStream(file);
+    }
+
+    private static void closeQuietly(Closeable closeable) {
+        try {
+            if (null != closeable) {
+                closeable.close();
+            }
+        } catch (IOException ioe) {
+            // ignore
+        }
+    }
+
+    private static byte[] toByteArray(InputStream input, long longSize) throws IOException {
+        if (longSize > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("流的期望长度不能超过int能表示的范围，当前长度： " + longSize);
+        }
+
+        // 转成int
+        int size = (int)longSize;
+
+        if (size < 0) {
+            throw new IllegalArgumentException("流的期望长度必须大于等于0，当前长度： " + size);
+        }
+
+        if (size == 0) {
+            return new byte[0];
+        }
+
+        byte[] data = new byte[size];
+        int offset = 0;
+        int readed;
+
+        while (offset < size && (readed = input.read(data, offset, size - offset)) != EOF) {
+            offset += readed;
+        }
+
+        if (offset != size) {
+            throw new IOException("实际读取的流的长度和期望的长度不一致，实际读取长度：" + offset + ", 期望长度: " + size);
+        }
+
+        return data;
     }
 
 }

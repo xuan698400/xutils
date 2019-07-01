@@ -12,7 +12,7 @@ import java.util.Map;
 import com.xuan.mix.http.HttpClient;
 import com.xuan.mix.http.HttpRequest;
 import com.xuan.mix.http.HttpResponse;
-import com.xuan.mix.io.FileUtils;
+import com.xuan.mix.utils.FileUtils;
 
 /**
  * 用UrlConnect方式实现HTTP请求
