@@ -183,7 +183,6 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         DataOutputStream dos = null;
         try {
             dos = new DataOutputStream(conn.getOutputStream());
-            //dos.writeBytes(bodyJson);
             dos.write(bodyJson.getBytes());
         } catch (Exception e) {
             System.out.println(e.getMessage());
