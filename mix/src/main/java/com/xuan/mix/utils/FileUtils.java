@@ -36,6 +36,12 @@ public abstract class FileUtils {
     private static final int EOF = -1;
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
+    /**
+     * 获取文件后缀
+     *
+     * @param fileName 文件名，例如：xxx.jpg
+     * @return 返回后缀，例如：jpg
+     */
     public static String getExtension(String fileName) {
         if (null == fileName) {
             return EMPTY;
@@ -490,6 +496,13 @@ public abstract class FileUtils {
         }
     }
 
+    /**
+     * 删除文件，并会递归删除其下面的文件
+     *
+     * @param filePath       指定文件
+     * @param deleteThisPath 是否删除本文件
+     * @throws IOException
+     */
     public static void deleteFileOrDirectory(String filePath, boolean deleteThisPath) throws IOException {
         if (null == filePath || filePath.length() <= 0) {
             return;
@@ -511,7 +524,8 @@ public abstract class FileUtils {
             if (!file.isDirectory()) {
                 file.delete();
             } else {
-                if (file.listFiles().length == 0) {
+                File[] files = file.listFiles();
+                if (null == files || files.length == 0) {
                     file.delete();
                 }
             }
@@ -527,10 +541,12 @@ public abstract class FileUtils {
     public static List<File> getFileListByPath(String path, FileFilter filter) {
         File directory = new File(path);
         if (!directory.exists() || !directory.isDirectory()) {
-            throw new IllegalArgumentException(String.format("Nonexistent directory[%s]", path));
+            throw new IllegalArgumentException(String.format("File [%s] not exist. Or not directory.", path));
         }
 
-        return new Recursiver().getFileList(directory, filter);
+        List<File> fileList = new ArrayList<>();
+        recursiverFile(directory, filter, fileList);
+        return fileList;
     }
 
     // ////////////////////操作Properties文件////////////////////
@@ -584,29 +600,23 @@ public abstract class FileUtils {
     }
 
     /**
-     * 递归获取指定目录下的所有文件的遍历器
+     * 递归获取目录下的所有文件
      *
-     * @author xuan
-     * @version $Revision: 1.0 $, $Date: 2013-9-5 下午1:13:17 $
+     * @param file     指定目录
+     * @param filter   文件过滤器
+     * @param fileList 文件列表
      */
-    private static class Recursiver {
+    private static void recursiverFile(File file, FileFilter filter, List<File> fileList) {
+        File[] children = null == filter ? file.listFiles() : file.listFiles(filter);
 
-        private static List<File> fileList = new ArrayList<>();
-
-        private List<File> getFileList(File file, FileFilter filter) {
-            File[] children = null == filter ? file.listFiles() : file.listFiles(filter);
-
-            if (null != children) {
-                for (File f : children) {
-                    if (f.isDirectory()) {
-                        new Recursiver().getFileList(f, filter);
-                    } else {
-                        fileList.add(f);
-                    }
+        if (null != children) {
+            for (File f : children) {
+                if (f.isDirectory()) {
+                    recursiverFile(f, filter, fileList);
+                } else {
+                    fileList.add(f);
                 }
             }
-
-            return fileList;
         }
     }
 
@@ -630,14 +640,14 @@ public abstract class FileUtils {
     private static FileInputStream openInputStream(File file) throws IOException {
         if (file.exists()) {
             if (file.isDirectory()) {
-                throw new IOException(String.format("file %s exists but is a directory.", file.getPath()));
+                throw new IOException(String.format("File %s exists but is a directory.", file.getPath()));
             }
 
             if (!file.canRead()) {
-                throw new IOException(String.format("file %s cannot be written to.", file.getPath()));
+                throw new IOException(String.format("File %s cannot be written to.", file.getPath()));
             }
         } else {
-            throw new FileNotFoundException(String.format("file %s does not exist.", file.getPath()));
+            throw new FileNotFoundException(String.format("File %s does not exist.", file.getPath()));
         }
 
         return new FileInputStream(file);
