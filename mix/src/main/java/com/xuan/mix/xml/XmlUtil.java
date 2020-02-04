@@ -202,7 +202,7 @@ public class XmlUtil {
 
     public static void main(String[] args) {
         testNode2Xml();
-        testXml2Node();
+        //testXml2Node();
     }
 
     private static void testNode2Xml() {
@@ -227,20 +227,20 @@ public class XmlUtil {
         System.out.println(node2Xml(bpm));
     }
 
-    private static void testXml2Node() {
-        String str = "<bpm code=\"bpm.ktvExample\" name=\"中文哦\">\n"
-            + "  <autoTask a=\"111\" b=\"222\"/>\n"
-            + "  <decition aa=\"111aaa\" ba=\"222aaa\"><![CDATA[中文]]></decition>\n"
-            + "  <decition1 ddd=\"vvv\">noCData</decition1>\n"
-            + "</bpm>";
-
-        Node node = xml2Node(str, "utf-8");
-        System.out.println(node.getType());
-        System.out.println(node.getAttr("name"));
-        System.out.println(node.getAttr().size());
-        System.out.println(node.getChildList().size());
-        System.out.println(node.getFistChild("decition").getValue());
-        System.out.println(node.getFistChild("decition1").getValue());
-    }
+    //private static void testXml2Node() {
+    //    String str = "<bpm code=\"bpm.ktvExample\" name=\"中文哦\">\n"
+    //        + "  <autoTask a=\"111\" b=\"222\"/>\n"
+    //        + "  <decition aa=\"111aaa\" ba=\"222aaa\"><![CDATA[中文]]></decition>\n"
+    //        + "  <decition1 ddd=\"vvv\">noCData</decition1>\n"
+    //        + "</bpm>";
+    //
+    //    Node node = xml2Node(str, "utf-8");
+    //    System.out.println(node.getType());
+    //    System.out.println(node.getAttr("name"));
+    //    System.out.println(node.getAttr().size());
+    //    System.out.println(node.getChildList().size());
+    //    System.out.println(node.getFistChild("decition").getValue());
+    //    System.out.println(node.getFistChild("decition1").getValue());
+    //}
 
 }
