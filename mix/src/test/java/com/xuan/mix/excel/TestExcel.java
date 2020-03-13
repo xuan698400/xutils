@@ -26,9 +26,18 @@ import org.junit.Test;
  */
 public class TestExcel {
 
-    private final static int from = 4071;
-    private final static int end = 4362;
+    private final static int from = 1;
+    private final static int end = 12;
     private final static Set<String> set = new HashSet<>();
+
+    @Test
+    public void testHashCode(){
+        String dddd = "dddfdfd";
+        System.out.println(dddd.hashCode());
+
+        String ttttt = "123456";
+        System.out.println(ttttt.hashCode());
+    }
 
     @Test
     public void test() {

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bpm code="bpm.onboard_stand" name="begin" type="statelessWorkflow" description="merchant onboard">
+  <var name="context" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="" defaultValue="" inOutType="param"/>
+  <end id="1575615810522" name="结束" tag="end" g="120,395,30,30"/>
+  <autoTask id="1575615784095" name="结束节点" tag="endNode" g="400,380,88,48">
+    <transition to="1575615810522"/>
+    <action type="spring-bean">
+      <actionHandle bean="SuccessWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </action>
+  </autoTask>
+  <waitTask id="1575986155543" name="商户通知" tag="NotifyMonitor" g="405,255,88,48">
+    <transition to="1575615784095"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardNotifyMonitorWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardNotifyMonitorWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984646989" name="主站报备" tag="AlipayReport" g="95,265,88,48">
+    <transition to="1575986155543"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardAlipayReportWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardAlipayReportWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984556306" name="签约" tag="SignContract" g="90,180,88,48">
+    <transition to="1575984646989"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardSignContractWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardSignContractWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984484681" name="开户" tag="openAccount" g="270,175,88,48">
+    <transition to="1575984556306"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardOpenAccountWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardOpenAccountWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984279191" name="商户创建" tag="MerchantCreate" g="500,175,88,48">
+    <transition to="1575984484681"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardMerchantCreateScanWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardMerchantCreateScanWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984172513" name="风控反洗钱扫描" tag="RiskAmlScan" g="700,180,88,48">
+    <transition to="1575984279191"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardRiskAmlScanWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardRiskAmlScanWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984087437" name="Kyc认证" tag="KycCertificate" g="700,70,88,48">
+    <transition to="1575984172513"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardKycCertificateWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardKycCertificateWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575984002253" name="风控预热" tag="RiskPrepare" g="520,75,88,48">
+    <transition to="1575984087437"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardRiskPrepareWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardRiskPrepareWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575983783169" name="信息补全" tag="DataComplete" g="375,75,88,48">
+    <transition to="1575984002253"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardDataCompleteWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardDataCompleteWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <waitTask id="1575983327012" name="创建会员" tag="CreateMerchantUser" g="240,75,88,48">
+    <transition to="1575983783169"/>
+    <inAction type="spring-bean">
+      <actionHandle bean="onboardCreateMerchantUserWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </inAction>
+    <outAction type="spring-bean">
+      <actionHandle bean="onboardCreateMerchantUserWorkflowOutNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </outAction>
+  </waitTask>
+  <autoTask id="1574922851911" name="开始节点" tag="beginNode" g="90,80,88,48">
+    <transition to="1575983327012"/>
+    <action type="spring-bean">
+      <actionHandle bean="StartWorkflowNode" clazz="com.ipay.imerchprod.module.workflow.core.node.WorkFlowNode" method="handle">
+        <var name="workFlowContext" description="" dataType="com.ipay.imerchprod.module.workflow.core.model.WorkFlowContext" contextVarName="context" defaultValue="" inOutType="param"/>
+      </actionHandle>
+    </action>
+  </autoTask>
+  <start id="1574922817446" name="开始" tag="begin" g="25,85,30,30">
+    <transition to="1574922851911"/>
+  </start>
+</bpm>

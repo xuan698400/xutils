@@ -9,6 +9,8 @@
     <version>1.0</version>
     <modules>
         <module>mix</module>
+        <module>user</module>
+        <module>common</module>
     </modules>
     <packaging>pom</packaging>
 

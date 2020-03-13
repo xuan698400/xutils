@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.user.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.xuan.user.model.entity.User">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="icon" property="icon"/>
+        <result column="password" property="password"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="feature" property="feature"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id,username,name,phone,email,icon,password,type,status,feature,create_time,modify_time,biz_code
+	</sql>
+
+    <insert id="insert" parameterType="com.xuan.user.model.entity.User" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into bw_user(
+        username,
+        name,
+        phone,
+        email,
+        icon,
+        password,
+        type,
+        status,
+        feature,
+        create_time,
+        modify_time,
+        biz_code
+        )
+        values(
+        #{username},
+        #{name},
+        #{phone},
+        #{email},
+        #{icon},
+        #{password},
+        #{type},
+        #{status},
+        #{feature},
+        now(),
+        now(),
+        #{bizCode}
+        )
+    </insert>
+
+    <update id="updateFeatureById">
+        UPDATE bw_user
+        SET feature = #{feature}, create_time = now()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM bw_user
+        WHERE id = #{id}
+        AND status = -1
+    </select>
+
+    <select id="selectByQuery" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM bw_user
+        WHERE status != -1
+        AND biz_code = #{bizCode}
+        <if test="username != null">
+            AND username = #{username}
+        </if>
+    </select>
+</mapper>

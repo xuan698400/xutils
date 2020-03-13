@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>工作空间</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/file.css" media="all">
+</head>
+<body>
+
+<ul class="layui-nav layui-bg-blue">
+    <li class="layui-nav-item">
+        <a href="">工作空间</a>
+    </li>
+    <li class="layui-nav-item" lay-unselect="">
+        <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img"><span id="uId"></span></a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:void(0);" id="userInfoBtn">个人信息</a></dd>
+            <dd><a href="javascript:void(0);" id="logoutBtn">退了</a></dd>
+        </dl>
+    </li>
+</ul>
+
+<div style="margin: 15px;">
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>我的文件</legend>
+        <div class="file-container">
+            <div class="file-op">
+                <button type="button" class="layui-btn layui-btn-normal" id="createDirBtn">创建文件夹</button>
+                <button type="button" class="layui-btn" id="createBpmBtn">创建流程图</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="updateNameBtn">重命名选中文件</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="removeFileBtn">删除选中文件</button>
+            </div>
+            <div class="file-nav">目录：</div>
+            <div class="file-content" id="fileContent">
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script src="../layui/layui.js"></script>
+<script src="../common/jquery.js"></script>
+<script src="../common/jquery.md5.js"></script>
+<script src="../common/common.js"></script>
+<script src="../common/api.js"></script>
+<script>
+    $(function () {
+        var parentId = 0;
+        var selectId = 0;
+        var selectName = '';
+
+        //获取用户信息
+        $.apiGetUser(function (data) {
+            $('#uId').html(data.username);
+        });
+        //文件导航
+        var loadNav = function () {
+            $.apiGetParentFiles(parentId, function (data) {
+                var navObj = $('.file-nav');
+                var itemTemplate = '<a data-id="{id}">{name}</a>';
+                navObj.html('');
+                navObj.append('目录：');
+
+                var rootObj = $(itemTemplate.replace('{id}', 0).replace('{name}', "ROOT"));
+                rootObj.click(function () {
+                    parentId = $(this).data('id');
+                    loadFiles();
+                });
+                navObj.append(rootObj);
+                navObj.append("/");
+
+                for (i in data) {
+                    var file = data[i];
+                    var obj = $(itemTemplate.replace('{id}', file.id).replace('{name}', file.name));
+                    obj.click(function () {
+                        parentId = $(this).data('id');
+                        loadFiles();
+                    });
+                    navObj.append(obj);
+                    navObj.append("/");
+                }
+            })
+        };
+        //获取文件列表
+        var loadFiles = function () {
+            $.apiGetFiles(parentId, function (data) {
+                var fileTemplate = '<div class="file-item" data-id="{id}" data-type="{type}"><img src="../images/{dir}.png"/><p>{name}</p></div>';
+                var fileContentObj = $('#fileContent');
+                fileContentObj.html('');
+                for (i in data) {
+                    var file = data[i];
+                    var fileTypeIcon;
+                    switch (file.type) {
+                        case 1:
+                            fileTypeIcon = 'dir';
+                            break;
+                        case 2:
+                            fileTypeIcon = 'bpm';
+                            break;
+                        default:
+                    }
+                    var fileItemStr = fileTemplate.replace('{dir}', fileTypeIcon)
+                        .replace('{name}', file.name).replace('{id}', file.id).replace("{type}", file.type);
+                    var fileItemObj = $(fileItemStr);
+                    fileItemObj.click(function () {
+                        $('.file-item').removeClass('active');
+                        $(this).addClass('active');
+                        selectId = $(this).data('id');
+                        selectName = $(this).find('p').html();
+                    });
+                    fileItemObj.dblclick(function () {
+                        var type = $(this).data('type');
+                        if (type == 1) {
+                            //文件夹
+                            parentId = $(this).data('id');
+                            loadFiles();
+                        } else {
+                            //bpm文件
+                            open("/bpm/web/grapheditor/www/index.html?fileId=" + $(this).data('id'));
+                        }
+                    });
+                    fileContentObj.append(fileItemObj);
+                }
+                //
+                loadNav();
+            });
+        };
+        loadFiles();
+
+        //个人信息点击
+        $('#userInfoBtn').click(function () {
+            open("userInfo.html");
+        });
+        $('#logoutBtn').click(function () {
+            open("userInfo.html");
+        });
+
+        //layer
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+            var layer = layui.layer;
+
+            //监听导航点击
+            element.on('nav(demo)', function (elem) {
+                layer.msg(elem.text());
+            });
+
+            //创建文件夹
+            $('#createDirBtn').click(function () {
+                layer.open({
+                    title: '输入文件夹名称',
+                    content: '<input id="inputVal" />',
+                    yes: function () {
+                        layer.close(layer.index);
+                        $.apiCreateFile($('#inputVal').val(), 1, parentId, function () {
+                            loadFiles();
+                        });
+                    }
+                });
+            });
+            //创建bpm文件
+            $('#createBpmBtn').click(function () {
+                layer.open({
+                    title: '输入文件名称',
+                    content: '<input id="inputVal" />',
+                    yes: function () {
+                        layer.close(layer.index);
+                        $.apiCreateFile($('#inputVal').val(), 2, parentId, function () {
+                            loadFiles();
+                        });
+                    }
+                });
+            });
+            //重命名
+            $('#updateNameBtn').click(function () {
+                layer.open({
+                    title: '重命名',
+                    content: '<input id="inputVal" value="' + selectName + '" />',
+                    yes: function () {
+                        layer.close(layer.index);
+                        $.apiUpdateName(selectId, $('#inputVal').val(), function () {
+                            loadFiles();
+                        });
+                    }
+                });
+            });
+            //删除文件
+            $('#removeFileBtn').click(function () {
+                layer.open({
+                    title: '删除提醒',
+                    content: '是否需要删除选中的文件[' + selectName + ']？',
+                    yes: function () {
+                        layer.close(layer.index);
+                        $.apiDeleteFile(selectId, function () {
+                            loadFiles();
+                        });
+                    }
+                });
+            });
+        });
+    });
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1278248239'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278248239%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>
