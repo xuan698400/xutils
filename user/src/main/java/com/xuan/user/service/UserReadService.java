@@ -13,4 +13,5 @@ import com.xuan.user.model.query.UserQuery;
 public interface UserReadService {
 
     List<UserDO> queryUser(UserQuery userQuery, BwPageQuery pageQuery);
+
 }
