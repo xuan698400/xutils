@@ -11,6 +11,7 @@
         <module>mix</module>
         <module>user</module>
         <module>common</module>
+        <module>tools</module>
     </modules>
     <packaging>pom</packaging>
 
