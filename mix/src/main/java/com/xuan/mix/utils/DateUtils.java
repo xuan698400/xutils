@@ -7,14 +7,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * 处理日期时间的工具类。
+ * 日期工具类
  *
  * @author xuan
- * @version $Revision: 1.0 $, $Date: 2012-11-22 上午9:46:12 $
+ * @since 2020/4/27
  */
-public abstract class DateUtils {
+public class DateUtils {
 
-    private static final int[] DAY_OF_MONTH = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static final int[] DAY_OF_MONTH = new int[] {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     /**
      * 取得指定天数后的时间
@@ -24,7 +24,7 @@ public abstract class DateUtils {
      * @return 指定天数后的时间
      */
     public static Date addDay(Date date, int dayAmount) {
-        if (date == null) {
+        if (null == date) {
             return null;
         }
 
@@ -42,7 +42,7 @@ public abstract class DateUtils {
      * @return 指定小时数后的时间
      */
     public static Date addHour(Date date, int hourAmount) {
-        if (date == null) {
+        if (null == date) {
             return null;
         }
 
@@ -60,7 +60,7 @@ public abstract class DateUtils {
      * @return 指定分钟数后的时间
      */
     public static Date addMinute(Date date, int minuteAmount) {
-        if (date == null) {
+        if (null == date) {
             return null;
         }
 
@@ -71,35 +71,53 @@ public abstract class DateUtils {
     }
 
     /**
-     * 比较两日期对象中的小时和分钟部分的大小.
+     * 取得指定秒数后的时间
      *
-     * @param date        日期对象1, 如果为 <code>null</code> 会以当前时间的日期对象代替
-     * @param anotherDate 日期对象2, 如果为 <code>null</code> 会以当前时间的日期对象代替
-     * @return 如果日期对象1大于日期对象2, 则返回大于0的数; 反之返回小于0的数; 如果两日期对象相等, 则返回0.
+     * @param date         基准时间
+     * @param secondAmount 指定秒数，允许为负数
+     * @return 指定秒数后的时间
      */
-    public static int compareHourAndMinute(Date date, Date anotherDate) {
-        if (date == null) {
-            date = new Date();
+    public static Date addSecond(Date date, int secondAmount) {
+        if (null == date) {
+            return null;
         }
 
-        if (anotherDate == null) {
-            anotherDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.SECOND, secondAmount);
+        return calendar.getTime();
+    }
+
+    /**
+     * 比较两日期对象中的小时和分钟部分的大小.
+     *
+     * @param date1 日期对象1, 如果为 <code>null</code> 会以当前时间的日期对象代替
+     * @param date2 日期对象2, 如果为 <code>null</code> 会以当前时间的日期对象代替
+     * @return 如果日期对象1大于日期对象2, 返回1; 如果日期对象1小于日期对象2, 返回-1;相等返回0;
+     */
+    public static int compareHourAndMinute(Date date1, Date date2) {
+        if (null == date1) {
+            date1 = new Date();
+        }
+
+        if (null == date2) {
+            date2 = new Date();
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int hourOfDay1 = cal.get(Calendar.HOUR_OF_DAY);
-        int minute1 = cal.get(Calendar.MINUTE);
+        cal.setTime(date1);
+        int hourOfDate1 = cal.get(Calendar.HOUR_OF_DAY);
+        int minuteOfDate1 = cal.get(Calendar.MINUTE);
 
-        cal.setTime(anotherDate);
-        int hourOfDay2 = cal.get(Calendar.HOUR_OF_DAY);
-        int minute2 = cal.get(Calendar.MINUTE);
+        cal.setTime(date2);
+        int hourOfDate2 = cal.get(Calendar.HOUR_OF_DAY);
+        int minuteOfDate2 = cal.get(Calendar.MINUTE);
 
-        if (hourOfDay1 > hourOfDay2) {
+        if (hourOfDate1 > hourOfDate2) {
             return 1;
-        } else if (hourOfDay1 == hourOfDay2) {
+        } else if (hourOfDate1 == hourOfDate2) {
             // 小时相等就比较分钟
-            return minute1 > minute2 ? 1 : (minute1 == minute2 ? 0 : -1);
+            return Integer.compare(minuteOfDate1, minuteOfDate2);
         } else {
             return -1;
         }
@@ -108,31 +126,31 @@ public abstract class DateUtils {
     /**
      * 比较两日期对象的大小, 忽略秒, 只精确到分钟.
      *
-     * @param date        日期对象1, 如果为 <code>null</code> 会以当前时间的日期对象代替
-     * @param anotherDate 日期对象2, 如果为 <code>null</code> 会以当前时间的日期对象代替
-     * @return 如果日期对象1大于日期对象2, 则返回大于0的数; 反之返回小于0的数; 如果两日期对象相等, 则返回0.
+     * @param date1 日期对象1, 如果为 <code>null</code> 会以当前时间的日期对象代替
+     * @param date2 日期对象2, 如果为 <code>null</code> 会以当前时间的日期对象代替
+     * @return 如果日期对象1大于日期对象2, 返回1; 如果日期对象1小于日期对象2, 返回-1;相等返回0;
      */
-    public static int compareIgnoreSecond(Date date, Date anotherDate) {
-        if (date == null) {
-            date = new Date();
+    public static int compareIgnoreSecond(Date date1, Date date2) {
+        if (null == date1) {
+            date1 = new Date();
         }
 
-        if (anotherDate == null) {
-            anotherDate = new Date();
+        if (null == date2) {
+            date2 = new Date();
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
+        cal.setTime(date1);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        date = cal.getTime();
+        date1 = cal.getTime();
 
-        cal.setTime(anotherDate);
+        cal.setTime(date2);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        anotherDate = cal.getTime();
+        date2 = cal.getTime();
 
-        return date.compareTo(anotherDate);
+        return date1.compareTo(date2);
     }
 
     /**
@@ -169,6 +187,51 @@ public abstract class DateUtils {
      */
     public static Date currentStartDate() {
         return getStartDate(new Date());
+    }
+
+    /**
+     * 获取某天的起始时间, 例如： 2005-10-01 00:00:00.000
+     *
+     * @param date 日期对象
+     * @return 该天的起始时间
+     */
+    public static Date getStartDate(Date date) {
+        if (date == null) {
+            return null;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        return cal.getTime();
+    }
+
+    /**
+     * 获取某天的结束时间。例如： 2005-10-01 23:59:59.999
+     *
+     * @param date 日期对象
+     * @return 该天的结束时间
+     */
+    public static Date getEndDate(Date date) {
+
+        if (date == null) {
+            return null;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 999);
+
+        return cal.getTime();
     }
 
     /**
@@ -294,7 +357,7 @@ public abstract class DateUtils {
      * 根据指定的年, 月, 日, 时, 分, 秒等参数获取日期对象.
      *
      * @param year      年
-     * @param month     月
+     * @param month     月（Calendar的月份表示是从0到11，所以为了友好使用，我们的入参是1到12，内部会自动减1）
      * @param date      日
      * @param hourOfDay 时(24小时制)
      * @param minute    分
@@ -302,6 +365,10 @@ public abstract class DateUtils {
      * @return 对应的日期对象
      */
     public static Date getDate(int year, int month, int date, int hourOfDay, int minute, int second) {
+        if (month < 1 || month > 12) {
+            throw new IllegalArgumentException("Month must be between 1 and 12.");
+        }
+
         Calendar cal = Calendar.getInstance();
         cal.set(year, month - 1, date, hourOfDay, minute, second);
         cal.set(Calendar.MILLISECOND, 0);
@@ -319,29 +386,6 @@ public abstract class DateUtils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal.get(Calendar.DAY_OF_WEEK);
-    }
-
-    /**
-     * 获取某天的结束时间, e.g. 2005-10-01 23:59:59.999
-     *
-     * @param date 日期对象
-     * @return 该天的结束时间
-     */
-    public static Date getEndDate(Date date) {
-
-        if (date == null) {
-            return null;
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 59);
-        cal.set(Calendar.MILLISECOND, 999);
-
-        return cal.getTime();
     }
 
     /**
@@ -369,35 +413,13 @@ public abstract class DateUtils {
     }
 
     /**
-     * 获取某天的起始时间, e.g. 2005-10-01 00:00:00.000
-     *
-     * @param date 日期对象
-     * @return 该天的起始时间
-     */
-    public static Date getStartDate(Date date) {
-        if (date == null) {
-            return null;
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-
-        return cal.getTime();
-    }
-
-    /**
      * 根据日期对象来获取日期中的时间(HH:mm:ss).
      *
      * @param date 日期对象
      * @return 时间字符串, 格式为: HH:mm:ss
      */
     public static String getTime(Date date) {
-        if (date == null) {
+        if (null == date) {
             return null;
         }
 
@@ -428,7 +450,7 @@ public abstract class DateUtils {
      */
     public static boolean isLeapYear(int year) {
         Calendar calendar = Calendar.getInstance();
-        return ((GregorianCalendar) calendar).isLeapYear(year);
+        return ((GregorianCalendar)calendar).isLeapYear(year);
     }
 
     /**

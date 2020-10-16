@@ -1,5 +1,8 @@
 package com.xuan.mix.http;
 
+import com.xuan.mix.http.client.HttpDownloadListener;
+import com.xuan.mix.http.client.HttpResponse;
+import com.xuan.mix.http.client.HttpUtils;
 import org.junit.Test;
 
 /**

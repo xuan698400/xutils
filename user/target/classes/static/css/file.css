@@ -1,0 +1,46 @@
+.file-container {
+    padding: 20px;
+}
+
+.file-op {
+}
+
+.file-nav {
+    padding-top: 20px;
+}
+
+.file-nav a {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #1E9FFF;
+    text-decoration: underline;
+    cursor:pointer;
+}
+.file-nav a:hover {
+    color: #5FB878;
+}
+
+.file-content {
+    padding-top: 20px;
+}
+
+.file-content .active {
+    background-color: #E9E7E7;
+}
+
+.file-item {
+    float: left;
+    text-align: center;
+    padding: 10px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.file-item img {
+    width: 40px;
+    height: 40px;
+}
+
+.file-item p {
+    font-size: 10px;
+}

@@ -12,6 +12,8 @@
         <module>user</module>
         <module>common</module>
         <module>tools</module>
+        <module>hazy</module>
+        <module>crow</module>
     </modules>
     <packaging>pom</packaging>
 

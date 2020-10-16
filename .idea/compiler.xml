@@ -7,6 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common" />
+        <module name="crow" />
+        <module name="hazy" />
         <module name="mix" />
         <module name="tools" />
         <module name="user" />
@@ -14,6 +16,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common" target="1.8" />
+      <module name="crow" target="1.8" />
+      <module name="hazy" target="1.8" />
       <module name="mix" target="1.8" />
       <module name="tools" target="1.8" />
       <module name="user" target="1.8" />
