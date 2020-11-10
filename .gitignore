@@ -5,3 +5,4 @@
 target/*
 xutils.iml
 mix/target/*
+common/target/*
