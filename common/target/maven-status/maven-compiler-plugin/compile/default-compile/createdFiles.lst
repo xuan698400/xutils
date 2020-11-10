@@ -1,6 +1,0 @@
-com/xuan/common/Main.class
-com/xuan/common/model/BwResult.class
-com/xuan/common/exception/BwException.class
-com/xuan/common/model/BwBaseDO.class
-com/xuan/common/model/BwResultCode.class
-com/xuan/common/enums/BwResultCodeEnum.class

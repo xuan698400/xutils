@@ -6,3 +6,5 @@ target/*
 xutils.iml
 mix/target/*
 common/target/*
+tools/target/*
+user/target/*
