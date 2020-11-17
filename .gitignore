@@ -8,3 +8,8 @@ mix/target/*
 common/target/*
 tools/target/*
 user/target/*
+spi2-app1/target/*
+spi2-app2/target/*
+spi2-framework/target/*
+spi2-platform-sdk/target/*
+spi2-platform-server/target/*
