@@ -33,7 +33,7 @@ public class FeatureUtil {
         return sb.toString();
     }
 
-    public static final Map<String, String> toMap(String str) {
+    public static Map<String, String> toMap(String str) {
         Map<String, String> featureMap = new HashMap<>();
 
         if (isEmpty(str)) {
