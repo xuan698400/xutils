@@ -12,6 +12,11 @@
         <module>user</module>
         <module>common</module>
         <module>tools</module>
+        <module>spi2-framework</module>
+        <module>spi2-platform-server</module>
+        <module>spi2-platform-sdk</module>
+        <module>spi2-app1</module>
+        <module>spi2-app2</module>
     </modules>
     <packaging>pom</packaging>
 
