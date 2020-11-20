@@ -13,47 +13,44 @@ import com.xuan.mix.xml.model.XmlSchemaModel;
  */
 public class XmlWriter {
     /**
-     * Êı¾İ°ü¹ü¸ñÊ½
+     * cdataæ ¼å¼åŒ–
      */
     private final static String FORMAT_CDATA = "<![CDATA[%s]]>";
     /**
-     * ·Ö¸î·ûºÅ
+     * åˆ†å‰²ç¬¦
      */
     private final static String SP = System.getProperty("line.separator");
     /**
-     * ¿Õ¸ñ
+     * ç©ºæ ¼
      */
     private final static String BLANK_SPACE = " ";
     /**
-     * µÈÓÚ·ûºÅ
+     * EQ
      */
     private final static String EQ = "=";
     /**
-     * Ë«ÒıºÅ
+     * QUOT
      */
     private final static String QUOT = "\"";
     /**
-     * ×ó¼âÀ¨ºÅ
+     * èŠ‚ç‚¹å¼€å§‹ç»“æŸ
      */
     private final static String LEFT_ARROW = "<";
     private final static String LEFT_ARROW_CLOSE = "</";
-    /**
-     * ÓÒ¼âÀ¨ºÅ
-     */
     private final static String RIGHT_ARROW = ">";
     private final static String RIGHT_ARROW_CLOSE = "/>";
     /**
-     * schema¿ªÊ¼½áÊø
+     * schemaå¼€å§‹ç»“æŸ
      */
     private final static String SCHEMA_START = "<?xml";
     private final static String SCHEMA_END = "?>";
     /**
-     * tabËõ½ø¿Õ¸ñÊı
+     * é”è¿›ç©ºæ ¼
      */
     private final static int TAB_BLANK_SPACE_NUM = 2;
 
     /**
-     * ÊôĞÔĞèÒª×ªÒåµÄ¹Ø¼ü×Ö
+     * å±æ€§è½¬ä¹‰æ›¿æ¢
      */
     private final static HashMap<String, String> ATTR_FILTER_MAP = new HashMap<>();
 
@@ -69,7 +66,8 @@ public class XmlWriter {
             }
 
             StringBuilder xml = new StringBuilder();
-
+            doAppendSchema(xml, xmlModel.getSchemaModel());
+            xml.append(SP);
             doAppendNode(xml, xmlModel.getNodeModel(), 0);
             return xml.toString();
 
@@ -98,10 +96,10 @@ public class XmlWriter {
             return;
         }
 
-        //Æ´½Ó½Úµãname£¬Èç£º<input
+        //èŠ‚ç‚¹åç§°ï¼Œlikeï¼š<input
         xml.append(getBlankSpaceStr(blankSpaceNum)).append(LEFT_ARROW).append(model.getName());
 
-        //Æ´½Ó½ÚµãÊôĞÔ£¬Èç£º<input name="abc" tag="123"
+        //èŠ‚ç‚¹å±æ€§ï¼Œlikeï¼š<input name="abc" tag="123"
         if (null != model.getAttr()) {
             for (Entry<String, String> attrEntry : model.getAttr().entrySet()) {
                 if (null != attrEntry.getValue()) {
@@ -116,30 +114,30 @@ public class XmlWriter {
         }
 
         if (null == model.getCdataList() && null == model.getTextList() && null == model.getChildList()) {
-            //Ã»ÓĞº¢×Ó½Úµã£¬ÇÒÒ²Ã»ÓĞÖµÊı¾İ£¬Ö±½Ó¹Ø±Õ·µ»Ø£¬Èç£º<input name="abc" tag="123" />
+            //æ— å­èŠ‚ç‚¹å…³é—­ï¼Œlikeï¼š<input name="abc" tag="123" />
             xml.append(RIGHT_ARROW_CLOSE);
             return;
         } else {
-            //ĞèÒªÍùÏÂÆ´½Óº¢×Ó½Úµã»òÕßÖµ½Úµã£¬Èç£º<input name="abc" tag="123">
+            //å«å­èŠ‚ç‚¹å…³é—­ï¼Œlikeï¼š<input name="abc" tag="123">
             xml.append(RIGHT_ARROW);
         }
 
-        //Æ´½Ócdata£¬Èç£º<input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>
+        //å«cdataï¼Œlikeï¼š<input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>
         if (null != model.getCdataList()) {
             for (String cdata : model.getCdataList()) {
                 xml.append(String.format(FORMAT_CDATA, cdata));
             }
         }
 
-        //Æ´½Ótext£¬Èç£º<input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>123
+        //æ— cdataï¼Œlikeï¼š<input name="abc" tag="123"><![CDATA[]]><![CDATA[value2]]>123
         if (null != model.getTextList()) {
             for (String text : model.getTextList()) {
                 xml.append(text);
             }
         }
 
-        //Æ´½Óº¢×Ó½Úµã£¬
-        // Èç£º<input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>123
+        //å­èŠ‚ç‚¹ï¼Œlikeï¼š
+        // <input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>123
         //       <a>...</a>
         //       <b>...</b>
         if (null != model.getChildList()) {
@@ -150,8 +148,8 @@ public class XmlWriter {
             xml.append(SP).append(getBlankSpaceStr(blankSpaceNum));
         }
 
-        //»»ĞĞÊÕÎ²£¬
-        // Èç£º<input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>123
+        //èŠ‚ç‚¹å…³é—­ï¼Œlikeï¼š
+        // <input name="abc" tag="123"><![CDATA[value1]]><![CDATA[value2]]>123
         //       <a>...</a>
         //       <b>...</b>
         //    </input>

@@ -13,3 +13,5 @@ spi2-app2/target/*
 spi2-framework/target/*
 spi2-platform-sdk/target/*
 spi2-platform-server/target/*
+garden/target/*
+logs/*

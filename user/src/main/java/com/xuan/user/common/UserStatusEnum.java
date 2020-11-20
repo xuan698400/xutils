@@ -1,20 +1,21 @@
-package com.xuan.user.enums;
+package com.xuan.user.common;
 
 /**
  * @author xuan
  * @since 2019/11/17
  */
-public enum UserTypeEnum {
+public enum UserStatusEnum {
 
-    //
-    NORMAL(1, "普通用户"),
-    ADMIN(2, "管理员"),
+    //正常
+    NORMAL(0, "正常"),
+    DELETED(-1, "被删除"),
+    WAIT_CHECK(1, "被确认状态"),
     ;
 
     private int value;
     private String name;
 
-    UserTypeEnum(int value, String name) {
+    UserStatusEnum(int value, String name) {
         this.value = value;
         this.name = name;
     }
@@ -31,13 +32,13 @@ public enum UserTypeEnum {
         return this.name();
     }
 
-    public static UserTypeEnum valueOf(Integer value) {
+    public static UserStatusEnum valueOf(Integer value) {
         if (null == value) {
             return null;
         }
 
-        UserTypeEnum result = null;
-        for (UserTypeEnum e : UserTypeEnum.values()) {
+        UserStatusEnum result = null;
+        for (UserStatusEnum e : UserStatusEnum.values()) {
             if (e.getValue() == value) {
                 result = e;
             }

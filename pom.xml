@@ -17,6 +17,7 @@
         <module>spi2-platform-sdk</module>
         <module>spi2-app1</module>
         <module>spi2-app2</module>
+        <module>garden</module>
     </modules>
     <packaging>pom</packaging>
 

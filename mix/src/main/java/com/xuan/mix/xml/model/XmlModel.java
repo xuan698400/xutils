@@ -1,15 +1,13 @@
 package com.xuan.mix.xml.model;
 
 /**
- * XMLÄ£ÐÍ
- *
  * @author xuan
  * @since 2020/11/10
  */
 public class XmlModel {
 
     /**
-     * XMLÐ­Òé£¬ÀýÈç£º<?xml version="1.0" encoding="UTF-8"?>µÄÊý¾ÝÄ£ÐÍ
+     * ä¾‹å¦‚ï¼š<?xml version="1.0" encoding="UTF-8"?>
      */
     private XmlSchemaModel schemaModel;
 

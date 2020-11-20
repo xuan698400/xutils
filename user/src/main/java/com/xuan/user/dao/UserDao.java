@@ -3,7 +3,7 @@ package com.xuan.user.dao;
 import java.util.List;
 
 import com.xuan.user.model.entity.User;
-import com.xuan.user.model.query.UserQuery;
+import com.xuan.user.model.request.UserQueryRequest;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,6 +20,6 @@ public interface UserDao {
 
     User selectById(@Param("id") Long id);
 
-    List<User> selectByQuery(UserQuery query);
+    List<User> selectByQuery(UserQueryRequest query);
 
 }

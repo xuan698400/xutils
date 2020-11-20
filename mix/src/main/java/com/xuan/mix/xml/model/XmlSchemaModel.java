@@ -1,7 +1,7 @@
 package com.xuan.mix.xml.model;
 
 /**
- * XMLÐ­Òé£¬ÀýÈç£º<?xml version="1.0" encoding="UTF-8"?>
+ * <?xml version="1.0" encoding="UTF-8"?>
  *
  * @author xuan
  * @since 2020/11/10

@@ -15,8 +15,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * XML转成模型数据
- *
  * @author xuan
  * @since 2020/11/10
  */

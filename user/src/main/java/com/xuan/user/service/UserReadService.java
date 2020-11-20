@@ -2,9 +2,9 @@ package com.xuan.user.service;
 
 import java.util.List;
 
-import com.xuan.common.model.BwPageQuery;
+import com.xuan.user.common.UserPageQuery;
 import com.xuan.user.model.domain.UserDO;
-import com.xuan.user.model.query.UserQuery;
+import com.xuan.user.model.request.UserQueryRequest;
 
 /**
  * @author xuan
@@ -12,6 +12,6 @@ import com.xuan.user.model.query.UserQuery;
  */
 public interface UserReadService {
 
-    List<UserDO> queryUser(UserQuery userQuery, BwPageQuery pageQuery);
+    List<UserDO> queryUser(UserQueryRequest userQuery, UserPageQuery userPageQuery);
 
 }

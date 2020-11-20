@@ -2,12 +2,13 @@ package com.xuan.user.model.convert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.alibaba.fastjson.JSON;
 
-import com.xuan.user.enums.UserStatusEnum;
-import com.xuan.user.enums.UserTypeEnum;
+import com.xuan.user.common.UserStatusEnum;
+import com.xuan.user.common.UserTypeEnum;
 import com.xuan.user.model.domain.UserDO;
 import com.xuan.user.model.entity.User;
 import com.xuan.user.model.vo.UserVO;
@@ -84,7 +85,7 @@ public class UserConvert {
         if (null == userDOList) {
             return new ArrayList<>();
         }
-        return userDOList.stream().map(UserConvert::toVO).collect(Collectors.toList());
+        return userDOList.stream().map(UserConvert::toVO).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
 }
