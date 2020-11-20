@@ -3,23 +3,23 @@ package com.xuan.mix.bt.diverter;
 import java.util.Set;
 
 /**
- * 分流器配置
+ * 分流器配置，一般配置到配置中心可调节
  *
  * @author xuan
  * @date 2019/1/29
  */
 public class DiverterConfig {
-    public static final int DEFAULT_PERCENT = 0;
-    public static final int DEFAULT_TOTAL = 100;
+    private static final Integer DEFAULT_HIT_NUM = 0;
+    private static final Integer DEFAULT_TOTAL_NUM = 100;
 
     /**
      * 分流占比
      */
-    private int percent = DEFAULT_PERCENT;
+    private Integer hitNum = DEFAULT_HIT_NUM;
     /**
      * 总份数
      */
-    private int total = DEFAULT_TOTAL;
+    private Integer totalNum = DEFAULT_TOTAL_NUM;
     /**
      * 白名单
      */
@@ -29,20 +29,20 @@ public class DiverterConfig {
      */
     private Set<String> blackSet;
 
-    public int getPercent() {
-        return percent;
+    public Integer getHitNum() {
+        return hitNum;
     }
 
-    public void setPercent(int percent) {
-        this.percent = percent;
+    public void setHitNum(Integer hitNum) {
+        this.hitNum = hitNum;
     }
 
-    public int getTotal() {
-        return total;
+    public Integer getTotalNum() {
+        return totalNum;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotalNum(Integer totalNum) {
+        this.totalNum = totalNum;
     }
 
     public Set<String> getWhiteSet() {
