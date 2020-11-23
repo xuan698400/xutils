@@ -1,0 +1,6 @@
+
+#add
+http://localhost:8080/user/userAdd?bizCode=test&username=test999&status=0&type=1&password=123456
+
+#query
+http://localhost:8080/user/userGetById?userId=1000051

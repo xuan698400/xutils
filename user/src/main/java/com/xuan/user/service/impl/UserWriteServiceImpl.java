@@ -4,14 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.xuan.user.adapter.SeqAdapter;
 import com.xuan.user.common.UserCheckUtil;
 import com.xuan.user.common.UserException;
 import com.xuan.user.common.UserExceptionCodeEnum;
 import com.xuan.user.dao.UserDao;
+import com.xuan.user.dao.model.UserDO;
+import com.xuan.user.dao.model.UserQueryParams;
 import com.xuan.user.model.convert.UserConvert;
-import com.xuan.user.model.domain.UserDO;
-import com.xuan.user.model.entity.User;
-import com.xuan.user.model.request.UserQueryRequest;
+import com.xuan.user.model.domain.User;
 import com.xuan.user.service.UserWriteService;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +25,16 @@ public class UserWriteServiceImpl implements UserWriteService {
 
     @Resource
     private UserDao userDao;
+    @Resource
+    private SeqAdapter seqAdapter;
 
     @Override
-    public Long create(UserDO userDO) {
+    public Long create(User user) {
         try {
-            checkCreate(userDO);
-            User user = UserConvert.toEntity(userDO);
-            return userDao.insert(user);
+            checkCreate(user);
+            UserDO userDO = UserConvert.toDO(user);
+            userDO.setId(seqAdapter.createNewUserId());
+            return userDao.insert(userDO);
         } catch (UserException ue) {
             throw ue;
         } catch (Exception e) {
@@ -38,20 +42,20 @@ public class UserWriteServiceImpl implements UserWriteService {
         }
     }
 
-    private void checkCreate(UserDO userDO) {
-        UserCheckUtil.checkEmpty(userDO.getBizCode(), "bizCode");
-        UserCheckUtil.checkEmpty(userDO.getUsername(), "username");
-        UserCheckUtil.checkEmpty(userDO.getPassword(), "password");
-        UserCheckUtil.checkNull(userDO.getStatus(), "status");
-        UserCheckUtil.checkNull(userDO.getType(), "type");
+    private void checkCreate(User user) {
+        UserCheckUtil.checkEmpty(user.getBizCode(), "bizCode");
+        UserCheckUtil.checkEmpty(user.getUsername(), "username");
+        UserCheckUtil.checkEmpty(user.getPassword(), "password");
+        UserCheckUtil.checkNull(user.getStatus(), "status");
+        UserCheckUtil.checkNull(user.getType(), "type");
 
         //用户名不能重复
-        UserQueryRequest query = new UserQueryRequest();
-        query.setBizCode(userDO.getBizCode());
-        query.setUsername(userDO.getUsername());
-        List<User> userList = userDao.selectByQuery(query);
-        if (UserCheckUtil.isNotEmpty(userList)) {
-            throw new UserException(UserExceptionCodeEnum.USERNAME_REPEAT, userDO.getUsername());
+        UserQueryParams params = new UserQueryParams();
+        params.setBizCode(user.getBizCode());
+        params.setUsername(user.getUsername());
+        List<UserDO> userDOList = userDao.selectByQuery(params);
+        if (UserCheckUtil.isNotEmpty(userDOList)) {
+            throw new UserException(UserExceptionCodeEnum.USERNAME_REPEAT, user.getUsername());
         }
     }
 

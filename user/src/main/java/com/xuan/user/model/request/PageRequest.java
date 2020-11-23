@@ -1,10 +1,10 @@
-package com.xuan.user.common;
+package com.xuan.user.model.request;
 
 /**
  * @author xuan
  * @since 2020/11/17
  */
-public class UserPageQuery {
+public class PageRequest extends BaseRequest {
 
     private int pageNo;
 

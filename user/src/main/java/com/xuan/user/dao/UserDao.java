@@ -2,8 +2,8 @@ package com.xuan.user.dao;
 
 import java.util.List;
 
-import com.xuan.user.model.entity.User;
-import com.xuan.user.model.request.UserQueryRequest;
+import com.xuan.user.dao.model.UserDO;
+import com.xuan.user.dao.model.UserQueryParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,12 +14,11 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserDao {
 
-    Long insert(User user);
+    Long insert(UserDO user);
 
-    int updateFeatureById(@Param("id") Long userId, @Param("feature") String feature);
+    int updateFeatureById(@Param("id") Long id, @Param("feature") String feature);
 
-    User selectById(@Param("id") Long id);
+    UserDO selectById(@Param("id") Long id);
 
-    List<User> selectByQuery(UserQueryRequest query);
-
+    List<UserDO> selectByQuery(UserQueryParams query);
 }

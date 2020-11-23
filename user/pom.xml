@@ -26,7 +26,7 @@
     </properties>
 
     <dependencies>
-        
+
         <!-- Web 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -73,22 +73,35 @@
             <version>1.2.62</version>
         </dependency>
 
+        <!-- 序列号生产器 -->
+
+        <dependency>
+            <groupId>com.xuan</groupId>
+            <artifactId>sequence</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.14</version>
+        </dependency>
+
         <!--&lt;!&ndash; lombok &ndash;&gt;-->
         <!--<dependency>-->
-            <!--<groupId>org.projectlombok</groupId>-->
-            <!--<artifactId>lombok</artifactId>-->
-            <!--<version>1.16.18</version>-->
+        <!--<groupId>org.projectlombok</groupId>-->
+        <!--<artifactId>lombok</artifactId>-->
+        <!--<version>1.16.18</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.apache.commons</groupId>-->
-            <!--<artifactId>commons-lang3</artifactId>-->
-            <!--<version>3.4</version>-->
+        <!--<groupId>org.apache.commons</groupId>-->
+        <!--<artifactId>commons-lang3</artifactId>-->
+        <!--<version>3.4</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>commons-collections</groupId>-->
-            <!--<artifactId>commons-collections</artifactId>-->
-            <!--<version>3.2.1</version>-->
+        <!--<groupId>commons-collections</groupId>-->
+        <!--<artifactId>commons-collections</artifactId>-->
+        <!--<version>3.2.1</version>-->
         <!--</dependency>-->
     </dependencies>
 

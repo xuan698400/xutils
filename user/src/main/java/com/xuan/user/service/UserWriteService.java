@@ -1,6 +1,6 @@
 package com.xuan.user.service;
 
-import com.xuan.user.model.domain.UserDO;
+import com.xuan.user.model.domain.User;
 
 /**
  * @author xuan
@@ -8,5 +8,5 @@ import com.xuan.user.model.domain.UserDO;
  */
 public interface UserWriteService {
 
-    Long create(UserDO userDO);
+    Long create(User user);
 }

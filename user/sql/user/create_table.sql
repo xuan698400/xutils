@@ -13,5 +13,5 @@ CREATE TABLE `bw_user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  KEY `idx_username` (`username`)
+  KEY `idx_username_biz_code` (`username`,`biz_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

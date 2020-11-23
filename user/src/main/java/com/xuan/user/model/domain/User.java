@@ -10,7 +10,7 @@ import com.xuan.user.common.UserTypeEnum;
  * @author xuan
  * @since 2020/3/14
  */
-public class UserDO {
+public class User {
     private Long id;
 
     private String name;

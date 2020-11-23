@@ -6,7 +6,7 @@ import java.util.List;
  * @author xuan
  * @since 2020/2/28
  */
-public class UserQueryRequest extends BaseRequest {
+public class UserQueryRequest extends PageRequest {
     private String email;
 
     private String username;

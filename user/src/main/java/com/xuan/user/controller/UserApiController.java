@@ -8,7 +8,8 @@ import com.xuan.user.common.UserException;
 import com.xuan.user.common.UserStatusEnum;
 import com.xuan.user.common.UserTypeEnum;
 import com.xuan.user.model.convert.UserConvert;
-import com.xuan.user.model.domain.UserDO;
+import com.xuan.user.model.domain.User;
+import com.xuan.user.model.request.UserIdQueryRequest;
 import com.xuan.user.model.request.UserQueryRequest;
 import com.xuan.user.model.request.UserCreateRequest;
 import com.xuan.user.model.response.UserResponse;
@@ -34,7 +35,7 @@ public class UserApiController {
     @RequestMapping(value = "userAdd")
     public UserResponse<Long> userAdd(UserCreateRequest userCreateRequest) {
         try {
-            UserDO addUserDO = new UserDO();
+            User addUserDO = new User();
             addUserDO.setBizCode(userCreateRequest.getBizCode());
             addUserDO.setUsername(userCreateRequest.getUsername());
             addUserDO.setPassword(userCreateRequest.getPassword());
@@ -51,9 +52,16 @@ public class UserApiController {
 
     @RequestMapping(value = "userList")
     public UserResponse<List<UserVO>> userList(UserQueryRequest userQueryRequest) {
-        List<UserDO> userDOList = userReadService.queryUser(userQueryRequest, null);
+        List<User> userDOList = userReadService.queryUser(userQueryRequest);
         List<UserVO> userVOList = UserConvert.toVOList(userDOList);
         return UserResponse.buildSuccess(userVOList);
+    }
+
+    @RequestMapping(value = "userGetById")
+    public UserResponse<UserVO> userGetById(UserIdQueryRequest userIdQueryRequest) {
+        User user = userReadService.getUserById(userIdQueryRequest);
+        UserVO userVO = UserConvert.toVO(user);
+        return UserResponse.buildSuccess(userVO);
     }
 
 }

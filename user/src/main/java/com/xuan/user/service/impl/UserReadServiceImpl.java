@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.xuan.user.common.UserPageQuery;
-import com.xuan.user.dao.UserDao;
+import com.xuan.user.dao.model.UserDO;
+import com.xuan.user.dao.model.UserQueryParams;
 import com.xuan.user.model.convert.UserConvert;
-import com.xuan.user.model.domain.UserDO;
-import com.xuan.user.model.entity.User;
+import com.xuan.user.model.domain.User;
+import com.xuan.user.dao.UserDao;
+import com.xuan.user.model.request.UserIdQueryRequest;
 import com.xuan.user.model.request.UserQueryRequest;
 import com.xuan.user.service.UserReadService;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,21 @@ public class UserReadServiceImpl implements UserReadService {
     private UserDao userDao;
 
     @Override
-    public List<UserDO> queryUser(UserQueryRequest userQueryRequest, UserPageQuery userPageQuery) {
-        List<User> userList = userDao.selectByQuery(userQueryRequest);
-        return UserConvert.toDOList(userList);
+    public List<User> queryUser(UserQueryRequest userQueryRequest) {
+        UserQueryParams params = new UserQueryParams();
+        params.setBizCode(userQueryRequest.getBizCode());
+        params.setEmail(userQueryRequest.getEmail());
+        params.setUsername(userQueryRequest.getUsername());
+        params.setStatusList(userQueryRequest.getStatusList());
+
+        List<UserDO> userDOList = userDao.selectByQuery(params);
+        return UserConvert.toUserList(userDOList);
+    }
+
+    @Override
+    public User getUserById(UserIdQueryRequest userIdQueryRequest) {
+        UserDO userDO = userDao.selectById(userIdQueryRequest.getUserId());
+        return UserConvert.toUser(userDO);
     }
 
 }

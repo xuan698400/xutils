@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xuan.user.dao.UserDao">
-    <resultMap id="BaseResultMap" type="com.xuan.user.model.entity.User">
+    <resultMap id="BaseResultMap" type="com.xuan.user.dao.model.UserDO">
         <result column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="name" property="name"/>
@@ -20,9 +20,9 @@
 		id,username,name,phone,email,icon,password,type,status,feature,create_time,modify_time,biz_code
 	</sql>
 
-    <insert id="insert" parameterType="com.xuan.user.model.entity.User" useGeneratedKeys="true"
-            keyProperty="id">
-        insert into bw_user(
+    <insert id="insert" parameterType="com.xuan.user.dao.model.UserDO">
+        INSERT INTO bw_user(
+        id,
         username,
         name,
         phone,
@@ -36,7 +36,8 @@
         modify_time,
         biz_code
         )
-        values(
+        VALUES(
+        #{id},
         #{username},
         #{name},
         #{phone},
@@ -62,7 +63,7 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM bw_user
-        WHERE id = #{id}
+        AND id = #{id}
         AND status = -1
     </select>
 
