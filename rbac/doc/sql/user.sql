@@ -1,0 +1,21 @@
+CREATE TABLE `rbac_user` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `biz_code` varchar(50) NOT DEFAULT 'DEFAULT' COMMENT '业务标识',
+  `username` varchar(500) NOT NULL COMMENT '用户名',
+  `by_name` varchar(500) DEFAULT NULL COMMENT '姓名',
+  `real_name` varchar(500) DEFAULT NULL COMMENT '姓名',
+  `phone` varchar(50) DEFAULT NULL COMMENT '手机号',
+  `email` varchar(500) DEFAULT NULL COMMENT '邮箱',
+  `icon` varchar(500) DEFAULT NULL COMMENT '头像地址',
+  `password` varchar(500) DEFAULT NULL COMMENT '加密的密码',
+  `type` tinyint(4) DEFAULT NULL COMMENT '用户类型：1-普通',
+  `status` tinyint(4) DEFAULT NULL COMMENT '用户状态：0-正常；-1-删除',
+  `version` tinyint(4) DEFAULT NULL COMMENT '数据版本',
+  `feature` text DEFAULT NULL COMMENT '属性JSON串',
+  `gmt_create` datetime DEFAULT NULL COMMENT '创建时间',
+  `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
+  `creator` varchar(500) DEFAULT NULL COMMENT '创建人',
+  `modifier` varchar(500) DEFAULT NULL COMMENT '修改人',
+  PRIMARY KEY (`id`),
+  KEY `idx_username_biz_code` (`username`,`biz_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

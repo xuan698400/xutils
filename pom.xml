@@ -20,6 +20,7 @@
         <module>garden</module>
         <module>sequence</module>
         <module>sequence-test</module>
+        <module>rbac</module>
     </modules>
     <packaging>pom</packaging>
 

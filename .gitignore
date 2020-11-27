@@ -15,5 +15,6 @@ spi2-platform-sdk/target/*
 spi2-platform-server/target/*
 garden/target/*
 logs/*
-sequence/*
-sequence-test/*
+sequence/target/*
+sequence-test/target/*
+rbac/target/*

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuan.user.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.xuan.rbac.dao.model.UserDO">
+        <result column="id" property="id"/>
+        <result column="biz_code" property="bizCode"/>
+        <result column="username" property="username"/>
+        <result column="by_name" property="byName"/>
+        <result column="real_name" property="realName"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="icon" property="icon"/>
+        <result column="password" property="password"/>
+        <result column="version" property="version"/>
+        <result column="feature" property="feature"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="creator" property="creator"/>
+        <result column="modifier" property="modifier"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xuan.rbac.dao.model.UserDO">
+        INSERT INTO rbac_user(
+        id,
+        biz_code,
+        username,
+        by_name,
+        reald_name,
+        phone,
+        email,
+        icon,
+        password,
+        version,
+        type,
+        status,
+        feature,
+        gmt_create,
+        gmt_modified,
+        creator,
+        modifier
+        )
+        VALUES(
+        #{id},
+        #{bizCode},
+        #{username},
+        #{byName},
+        #{realName},
+        #{phone},
+        #{email},
+        #{icon},
+        #{password},
+        #{version},
+        #{type},
+        #{status},
+        #{feature},
+        now(),
+        now(),
+        #{creator},
+        #{modifier}
+        )
+    </insert>
+</mapper>
