@@ -8,8 +8,6 @@ target/*
 xutils.iml
 mix/target/*
 common/target/*
-common/common.iml
-tools/target/*
 user/target/*
 spi2-app1/target/*
 spi2-app2/target/*
