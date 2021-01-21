@@ -3,7 +3,7 @@ package com.xuan.seq.range;
 import com.xuan.seq.exception.SeqException;
 
 /**
- * 区间管理器
+ * 序列号区间管理器，服务器每次向一个存储中介获取一段数字区间，然后在内存进行分配
  *
  * @author xuan
  * @date 2018/1/10

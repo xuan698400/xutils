@@ -17,7 +17,7 @@ import com.xuan.seq.sequence.RangeSequence;
 public class DefaultRangeSequence implements RangeSequence {
 
     /**
-     * 获取区间是加一把独占锁防止资源冲突
+     * 获取区间时加一把独占锁防止资源冲突
      */
     private final Lock lock = new ReentrantLock();
 
