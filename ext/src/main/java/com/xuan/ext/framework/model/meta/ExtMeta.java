@@ -10,6 +10,16 @@ public class ExtMeta {
 
     private String desc;
 
+    private Class extClass;
+
+    public static ExtMeta of(String name, String desc, Class extClass) {
+        ExtMeta extMeta = new ExtMeta();
+        extMeta.setName(name);
+        extMeta.setDesc(desc);
+        extMeta.setExtClass(extClass);
+        return extMeta;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,6 +34,14 @@ public class ExtMeta {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Class getExtClass() {
+        return extClass;
+    }
+
+    public void setExtClass(Class extClass) {
+        this.extClass = extClass;
     }
 
 }
