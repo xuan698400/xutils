@@ -18,3 +18,4 @@ logs/*
 sequence/target/*
 sequence-test/target/*
 rbac/target/*
+ext/target/*

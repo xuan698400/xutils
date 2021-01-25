@@ -36,6 +36,10 @@ public enum BwResultCodeEnum implements BwResultCode {
         return msg;
     }
 
+    public String getMsg(Object... args) {
+        return String.format(msg, args);
+    }
+
     public static BwResultCodeEnum codeOf(String code) {
         if (null == code) {
             return null;
