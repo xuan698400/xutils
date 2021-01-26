@@ -4,7 +4,7 @@ package com.xuan.common.model;
  * @author xuan
  * @since 2019/11/18
  */
-public class BwResult<T> {
+public class BizResult<T> {
 
     private boolean success;
 
@@ -54,27 +54,6 @@ public class BwResult<T> {
 
     public void setData(T data) {
         this.data = data;
-    }
-
-    public static <E> BwResult<E> obtainError(String eCode, String eMsg) {
-        BwResult<E> bwResult = new BwResult<>();
-        bwResult.setSuccess(false);
-        bwResult.setCode(eCode);
-        bwResult.setMsg(eMsg);
-        return bwResult;
-    }
-
-    public static <E> BwResult<E> obtainSuccess() {
-        BwResult<E> bwResult = new BwResult<>();
-        bwResult.setSuccess(true);
-        return bwResult;
-    }
-
-    public static <E> BwResult<E> obtainSuccess(E data) {
-        BwResult<E> bwResult = new BwResult<>();
-        bwResult.setSuccess(true);
-        bwResult.setData(data);
-        return bwResult;
     }
 
 }

@@ -1,25 +1,23 @@
 package com.xuan.common.exception;
 
-import com.xuan.common.model.BwResultCode;
-
 /**
  * @author xuan
  * @since 2019/11/16
  */
-public class BwException extends RuntimeException {
+public class BizException extends RuntimeException {
 
     private String code;
 
     private String msg;
 
-    public BwException(String code, String msg) {
+    public BizException(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public BwException(BwResultCode resultCode) {
+    public BizException(BizExceptionCode resultCode, Object... msg) {
         this.code = resultCode.getCode();
-        this.msg = resultCode.getMsg();
+        this.msg = resultCode.getMsg(msg);
     }
 
     public String getCode() {
