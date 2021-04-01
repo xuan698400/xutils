@@ -1,4 +1,4 @@
-package com.xuan.ext.framework.core.classfind;
+package com.xuan.ext.framework.core.classfinder;
 
 import java.util.Set;
 
@@ -6,7 +6,7 @@ import java.util.Set;
  * @author xuan
  * @since 2021/1/25
  */
-public class ClassFinderTest {
+public class Test {
 
     private static ClassFinder classFinder = new ClassFinderImpl();
 

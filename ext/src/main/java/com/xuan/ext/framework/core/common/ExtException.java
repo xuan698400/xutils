@@ -11,6 +11,6 @@ public class ExtException extends RuntimeException {
 
     public ExtException(String message, Throwable cause) {
         super(message, cause);
-        
     }
+
 }

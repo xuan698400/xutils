@@ -1,4 +1,4 @@
-package com.xuan.ext.framework.core.classfind;
+package com.xuan.ext.framework.core.classfinder;
 
 /**
  * @author xuan

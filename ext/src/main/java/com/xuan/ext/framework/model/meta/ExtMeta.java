@@ -1,7 +1,5 @@
 package com.xuan.ext.framework.model.meta;
 
-import java.util.List;
-
 /**
  * @author xuan
  * @since 2021/1/24
