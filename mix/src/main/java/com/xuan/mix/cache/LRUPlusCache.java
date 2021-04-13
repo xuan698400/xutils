@@ -10,15 +10,14 @@ import java.util.Map;
  * LRU是Least Recently Used的缩写，即最近最少使用页面置换算法
  *
  * @author xuan
- * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:42:57 $
+ * @since 2020/10/19
  */
 public class LRUPlusCache implements Serializable {
-
     private static final long serialVersionUID = -1L;
 
     private final int capacity;
-    private final LinkedList<String>      list = new LinkedList<>();
-    private final HashMap<String, Object> map  = new HashMap<>();
+    private final LinkedList<String> list = new LinkedList<>();
+    private final HashMap<String, Object> map = new HashMap<>();
 
     /**
      * 构造方法
@@ -32,13 +31,13 @@ public class LRUPlusCache implements Serializable {
     /**
      * 放到缓存中，会放在缓存中的第一个位置
      *
-     * @param key   键
-     * @param value 值
+     * @param key   缓存key
+     * @param value 缓存值
      * @return 被挤出的对象，如果为null，说明没有对象被挤出
      */
     public synchronized Object putInCache(String key, Object value) {
         Object oldValue = map.put(key, value);
-        if (oldValue != null) {
+        if (null != oldValue) {
             return null;
         }
 
@@ -55,12 +54,12 @@ public class LRUPlusCache implements Serializable {
     /**
      * 从缓存中读取，被读取的对象会放到缓存中的第一个位置
      *
-     * @param key
-     * @return 对象
+     * @param key 缓存key
+     * @return 缓存值
      */
     public synchronized Object getFromCache(String key) {
         Object value = map.get(key);
-        if (value != null) {
+        if (null != value) {
             list.remove(key);
             list.addFirst(key);
         }
@@ -73,7 +72,7 @@ public class LRUPlusCache implements Serializable {
      * @return 被删除的所有对象Map
      */
     public synchronized Map<String, Object> removeAll() {
-        HashMap<String, Object> removedMap = new HashMap<String, Object>(map);
+        HashMap<String, Object> removedMap = new HashMap<>(map);
         list.clear();
         map.clear();
         return removedMap;
@@ -81,18 +80,18 @@ public class LRUPlusCache implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder StringBuilder = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             String key = list.get(i);
             if (i > 0) {
-                StringBuilder.append(",");
+                sb.append(",");
             }
-            StringBuilder.append(key);
-            StringBuilder.append("[");
-            StringBuilder.append(map.get(key));
-            StringBuilder.append("]");
+            sb.append(key);
+            sb.append("[");
+            sb.append(map.get(key));
+            sb.append("]");
         }
-        return StringBuilder.toString();
+        return sb.toString();
     }
 
     public static void main(String[] args) {
