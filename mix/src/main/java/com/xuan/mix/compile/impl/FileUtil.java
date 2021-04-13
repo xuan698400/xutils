@@ -3,7 +3,6 @@ package com.xuan.mix.compile.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,24 +20,21 @@ class FileUtil {
         if (!file.exists()) {
             try {
                 if (!file.createNewFile()) {
-                    throw new CompileException(
-                        "Compile log file can't be created, file:" + file.getName());
+                    throw new CompileException(String.format("Failed to createNewFile[%s]", file.getName()));
                 }
             } catch (IOException e) {
-                throw new CompileException(
-                    "Compile log file create exception, file:" + file.getName(), e);
+                throw new CompileException(String.format("Exception to createNewFile[%s]", file.getName()), e);
             }
         }
     }
 
     static void createPackageDirs(File parent, String packageName) {
-
         String[] packagePaths = packageName.split("\\.");
         for (String packagePath : packagePaths) {
             parent = new File(parent, packagePath);
             if (!parent.exists()) {
-                if (!parent.mkdir()) {
-                    throw new CompileException("Failed to mkdir, dir name is " + parent);
+                if (!parent.mkdirs()) {
+                    throw new CompileException(String.format("Failed to mkdir[%s]", parent.getName()));
                 }
             }
         }
@@ -47,9 +43,8 @@ class FileUtil {
     static void createDir(String dirPath) {
         File dirFile = new File(dirPath);
         if (!dirFile.exists()) {
-            if (!dirFile.mkdir()) {
-                throw new CompileException(
-                    "Output directory for class can't be created, directory:" + dirPath);
+            if (!dirFile.mkdirs()) {
+                throw new CompileException(String.format("Failed to mkdirs[%s]", dirFile));
             }
         }
     }
@@ -64,26 +59,18 @@ class FileUtil {
     private static FileInputStream openInputStream(final File file) throws IOException {
         if (file.exists()) {
             if (file.isDirectory()) {
-                throw new IOException("File '" + file + "' exists but is a directory");
+                throw new CompileException(String.format("File exists but is a directory. file[%s]", file.getName()));
             }
             if (!file.canRead()) {
-                throw new IOException("File '" + file + "' cannot be read");
+                throw new CompileException(String.format("File cannot be read. file[%s]", file.getName()));
             }
         } else {
-            throw new FileNotFoundException("File '" + file + "' does not exist");
+            throw new CompileException(String.format("File not exists. file[%s]", file.getName()));
         }
         return new FileInputStream(file);
     }
 
     private static byte[] toByteArray(final InputStream input, final int size) throws IOException {
-        if (size < 0) {
-            throw new IllegalArgumentException("Size must be equal or greater than zero: " + size);
-        }
-
-        if (size == 0) {
-            return new byte[0];
-        }
-
         final byte[] data = new byte[size];
         int offset = 0;
         int read;
@@ -93,7 +80,7 @@ class FileUtil {
         }
 
         if (offset != size) {
-            throw new IOException("Unexpected read size. current: " + offset + ", expected: " + size);
+            throw new CompileException(String.format("Unexpected read size. current:%s, expected:%s", offset, size));
         }
 
         return data;

@@ -3,7 +3,7 @@ package com.xuan.mix.compile;
 import java.io.File;
 
 /**
- * ±àÒëÊ±¿ÉÑ¡Ïî
+ * ç¼–è¯‘é…ç½®é¡¹
  *
  * @author xuan
  * @since 2020/10/19
@@ -11,7 +11,7 @@ import java.io.File;
 public class CompileOption {
 
     /**
-     * ±àÒëºóclassµÄÄ¿Â¼
+     * classæ–‡ä»¶è¾“å‡ºç›®å½•
      */
     private String compileDir = System.getProperty("user.dir") + File.separator
         + ".xUtils_compile_dir" + File.separator;

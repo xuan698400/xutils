@@ -1,19 +1,19 @@
 package com.xuan.mix.compile;
 
 /**
- * ±àÒë½Ó¿Ú
+ * Javaç¼–è¯‘å™¨æ¥å£
  *
  * @author xuan
  * @since 2020/10/19
  */
 public interface JavaCompiler {
-
+    
     /**
-     * ±àÒë
+     * ç¼–è¾‘Javaä»£ç ï¼Œå¹¶è¿”å›å…¶Classå¯¹è±¡
      *
-     * @param javaSource    Ô´´úÂë
-     * @param compileOption ±àÒëÑ¡Ïî
-     * @return ÀàµÄClass¶ÔÏó
+     * @param javaSource
+     * @param compileOption
+     * @return
      */
     Class<?> compile(JavaSource javaSource, CompileOption compileOption);
 }

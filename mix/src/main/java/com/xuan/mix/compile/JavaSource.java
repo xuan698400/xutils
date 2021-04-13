@@ -1,7 +1,7 @@
 package com.xuan.mix.compile;
 
 /**
- * Java源码
+ * Java璧勬簮妯″瀷
  *
  * @author xuan
  * @since 2020/10/19
@@ -9,11 +9,11 @@ package com.xuan.mix.compile;
 public class JavaSource {
 
     /**
-     * 源代码
+     * Java浠ｇ爜
      */
     private String sourceCode;
     /**
-     * 类全路径
+     * 绫诲叏璺緞锛屼緥濡傦細com.xuan.mix.compile.DemoTestClass
      */
     private String fullClassName;
 

@@ -15,7 +15,7 @@ import com.xuan.mix.compile.CompileOption;
 import com.xuan.mix.compile.JavaSource;
 
 /**
- * Ê¹ÓÃJDK×Ô´øÊµÏÖ
+ * ä½¿ç”¨JDKè‡ªå¸¦å®žçŽ°
  *
  * @author xuan
  * @since 2020/10/19
@@ -25,28 +25,28 @@ public class JdkJavaCompiler implements com.xuan.mix.compile.JavaCompiler {
     @Override
     public Class<?> compile(JavaSource javaSource, CompileOption compileOption) {
 
-        //»º´æÔ´Âëµ½´ÅÅÌ
+        //1. ä¿å­˜Javaä»£ç åˆ°ç£ç›˜
         writeCodeToCompileDir(compileOption.getCompileDir(), javaSource.getFullClassName(), javaSource.getSourceCode());
 
-        //±àÒë³Éclass
+        //2. ç¼–è¯‘æˆclass
         doCompile(compileOption.getCompileDir(), javaSource.getFullClassName(), javaSource.getSourceCode());
 
-        //¼ÓÔØclassµ½ÄÚ´æ
+        //3. åŠ è½½classåˆ°å†…å­˜
         return loadClass(compileOption.getCompileDir(), javaSource.getFullClassName());
     }
 
     private void writeCodeToCompileDir(String dirPath, String fullClassName, String sourceCode) {
-        //³õÊ¼»¯Ä¿Â¼
+        //åˆå§‹åŒ–ç›®å½•
         FileUtil.createDir(dirPath);
 
         int index = fullClassName.lastIndexOf(".");
         if (index >= 0) {
-            //³õÊ¼»¯°üÄ¿Â¼
+            //åˆ›å»ºç±»çš„å…¨è·¯å¾„ç›®å½•
             String packageName = fullClassName.substring(0, index);
             FileUtil.createPackageDirs(new File(dirPath), packageName);
         }
 
-        //°ÑsourceCodeÐ´µ½.javaÎÄ¼þ
+        //æŠŠsourceCodeå†™åˆ°.javaæ–‡ä»¶
         File file = new File(dirPath,
             fullClassName.replace('.', File.separatorChar) + ".java");
         FileUtil.createFile(file);
@@ -59,7 +59,6 @@ public class JdkJavaCompiler implements com.xuan.mix.compile.JavaCompiler {
     }
 
     private void doCompile(String dirPath, String fullClassName, String sourceCode) {
-        //±àÒë
         javax.tools.JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
         List<StringJavaFileObject> javaFileObjects = new ArrayList<>();
@@ -75,16 +74,15 @@ public class JdkJavaCompiler implements com.xuan.mix.compile.JavaCompiler {
         boolean result = task.call();
 
         if (!result) {
-            throw new CompileException(
-                "Compile class error, class name is:" + fullClassName);
+            throw new CompileException("Compile class error, class name is:" + fullClassName);
         }
     }
 
     private Class<?> loadClass(String dirPath, String fullClassName) {
         try {
-            File classFile = new File(dirPath,
-                fullClassName.replace('.', File.separatorChar) + ".class");
+            File classFile = new File(dirPath, fullClassName.replace('.', File.separatorChar) + ".class");
             byte[] classBytes = FileUtil.readFileToByteArray(classFile);
+
             return CompileClassLoader.getInstance(dirPath).defineClass(fullClassName, classBytes);
         } catch (Exception e) {
             throw new CompileException(e.getMessage(), e);

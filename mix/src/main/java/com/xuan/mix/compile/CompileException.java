@@ -1,6 +1,8 @@
 package com.xuan.mix.compile;
 
 /**
+ * ç¼–è¯‘è‡ªå®šä¹‰å¼‚å¸¸
+ *
  * @author xuan
  * @since 2020/10/19
  */
@@ -18,7 +20,6 @@ public class CompileException extends RuntimeException {
 
     @Override
     public synchronized Throwable fillInStackTrace() {
-        //¸´Ð´Õâ¸ö·½·¨¿ÉÒÔ·ÀÖ¹´ò³ö¶ÑÕ»ÐÅÏ¢
         return this;
     }
 

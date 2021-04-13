@@ -32,10 +32,7 @@ public class DemoTest {
         Object d = method.invoke(demoTestClass.newInstance());
         //输出结果
         System.out.println(d);
-    }
-
-    public String hello() {
-        return "你好太牛逼";
+        System.out.println(demoTestClass.getClassLoader());
     }
 
 }
