@@ -1,7 +1,12 @@
 package com.extp.platform.server;
 
+import java.net.URL;
+import java.util.List;
+
 import com.extp.framework.core.ExtpConfig;
 import com.extp.framework.core.ExtpManager;
+import com.extp.framework.core.plugin.PluginManager;
+import com.extp.framework.core.utils.ResourceUtil;
 
 /**
  * @author xuan
@@ -17,6 +22,12 @@ public class Application {
         config.addScanPluginPackageName("com.extp.plugin1");
         config.addScanPluginPackageName("com.extp.plugin2");
         ExtpManager.getInstance().init(config);
+
+        try {
+            PluginManager.getInstance().init();
+        } catch (Exception e) {
+
+        }
     }
 
     public static void main(String[] args) {

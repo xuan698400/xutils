@@ -15,6 +15,8 @@ import com.extp.framework.core.log.LogAdapterFactory;
 import com.extp.framework.model.Plugin;
 
 /**
+ * 扩展框架管理器
+ *
  * @author xuan
  * @since 2021/2/26
  */
@@ -33,8 +35,13 @@ public class ExtpManager {
     }
 
     public void init(ExtpConfig config) {
+        //1. 注册扩展点定义（注解：com.extp.framework.model.Ext）
         ExtManager.getInstance().register(config.getScanExtPackageNameSet());
+
+        //2. 注册插件实现（注解：com.extp.framework.model.Plugin）
         PluginManager.getInstance().register(config.getScanPluginPackageNameSet());
+
+        //3. 解析插件实现的扩展点，和扩展点定义建立联系
         buildExtInstanceMap();
     }
 
@@ -57,10 +64,13 @@ public class ExtpManager {
     }
 
     private void buildExtInstanceMap() {
-        //获取所有扩展点接口（打了Ext注解的）
+        //1. 获取所有扩展点定义
         Set<Class> extClassSet = ExtManager.getInstance().getExtClassSet();
-        //获取所有Plugin插件实现Class（打了Plugin注解的）
+
+        //2. 获取所有插件实现
         Set<Class> pluginClassSet = PluginManager.getInstance().getPluginClassSet();
+
+        //3. 以bizCode分类聚合，找到所有扩展点定义对应的实现实例
         for (Class extClass : extClassSet) {
             Map<String, List<Object>> bizCodeExtMap = new HashMap<>();
             for (Class pluginClass : pluginClassSet) {
@@ -70,6 +80,13 @@ public class ExtpManager {
         }
     }
 
+    /**
+     * 指定扩展点，扫描插件，找出对该扩展点的实现
+     *
+     * @param extClass      指定扩展点
+     * @param pluginClass   需要扫描的插件
+     * @param bizCodeExtMap 找出对扩展点的实现，以业务身份方式关联
+     */
     private void buildPlugin(
         Class<?> extClass,
         Class<?> pluginClass,
@@ -112,7 +129,7 @@ public class ExtpManager {
                         return method.invoke(pluginInstance);
                     } catch (InvocationTargetException e) {
                         LOG.error(String.format(
-                            "ExtpManager_createExtPointsInstance_IllegalAccessException. pluginClass:%s, "
+                            "ExtpManager_createExtPointsInstance_InvocationTargetException. pluginClass:%s, "
                                 + "extClass:%s, method:%s",
                             pluginClass.getName(), extClass.getName(), method.getName()), e);
                     }
