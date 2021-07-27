@@ -13,4 +13,9 @@ logs/*
 */target/*
 */*/target/*
 
+common/target/*
 extp/*/target/*
+mix/target/*
+rbac/target/*
+sequence/target/*
+user/target/*
