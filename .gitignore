@@ -5,19 +5,8 @@
 logs/*
 
 common/target/*
-common/*.iml
-
 extp/*/target/*
-extp/*/*.iml
-
 mix/target/*
-mix/*.iml
-
 rbac/target/*
-rbac/*.iml
-
 sequence/target/*
-sequence/*.iml
-
 user/target/*
-user/*.iml
