@@ -1,0 +1,9 @@
+package com.extp.framework.core.classfinder;
+
+/**
+ * @author xuan
+ * @since 2021/1/25
+ */
+public interface ClassFilter {
+    boolean accept(Class c);
+}

@@ -18,6 +18,7 @@
         <module>sequence-test</module>
         <module>rbac</module>
         <module>ext</module>
+        <module>extp</module>
     </modules>
     <packaging>pom</packaging>
 

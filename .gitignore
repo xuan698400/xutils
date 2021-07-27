@@ -1,21 +1,14 @@
 # Mac crap
 .DS_Store
 
+*.iml
 */*.iml
+*/*/*.iml
 
 .idea/*
-target/*
-xutils.iml
-mix/target/*
-common/target/*
-user/target/*
-spi2-app1/target/*
-spi2-app2/target/*
-spi2-framework/target/*
-spi2-platform-sdk/target/*
-spi2-platform-server/target/*
+
 logs/*
-sequence/target/*
-sequence-test/target/*
-rbac/target/*
-ext/target/*
+
+
+*/target/*
+*/*/target/*
