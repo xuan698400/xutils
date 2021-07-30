@@ -23,11 +23,11 @@ public class Application {
         config.addScanPluginPackageName("com.extp.plugin2");
         ExtpManager.getInstance().init(config);
 
-        try {
-            PluginManager.getInstance().init();
-        } catch (Exception e) {
-
-        }
+        //try {
+        //    PluginManager.getInstance().init();
+        //} catch (Exception e) {
+        //
+        //}
     }
 
     public static void main(String[] args) {

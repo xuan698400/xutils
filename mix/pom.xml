@@ -12,9 +12,6 @@
     <artifactId>mix</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <modules>
-        <module>spi2-plugin</module>
-    </modules>
 
     <dependencies>
         <!-- test解析excel的-->
