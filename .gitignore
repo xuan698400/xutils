@@ -10,3 +10,4 @@ mix/target/*
 rbac/target/*
 sequence/target/*
 user/target/*
+spring-utils/target/*
