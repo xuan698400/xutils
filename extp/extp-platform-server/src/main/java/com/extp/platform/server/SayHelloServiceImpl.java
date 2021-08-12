@@ -19,10 +19,12 @@ public class SayHelloServiceImpl implements SayHelloService {
         BizInstance bizInstance = new BizInstance();
         bizInstance.setBizCode(bizCode);
 
+        //执行扩展点1
         ExtInvoker<SayHelloExt1> ext1ExtInvoker = new ExtInvoker<>(SayHelloExt1.class);
         String bizMyName = ext1ExtInvoker.executeFirst(bizInstance, ext -> ext.getMyName());
         result = result + "我叫：" + bizMyName + "...";
 
+        //执行扩展点2
         ExtInvoker<SayHelloExt2> ext2ExtInvoker = new ExtInvoker<>(SayHelloExt2.class);
         String bizMyAge = ext2ExtInvoker.executeFirst(bizInstance, ext -> ext.getMyAge());
         result = result + "我的年龄：" + bizMyAge + "...";
