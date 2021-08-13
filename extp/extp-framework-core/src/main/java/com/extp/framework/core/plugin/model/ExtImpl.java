@@ -24,4 +24,12 @@ public class ExtImpl {
         this.impl = impl;
     }
 
+    @Override
+    public String toString() {
+        return "ExtImpl{" +
+            "ext='" + ext + '\'' +
+            ", impl='" + impl + '\'' +
+            '}';
+    }
+    
 }

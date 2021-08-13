@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.List;
 
 import com.extp.framework.core.ExtpConfig;
+import com.extp.framework.core.ExtpInitializer;
 import com.extp.framework.core.ExtpManager;
+import com.extp.framework.core.FunctionManager;
 import com.extp.framework.core.plugin.PluginManager;
 import com.extp.framework.core.utils.ResourceUtil;
 
@@ -23,16 +25,16 @@ public class Application {
         config.addScanPluginPackageName("com.extp.plugin2");
         ExtpManager.getInstance().init(config);
 
-        //try {
-        //    PluginManager.getInstance().init();
-        //} catch (Exception e) {
-        //
-        //}
+        //使用配置
+        ExtpInitializer.init();
+
+        System.out.println(FunctionManager.getInstance().getExtMap());
     }
 
     public static void main(String[] args) {
-        System.out.println(sayHelloService.sayHello("徐工", "abc"));
-        System.out.println(sayHelloService.sayHello("徐工", "ddd"));
+        System.out.println(sayHelloService.sayHello("徐工", "plugin1"));
+        System.out.println(sayHelloService.sayHello("徐工", "plugin1_abc"));
+        System.out.println(sayHelloService.sayHello("徐工", "plugin2"));
     }
 
 }

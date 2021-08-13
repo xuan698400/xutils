@@ -1,3 +1,14 @@
-<plugin>
-    
+<plugin code="plugin2(全球唯一)" name="plugin2Name(可重复)">
+
+    <!-- 所支持的业务身份 -->
+    <biz-codes>
+        <biz-code value="plugin2"/>
+    </biz-codes>
+
+    <!-- 实现的扩展点 -->
+    <ext-impls>
+        <ext-impl ext="com.extp.platform.sdk.SayHelloExt1" impl="com.extp.plugin2.Plugin2SayHelloExt1Impl" priority="100"/>
+        <ext-impl ext="com.extp.platform.sdk.SayHelloExt2" impl="com.extp.plugin2.Plugin2SayHelloExt2Impl" priority="100"/>
+    </ext-impls>
+
 </plugin>

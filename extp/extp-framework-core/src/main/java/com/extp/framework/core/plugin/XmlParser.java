@@ -113,4 +113,5 @@ public class XmlParser {
     private static String getAttribute(Node node, String key) {
         return node.getAttributes().getNamedItem(key).getNodeValue();
     }
+
 }

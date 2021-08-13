@@ -1,28 +1,23 @@
 package com.extp.framework.core.plugin;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import com.extp.framework.core.log.LogAdapter;
+import com.extp.framework.core.log.LogAdapterFactory;
 import com.extp.framework.core.plugin.model.Plugin;
 import com.extp.framework.core.utils.ResourceUtil;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * @author xuan
  * @since 2021/7/27
  */
 public class PluginManager {
+
+    private final static LogAdapter LOG = LogAdapterFactory.getLogAdapter();
 
     private static final String PLUGIN_CONFIG = "extp-plugin.xml";
 
@@ -42,13 +37,13 @@ public class PluginManager {
         return INSTANCE;
     }
 
-    public synchronized void init() throws Exception {
+    public synchronized void init() {
 
         synchronized (this) {
 
             //正在初始化中，循环等待
             while (initializing && !finished) {
-                wait(1000);
+                doWait(1000);
             }
 
             //已经初始化完成直接返回，防止重复初始化
@@ -70,7 +65,9 @@ public class PluginManager {
             return;
         }
         for (URL url : pluginUrlList) {
-            System.out.println(XmlParser.parser(getXmlFromUrl(url)));
+
+            Plugin plugin = XmlParser.parser(getXmlFromUrl(url));
+            pluginList.add(plugin);
         }
     }
 
@@ -85,6 +82,18 @@ public class PluginManager {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private void doWait(long timeout) {
+        try {
+            wait(timeout);
+        } catch (InterruptedException ie) {
+            LOG.error("PluginManager_doWait_InterruptedException. timeout:" + timeout);
+        }
+    }
+
+    public List<Plugin> getAllPlugin() {
+        return pluginList;
     }
 
 }
