@@ -6,8 +6,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.extp.framework.core.log.LogAdapter;
-import com.extp.framework.core.log.LogAdapterFactory;
 import com.extp.framework.core.plugin.model.Plugin;
 import com.extp.framework.core.utils.ResourceUtil;
 
@@ -17,15 +15,9 @@ import com.extp.framework.core.utils.ResourceUtil;
  */
 public class PluginManager {
 
-    private final static LogAdapter LOG = LogAdapterFactory.getLogAdapter();
-
     private static final String PLUGIN_CONFIG = "extp-plugin.xml";
 
     private static final PluginManager INSTANCE = new PluginManager();
-
-    private static volatile boolean initializing = false;
-
-    private static volatile boolean finished = false;
 
     private List<Plugin> pluginList = new ArrayList<>();
 
@@ -38,25 +30,7 @@ public class PluginManager {
     }
 
     public synchronized void init() {
-
-        synchronized (this) {
-
-            //正在初始化中，循环等待
-            while (initializing && !finished) {
-                doWait(1000);
-            }
-
-            //已经初始化完成直接返回，防止重复初始化
-            if (initializing && finished) {
-                return;
-            }
-
-            if (!initializing) {
-                initializing = true;
-                doInit();
-                finished = true;
-            }
-        }
+        doInit();
     }
 
     private void doInit() {
@@ -81,14 +55,6 @@ public class PluginManager {
             return context.toString();
         } catch (Exception e) {
             return null;
-        }
-    }
-
-    private void doWait(long timeout) {
-        try {
-            wait(timeout);
-        } catch (InterruptedException ie) {
-            LOG.error("PluginManager_doWait_InterruptedException. timeout:" + timeout);
         }
     }
 

@@ -19,16 +19,14 @@ public class Application {
     private static SayHelloService sayHelloService = new SayHelloServiceImpl();
 
     static {
-        ExtpConfig config = new ExtpConfig();
-        config.addScanExtPackageName("com.extp.platform.sdk");
-        config.addScanPluginPackageName("com.extp.plugin1");
-        config.addScanPluginPackageName("com.extp.plugin2");
-        ExtpManager.getInstance().init(config);
+        //ExtpConfig config = new ExtpConfig();
+        //config.addScanExtPackageName("com.extp.platform.sdk");
+        //config.addScanPluginPackageName("com.extp.plugin1");
+        //config.addScanPluginPackageName("com.extp.plugin2");
+        //ExtpManager.getInstance().init(config);
 
         //使用配置
-        ExtpInitializer.init();
-
-        System.out.println(FunctionManager.getInstance().getExtMap());
+        ExtpInitializer.getInstance().init();
     }
 
     public static void main(String[] args) {
