@@ -1,13 +1,13 @@
-package com.xuan.mix.domain.enums;
+package com.xuan.mix.common.enums;
 
 /**
- * 一个通用的区分对错的枚举
- * <p>
- * Created by xuan on 17/8/2.
+ * @author xuan
+ * @since 2021/8/15
  */
-public enum YNEnum {
-
-    Y(true, 1, "是"), N(false, 0, "否");
+public enum YnEnum {
+    //
+    YES(true, 1, "是"),
+    NO(false, 0, "否");
 
     private boolean value;
 
@@ -15,20 +15,14 @@ public enum YNEnum {
 
     private String msg;
 
-    YNEnum(boolean value, int code, String msg) {
+    YnEnum(boolean value, int code, String msg) {
         this.value = value;
         this.code = code;
         this.msg = msg;
     }
-
-    /**
-     * 根据code获取到YNEnum,取不到返回null
-     *
-     * @param code
-     * @return
-     */
-    public static YNEnum codeOf(int code) {
-        for (YNEnum ynEnum : YNEnum.values()) {
+    
+    public static YnEnum codeOf(int code) {
+        for (YnEnum ynEnum : YnEnum.values()) {
             if (ynEnum.code == code) {
                 return ynEnum;
             }
@@ -47,5 +41,4 @@ public enum YNEnum {
     public String getMsg() {
         return msg;
     }
-
 }

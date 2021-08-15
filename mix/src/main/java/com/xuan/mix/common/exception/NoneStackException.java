@@ -1,4 +1,4 @@
-package com.xuan.mix.domain.exception;
+package com.xuan.mix.common.exception;
 
 /**
  * 很多时候我们在业务中使用自定义异常是用来控制流程,所以没有必要打出堆栈信息(打堆栈信息是比较消耗性能的)
