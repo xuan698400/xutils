@@ -9,7 +9,6 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -18,6 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
 
 /**
@@ -26,7 +26,7 @@ import com.sun.net.httpserver.spi.HttpServerProvider;
  * @author xuan
  * @since 2020/10/16
  */
-public class HttpServer {
+public class MiniHttpServer {
     /**
      * 表示是否已经启动了
      */
@@ -44,19 +44,19 @@ public class HttpServer {
      */
     private Executor executor = new ThreadPoolExecutor(4, 4, 4,
         TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000),
-        (r) -> new Thread(r, "xUtils-HttpServer-Thread" + threadCounter.get()), (r, executor) -> {
+        (r) -> new Thread(r, "xUtils-MiniHttpServer-Thread" + threadCounter.get()), (r, executor) -> {
         //这里是拒绝策略，默认抛弃
     });
     /**
      * 逻辑处理
      */
-    private HttpHandler httpHandler;
+    private MiniHttpHandler httpHandler;
     /**
      * 内部正真使用的Server
      */
-    private com.sun.net.httpserver.HttpServer innerHttpServer;
+    private HttpServer innerHttpServer;
 
-    public HttpServer(int port, HttpHandler httpHandler) {
+    public MiniHttpServer(int port, MiniHttpHandler httpHandler) {
         this.port = port;
         this.httpHandler = httpHandler;
     }
@@ -89,7 +89,7 @@ public class HttpServer {
         innerHttpServer.setExecutor(this.executor);
 
         innerHttpServer.start();
-        System.out.println("xUtils HttpServer start. port=" + port);
+        System.out.println("xUtils MiniHttpServer start. port=" + port);
     }
 
     public void stop() {
@@ -98,7 +98,7 @@ public class HttpServer {
         }
 
         innerHttpServer.stop(1);
-        System.out.println("xUtils HttpServer stop.");
+        System.out.println("xUtils MiniHttpServer stop.");
     }
 
     private Map<String, String> buildGetParams(URI uri) throws UnsupportedEncodingException {
@@ -116,21 +116,6 @@ public class HttpServer {
             }
         }
         return params;
-    }
-
-    public static void main(String[] args) throws IOException {
-        HttpServer httpServer = new HttpServer(7002, new HttpHandler() {
-            @Override
-            public String handle(String path, Map<String, String> params) {
-                System.out.println("path:" + path + ", params:" + params);
-                return "我收到path:" + path + ", params:" + params;
-            }
-        });
-
-        httpServer.start();
-
-        new Scanner(System.in).next();
-        httpServer.stop();
     }
 
 }
