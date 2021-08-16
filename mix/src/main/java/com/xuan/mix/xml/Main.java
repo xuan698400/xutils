@@ -6,7 +6,7 @@ import com.xuan.mix.xml.model.XmlModel;
  * @author xuan
  * @since 2020/11/10
  */
-public class MainTest {
+public class Main {
 
     public static void main(String[] args) {
         writeTest(readTest());
