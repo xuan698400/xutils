@@ -35,13 +35,13 @@
  * 
  * For reading a diagram from a remote location, use the <open> method.
  * 
- * To save diagrams in XML on a server, you can set the <urlPost> variable. 
+ * To save diagrams in XML on a mini, you can set the <urlPost> variable.
  * This variable will be used in <getUrlPost> to construct a URL for the post 
  * request that is issued in the <save> method. The post request contains the 
  * XML representation of the diagram as returned by <writeGraphModel> in the 
  * xml parameter.
  * 
- * On the server side, the post request is processed using standard
+ * On the mini side, the post request is processed using standard
  * technologies such as Java Servlets, CGI, .NET or ASP.
  * 
  * Here are some examples of processing a post request in various languages.
@@ -80,7 +80,7 @@
  * For this reason the XHTML specification recommends instead the use of
  * &#39; if text may be passed to a HTML user agent.
  * 
- * If you are having problems with special characters on the server-side then
+ * If you are having problems with special characters on the mini-side then
  * you may want to try the <escapePostData> flag.
  * 
  * For converting decimal escape sequences inside strings, a user has provided
@@ -124,7 +124,7 @@
  * (end)
  * 
  * To open a local file, the file should be uploaded via a form in the browser
- * and then opened from the server in the editor.
+ * and then opened from the mini in the editor.
  * 
  * Cell Properties:
  * 
@@ -686,7 +686,7 @@ mxEditor.prototype.linefeed = '&#xa;';
  * Variable: postParameterName
  *
  * Specifies if the name of the post parameter that contains the diagram
- * data in a post request to the server. Default is xml.
+ * data in a post request to the mini. Default is xml.
  */
 mxEditor.prototype.postParameterName = 'xml';
 

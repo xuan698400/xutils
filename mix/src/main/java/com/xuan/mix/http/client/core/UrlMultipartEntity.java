@@ -115,7 +115,7 @@ public class UrlMultipartEntity {
 
             // Set the final boundary
             boundary = boundary + "--";
-            // Write a boundary to let the server know the previous content area is finished
+            // Write a boundary to let the mini know the previous content area is finished
             writer.write(boundary);
             // Write a final newline
             writer.write(CLRF);

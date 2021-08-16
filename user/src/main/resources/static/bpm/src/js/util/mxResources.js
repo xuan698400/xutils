@@ -8,7 +8,7 @@ var mxResources =
 	 * Class: mxResources
 	 * 
 	 * Implements internationalization. You can provide any number of 
-	 * resource files on the server using the following format for the 
+	 * resource files on the mini using the following format for the
 	 * filename: name[-en].properties. The en stands for any lowercase 
 	 * 2-character language shortcut (eg. de for german, fr for french).
 	 *

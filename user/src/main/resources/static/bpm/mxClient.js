@@ -1248,7 +1248,7 @@ var mxResources =
 	 * Class: mxResources
 	 * 
 	 * Implements internationalization. You can provide any number of 
-	 * resource files on the server using the following format for the 
+	 * resource files on the mini using the following format for the
 	 * filename: name[-en].properties. The en stands for any lowercase 
 	 * 2-character language shortcut (eg. de for german, fr for french).
 	 *
@@ -10950,7 +10950,7 @@ mxXmlRequest.prototype.request = null;
  * 
  * Specifies if request values should be decoded as URIs before setting the
  * textarea value in <simulate>. Defaults to false for backwards compatibility,
- * to avoid another decode on the server this should be set to true.
+ * to avoid another decode on the mini this should be set to true.
  */
 mxXmlRequest.prototype.decodeSimulateValues = false;
 
@@ -16304,7 +16304,7 @@ mxMorphing.prototype.getOriginForCell = function(cell)
  * 
  * A typical value for the fallback is a MTHML link as defined in RFC 2557.
  * Note that this format requires a file to be dynamically created on the
- * server-side, or the page that contains the graph to be modified to contain
+ * mini-side, or the page that contains the graph to be modified to contain
  * the resources, this can be done by adding a comment that contains the
  * resource in the HEAD section of the page after the title tag.
  * 
@@ -54402,13 +54402,13 @@ mxCurrentRootChange.prototype.execute = function()
  * This string can now be stored in a local persistent storage (for example
  * using Google Gears) or it can be passed to a backend using mxUtils.post as
  * follows. The url variable is the URL of the Java servlet, PHP page or HTTP
- * handler, depending on the server.
+ * handler, depending on the mini.
  * 
  * (code)
  * var xmlString = encodeURIComponent(mxUtils.getXml(node));
  * mxUtils.post(url, 'xml='+xmlString, function(req)
  * {
- *   // Process server response using req of type mxXmlRequest
+ *   // Process mini response using req of type mxXmlRequest
  * });
  * (end)
  * 
@@ -82868,13 +82868,13 @@ mxDefaultToolbar.prototype.destroy = function ()
  * 
  * For reading a diagram from a remote location, use the <open> method.
  * 
- * To save diagrams in XML on a server, you can set the <urlPost> variable. 
+ * To save diagrams in XML on a mini, you can set the <urlPost> variable.
  * This variable will be used in <getUrlPost> to construct a URL for the post 
  * request that is issued in the <save> method. The post request contains the 
  * XML representation of the diagram as returned by <writeGraphModel> in the 
  * xml parameter.
  * 
- * On the server side, the post request is processed using standard
+ * On the mini side, the post request is processed using standard
  * technologies such as Java Servlets, CGI, .NET or ASP.
  * 
  * Here are some examples of processing a post request in various languages.
@@ -82913,7 +82913,7 @@ mxDefaultToolbar.prototype.destroy = function ()
  * For this reason the XHTML specification recommends instead the use of
  * &#39; if text may be passed to a HTML user agent.
  * 
- * If you are having problems with special characters on the server-side then
+ * If you are having problems with special characters on the mini-side then
  * you may want to try the <escapePostData> flag.
  * 
  * For converting decimal escape sequences inside strings, a user has provided
@@ -82957,7 +82957,7 @@ mxDefaultToolbar.prototype.destroy = function ()
  * (end)
  * 
  * To open a local file, the file should be uploaded via a form in the browser
- * and then opened from the server in the editor.
+ * and then opened from the mini in the editor.
  * 
  * Cell Properties:
  * 
@@ -83519,7 +83519,7 @@ mxEditor.prototype.linefeed = '&#xa;';
  * Variable: postParameterName
  *
  * Specifies if the name of the post parameter that contains the diagram
- * data in a post request to the server. Default is xml.
+ * data in a post request to the mini. Default is xml.
  */
 mxEditor.prototype.postParameterName = 'xml';
 

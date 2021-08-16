@@ -167,7 +167,7 @@ mxXmlRequest.prototype.request = null;
  * 
  * Specifies if request values should be decoded as URIs before setting the
  * textarea value in <simulate>. Defaults to false for backwards compatibility,
- * to avoid another decode on the server this should be set to true.
+ * to avoid another decode on the mini this should be set to true.
  */
 mxXmlRequest.prototype.decodeSimulateValues = false;
 

@@ -1,14 +1,12 @@
-package com.xuan.mix.http.server;
+package com.xuan.mix.http.mini;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,7 +16,7 @@ import java.util.Map.Entry;
  * @author xuan
  * @since 2020/10/16
  */
-public class HttpClient {
+public class MiniHttpClient {
 
     public static String get(String urlStr, Map<String, String> params) {
         ByteArrayOutputStream baos = null;
@@ -81,14 +79,6 @@ public class HttpClient {
             sb.deleteCharAt(sb.length() - 1);
         }
         return "?" + sb.toString();
-    }
-
-    public static void main(String[] args) throws IOException {
-        Map<String, String> params = new HashMap<>();
-        params.put("dd", "1");
-        params.put("cc", "中文");
-        String r = HttpClient.get("http://localhost:7002/dddd/rrr", params);
-        System.out.println(r);
     }
 
 }

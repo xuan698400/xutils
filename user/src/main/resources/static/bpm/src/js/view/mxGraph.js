@@ -324,13 +324,13 @@
  * This string can now be stored in a local persistent storage (for example
  * using Google Gears) or it can be passed to a backend using mxUtils.post as
  * follows. The url variable is the URL of the Java servlet, PHP page or HTTP
- * handler, depending on the server.
+ * handler, depending on the mini.
  * 
  * (code)
  * var xmlString = encodeURIComponent(mxUtils.getXml(node));
  * mxUtils.post(url, 'xml='+xmlString, function(req)
  * {
- *   // Process server response using req of type mxXmlRequest
+ *   // Process mini response using req of type mxXmlRequest
  * });
  * (end)
  * 

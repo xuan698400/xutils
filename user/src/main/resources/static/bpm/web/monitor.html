@@ -83,7 +83,7 @@
 			// Creates a button to invoke the refresh function
 			document.body.appendChild(mxUtils.button('Update', function(evt)
 			{
-				// XML is normally fetched from URL at server using mxUtils.get - this is a client-side
+				// XML is normally fetched from URL at mini using mxUtils.get - this is a client-side
 				// string with randomized states to demonstrate the idea of the workflow monitor
 				var xml = '<process><update id="ApproveClaim" state="'+getState()+'"/><update id="AuthorizeClaim" state="'+getState()+'"/>'+
 					'<update id="CheckAccountingData" state="'+getState()+'"/><update id="ReviewClaim" state="'+getState()+'"/>'+

@@ -11,16 +11,16 @@ public class DemoTest {
     public static void main(String[] args) throws Exception {
         JavaCompiler javaCompiler = JavaCompilerFactory.getJdkJavaCompiler();
 
-        JavaSource javaSource = JavaSource.of("package com.xuan.mix.compile;\n"
-            + "\n"
-            + "/**\n"
-            + " * @author xuan\n"
-            + " * @since 2020/10/19\n"
-            + " */\n"
-            + "public class DemoTestClass {\n"
-            + "    public String hello() {\n"
-            + "        return \"你好太牛逼\";\n"
-            + "    }\n"
+        JavaSource javaSource = JavaSource.of("package com.xuan.mix.compile;"
+            + ""
+            + "/**"
+            + " * @author xuan"
+            + " * @since 2020/10/19"
+            + " */"
+            + "public class DemoTestClass {"
+            + "    public String hello() {"
+            + "        return \"你好太牛逼\";"
+            + "    }"
             + "}", "com.xuan.mix.compile.DemoTestClass");
 
         Class<?> demoTestClass = javaCompiler.compile(javaSource, new CompileOption());

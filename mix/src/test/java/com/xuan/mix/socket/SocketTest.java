@@ -14,7 +14,7 @@ public class SocketTest {
     @Test
     public void test() {
         new Thread(() -> {
-            //server
+            //mini
             Server server = new NioServer(20000);
             server.setHandler(new Handler() {
                 @Override

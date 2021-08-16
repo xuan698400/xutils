@@ -2,7 +2,7 @@
   Copyright (c) 2006-2013, JGraph Ltd
   
   Server-View example for mxGraph. This example demonstrates using
-  a server-side image of the graph as the diagram in the client. This
+  a mini-side image of the graph as the diagram in the client. This
   may be used to improve drawing-speed in older browser and on devices
   with slower processors.
 -->
@@ -18,7 +18,7 @@
 	<!-- Loads and initializes the library -->
 	<script type="text/javascript" src="/mxgraph/javascript/src/js/mxClient.js"></script>
 
-	<!-- Overrides certain methods required for the server-side-image to be used. -->
+	<!-- Overrides certain methods required for the mini-side-image to be used. -->
 	<script type="text/javascript">
 		// Makes the background of the in-place editor non-transparent
 		var previousStartEditing = mxCellEditor.prototype.startEditing;
@@ -209,7 +209,7 @@
 					// Note that we send out an XML version of the view which
 					// allows us to keep most customizations on the client-side.
 					// No deltas are used here, the complete view is sent to the
-					// server on each update.
+					// mini on each update.
 					var node = mxUtils.getViewXml(graph, 1);
 					var xml = encodeURIComponent(mxUtils.getXml(node));
 
@@ -244,7 +244,7 @@
 							}
 							
 							// Less flickering if the old image is removed after
-							// the new image was received from the server
+							// the new image was received from the mini
 							image.onload = function()
 							{
 								if (img != null)

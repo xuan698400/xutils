@@ -1,4 +1,4 @@
-package com.xuan.mix.http.server;
+package com.xuan.mix.http.mini;
 
 import java.io.IOException;
 import java.io.OutputStream;
