@@ -1,9 +1,11 @@
-package com.xuan.mix.concurrent.forkjoin.listtask.config;
+package com.xuan.mix.concurrent.listtask.config;
 
 /**
  * 执行时的配置参数，可以让一些高级用户定制一些参数来影响子任务的分解等
  * <p>
- * Created by xuan on 17/8/26.
+ *
+ * @author xuan
+ * @date 17/8/29
  */
 public class ListTaskConfig {
 

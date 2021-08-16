@@ -1,9 +1,9 @@
 package com.xuan.mix.concurrent;
 
-import com.xuan.mix.concurrent.forkjoin.listtask.ListTaskExecutorFactory;
-import com.xuan.mix.concurrent.forkjoin.listtask.callback.SingleSizeListTaskCallable;
-import com.xuan.mix.concurrent.forkjoin.listtask.core.ListTaskException;
-import com.xuan.mix.concurrent.forkjoin.listtask.executor.ListTaskExecutor;
+import com.xuan.mix.concurrent.listtask.ListTaskExecutorFactory;
+import com.xuan.mix.concurrent.listtask.callback.AbstractSingleSizeListTaskCallable;
+import com.xuan.mix.concurrent.listtask.core.ListTaskException;
+import com.xuan.mix.concurrent.listtask.executor.ListTaskExecutor;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ForkJoinTest {
         //List<String> list = initList();
         ////
         //long start = System.currentTimeMillis();
-        //List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable() {
+        //List<String> resultList = executor.execute(list, new AbstractSingleSizeListTaskCallable() {
         //    @Override
         //    protected String call(String s) {
         //        return doThing(s);
@@ -71,7 +71,7 @@ public class ForkJoinTest {
         //
         long start = System.currentTimeMillis();
         ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getCyclicBarrierExecutor();
-        List<String> resultList = executor.execute(list, new SingleSizeListTaskCallable<String, String>() {
+        List<String> resultList = executor.execute(list, new AbstractSingleSizeListTaskCallable<String, String>() {
             @Override
             protected String call(String s) {
                 return doThing(s);

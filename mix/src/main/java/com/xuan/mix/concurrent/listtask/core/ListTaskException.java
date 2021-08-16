@@ -1,9 +1,11 @@
-package com.xuan.mix.concurrent.forkjoin.listtask.core;
+package com.xuan.mix.concurrent.listtask.core;
 
 /**
  * 执行ListTask异常
  * <p>
- * Created by xuan on 17/8/29.
+ *
+ * @author xuan
+ * @date 17/8/29
  */
 public class ListTaskException extends Throwable {
     private static final long serialVersionUID = 1;
@@ -18,11 +20,6 @@ public class ListTaskException extends Throwable {
         this.realException = cause;
     }
 
-    /**
-     * 复写这个方法可以防止打出堆栈信息
-     *
-     * @return
-     */
     @Override
     public synchronized Throwable fillInStackTrace() {
         return this;
@@ -35,4 +32,5 @@ public class ListTaskException extends Throwable {
     public void setRealException(Throwable realException) {
         this.realException = realException;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.xuan.mix.concurrent.forkjoin.listtask.core;
+package com.xuan.mix.concurrent.listtask.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,9 @@ import java.util.List;
  * 任务执行结果对象
  * 注意：子任务执行成功后生成的结果对象也会使用他，最后结果汇总也使用的他
  * <p>
- * Created by xuan on 17/8/23.
+ *
+ * @author xuan
+ * @date 17/8/29
  */
 public class ListTaskResult<R> {
 

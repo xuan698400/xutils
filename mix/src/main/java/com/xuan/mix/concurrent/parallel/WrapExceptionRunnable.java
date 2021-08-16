@@ -1,4 +1,4 @@
-package com.xuan.common.concurrent;
+package com.xuan.mix.concurrent.parallel;
 
 /**
  * 保证不会有Exception抛出到线程池的Runnable，防止用户没有捕捉异常导致中断了线程池中的线程。

@@ -1,7 +1,7 @@
-package com.xuan.mix.concurrent.forkjoin.listtask.core;
+package com.xuan.mix.concurrent.listtask.core;
 
-import com.xuan.mix.concurrent.forkjoin.listtask.callback.ListTaskCallable;
-import com.xuan.mix.concurrent.forkjoin.listtask.config.ListTaskConfig;
+import com.xuan.mix.concurrent.listtask.callback.ListTaskCallable;
+import com.xuan.mix.concurrent.listtask.config.ListTaskConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,9 @@ import java.util.concurrent.RecursiveTask;
  * 第一：如果原数据足够多，就会进行任务拆分，拆分到原数据足够小的子任务
  * 第二：如果原数据足够少，调用用户传入的逻辑回调拿到结果数据
  * <p>
- * Created by xuan on 17/8/23.
+ *
+ * @author xuan
+ * @date 17/8/29
  */
 public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
     private static final long serialVersionUID = 1;
@@ -59,7 +61,7 @@ public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
         if (originList.size() <= config.getSubOriginListSize()) {
             //如果原数据足够少，即小于配置参数指定的单个任务的原数据数量时，进行用户的业务逻辑回调执行，拿到结果
             List<R> resultList = callable.call(originList);
-            ListTaskResult<R> result = new ListTaskResult<R>();
+            ListTaskResult<R> result = new ListTaskResult<>();
             result.setList(resultList);
             return result;
         } else {

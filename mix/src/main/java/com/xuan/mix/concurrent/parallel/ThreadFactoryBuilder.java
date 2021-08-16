@@ -1,4 +1,4 @@
-package com.xuan.common.concurrent;
+package com.xuan.mix.concurrent.parallel;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;

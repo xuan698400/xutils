@@ -1,4 +1,4 @@
-package com.xuan.mix.concurrent.forkjoin.listtask.callback;
+package com.xuan.mix.concurrent.listtask.callback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,11 @@ import java.util.List;
  * 如果用户想更方便，只需要对原始数据单个单个处理，可以继承这个去实现。
  * 如果子任务拥有多个原始数据需要处理，这里会for循环进行串行处理
  * <p>
- * Created by xuan on 17/8/26.
+ *
+ * @author xuan
+ * @date 17/8/29
  */
-public abstract class SingleSizeListTaskCallable<T, R> extends AbstractListTaskCallable<T, R> {
+public abstract class AbstractSingleSizeListTaskCallable<T, R> extends AbstractListTaskCallable<T, R> {
 
     @Override
     public List<R> call(List<T> list) {

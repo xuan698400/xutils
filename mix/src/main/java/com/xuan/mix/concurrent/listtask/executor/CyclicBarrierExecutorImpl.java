@@ -1,10 +1,9 @@
-package com.xuan.mix.concurrent.forkjoin.listtask.executor;
+package com.xuan.mix.concurrent.listtask.executor;
 
-
-import com.xuan.mix.concurrent.forkjoin.listtask.callback.ListTaskCallable;
-import com.xuan.mix.concurrent.forkjoin.listtask.config.ListTaskConfig;
-import com.xuan.mix.concurrent.forkjoin.listtask.core.ListTaskException;
-import com.xuan.mix.concurrent.forkjoin.listtask.core.ListTaskResult;
+import com.xuan.mix.concurrent.listtask.callback.ListTaskCallable;
+import com.xuan.mix.concurrent.listtask.config.ListTaskConfig;
+import com.xuan.mix.concurrent.listtask.core.ListTaskException;
+import com.xuan.mix.concurrent.listtask.core.ListTaskResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +15,16 @@ import java.util.concurrent.Executors;
 /**
  * 使用普通的线程池来实现，仅仅用来做测试对比，暂时不建议使用的
  * <p>
- * Created by xuan on 17/8/28.
+ *
+ * @author xuan
+ * @date 17/8/29
  */
 public class CyclicBarrierExecutorImpl<T, R> implements ListTaskExecutor<T, R> {
     ExecutorService executor = Executors.newFixedThreadPool(10);
 
     @Override
     public ListTaskResult<R> execute(List<T> orignList, ListTaskCallable<T, R> callable, ListTaskConfig config) throws
-                                                                                                                ListTaskException {
+        ListTaskException {
         throw new ListTaskException(new RuntimeException("no support"));
     }
 
@@ -51,7 +52,8 @@ public class CyclicBarrierExecutorImpl<T, R> implements ListTaskExecutor<T, R> {
     }
 
     @Override
-    public List<R> execute(List<T> orignList, ListTaskCallable<T, R> callable, int subOriginListSize) throws ListTaskException {
+    public List<R> execute(List<T> orignList, ListTaskCallable<T, R> callable, int subOriginListSize)
+        throws ListTaskException {
         throw new ListTaskException(new RuntimeException("no support"));
     }
 

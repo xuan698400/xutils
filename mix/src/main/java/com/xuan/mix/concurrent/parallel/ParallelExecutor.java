@@ -1,4 +1,4 @@
-package com.xuan.common.concurrent.parallel;
+package com.xuan.mix.concurrent.parallel;
 
 import java.util.ArrayList;
 import java.util.List;
