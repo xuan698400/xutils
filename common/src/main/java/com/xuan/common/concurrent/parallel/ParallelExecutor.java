@@ -8,8 +8,6 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.xuan.common.concurrent.ThreadLocalUtil;
-
 /**
  * @author xuan
  * @since 2021/1/26
@@ -27,7 +25,7 @@ public class ParallelExecutor {
                 ParallelTask parallelTask = new ParallelTask(countDownLatch, runnable);
                 try {
                     //设置主线程的线程变量到并行任务中去
-                    parallelTask.setBizContext(ThreadLocalUtil.get());
+                    parallelTask.setBizContext(ParallelThreadLocal.get());
                     //提交任务到线程池
                     Future<?> future = executor.submit(parallelTask);
                     //记录Future，方便后续取消任务

@@ -4,8 +4,6 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.xuan.common.concurrent.ThreadLocalUtil;
-
 /**
  * 并行任务
  *
@@ -13,7 +11,6 @@ import com.xuan.common.concurrent.ThreadLocalUtil;
  * @since 2021/1/26
  */
 public class ParallelTask implements Runnable {
-
     /**
      * 并行任务计数器
      */
@@ -50,15 +47,15 @@ public class ParallelTask implements Runnable {
             return;
         }
 
+        //标记是否是主线程执行，设计后续是否需要清理线程变量
         boolean callerRunsPolicy = false;
         try {
-            //bizContext一致，说明该任务是由主线程执行的，在finally中不需要清空bizContext
-            if (bizContext == ThreadLocalUtil.get()) {
+            if (bizContext == ParallelThreadLocal.get()) {
+                //bizContext一致，说明该任务是由主线程执行的，在finally中不需要清空bizContext
                 callerRunsPolicy = true;
             }
             // 主线程上下文传递到子线程
-            ThreadLocalUtil.set(bizContext);
-
+            ParallelThreadLocal.set(bizContext);
             runnable.run();
         } catch (Exception e) {
             //单个任务执行错误，这里捕获输出日志
@@ -70,7 +67,7 @@ public class ParallelTask implements Runnable {
             }
             if (!callerRunsPolicy) {
                 // 线程执行完清除上下文，避免线程间串上下文
-                ThreadLocalUtil.remove();
+                ParallelThreadLocal.remove();
             }
         }
     }
