@@ -8,8 +8,8 @@
 
     <!-- 实现的扩展点 -->
     <ext-impls>
-        <ext-impl ext="com.extp.platform.sdk.SayHelloExt1" impl="com.extp.plugin1.Plugin1SayHelloExt1Impl" priority="100"/>
-        <ext-impl ext="com.extp.platform.sdk.SayHelloExt2" impl="com.extp.plugin1.Plugin1SayHelloExt2Impl" priority="100"/>
+        <ext-impl ext="com.extp.platform.sdk.NameExt" impl="com.extp.plugin1.NameExtImplByPlugin1" priority="100"/>
+        <ext-impl ext="com.extp.platform.sdk.AgeExt" impl="com.extp.plugin1.AgeExtImplByPlugin1" priority="100"/>
     </ext-impls>
 
 </plugin>

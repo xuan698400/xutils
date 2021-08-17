@@ -2,8 +2,8 @@ package com.extp.platform.server;
 
 import com.extp.framework.core.ExtInvoker;
 import com.extp.framework.model.BizInstance;
-import com.extp.platform.sdk.SayHelloExt1;
-import com.extp.platform.sdk.SayHelloExt2;
+import com.extp.platform.sdk.NameExt;
+import com.extp.platform.sdk.AgeExt;
 
 /**
  * @author xuan
@@ -20,13 +20,13 @@ public class SayHelloServiceImpl implements SayHelloService {
         bizInstance.setBizCode(bizCode);
 
         //执行扩展点1
-        ExtInvoker<SayHelloExt1> ext1ExtInvoker = new ExtInvoker<>(SayHelloExt1.class);
-        String bizMyName = ext1ExtInvoker.executeFirst(bizInstance, ext -> ext.getMyName());
+        ExtInvoker<NameExt> ext1ExtInvoker = new ExtInvoker<>(NameExt.class);
+        String bizMyName = ext1ExtInvoker.executeFirst(bizInstance, ext -> ext.getName());
         result = result + "我叫：" + bizMyName + "...";
 
         //执行扩展点2
-        ExtInvoker<SayHelloExt2> ext2ExtInvoker = new ExtInvoker<>(SayHelloExt2.class);
-        String bizMyAge = ext2ExtInvoker.executeFirst(bizInstance, ext -> ext.getMyAge());
+        ExtInvoker<AgeExt> ext2ExtInvoker = new ExtInvoker<>(AgeExt.class);
+        String bizMyAge = ext2ExtInvoker.executeFirst(bizInstance, ext -> ext.getAge());
         result = result + "我的年龄：" + bizMyAge + "...";
 
         return result;

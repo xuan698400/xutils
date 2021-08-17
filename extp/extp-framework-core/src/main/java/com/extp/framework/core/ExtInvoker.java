@@ -21,15 +21,6 @@ public class ExtInvoker<Ext> {
     public <TARGET extends BizInstance, RESULT> RESULT executeFirst(TARGET target,
         ExtCallback<Ext, RESULT> callback) {
 
-        //List<Ext> extList = ExtpManager.getInstance().getExtPoints(
-        //    extClass,
-        //    target.getBizCode());
-        //if (null == extList || extList.isEmpty()) {
-        //    return null;
-        //}
-        //
-        //return callback.apply(extList.get(0));
-
         List<Ext> extList = FunctionManager.getInstance().getExt(
             extClass,
             target.getBizCode());

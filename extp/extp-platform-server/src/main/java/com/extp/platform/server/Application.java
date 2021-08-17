@@ -1,14 +1,6 @@
 package com.extp.platform.server;
 
-import java.net.URL;
-import java.util.List;
-
-import com.extp.framework.core.ExtpConfig;
 import com.extp.framework.core.ExtpInitializer;
-import com.extp.framework.core.ExtpManager;
-import com.extp.framework.core.FunctionManager;
-import com.extp.framework.core.plugin.PluginManager;
-import com.extp.framework.core.utils.ResourceUtil;
 
 /**
  * @author xuan
@@ -19,13 +11,6 @@ public class Application {
     private static SayHelloService sayHelloService = new SayHelloServiceImpl();
 
     static {
-        //ExtpConfig config = new ExtpConfig();
-        //config.addScanExtPackageName("com.extp.platform.sdk");
-        //config.addScanPluginPackageName("com.extp.plugin1");
-        //config.addScanPluginPackageName("com.extp.plugin2");
-        //ExtpManager.getInstance().init(config);
-
-        //使用配置
         ExtpInitializer.getInstance().init();
     }
 
