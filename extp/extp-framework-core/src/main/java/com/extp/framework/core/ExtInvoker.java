@@ -2,7 +2,6 @@ package com.extp.framework.core;
 
 import java.util.List;
 
-import com.extp.framework.core.utils.ValidatorUtil;
 import com.extp.framework.model.BizInstance;
 import com.extp.framework.model.ExtCallback;
 
@@ -24,7 +23,7 @@ public class ExtInvoker<Ext> {
         List<Ext> extList = FunctionManager.getInstance().getExt(
             extClass,
             target.getBizCode());
-        if (ValidatorUtil.isEmpty(extList)) {
+        if (null == extList || extList.isEmpty()) {
             return null;
         }
 

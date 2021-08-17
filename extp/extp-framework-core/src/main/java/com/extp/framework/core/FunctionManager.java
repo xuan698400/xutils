@@ -11,7 +11,6 @@ import com.extp.framework.core.plugin.PluginManager;
 import com.extp.framework.core.plugin.model.BizCode;
 import com.extp.framework.core.plugin.model.ExtImpl;
 import com.extp.framework.core.plugin.model.Plugin;
-import com.extp.framework.core.utils.ValidatorUtil;
 
 /**
  * @author xuan
@@ -34,7 +33,7 @@ public class FunctionManager {
 
     public void init() {
         List<Plugin> pluginList = PluginManager.getInstance().getAllPlugin();
-        if (ValidatorUtil.isEmpty(pluginList)) {
+        if (null == pluginList || pluginList.isEmpty()) {
             return;
         }
         for (Plugin plugin : pluginList) {
@@ -43,7 +42,7 @@ public class FunctionManager {
     }
 
     public void registerPlugin(Plugin plugin) {
-        if (ValidatorUtil.isEmpty(plugin.getBizCodeList()) || ValidatorUtil.isEmpty(plugin.getExtImplList())) {
+        if (null == plugin.getBizCodeList() || null == plugin.getExtImplList()) {
             return;
         }
         for (ExtImpl extImpl : plugin.getExtImplList()) {
@@ -66,12 +65,12 @@ public class FunctionManager {
 
     public <Ext> List<Ext> getExt(Class<Ext> extPointsClass, String bizCode) {
         Map<String, List<Object>> bizCode2InstancesMap = extMap.get(extPointsClass.getName());
-        if (ValidatorUtil.isEmpty(bizCode2InstancesMap)) {
+        if (null == bizCode2InstancesMap) {
             return new ArrayList<>();
         }
 
         List<Object> instanceList = bizCode2InstancesMap.get(bizCode);
-        if (ValidatorUtil.isEmpty(instanceList)) {
+        if (null == instanceList) {
             return new ArrayList<>();
         }
 
