@@ -3,7 +3,7 @@ package com.xuan.mix.extension.framework.core;
 import java.util.List;
 
 import com.xuan.mix.extension.framework.model.BizInstance;
-import com.xuan.mix.extension.framework.model.ExtCallback;
+import com.xuan.mix.extension.framework.model.ExtensionCallback;
 
 /**
  * @author xuan
@@ -18,7 +18,7 @@ public class ExtensionInvoker<Extension> {
     }
 
     public <TARGET extends BizInstance, RESULT> RESULT executeFirst(TARGET target,
-        ExtCallback<Extension, RESULT> callback) {
+        ExtensionCallback<Extension, RESULT> callback) {
 
         List<Extension> extensionList = ExtensionManager.getInstance().getExtensions(
             extensionClass,

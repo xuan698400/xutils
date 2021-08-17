@@ -4,7 +4,7 @@ package com.xuan.mix.cache.threadlocalcache;
  * @author xuan
  * @since 2021/6/11
  */
-public class ThreadLocalCacheTest {
+public class Main {
 
     public static class ValueObject {
 

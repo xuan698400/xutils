@@ -14,8 +14,7 @@ public class Application {
     static {
         ExtensionConfig config = new ExtensionConfig();
         config.addExtensionPackage("com.xuan.mix.extension.platform.sdk");
-        config.addPluginPackage("com.xuan.mix.extension.biz.plugin1");
-        config.addPluginPackage("com.xuan.mix.extension.biz.plugin2");
+        config.addPluginPackage("com.xuan.mix.extension.biz");
         ExtensionManager.getInstance().init(config);
     }
 
