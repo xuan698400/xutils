@@ -6,7 +6,7 @@ package com.xuan.mix.design.strategy;
  * @author xuan
  * @since 2021/8/15
  */
-public class Client {
+public class Main {
 
     public static void main(String[] args) {
         StrategyContext context = new StrategyContext(new StrategyImpl1());
