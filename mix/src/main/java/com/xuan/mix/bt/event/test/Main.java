@@ -15,7 +15,7 @@ public class Main {
         ////
         MyEvent myEvent = new MyEvent();
         myEvent.setName("你好");
-        EventPublisher.instance().fire(myEvent);
+        EventPublisher.instance().asyncFire(myEvent);
     }
 
 }

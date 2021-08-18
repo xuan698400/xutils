@@ -5,6 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -13,7 +18,23 @@ import org.apache.commons.collections4.CollectionUtils;
  * @since 2021/4/1
  */
 public class EventPublisher {
+
+    private AtomicInteger threadCounter = new AtomicInteger(1);
+
+    /**
+     * 异步通知默认线程池
+     */
+    private ExecutorService DEFAULT_WORK = new ThreadPoolExecutor(4, 4, 4,
+        TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000),
+        (r) -> new Thread(r, "xUtils-EventPublisher-Thread" + threadCounter.get()), (r, executor) -> {
+        //这里是拒绝策略，默认抛弃
+    });
+
     private static final EventPublisher INSTANCE = new EventPublisher();
+
+    private EventPublisher() {
+
+    }
 
     public static EventPublisher instance() {
         return INSTANCE;
@@ -36,7 +57,6 @@ public class EventPublisher {
                 List<EventSubscriber> subscriberList = subscriberMap.computeIfAbsent(clazz, k -> new ArrayList<>());
                 subscriberList.add(subscriber);
                 sortSubscriber(subscriberList);
-                System.out.println(subscriberList);
             }
         }
     }
@@ -46,7 +66,35 @@ public class EventPublisher {
         subscriberMap.clear();
     }
 
-    public void fire(Object event) {
+    /**
+     * 同步通知
+     *
+     * @param event 通知事件
+     */
+    public void syncFire(Event event) {
+        doFire(event);
+    }
+
+    /**
+     * 异步通知
+     *
+     * @param event 通知事件
+     */
+    public void asyncFire(Event event) {
+        DEFAULT_WORK.submit(() -> doFire(event));
+    }
+
+    /**
+     * 异步通知（自带异步线程池）
+     *
+     * @param event
+     * @param executorService
+     */
+    public void asyncFire(Event event, ExecutorService executorService) {
+        executorService.submit(() -> doFire(event));
+    }
+
+    private void doFire(Event event) {
         if (!this.hasSubscribers()) {
             return;
         }
