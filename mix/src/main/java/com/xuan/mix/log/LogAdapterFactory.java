@@ -9,4 +9,5 @@ public class LogAdapterFactory {
     public static LogAdapter getLogAdapter() {
         return new ConsoleLogAdapterImpl();
     }
+    
 }
