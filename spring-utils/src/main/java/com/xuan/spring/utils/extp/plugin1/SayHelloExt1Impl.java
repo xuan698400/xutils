@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author xuan
  * @since 2021/7/27
  */
-@Component
+//@Component
 public class SayHelloExt1Impl implements SayHelloExt1 {
 
     @Override

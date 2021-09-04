@@ -15,10 +15,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NodeLog {
 
-    /**
-     * 节点名称
-     *
-     * @return
-     */
-    String value();
+    int sample() default 10000;
+
+    boolean printParams() default true;
+
+    boolean printResult() default true;
+
+    boolean printIfResultFail() default true;
 }

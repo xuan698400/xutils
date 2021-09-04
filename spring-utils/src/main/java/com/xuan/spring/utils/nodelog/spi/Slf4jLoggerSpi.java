@@ -10,12 +10,11 @@ import org.slf4j.LoggerFactory;
  */
 public class Slf4jLoggerSpi implements LoggerSpi {
 
-    private final static Logger log = LoggerFactory.getLogger("Slf4jLoggerSpi");
+    private final static Logger log = LoggerFactory.getLogger("NodeLog_Slf4jLoggerSpi_Logger");
 
     @Override
     public void info(String msg) {
-        //log.info(msg);
-        System.out.println("hah:" + msg);
+        log.info(msg);
     }
 
 }
