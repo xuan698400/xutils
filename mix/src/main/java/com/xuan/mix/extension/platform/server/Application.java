@@ -18,7 +18,7 @@ public class Application {
         ExtensionManager.getInstance().init(config);
     }
 
-    public static void main(String[] args) {
+    public void startApp() {
         System.out.println(sayHelloService.sayHello("徐工", "plugin1"));
         System.out.println(sayHelloService.sayHello("徐工", "plugin1_abc"));
         System.out.println(sayHelloService.sayHello("徐工", "plugin2"));
