@@ -5,6 +5,7 @@ package com.xuan.mix.bt.status;
  * Created by xuan on 17/7/29.
  */
 public enum Level {
+    //
     OK,
     WARN,
     ERROR,

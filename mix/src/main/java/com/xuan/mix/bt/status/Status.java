@@ -11,12 +11,10 @@ public class Status {
      * 状态级别
      */
     private final Level level;
-
     /**
      * 状态消息
      */
     private final String message;
-
     /**
      * 描述
      */

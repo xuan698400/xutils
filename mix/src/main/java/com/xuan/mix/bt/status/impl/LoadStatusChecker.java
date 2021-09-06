@@ -25,7 +25,7 @@ public class LoadStatusChecker implements StatusChecker {
             load = -1;
         }
         int cpu = operatingSystemMXBean.getAvailableProcessors();
-        return new Status(load < 0 ? Level.ERROR.UNKNOWN : (load < cpu ? Level.OK : Level.WARN),
+        return new Status(load < 0 ? Level.ERROR : (load < cpu ? Level.OK : Level.WARN),
                           (load < 0 ? "" : "load:" + load + ",") + "cpu:" + cpu);
     }
 
