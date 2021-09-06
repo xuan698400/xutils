@@ -14,17 +14,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.collections4.CollectionUtils;
 
 /**
+ * 发布者
+ *
  * @author xuan
  * @since 2021/4/1
  */
 public class EventPublisher {
 
-    private AtomicInteger threadCounter = new AtomicInteger(1);
+    private final static AtomicInteger threadCounter = new AtomicInteger(1);
 
     /**
      * 异步通知默认线程池
      */
-    private ExecutorService DEFAULT_WORK = new ThreadPoolExecutor(4, 4, 4,
+    private final static ExecutorService DEFAULT_WORK = new ThreadPoolExecutor(4, 4, 4,
         TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000),
         (r) -> new Thread(r, "xUtils-EventPublisher-Thread" + threadCounter.get()), (r, executor) -> {
         //这里是拒绝策略，默认抛弃
