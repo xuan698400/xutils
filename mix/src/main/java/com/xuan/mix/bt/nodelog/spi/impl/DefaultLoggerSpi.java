@@ -3,6 +3,8 @@ package com.xuan.mix.bt.nodelog.spi.impl;
 import com.xuan.mix.bt.nodelog.spi.LoggerSpi;
 
 /**
+ * 默认System输出
+ *
  * @author xuan
  * @since 2021/9/3
  */

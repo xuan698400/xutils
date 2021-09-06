@@ -30,17 +30,9 @@ public class LogLine {
      */
     public static final String STATUS_FAIL = "N";
     /**
-     * eagle eye traceId 官方 MDC 名称
-     */
-    public static final String TRACE_ID_EAGLE_EYE = "EAGLEEYE_TRACE_ID";
-    /**
-     * eagle eye rpcId 官方 MDC 名称
-     */
-    public static final String RPC_ID_EAGLE_EYE = "EAGLEEYE_RPC_ID";
-    /**
      * 程序未捕获的未知异常
      */
-    public static final String ERROR_CODE_UNKONW = "ERROR_CODE_UNKONW";
+    public static final String ERROR_CODE_UNKNOWN = "ERROR_CODE_UNKNOWN";
     /**
      * 解析返回结果是null
      */

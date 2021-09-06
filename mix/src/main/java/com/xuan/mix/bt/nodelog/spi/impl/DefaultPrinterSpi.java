@@ -10,6 +10,8 @@ import com.xuan.mix.bt.nodelog.spi.LoggerSpi;
 import com.xuan.mix.bt.nodelog.spi.PrinterSpi;
 
 /**
+ * 默认异步方式输出
+ *
  * @author xuan
  * @since 2021/9/3
  */

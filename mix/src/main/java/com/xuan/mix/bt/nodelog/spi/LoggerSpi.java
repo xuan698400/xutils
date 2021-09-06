@@ -1,7 +1,7 @@
 package com.xuan.mix.bt.nodelog.spi;
 
 /**
- * 日志答应扩展，可根据不同的系统使用不同的日志框架
+ * 日志实现扩展，不同系统可能会使用不同的日志打印框架，实现该接口可以自定义
  *
  * @author xuan
  * @since 2021/9/3

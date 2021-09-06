@@ -1,7 +1,7 @@
 package com.xuan.mix.bt.nodelog.spi;
 
 /**
- * 打印，例如同步还是异步
+ * 打印扩展，例如可以自定义实现同步还是异步打印
  *
  * @author xuan
  * @since 2021/9/3

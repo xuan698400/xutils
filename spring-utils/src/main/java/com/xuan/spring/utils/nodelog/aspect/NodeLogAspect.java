@@ -60,7 +60,7 @@ public class NodeLogAspect {
                 //说明业务逻辑没有捕获到异常，这里强制记录这种错误
                 if (null != throwable) {
                     status = LogLine.STATUS_FAIL;
-                    eCode = LogLine.ERROR_CODE_UNKONW;
+                    eCode = LogLine.ERROR_CODE_UNKNOWN;
                     eMsg = throwable.getMessage();
                 }
 

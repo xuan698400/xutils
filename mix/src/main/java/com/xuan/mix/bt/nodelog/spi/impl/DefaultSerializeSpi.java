@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.xuan.mix.bt.nodelog.spi.SerializeSpi;
 
 /**
+ * 默认使用Object.toString序列化
+ *
  * @author xuan
  * @since 2021/9/3
  */
