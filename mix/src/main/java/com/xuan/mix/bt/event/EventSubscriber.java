@@ -6,14 +6,14 @@ package com.xuan.mix.bt.event;
  * @author xuan
  * @since 2021/4/1
  */
-public interface EventSubscriber {
+public interface EventSubscriber<Body extends EventBody> {
 
-    int HIGHEST = Integer.MIN_VALUE;
+    int HIGHEST = Integer.MAX_VALUE;
     int NORMAL = 0;
-    int LOWEST = Integer.MAX_VALUE;
+    int LOWEST = Integer.MIN_VALUE;
 
     /**
-     * 返回订阅者优先级，越小优先级越高，默认是0
+     * 返回订阅者优先级，越大优先级越高，默认是0
      *
      * @return 优先级
      */
@@ -22,16 +22,16 @@ public interface EventSubscriber {
     }
 
     /**
-     * 执行事件
+     * 处理事件
      *
-     * @param event 事件对象
+     * @param eventModel 事件模型
      */
-    void fireEvent(Object event);
+    void handle(EventModel<Body> eventModel);
 
     /**
      * 所支持事件类型
      *
      * @return 支持的事件类型
      */
-    Class[] supportEventTypes();
+    Class<Body> getEventBodyClass();
 }

@@ -1,24 +1,23 @@
 package com.xuan.mix.bt.event.test;
 
+import com.xuan.mix.bt.event.EventModel;
 import com.xuan.mix.bt.event.EventSubscriber;
 
 /**
  * @author xuan
  * @since 2021/4/1
  */
-public class FirstSubscriber implements EventSubscriber {
+public class FirstSubscriber implements EventSubscriber<MyEventBody> {
 
     @Override
-    public void fireEvent(Object event) {
-        if (event instanceof MyEvent) {
-            MyEvent myEvent = (MyEvent)event;
-            System.out.println(myEvent.getName() + " by FirstSubscriber.");
-        }
+    public void handle(EventModel<MyEventBody> eventModel) {
+
+        System.out.println(eventModel.getEventBody().getName() + " by FirstSubscriber.");
     }
 
     @Override
-    public Class[] supportEventTypes() {
-        return new Class[] {MyEvent.class};
+    public Class<MyEventBody> getEventBodyClass() {
+        return MyEventBody.class;
     }
 
     @Override

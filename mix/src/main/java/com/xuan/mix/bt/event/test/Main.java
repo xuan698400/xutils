@@ -1,6 +1,10 @@
 package com.xuan.mix.bt.event.test;
 
+import com.xuan.mix.bt.event.EventBus;
+import com.xuan.mix.bt.event.EventModel;
 import com.xuan.mix.bt.event.EventPublisher;
+import com.xuan.mix.bt.event.core.DefaultEventBus;
+import com.xuan.mix.bt.event.core.DefaultEventPublisher;
 
 /**
  * @author xuan
@@ -8,14 +12,26 @@ import com.xuan.mix.bt.event.EventPublisher;
  */
 public class Main {
 
-    public static void main(String[] args) {
-        EventPublisher.instance().subscribe(new SecondSubcriber());
-        EventPublisher.instance().subscribe(new FirstSubscriber());
+    public static void main(String[] args) throws Exception {
+        //构建事件总线
+        EventBus eventBus = new DefaultEventBus();
 
-        ////
-        MyEvent myEvent = new MyEvent();
-        myEvent.setName("你好");
-        EventPublisher.instance().asyncFire(myEvent);
+        //构建订阅者 & 订阅到事件总线
+        FirstSubscriber firstSubscriber = new FirstSubscriber();
+        SecondSubcriber secondSubcriber = new SecondSubcriber();
+        eventBus.addSubscriber(firstSubscriber);
+        eventBus.addSubscriber(secondSubcriber);
+
+        //构建发布者
+        EventPublisher eventPublisher = new DefaultEventPublisher(eventBus);
+
+        //构建事件模型
+        MyEventBody myEventBody = new MyEventBody();
+        myEventBody.setName("xuan");
+        EventModel<MyEventBody> eventModel = new EventModel<>(myEventBody);
+
+        //发布操作
+        eventPublisher.publish(eventModel);
     }
 
 }
