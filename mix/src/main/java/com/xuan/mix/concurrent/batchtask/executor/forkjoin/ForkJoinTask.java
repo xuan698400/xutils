@@ -1,7 +1,9 @@
-package com.xuan.mix.concurrent.listtask.core;
+package com.xuan.mix.concurrent.batchtask.executor.forkjoin;
 
-import com.xuan.mix.concurrent.listtask.callback.ListTaskCallable;
-import com.xuan.mix.concurrent.listtask.config.ListTaskConfig;
+import com.xuan.mix.concurrent.batchtask.BatchSubTaskResult;
+import com.xuan.mix.concurrent.batchtask.BatchTaskCallable;
+import com.xuan.mix.concurrent.batchtask.BatchTaskConfig;
+import com.xuan.mix.concurrent.batchtask.BatchTaskResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +18,13 @@ import java.util.concurrent.RecursiveTask;
  * @author xuan
  * @date 17/8/29
  */
-public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
+public class ForkJoinTask<T, R> extends RecursiveTask<BatchTaskResult<R>> {
     private static final long serialVersionUID = 1;
 
     /**
      * 配置参数
      */
-    private ListTaskConfig config;
+    private BatchTaskConfig config;
 
     /**
      * 任务需要处理的原始数据
@@ -32,7 +34,7 @@ public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
     /**
      * 用户逻辑回调
      */
-    private ListTaskCallable<T, R> callable;
+    private BatchTaskCallable<T, R> callable;
 
     /**
      * 构造函数
@@ -41,15 +43,15 @@ public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
      * @param callable   逻辑处理回调
      * @param config     配置参数
      */
-    public ListTask(List<T> originList, ListTaskCallable<T, R> callable, ListTaskConfig config) {
+    public ForkJoinTask(List<T> originList, BatchTaskCallable<T, R> callable, BatchTaskConfig config) {
         if (null == originList || originList.size() == 0) {
-            throw new RuntimeException("[ListTask-ListTask] originList is empty.");
+            throw new RuntimeException("[ForkJoinTask-ForkJoinTask] originList is empty.");
         }
         if (null == callable) {
-            throw new RuntimeException("[ListTask-ListTask] callable is null.");
+            throw new RuntimeException("[ForkJoinTask-ForkJoinTask] callable is null.");
         }
         if (null == config) {
-            throw new RuntimeException("[ListTask-ListTask] config is null.");
+            throw new RuntimeException("[ForkJoinTask-ForkJoinTask] config is null.");
         }
         this.originList = originList;
         this.callable = callable;
@@ -57,18 +59,18 @@ public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
     }
 
     @Override
-    protected ListTaskResult<R> compute() {
+    protected BatchTaskResult<R> compute() {
         if (originList.size() <= config.getSubOriginListSize()) {
             //如果原数据足够少，即小于配置参数指定的单个任务的原数据数量时，进行用户的业务逻辑回调执行，拿到结果
-            List<R> resultList = callable.call(originList);
-            ListTaskResult<R> result = new ListTaskResult<>();
-            result.setList(resultList);
+            List<BatchSubTaskResult<R>> resultList = callable.call(originList);
+            BatchTaskResult<R> result = new BatchTaskResult<>();
+            result.setSubTaskResultList(resultList);
             return result;
         } else {
             //如果原数据足够多，那么需要进行任务拆分，根据配置，拆分成多个子任务
             //例如：原数据=20个，用户配置子任务的原数据数量subOriginListSize=3
             //那么：会拆分任务：3，3，3，3，3，3，2一共7个子任务
-            List<ListTask<T, R>> taskList = new ArrayList<>();
+            List<ForkJoinTask<T, R>> taskList = new ArrayList<>();
             int subTaskSize = originList.size() / config.getSubOriginListSize();
             if (originList.size() % config.getSubOriginListSize() > 0) {
                 //未除尽有余数，需要额外再加一个
@@ -82,13 +84,13 @@ public class ListTask<T, R> extends RecursiveTask<ListTaskResult<R>> {
                     end = originList.size();
                 }
                 List<T> subList = originList.subList(start, end);
-                ListTask<T, R> subTask = new ListTask<>(subList, callable, config);
+                ForkJoinTask<T, R> subTask = new ForkJoinTask<>(subList, callable, config);
                 subTask.fork();
                 taskList.add(subTask);
             }
             //合并任务执行结果
-            ListTaskResult<R> result = new ListTaskResult<>();
-            for (ListTask<T, R> task : taskList) {
+            BatchTaskResult<R> result = new BatchTaskResult<>();
+            for (ForkJoinTask<T, R> task : taskList) {
                 result.mergeFrom(task.join());
             }
             return result;

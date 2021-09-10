@@ -1,4 +1,4 @@
-package com.xuan.mix.concurrent.listtask.callback;
+package com.xuan.mix.concurrent.batchtask;
 
 import java.util.List;
 
@@ -9,12 +9,12 @@ import java.util.List;
  * @author xuan
  * @date 17/8/29
  */
-public interface ListTaskCallable<T, R> {
+public interface BatchTaskCallable<T, R> {
     /**
      * 回调，入参是需要处理的数据，返回是处理后的数据
      *
      * @param subList 切割子列表
      * @return 处理结果
      */
-    List<R> call(List<T> subList);
+    List<BatchSubTaskResult<R>> call(List<T> subList);
 }

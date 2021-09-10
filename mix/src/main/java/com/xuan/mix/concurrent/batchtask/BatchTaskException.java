@@ -1,4 +1,4 @@
-package com.xuan.mix.concurrent.listtask.core;
+package com.xuan.mix.concurrent.batchtask;
 
 /**
  * 执行ListTask异常
@@ -7,7 +7,7 @@ package com.xuan.mix.concurrent.listtask.core;
  * @author xuan
  * @date 17/8/29
  */
-public class ListTaskException extends Throwable {
+public class BatchTaskException extends Throwable {
     private static final long serialVersionUID = 1;
 
     /**
@@ -15,7 +15,7 @@ public class ListTaskException extends Throwable {
      */
     private Throwable realException;
 
-    public ListTaskException(Throwable cause) {
+    public BatchTaskException(Throwable cause) {
         super(cause.getMessage(), cause);
         this.realException = cause;
     }

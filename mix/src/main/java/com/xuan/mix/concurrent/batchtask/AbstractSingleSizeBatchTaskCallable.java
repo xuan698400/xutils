@@ -1,4 +1,4 @@
-package com.xuan.mix.concurrent.listtask.callback;
+package com.xuan.mix.concurrent.batchtask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.List;
  * @author xuan
  * @date 17/8/29
  */
-public abstract class AbstractSingleSizeListTaskCallable<T, R> extends AbstractListTaskCallable<T, R> {
+public abstract class AbstractSingleSizeBatchTaskCallable<T, R> extends AbstractBatchTaskCallable<T, R> {
 
     @Override
-    public List<R> call(List<T> list) {
-        List<R> rList = new ArrayList<>();
+    public List<BatchSubTaskResult<R>> call(List<T> list) {
+        List<BatchSubTaskResult<R>> rList = new ArrayList<>();
         for (T t : list) {
             rList.add(call(t));
         }
@@ -28,6 +28,6 @@ public abstract class AbstractSingleSizeListTaskCallable<T, R> extends AbstractL
      * @param t
      * @return
      */
-    protected abstract R call(T t);
+    protected abstract BatchSubTaskResult<R> call(T t);
 
 }

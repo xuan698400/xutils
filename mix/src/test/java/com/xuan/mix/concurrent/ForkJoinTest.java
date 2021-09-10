@@ -1,9 +1,9 @@
 package com.xuan.mix.concurrent;
 
-import com.xuan.mix.concurrent.listtask.ListTaskExecutorFactory;
-import com.xuan.mix.concurrent.listtask.callback.AbstractSingleSizeListTaskCallable;
-import com.xuan.mix.concurrent.listtask.core.ListTaskException;
-import com.xuan.mix.concurrent.listtask.executor.ListTaskExecutor;
+import com.xuan.mix.concurrent.batchtask.BatchTaskExecutorFactory;
+import com.xuan.mix.concurrent.batchtask.AbstractSingleSizeBatchTaskCallable;
+import com.xuan.mix.concurrent.batchtask.BatchTaskException;
+import com.xuan.mix.concurrent.batchtask.BatchTaskExecutor;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ForkJoinTest {
 
-    ListTaskExecutor executor = ListTaskExecutorFactory.getExecutor();
+    BatchTaskExecutor executor = BatchTaskExecutorFactory.getExecutor();
 
     @Test
     public void testListTask() throws Throwable {
@@ -48,11 +48,11 @@ public class ForkJoinTest {
      *
      * @return
      */
-    private void run2() throws ListTaskException {
+    private void run2() throws BatchTaskException {
         //List<String> list = initList();
         ////
         //long start = System.currentTimeMillis();
-        //List<String> resultList = executor.execute(list, new AbstractSingleSizeListTaskCallable() {
+        //List<String> resultList = executor.execute(list, new AbstractSingleSizeBatchTaskCallable() {
         //    @Override
         //    protected String call(String s) {
         //        return doThing(s);
@@ -66,20 +66,20 @@ public class ForkJoinTest {
     /**
      * 线程池
      */
-    private void run3() throws ListTaskException {
-        List<String> list = initList();
-        //
-        long start = System.currentTimeMillis();
-        ListTaskExecutor<String, String> executor = ListTaskExecutorFactory.getCyclicBarrierExecutor();
-        List<String> resultList = executor.execute(list, new AbstractSingleSizeListTaskCallable<String, String>() {
-            @Override
-            protected String call(String s) {
-                return doThing(s);
-            }
-        });
-        //
-        System.out.println("++++++++++run3-time:" + (System.currentTimeMillis() - start));
-        System.out.println("++++++++++run3-result:" + resultList);
+    private void run3() throws BatchTaskException {
+        //List<String> list = initList();
+        ////
+        //long start = System.currentTimeMillis();
+        //BatchTaskExecutor<String, String> executor = BatchTaskExecutorFactory.getCyclicBarrierExecutor();
+        //List<String> resultList = executor.execute(list, new AbstractSingleSizeBatchTaskCallable<String, String>() {
+        //    @Override
+        //    protected String call(String s) {
+        //        return doThing(s);
+        //    }
+        //});
+        ////
+        //System.out.println("++++++++++run3-time:" + (System.currentTimeMillis() - start));
+        //System.out.println("++++++++++run3-result:" + resultList);
     }
 
     /**
