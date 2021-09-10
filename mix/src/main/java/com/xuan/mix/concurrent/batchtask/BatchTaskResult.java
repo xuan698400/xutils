@@ -71,10 +71,10 @@ public class BatchTaskResult<R> {
         }
 
         for (BatchSubTaskResult<R> subTaskResult : subTaskResultList) {
-            if (null == subTaskResult || !subTaskResult.isSuccess() || null == subTaskResult.getData()) {
+            if (null == subTaskResult || !subTaskResult.isSuccess() || null == subTaskResult.getList()) {
                 continue;
             }
-            resultDataList.add(subTaskResult.getData());
+            resultDataList.addAll(subTaskResult.getList());
         }
         return resultDataList;
     }

@@ -1,6 +1,5 @@
 package com.xuan.mix.concurrent.batchtask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,20 +13,18 @@ import java.util.List;
 public abstract class AbstractSingleSizeBatchTaskCallable<T, R> extends AbstractBatchTaskCallable<T, R> {
 
     @Override
-    public List<BatchSubTaskResult<R>> call(List<T> list) {
-        List<BatchSubTaskResult<R>> rList = new ArrayList<>();
-        for (T t : list) {
-            rList.add(call(t));
+    public void call(List<T> subList, BatchSubTaskResult<R> subTaskResult) {
+        for (T t : subList) {
+            call(t, subTaskResult);
         }
-        return rList;
     }
 
     /**
      * 子类实现，处理单个原始数据
      *
-     * @param t
-     * @return
+     * @param t             单个数据
+     * @param subTaskResult 处理结果
      */
-    protected abstract BatchSubTaskResult<R> call(T t);
+    protected abstract void call(T t, BatchSubTaskResult<R> subTaskResult);
 
 }

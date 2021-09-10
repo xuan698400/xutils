@@ -10,11 +10,12 @@ import java.util.List;
  * @date 17/8/29
  */
 public interface BatchTaskCallable<T, R> {
+
     /**
-     * 回调，入参是需要处理的数据，返回是处理后的数据
+     * 任务处理回调
      *
-     * @param subList 切割子列表
-     * @return 处理结果
+     * @param subList       分批数据集合
+     * @param subTaskResult 处理后结果模型
      */
-    List<BatchSubTaskResult<R>> call(List<T> subList);
+    void call(List<T> subList, BatchSubTaskResult<R> subTaskResult);
 }

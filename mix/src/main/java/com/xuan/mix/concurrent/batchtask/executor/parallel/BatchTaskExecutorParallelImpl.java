@@ -2,7 +2,6 @@ package com.xuan.mix.concurrent.batchtask.executor.parallel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -59,18 +58,17 @@ public class BatchTaskExecutorParallelImpl<T, R> implements BatchTaskExecutor<T,
 
         //2. 数据切割
         List<List<T>> subOriginLists = ParallelTaskHelper.split(originList, config.getSubOriginListSize());
+        List<BatchSubTaskResult<R>> subTaskResultList = new ArrayList<>();
+        result.setSubTaskResultList(subTaskResultList);
 
         //3. 分批任务构建
         CountDownLatch countDownLatch = new CountDownLatch(subOriginLists.size());
         List<ParallelTask> parallelTaskList = new ArrayList<>();
-        List<BatchSubTaskResult<R>> allSubTaskResultList = new CopyOnWriteArrayList<>();
         for (List<T> subOriginList : subOriginLists) {
-            ParallelTask parallelTask = new ParallelTask(countDownLatch, () -> {
-                List<BatchSubTaskResult<R>> subTaskResultList = callable.call(subOriginList);
-                if (null != subTaskResultList && !subTaskResultList.isEmpty()) {
-                    allSubTaskResultList.addAll(subTaskResultList);
-                }
-            });
+            BatchSubTaskResult<R> subTaskResult = BatchSubTaskResult.of();
+            subTaskResultList.add(subTaskResult);
+            ParallelTask parallelTask = new ParallelTask(countDownLatch,
+                () -> callable.call(subOriginList, subTaskResult));
             parallelTaskList.add(parallelTask);
         }
 

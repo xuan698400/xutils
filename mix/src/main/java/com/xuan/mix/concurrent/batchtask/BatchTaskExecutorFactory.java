@@ -1,6 +1,5 @@
 package com.xuan.mix.concurrent.batchtask;
 
-import com.xuan.mix.concurrent.batchtask.executor.forkjoin.BatchTaskExecutorForkJoinImpl;
 import com.xuan.mix.concurrent.batchtask.executor.parallel.BatchTaskExecutorParallelImpl;
 
 /**
@@ -12,21 +11,21 @@ import com.xuan.mix.concurrent.batchtask.executor.parallel.BatchTaskExecutorPara
  */
 public class BatchTaskExecutorFactory {
 
-    /**
-     * 获取ListTask执行器
-     *
-     * @return
-     */
-    public static <T, R> BatchTaskExecutor<T, R> getExecutor() {
-        return new BatchTaskExecutorForkJoinImpl<>(10);
-    }
+    ///**
+    // * 获取ListTask执行器
+    // *
+    // * @return
+    // */
+    //public static <T, R> BatchTaskExecutor<T, R> getExecutor() {
+    //    return new BatchTaskExecutorForkJoinImpl<>(10);
+    //}
 
     /**
      * 获取ListTask执行器
      *
      * @return
      */
-    public static <T, R> BatchTaskExecutor<T, R> getParalleExecutor() {
+    public static <T, R> BatchTaskExecutor<T, R> getParallelExecutor() {
         return new BatchTaskExecutorParallelImpl<>();
     }
 

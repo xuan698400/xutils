@@ -18,7 +18,7 @@ public class Main {
     private static BatchTaskExecutor<OriginClass, TargetClass> listTaskExecutor;
 
     static {
-        listTaskExecutor = BatchTaskExecutorFactory.getParalleExecutor();
+        listTaskExecutor = BatchTaskExecutorFactory.getParallelExecutor();
     }
 
     public static void main(String[] args) {
@@ -34,14 +34,19 @@ public class Main {
         BatchTaskResult<TargetClass> targetList = listTaskExecutor.execute(originList,
             new AbstractSingleSizeBatchTaskCallable<OriginClass, TargetClass>() {
                 @Override
-                protected BatchSubTaskResult<TargetClass> call(OriginClass originClass) {
-                    BatchSubTaskResult<TargetClass> subResult = new BatchSubTaskResult<>();
+                protected void call(OriginClass originClass,
+                    BatchSubTaskResult<TargetClass> subTaskResult) {
                     sleep();
                     TargetClass tc = new TargetClass();
                     tc.setName(originClass.getName() + "_加工");
-                    subResult.setData(tc);
+
+                    if (null == subTaskResult.getList()) {
+                        subTaskResult.setList(new ArrayList<>());
+                    }
+                    subTaskResult.setSuccess(true);
+                    subTaskResult.getList().add(tc);
+
                     System.out.println("加工完成" + originClass.getName());
-                    return subResult;
                 }
             }, 1, 5);
         System.out.println(targetList);

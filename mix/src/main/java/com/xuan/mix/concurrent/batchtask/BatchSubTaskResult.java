@@ -1,5 +1,7 @@
 package com.xuan.mix.concurrent.batchtask;
 
+import java.util.List;
+
 /**
  * 分批子任务的处理结果
  *
@@ -14,7 +16,7 @@ public class BatchSubTaskResult<R> {
 
     private Exception exception;
 
-    private R data;
+    private List<R> list;
 
     public boolean isSuccess() {
         return success;
@@ -22,6 +24,7 @@ public class BatchSubTaskResult<R> {
 
     public void setSuccess(boolean success) {
         this.success = success;
+        this.setResultMsg("success");
     }
 
     public String getResultMsg() {
@@ -32,12 +35,12 @@ public class BatchSubTaskResult<R> {
         this.resultMsg = resultMsg;
     }
 
-    public R getData() {
-        return data;
+    public List<R> getList() {
+        return list;
     }
 
-    public void setData(R data) {
-        this.data = data;
+    public void setList(List<R> list) {
+        this.list = list;
     }
 
     public Exception getException() {
@@ -46,6 +49,13 @@ public class BatchSubTaskResult<R> {
 
     public void setException(Exception exception) {
         this.exception = exception;
+    }
+
+    public static <R> BatchSubTaskResult<R> of() {
+        BatchSubTaskResult<R> result = new BatchSubTaskResult<>();
+        result.setSuccess(false);
+        result.setResultMsg("Result init.");
+        return result;
     }
 
 }
