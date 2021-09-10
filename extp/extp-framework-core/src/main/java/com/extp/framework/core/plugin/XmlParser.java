@@ -68,7 +68,7 @@ public class XmlParser {
         if (null != nodeList && nodeList.getLength() > 0) {
             for (int i = 0, n = nodeList.getLength(); i < n; i++) {
                 Node childNode = nodeList.item(i);
-                if ("ext-impl".equals(childNode.getNodeName())) {
+                if ("ext-java".equals(childNode.getNodeName())) {
                     ExtImpl extImpl = parserExtImpl(childNode);
                     if (null != extImpl) {
                         extImplList.add(extImpl);
@@ -82,7 +82,7 @@ public class XmlParser {
     private static ExtImpl parserExtImpl(Node node) {
         ExtImpl extImpl = new ExtImpl();
         extImpl.setExt(getAttribute(node, "ext"));
-        extImpl.setImpl(getAttribute(node, "impl"));
+        extImpl.setImpl(getAttribute(node, "java"));
         return extImpl;
     }
 

@@ -1,4 +1,4 @@
-package com.xuan.mix.compile.impl;
+package com.xuan.mix.compile.java;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.tools.JavaCompiler;
+import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import com.xuan.mix.compile.CompileException;
-import com.xuan.mix.compile.CompileOption;
-import com.xuan.mix.compile.JavaSource;
+import com.xuan.mix.compile.CompileConfig;
+import com.xuan.mix.compile.Compiler;
+import com.xuan.mix.compile.SourceCode;
 
 /**
  * 使用JDK自带实现
@@ -20,19 +23,19 @@ import com.xuan.mix.compile.JavaSource;
  * @author xuan
  * @since 2020/10/19
  */
-public class JdkJavaCompiler implements com.xuan.mix.compile.JavaCompiler {
+public class JdkJavaCompiler implements Compiler {
 
     @Override
-    public Class<?> compile(JavaSource javaSource, CompileOption compileOption) {
+    public Class<?> compile(SourceCode sourceCode, CompileConfig compileOption) {
 
         //1. 保存Java代码到磁盘
-        writeCodeToCompileDir(compileOption.getCompileDir(), javaSource.getFullClassName(), javaSource.getSourceCode());
+        writeCodeToCompileDir(compileOption.getCompileDir(), sourceCode.getFullClassName(), sourceCode.getSourceCode());
 
         //2. 编译成class
-        doCompile(compileOption.getCompileDir(), javaSource.getFullClassName(), javaSource.getSourceCode());
+        doCompile(compileOption.getCompileDir(), sourceCode.getFullClassName(), sourceCode.getSourceCode());
 
         //3. 加载class到内存
-        return loadClass(compileOption.getCompileDir(), javaSource.getFullClassName());
+        return loadClass(compileOption.getCompileDir(), sourceCode.getFullClassName());
     }
 
     private void writeCodeToCompileDir(String dirPath, String fullClassName, String sourceCode) {
@@ -59,7 +62,7 @@ public class JdkJavaCompiler implements com.xuan.mix.compile.JavaCompiler {
     }
 
     private void doCompile(String dirPath, String fullClassName, String sourceCode) {
-        javax.tools.JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
         List<StringJavaFileObject> javaFileObjects = new ArrayList<>();
         StringJavaFileObject srcObject = new StringJavaFileObject(fullClassName,
@@ -68,7 +71,7 @@ public class JdkJavaCompiler implements com.xuan.mix.compile.JavaCompiler {
 
         Iterable<String> options = Arrays.asList("-d", dirPath);
 
-        javax.tools.JavaCompiler.CompilationTask task = compiler.getTask(
+        CompilationTask task = compiler.getTask(
             CompileLogHelper.getPrintWriter(dirPath), fileManager, null,
             options, null, javaFileObjects);
         boolean result = task.call();

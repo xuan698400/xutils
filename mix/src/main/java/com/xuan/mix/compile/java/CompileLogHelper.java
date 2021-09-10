@@ -1,4 +1,4 @@
-package com.xuan.mix.compile.impl;
+package com.xuan.mix.compile.java;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -100,7 +100,7 @@ public class FunctionManager {
         try {
             return Class.forName(impl);
         } catch (ClassNotFoundException e) {
-            LOG.error("FunctionManager_loadClass_ClassNotFoundException. impl:" + impl);
+            LOG.error("FunctionManager_loadClass_ClassNotFoundException. java:" + impl);
         }
         return null;
     }

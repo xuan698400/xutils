@@ -1,4 +1,4 @@
-package com.xuan.mix.compile.impl;
+package com.xuan.mix.compile.java;
 
 import java.net.MalformedURLException;
 import java.net.URL;

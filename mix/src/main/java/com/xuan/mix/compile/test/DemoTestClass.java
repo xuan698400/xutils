@@ -1,4 +1,4 @@
-package com.xuan.mix.compile;
+package com.xuan.mix.compile.test;
 
 /**
  * @author xuan

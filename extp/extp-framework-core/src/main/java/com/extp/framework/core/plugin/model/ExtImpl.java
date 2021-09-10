@@ -28,7 +28,7 @@ public class ExtImpl {
     public String toString() {
         return "ExtImpl{" +
             "ext='" + ext + '\'' +
-            ", impl='" + impl + '\'' +
+            ", java='" + impl + '\'' +
             '}';
     }
     

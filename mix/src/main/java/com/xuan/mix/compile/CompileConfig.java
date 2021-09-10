@@ -8,10 +8,10 @@ import java.io.File;
  * @author xuan
  * @since 2020/10/19
  */
-public class CompileOption {
+public class CompileConfig {
 
     /**
-     * class文件输出目录
+     * 编译时需要临时输出文件目录
      */
     private String compileDir = System.getProperty("user.dir") + File.separator
         + ".xUtils_compile_dir" + File.separator;

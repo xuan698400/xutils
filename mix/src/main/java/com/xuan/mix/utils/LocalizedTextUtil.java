@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Provides impl for localization in XWork.
+ * Provides java for localization in XWork.
  * <p>
  * <!-- START SNIPPET: searchorder --> Resource bundles are searched in the following order:
  * <p>
