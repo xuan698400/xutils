@@ -17,9 +17,9 @@ public class BatchTaskConfig {
     private int subOriginListSize = 1;
 
     /**
-     * 整个任务执行超时时间，单位：秒，默认5秒
+     * 整个任务执行超时时间，单位：毫秒，默认3秒
      */
-    private long timeoutSecond = 5;
+    private long timeout = 3000;
     /**
      * 用户可以自定义线程池
      */
@@ -33,12 +33,12 @@ public class BatchTaskConfig {
         this.subOriginListSize = subOriginListSize;
     }
 
-    public long getTimeoutSecond() {
-        return timeoutSecond;
+    public long getTimeout() {
+        return timeout;
     }
 
-    public void setTimeoutSecond(long timeoutSecond) {
-        this.timeoutSecond = timeoutSecond;
+    public void setTimeout(long timeout) {
+        this.timeout = timeout;
     }
 
     public ExecutorService getCustomExecutor() {

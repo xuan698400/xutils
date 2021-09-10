@@ -2,7 +2,6 @@ package com.xuan.mix.concurrent.batchtask;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 任务执行结果对象
@@ -27,7 +26,7 @@ public class BatchTaskResult<R> {
      */
     private List<BatchSubTaskResult<R>> subTaskResultList;
     /**
-     * 如果存在
+     * 整个任务级别异常
      */
     private Exception exception;
 
@@ -85,15 +84,15 @@ public class BatchTaskResult<R> {
      * @param from
      * @return to
      */
-    public BatchTaskResult<R> mergeFrom(BatchTaskResult<R> from) {
-        if (null == from || null == from.getSubTaskResultList() || from.getSubTaskResultList().size() == 0) {
-            return this;
-        }
-        if (null == this.getSubTaskResultList()) {
-            this.setSubTaskResultList(new CopyOnWriteArrayList<>());
-        }
-        this.getSubTaskResultList().addAll(from.getSubTaskResultList());
-        return this;
-    }
+    //public BatchTaskResult<R> mergeFrom(BatchTaskResult<R> from) {
+    //    if (null == from || null == from.getSubTaskResultList() || from.getSubTaskResultList().size() == 0) {
+    //        return this;
+    //    }
+    //    if (null == this.getSubTaskResultList()) {
+    //        this.setSubTaskResultList(new CopyOnWriteArrayList<>());
+    //    }
+    //    this.getSubTaskResultList().addAll(from.getSubTaskResultList());
+    //    return this;
+    //}
 
 }

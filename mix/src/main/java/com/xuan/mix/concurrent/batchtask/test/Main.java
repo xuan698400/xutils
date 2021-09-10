@@ -48,7 +48,7 @@ public class Main {
 
                     System.out.println("加工完成" + originClass.getName());
                 }
-            }, 1, 5);
+            }, 1, 5000);
         System.out.println(targetList);
         System.out.println("耗时：" + (System.currentTimeMillis() - start));
     }

@@ -40,66 +40,42 @@ public class BatchTaskExecutorParallelImpl<T, R> implements BatchTaskExecutor<T,
         BatchTaskResult<R> result = new BatchTaskResult<>();
 
         //1. 入参基本校验
-        if (null == originList || originList.isEmpty()) {
+        checkParams(result, originList, callable, config);
+        if (!result.isSuccess()) {
             return result;
         }
 
-        if (null == callable) {
-            result.setSuccess(false);
-            result.setResultMsg("callable is null.");
-            return result;
-        }
+        //2. 构建分批任务以及设置分批结果
+        Wrapper<R> wrapper = buildTaskAndResult(originList, callable, config);
 
-        if (null == config) {
-            result.setSuccess(false);
-            result.setResultMsg("config is null.");
-            return result;
-        }
-
-        //2. 数据切割
-        List<List<T>> subOriginLists = ParallelTaskHelper.split(originList, config.getSubOriginListSize());
-        List<BatchSubTaskResult<R>> subTaskResultList = new ArrayList<>();
-        result.setSubTaskResultList(subTaskResultList);
-
-        //3. 分批任务构建
-        CountDownLatch countDownLatch = new CountDownLatch(subOriginLists.size());
-        List<ParallelTask> parallelTaskList = new ArrayList<>();
-        for (List<T> subOriginList : subOriginLists) {
-            BatchSubTaskResult<R> subTaskResult = BatchSubTaskResult.of();
-            subTaskResultList.add(subTaskResult);
-            ParallelTask parallelTask = new ParallelTask(countDownLatch,
-                () -> callable.call(subOriginList, subTaskResult));
-            parallelTaskList.add(parallelTask);
-        }
-
-        //4. 提交任务到线程池
+        //3. 提交任务到线程池
         long startTime = System.currentTimeMillis();
         List<Future> futureList = new ArrayList<>();
-        for (ParallelTask parallelTask : parallelTaskList) {
+        for (ParallelTask subTask : wrapper.getSubTaskList()) {
             ExecutorService executor = null != config.getCustomExecutor() ? config.getCustomExecutor()
                 : defaultExecutor;
-            Future future = executor.submit(parallelTask);
+            Future future = executor.submit(subTask);
             futureList.add(future);
         }
 
-        // 5. 等待所有任务执行完毕（或者超时）
+        // 4. 等待所有任务执行完毕（或者超时）
         try {
-            countDownLatch.await((config.getTimeoutSecond() * 1000 - (System.currentTimeMillis() - startTime)),
+            wrapper.getCountDownLatch().await((config.getTimeout() - (System.currentTimeMillis() - startTime)),
                 TimeUnit.MILLISECONDS);
+            if (wrapper.getCountDownLatch().getCount() > 0) {
+                for (Future future : futureList) {
+                    if (null != future && !future.isDone()) {
+                        future.cancel(true);
+                    }
+                }
+                result.setSuccess(false);
+                result.setResultMsg("Timeout, some sub tasks are not executed.");
+            }
         } catch (InterruptedException ie) {
             //Ignore
         }
-        // 如果countDownLatch计数器没有完成，说明超时，取消其他任务
-        if (countDownLatch.getCount() > 0) {
-            for (Future future : futureList) {
-                if (null != future && !future.isDone()) {
-                    future.cancel(true);
-                }
-            }
-            result.setSuccess(false);
-            result.setResultMsg("Timeout, some subtasks are not executed.");
-        }
 
+        result.setSubTaskResultList(wrapper.getSubTaskResultList());
         return result;
     }
 
@@ -108,8 +84,72 @@ public class BatchTaskExecutorParallelImpl<T, R> implements BatchTaskExecutor<T,
         int timeout) {
         BatchTaskConfig config = new BatchTaskConfig();
         config.setSubOriginListSize(subOriginListSize);
-        config.setTimeoutSecond(timeout);
+        config.setTimeout(timeout);
         return execute(originList, callable, config);
+    }
+
+    private void checkParams(BatchTaskResult<R> result, List<T> originList,
+        BatchTaskCallable<T, R> callable,
+        BatchTaskConfig config) {
+
+        if (null == originList || originList.isEmpty()) {
+            result.setSuccess(false);
+            result.setResultMsg("originList is empty.");
+            return;
+        }
+
+        if (null == callable) {
+            result.setSuccess(false);
+            result.setResultMsg("callable is null.");
+            return;
+        }
+
+        if (null == config) {
+            result.setSuccess(false);
+            result.setResultMsg("config is null.");
+            return;
+        }
+
+        if (config.getTimeout() <= 0) {
+            result.setSuccess(false);
+            result.setResultMsg("Timeout less than or equal to 0.");
+            return;
+        }
+
+        if (config.getSubOriginListSize() <= 0) {
+            result.setSuccess(false);
+            result.setResultMsg("SubOriginListSize less than or equal to 0.");
+        }
+    }
+
+    private Wrapper<R> buildTaskAndResult(List<T> originList,
+        BatchTaskCallable<T, R> callable,
+        BatchTaskConfig config) {
+
+        Wrapper<R> wrapper = new Wrapper();
+
+        List<ParallelTask> subTaskList = new ArrayList<>();
+        wrapper.setSubTaskList(subTaskList);
+
+        List<BatchSubTaskResult<R>> subTaskResultList = new ArrayList<>();
+        wrapper.setSubTaskResultList(subTaskResultList);
+
+        //切割数据
+        List<List<T>> subOriginLists = ParallelTaskHelper.split(originList, config.getSubOriginListSize());
+
+        CountDownLatch countDownLatch = new CountDownLatch(subOriginLists.size());
+        wrapper.setCountDownLatch(countDownLatch);
+
+        //构建任务和结果
+        for (List<T> subOriginList : subOriginLists) {
+            BatchSubTaskResult<R> subTaskResult = BatchSubTaskResult.of();
+            subTaskResultList.add(subTaskResult);
+            ParallelTask parallelTask = new ParallelTask(countDownLatch,
+                () -> callable.call(subOriginList, subTaskResult));
+            subTaskList.add(parallelTask);
+        }
+
+        return wrapper;
     }
 
 }
