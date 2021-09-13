@@ -60,7 +60,7 @@ public class ParallelTask implements Runnable {
             ParallelThreadLocal.set(bizContext);
             runnable.run();
         } catch (Exception e) {
-
+            //Ignore
         } finally {
             //每执行一次一定要把计数器减一次
             if (status.compareAndSet(RUNNING, COMPLETE)) {

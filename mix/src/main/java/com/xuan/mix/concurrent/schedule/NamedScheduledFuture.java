@@ -17,7 +17,7 @@ public class NamedScheduledFuture<V> implements RunnableScheduledFuture<V> {
     /**
      * 任务名称
      */
-    private final String       name;
+    private final String name;
     /**
      * 任务类
      */
