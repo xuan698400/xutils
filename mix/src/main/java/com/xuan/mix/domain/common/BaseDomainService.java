@@ -1,14 +1,15 @@
-package com.xuan.mix.common.invoker;
+package com.xuan.mix.domain.common;
 
 import com.xuan.mix.common.exception.BizException;
+import com.xuan.mix.common.invoker.BizCommond;
+import com.xuan.mix.common.invoker.BizCommondResult;
+import com.xuan.mix.common.invoker.BizCommondResultBuilder;
 
 /**
- * 使用该call方法包装，可以进行手动AOP拦截（改装版策略模式）
- *
  * @author xuan
- * @since 2021/1/19
+ * @since 2021/9/27
  */
-public class BizInvoker {
+public class BaseDomainService {
 
     public static <T> BizCommondResult<T> call(BizCommond<T> commond) {
         try {
