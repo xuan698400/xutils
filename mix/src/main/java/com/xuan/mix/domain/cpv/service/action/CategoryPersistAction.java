@@ -11,13 +11,17 @@ import org.springframework.stereotype.Component;
  * @since 2021/9/28
  */
 @Component
-public class CategorySaveAction {
+public class CategoryPersistAction {
 
     @Resource
     private CategoryRepository categoryRepository;
 
-    public Long save(Category category) {
+    public Long add(Category category) {
         return categoryRepository.add(category);
+    }
+
+    public void update(Category category) {
+        categoryRepository.update(category);
     }
 
 }

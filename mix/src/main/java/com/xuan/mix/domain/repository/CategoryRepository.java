@@ -9,4 +9,6 @@ import com.xuan.mix.domain.cpv.model.Category;
 public interface CategoryRepository {
 
     Long add(Category category);
+
+    void update(Category category);
 }

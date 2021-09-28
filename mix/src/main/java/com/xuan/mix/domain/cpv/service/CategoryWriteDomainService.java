@@ -9,4 +9,6 @@ import com.xuan.mix.domain.cpv.model.Category;
 public interface CategoryWriteDomainService {
 
     Long add(Category category);
+
+    void rename(Category category);
 }

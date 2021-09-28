@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @since 2021/9/28
  */
 @Component
-public class CategoryAddCheckAction {
+public class CategoryCheckAction {
 
     public void check(Category category) {
 
