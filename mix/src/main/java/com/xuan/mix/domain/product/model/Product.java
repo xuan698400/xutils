@@ -1,6 +1,7 @@
 package com.xuan.mix.domain.product.model;
 
 import java.util.List;
+import java.util.Set;
 
 import com.xuan.mix.domain.cpv.model.Category;
 
@@ -16,15 +17,21 @@ public class Product {
 
     private String subTitle;
 
-    private Long spuId;
+    private Spu spu;
 
     private Category category;
 
     private List<ProductImage> imageList;
 
+    private List<ProductVideo> videoList;
+
     private ProductStatus status;
 
     private List<ProductSku> skuList;
+
+    private String desc;
+
+    private Set<Integer> tagSet;
 
     public Long getId() {
         return id;
@@ -50,12 +57,12 @@ public class Product {
         this.subTitle = subTitle;
     }
 
-    public Long getSpuId() {
-        return spuId;
+    public Spu getSpu() {
+        return spu;
     }
 
-    public void setSpuId(Long spuId) {
-        this.spuId = spuId;
+    public void setSpu(Spu spu) {
+        this.spu = spu;
     }
 
     public Category getCategory() {
@@ -74,6 +81,14 @@ public class Product {
         this.imageList = imageList;
     }
 
+    public List<ProductVideo> getVideoList() {
+        return videoList;
+    }
+
+    public void setVideoList(List<ProductVideo> videoList) {
+        this.videoList = videoList;
+    }
+
     public ProductStatus getStatus() {
         return status;
     }
@@ -88,6 +103,22 @@ public class Product {
 
     public void setSkuList(List<ProductSku> skuList) {
         this.skuList = skuList;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Set<Integer> getTagSet() {
+        return tagSet;
+    }
+
+    public void setTagSet(Set<Integer> tagSet) {
+        this.tagSet = tagSet;
     }
 
 }

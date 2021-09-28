@@ -16,6 +16,8 @@ public class ProductSku {
 
     private List<AttributePair> attributePairList;
 
+    private Inventory inventory;
+
     public Long getId() {
         return id;
     }
@@ -38,6 +40,14 @@ public class ProductSku {
 
     public void setAttributePairList(List<AttributePair> attributePairList) {
         this.attributePairList = attributePairList;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
 }
