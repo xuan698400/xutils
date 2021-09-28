@@ -6,5 +6,5 @@ package com.xuan.mix.domain.common;
  */
 public interface ExceptionCode {
 
-    String CATEGORY_ADD = "CATEGORY_ADD";
+    String CATEGORY = "CATEGORY";
 }

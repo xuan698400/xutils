@@ -11,4 +11,6 @@ public interface CategoryWriteDomainService {
     Long add(Category category);
 
     void rename(Category category);
+
+    void delete(Category category);
 }

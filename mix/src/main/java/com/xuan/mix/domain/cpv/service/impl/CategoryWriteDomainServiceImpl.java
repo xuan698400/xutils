@@ -36,4 +36,10 @@ public class CategoryWriteDomainServiceImpl extends BaseDomainService implements
         categoryPersistAction.update(category);
     }
 
+    @Override
+    public void delete(Category category) {
+        categoryCheckAction.checkDelete(category);
+        categoryPersistAction.delete(category);
+    }
+
 }

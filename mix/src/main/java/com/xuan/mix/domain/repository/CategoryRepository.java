@@ -11,4 +11,6 @@ public interface CategoryRepository {
     Long add(Category category);
 
     void update(Category category);
+
+    void delete(Category category);
 }

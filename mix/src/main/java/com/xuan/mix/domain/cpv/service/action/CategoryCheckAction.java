@@ -15,11 +15,21 @@ public class CategoryCheckAction {
     public void check(Category category) {
 
         if (null == category) {
-            throw new BizException(ExceptionCode.CATEGORY_ADD, "category is null");
+            throw new BizException(ExceptionCode.CATEGORY, "category is null");
         }
 
         if (null == category.getName() || category.getName().trim().length() == 0) {
-            throw new BizException(ExceptionCode.CATEGORY_ADD, "category.getName is empty");
+            throw new BizException(ExceptionCode.CATEGORY, "category.getName is empty");
+        }
+    }
+
+    public void checkDelete(Category category) {
+        if (null == category) {
+            throw new BizException(ExceptionCode.CATEGORY, "category is null");
+        }
+
+        if (null == category.getId()) {
+            throw new BizException(ExceptionCode.CATEGORY, "category.getId is null");
         }
     }
 

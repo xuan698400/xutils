@@ -24,4 +24,8 @@ public class CategoryPersistAction {
         categoryRepository.update(category);
     }
 
+    public void delete(Category category) {
+        categoryRepository.delete(category);
+    }
+
 }
