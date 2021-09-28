@@ -1,12 +1,12 @@
-package com.xuan.mix.domain.cpv.service;
+package com.xuan.mix.domain.repository;
 
 import com.xuan.mix.domain.cpv.model.Category;
 
 /**
  * @author xuan
- * @since 2021/9/27
+ * @since 2021/9/28
  */
-public interface CategoryWriteDomainService {
+public interface CategoryRepository {
 
     Long add(Category category);
 }

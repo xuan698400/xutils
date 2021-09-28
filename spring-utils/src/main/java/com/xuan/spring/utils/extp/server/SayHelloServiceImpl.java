@@ -8,13 +8,11 @@ import com.xuan.spring.utils.extp.core.BizExtMgr;
 import com.xuan.spring.utils.extp.model.BizExt;
 import com.xuan.spring.utils.extp.sdk.SayHelloExt1;
 import com.xuan.spring.utils.extp.sdk.SayHelloExt2;
-import org.springframework.stereotype.Service;
 
 /**
  * @author xuan
  * @since 2021/2/25
  */
-@Service
 public class SayHelloServiceImpl implements SayHelloService {
 
     @Resource
