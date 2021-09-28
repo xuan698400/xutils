@@ -1,4 +1,4 @@
-package com.xuan.mix.domain.repository;
+package com.xuan.mix.domain.cpv.repository;
 
 import com.xuan.mix.domain.cpv.model.Category;
 

@@ -3,7 +3,7 @@ package com.xuan.mix.domain.cpv.service.action;
 import javax.annotation.Resource;
 
 import com.xuan.mix.domain.cpv.model.Category;
-import com.xuan.mix.domain.repository.CategoryRepository;
+import com.xuan.mix.domain.cpv.repository.CategoryRepository;
 import org.springframework.stereotype.Component;
 
 /**
