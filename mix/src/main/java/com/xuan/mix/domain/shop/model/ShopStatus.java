@@ -1,4 +1,4 @@
-package com.xuan.mix.domain.product.model;
+package com.xuan.mix.domain.shop.model;
 
 import com.xuan.mix.domain.share.model.Status;
 
@@ -6,6 +6,6 @@ import com.xuan.mix.domain.share.model.Status;
  * @author xuan
  * @since 2021/9/28
  */
-public class ProductStatus extends Status {
+public class ShopStatus extends Status {
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.xuan.mix.domain.cpv.model.Category;
+import com.xuan.mix.domain.share.model.Image;
+import com.xuan.mix.domain.share.model.Video;
 
 /**
  * @author xuan
@@ -21,9 +23,9 @@ public class Product {
 
     private Category category;
 
-    private List<ProductImage> imageList;
+    private List<Image> imageList;
 
-    private List<ProductVideo> videoList;
+    private List<Video> videoList;
 
     private ProductStatus status;
 
@@ -73,19 +75,19 @@ public class Product {
         this.category = category;
     }
 
-    public List<ProductImage> getImageList() {
+    public List<Image> getImageList() {
         return imageList;
     }
 
-    public void setImageList(List<ProductImage> imageList) {
+    public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
     }
 
-    public List<ProductVideo> getVideoList() {
+    public List<Video> getVideoList() {
         return videoList;
     }
 
-    public void setVideoList(List<ProductVideo> videoList) {
+    public void setVideoList(List<Video> videoList) {
         this.videoList = videoList;
     }
 

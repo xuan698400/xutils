@@ -1,4 +1,4 @@
-package com.xuan.mix.domain.product.model;
+package com.xuan.mix.domain.share.model;
 
 import java.math.BigDecimal;
 import java.util.Currency;

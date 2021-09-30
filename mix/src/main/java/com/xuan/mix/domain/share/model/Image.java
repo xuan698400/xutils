@@ -1,10 +1,10 @@
-package com.xuan.mix.domain.product.model;
+package com.xuan.mix.domain.share.model;
 
 /**
  * @author xuan
  * @since 2021/9/28
  */
-public class ProductImage {
+public class Image {
 
     private Long id;
 
