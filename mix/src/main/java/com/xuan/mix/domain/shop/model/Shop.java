@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.xuan.mix.domain.share.model.Image;
 import com.xuan.mix.domain.share.model.Video;
+import com.xuan.mix.domain.shop.model.businesstime.BusinessTime;
 
 /**
  * @author xuan
