@@ -13,11 +13,13 @@ import com.xuan.mix.domain.shop.model.businesstime.BusinessTime;
  */
 public class Shop {
 
-    private Long shopId;
+    private Long id;
 
     private String title;
 
     private String subTitle;
+
+    private String desc;
 
     private PoiInfo poiInfo;
 
@@ -29,12 +31,12 @@ public class Shop {
 
     private Set<Integer> tagSet;
 
-    public Long getShopId() {
-        return shopId;
+    public Long getId() {
+        return id;
     }
 
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -51,6 +53,14 @@ public class Shop {
 
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public PoiInfo getPoiInfo() {
