@@ -19,7 +19,7 @@ public class Shop {
 
     private String subTitle;
 
-    private Poi poi;
+    private PoiInfo poiInfo;
 
     private BusinessTime businessTime;
 
@@ -53,12 +53,12 @@ public class Shop {
         this.subTitle = subTitle;
     }
 
-    public Poi getPoi() {
-        return poi;
+    public PoiInfo getPoiInfo() {
+        return poiInfo;
     }
 
-    public void setPoi(Poi poi) {
-        this.poi = poi;
+    public void setPoiInfo(PoiInfo poiInfo) {
+        this.poiInfo = poiInfo;
     }
 
     public BusinessTime getBusinessTime() {
@@ -67,6 +67,22 @@ public class Shop {
 
     public void setBusinessTime(BusinessTime businessTime) {
         this.businessTime = businessTime;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
+    }
+
+    public List<Video> getVideoList() {
+        return videoList;
+    }
+
+    public void setVideoList(List<Video> videoList) {
+        this.videoList = videoList;
     }
 
     public Set<Integer> getTagSet() {
