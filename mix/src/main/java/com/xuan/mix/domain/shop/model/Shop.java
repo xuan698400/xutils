@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.xuan.mix.domain.share.model.Image;
+import com.xuan.mix.domain.share.model.StatusEnum;
 import com.xuan.mix.domain.share.model.Video;
 import com.xuan.mix.domain.shop.model.businesstime.BusinessTime;
 
@@ -30,6 +31,8 @@ public class Shop {
     private List<Video> videoList;
 
     private Set<Integer> tagSet;
+
+    private StatusEnum statusEnum;
 
     public Long getId() {
         return id;
@@ -101,6 +104,14 @@ public class Shop {
 
     public void setTagSet(Set<Integer> tagSet) {
         this.tagSet = tagSet;
+    }
+
+    public StatusEnum getStatusEnum() {
+        return statusEnum;
+    }
+
+    public void setStatusEnum(StatusEnum statusEnum) {
+        this.statusEnum = statusEnum;
     }
 
 }
