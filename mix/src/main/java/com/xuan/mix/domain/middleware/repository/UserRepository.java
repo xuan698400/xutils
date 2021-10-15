@@ -1,4 +1,4 @@
-package com.xuan.mix.domain.user.repository;
+package com.xuan.mix.domain.middleware.repository;
 
 import com.xuan.mix.domain.share.model.OperationOption;
 import com.xuan.mix.domain.user.model.User;
@@ -9,7 +9,7 @@ import com.xuan.mix.domain.user.model.User;
  */
 public interface UserRepository {
 
-    Long add(User user, OperationOption option);
+    void add(User user, OperationOption option);
 
     void update(User user, OperationOption option);
 }
