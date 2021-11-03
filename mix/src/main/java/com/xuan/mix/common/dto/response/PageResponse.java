@@ -1,4 +1,4 @@
-package com.xuan.mix.common.dto;
+package com.xuan.mix.common.dto.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -86,11 +86,11 @@ public class PageResponse<T> extends Response {
         return response;
     }
 
-    public static PageResponse buildFailure(String errCode, String errMessage) {
+    public static PageResponse buildFailure(String code, String message) {
         PageResponse response = new PageResponse();
         response.setSuccess(false);
-        response.setErrCode(errCode);
-        response.setErrMessage(errMessage);
+        response.setCode(code);
+        response.setMessage(message);
         return response;
     }
 
@@ -113,4 +113,5 @@ public class PageResponse<T> extends Response {
         response.setPageIndex(pageIndex);
         return response;
     }
+
 }

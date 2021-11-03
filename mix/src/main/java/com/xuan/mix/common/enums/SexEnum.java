@@ -10,14 +10,14 @@ public enum SexEnum {
     WOMAN(2, "女");
 
     private int code;
-    private String msg;
+    private String desc;
 
-    SexEnum(int code, String msg) {
+    SexEnum(int code, String desc) {
         this.code = code;
-        this.msg = msg;
+        this.desc = desc;
     }
 
-    public static SexEnum codeOf(int code) {
+    public static SexEnum of(int code) {
         for (SexEnum sexEnum : SexEnum.values()) {
             if (sexEnum.getCode() == code) {
                 return sexEnum;
@@ -51,7 +51,7 @@ public enum SexEnum {
         return code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getDesc() {
+        return desc;
     }
 }

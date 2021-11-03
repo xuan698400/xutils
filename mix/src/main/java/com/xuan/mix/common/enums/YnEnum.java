@@ -13,15 +13,15 @@ public enum YnEnum {
 
     private int code;
 
-    private String msg;
+    private String desc;
 
-    YnEnum(boolean value, int code, String msg) {
+    YnEnum(boolean value, int code, String desc) {
         this.value = value;
         this.code = code;
-        this.msg = msg;
+        this.desc = desc;
     }
-    
-    public static YnEnum codeOf(int code) {
+
+    public static YnEnum of(int code) {
         for (YnEnum ynEnum : YnEnum.values()) {
             if (ynEnum.code == code) {
                 return ynEnum;
@@ -38,7 +38,7 @@ public enum YnEnum {
         return code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getDesc() {
+        return desc;
     }
 }

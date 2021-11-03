@@ -6,7 +6,12 @@ package com.xuan.mix.common.invoker;
  * @author xuan
  * @since 2021/1/21
  */
-public interface BizCommond<T> {
+public interface BizCommand<T> {
 
-    BizCommondResult<T> call();
+    /**
+     * 命令执行
+     *
+     * @return 返回结果
+     */
+    T execute();
 }

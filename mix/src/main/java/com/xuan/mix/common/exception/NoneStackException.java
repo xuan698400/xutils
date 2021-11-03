@@ -25,7 +25,8 @@ public class NoneStackException extends RuntimeException {
         super(cause);
     }
 
-    protected NoneStackException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected NoneStackException(String message, Throwable cause, boolean enableSuppression,
+        boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
@@ -38,4 +39,5 @@ public class NoneStackException extends RuntimeException {
     public synchronized Throwable fillInStackTrace() {
         return this;
     }
+
 }

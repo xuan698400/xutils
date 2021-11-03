@@ -34,7 +34,7 @@ public enum BizExceptionCodeEnum implements BizExceptionCode {
         return String.format(msg, args);
     }
 
-    public static BizExceptionCodeEnum codeOf(String code) {
+    public static BizExceptionCodeEnum of(String code) {
         if (null == code) {
             return null;
         }

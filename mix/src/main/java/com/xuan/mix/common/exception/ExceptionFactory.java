@@ -6,32 +6,32 @@ package com.xuan.mix.common.exception;
  */
 public class ExceptionFactory {
 
-    public static BizException bizException(String errorMessage) {
-        return new BizException(errorMessage);
+    public static BizException bizException(String message) {
+        return new BizException(message);
     }
 
-    public static BizException bizException(String errorCode, String errorMessage) {
-        return new BizException(errorCode, errorMessage);
+    public static BizException bizException(String code, String message) {
+        return new BizException(code, message);
     }
 
-    public static BizException bizException(BizExceptionCode resultCode, Object... msg) {
-        return new BizException(resultCode, msg);
+    public static BizException bizException(BizExceptionCode code, Object... params) {
+        return new BizException(code, params);
     }
 
-    public static SysException sysException(String errorMessage) {
-        return new SysException(errorMessage);
+    public static SysException sysException(String message) {
+        return new SysException(message);
     }
 
-    public static SysException sysException(String errorCode, String errorMessage) {
-        return new SysException(errorCode, errorMessage);
+    public static SysException sysException(String code, String message) {
+        return new SysException(code, message);
     }
 
-    public static SysException sysException(String errorMessage, Throwable e) {
-        return new SysException(errorMessage, e);
+    public static SysException sysException(String message, Throwable e) {
+        return new SysException(message, e);
     }
 
-    public static SysException sysException(String errorCode, String errorMessage, Throwable e) {
-        return new SysException(errorCode, errorMessage, e);
+    public static SysException sysException(String code, String message, Throwable e) {
+        return new SysException(code, message, e);
     }
 
 }

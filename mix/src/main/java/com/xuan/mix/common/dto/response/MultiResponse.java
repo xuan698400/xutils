@@ -1,4 +1,4 @@
-package com.xuan.mix.common.dto;
+package com.xuan.mix.common.dto.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,11 +44,11 @@ public class MultiResponse<T> extends Response {
         return response;
     }
 
-    public static MultiResponse buildFailure(String errCode, String errMessage) {
+    public static MultiResponse buildFailure(String code, String message) {
         MultiResponse response = new MultiResponse();
         response.setSuccess(false);
-        response.setErrCode(errCode);
-        response.setErrMessage(errMessage);
+        response.setCode(code);
+        response.setMessage(message);
         return response;
     }
 

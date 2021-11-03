@@ -10,23 +10,23 @@ public class BizException extends BaseException {
 
     public static final String DEFAULT_ERR_CODE = "BIZ_ERROR";
 
-    public BizException(String errMessage) {
-        super(DEFAULT_ERR_CODE, errMessage);
+    public BizException(String message) {
+        super(DEFAULT_ERR_CODE, message);
     }
 
-    public BizException(String errCode, String errMessage) {
-        super(errCode, errMessage);
+    public BizException(String code, String message) {
+        super(code, message);
     }
 
-    public BizException(BizExceptionCode resultCode, Object... msg) {
-        super(resultCode.getCode(), resultCode.getMsg(msg));
+    public BizException(BizExceptionCode code, Object... params) {
+        super(code.getCode(), code.getMsg(params));
     }
 
-    public BizException(String errMessage, Throwable e) {
-        super(DEFAULT_ERR_CODE, errMessage, e);
+    public BizException(String message, Throwable e) {
+        super(DEFAULT_ERR_CODE, message, e);
     }
 
-    public BizException(String errorCode, String errMessage, Throwable e) {
-        super(errorCode, errMessage, e);
+    public BizException(String code, String message, Throwable e) {
+        super(code, message, e);
     }
 }

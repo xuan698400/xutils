@@ -1,6 +1,8 @@
 package com.xuan.mix.common.exception;
 
 /**
+ * 所有异常的基类
+ *
  * @author xuan
  * @since 2021/7/12
  */
@@ -8,31 +10,32 @@ public class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private String errCode;
+    private String code;
 
-    public BaseException(String errMessage) {
-        super(errMessage);
+    public BaseException(String message) {
+        super(message);
     }
 
-    public BaseException(String errCode, String errMessage) {
-        super(errMessage);
-        this.errCode = errCode;
+    public BaseException(String code, String message) {
+        super(message);
+        this.code = code;
     }
 
-    public BaseException(String errMessage, Throwable e) {
-        super(errMessage, e);
+    public BaseException(String message, Throwable e) {
+        super(message, e);
     }
 
-    public BaseException(String errCode, String errMessage, Throwable e) {
-        super(errMessage, e);
-        this.errCode = errCode;
+    public BaseException(String code, String message, Throwable e) {
+        super(message, e);
+        this.code = code;
     }
 
-    public String getErrCode() {
-        return errCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setErrCode(String errCode) {
-        this.errCode = errCode;
+    public void setCode(String errCode) {
+        this.code = errCode;
     }
+
 }

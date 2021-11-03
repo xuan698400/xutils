@@ -1,10 +1,12 @@
-package com.xuan.mix.common.dto;
+package com.xuan.mix.common.dto.request;
+
+import java.io.Serializable;
 
 /**
  * @author xuan
  * @since 2021/7/12
  */
-public class PageQuery extends Query {
+public class PageQuery implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String ASC = "ASC";

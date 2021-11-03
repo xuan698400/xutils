@@ -1,4 +1,4 @@
-package com.xuan.mix.common.dto;
+package com.xuan.mix.common.dto.response;
 
 /**
  * @author xuan
@@ -30,11 +30,11 @@ public class SingleResponse<T> extends Response {
         return response;
     }
 
-    public static SingleResponse buildFailure(String errCode, String errMessage) {
+    public static SingleResponse buildFailure(String code, String message) {
         SingleResponse response = new SingleResponse();
         response.setSuccess(false);
-        response.setErrCode(errCode);
-        response.setErrMessage(errMessage);
+        response.setCode(code);
+        response.setMessage(message);
         return response;
     }
 

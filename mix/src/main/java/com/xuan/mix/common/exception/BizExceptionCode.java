@@ -6,7 +6,18 @@ package com.xuan.mix.common.exception;
  */
 public interface BizExceptionCode {
 
+    /**
+     * 错误码Code
+     *
+     * @return code
+     */
     String getCode();
 
-    String getMsg(Object... args);
+    /**
+     * 错误码提示
+     *
+     * @param params 替换参数
+     * @return msg
+     */
+    String getMsg(Object... params);
 }

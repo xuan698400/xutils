@@ -4,11 +4,9 @@ package com.xuan.mix.common.invoker;
  * @author xuan
  * @since 2019/11/18
  */
-public class BizCommondResult<T> {
+public class BizCommandResult<T> {
 
     private boolean success;
-
-    private long serverTime = System.currentTimeMillis();
 
     private String code;
 
@@ -22,14 +20,6 @@ public class BizCommondResult<T> {
 
     public void setSuccess(boolean success) {
         this.success = success;
-    }
-
-    public long getServerTime() {
-        return serverTime;
-    }
-
-    public void setServerTime(long serverTime) {
-        this.serverTime = serverTime;
     }
 
     public String getCode() {
