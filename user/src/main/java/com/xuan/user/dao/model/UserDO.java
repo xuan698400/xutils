@@ -1,12 +1,13 @@
 package com.xuan.user.dao.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author xuan
  * @since 2019/11/17
  */
-public class UserDO {
+public class UserDO implements Serializable {
 
     private Long id;
 

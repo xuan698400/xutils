@@ -57,6 +57,12 @@ public class Assert {
         notNull(object, "[Assertion failed] Must not null");
     }
 
+    public static void notEmpty(String str, String errMessage) {
+        if (null == str || str.trim().length() == 0) {
+            throw new BizException(errMessage);
+        }
+    }
+
     public static void notEmpty(Collection<?> collection, String errorCode, String errMessage) {
         if (collection == null || collection.isEmpty()) {
             throw new BizException(errorCode, errMessage);

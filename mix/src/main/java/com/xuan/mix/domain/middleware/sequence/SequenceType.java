@@ -7,7 +7,8 @@ package com.xuan.mix.domain.middleware.sequence;
 public enum SequenceType {
 
     //
-    USER(1, "用户id");
+    USER(1, "用户id"),
+    CATEGORY(2, "类目id");
 
     private int value;
     private String msg;
