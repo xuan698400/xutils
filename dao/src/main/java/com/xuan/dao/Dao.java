@@ -15,4 +15,6 @@ public interface Dao {
     void update(List<BaseDO> dataList);
 
     void delete(List<BaseDO> dataList);
+
+    <T extends BaseDO> List<T> select(List<T> conditionList, Class<T> elementType);
 }

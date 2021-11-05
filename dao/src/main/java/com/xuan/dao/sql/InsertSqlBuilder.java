@@ -13,7 +13,6 @@ import com.xuan.dao.model.BaseDO;
 public class InsertSqlBuilder {
 
     public static InsertSql build(BaseDO baseDO) {
-        InsertSql insertSql = new InsertSql();
 
         List<Object> valueList = new ArrayList<>();
         StringBuilder sb = new StringBuilder("INSERT INTO " + baseDO.tableName() + "(");
@@ -48,6 +47,7 @@ public class InsertSqlBuilder {
         Object[] params = new Object[valueList.size()];
         valueList.toArray(params);
 
+        InsertSql insertSql = new InsertSql();
         insertSql.setSql(sb.toString());
         insertSql.setParams(params);
         return insertSql;

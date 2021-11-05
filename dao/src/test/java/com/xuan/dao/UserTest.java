@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSON;
+
 import com.xuan.dao.model.BaseDO;
 import com.xuan.dao.model.UserDO;
 import org.junit.Test;
@@ -93,6 +95,26 @@ public class UserTest {
         dataList.add(userDO2);
 
         dao.delete(dataList);
+    }
+
+    @Test
+    public void select() {
+        List<UserDO> conditionList = new ArrayList<>();
+
+        UserDO userDO1 = new UserDO();
+        userDO1.setId(15L);
+        conditionList.add(userDO1);
+
+        UserDO userDO2 = new UserDO();
+        userDO2.setId(16L);
+        conditionList.add(userDO2);
+
+        UserDO userDO3 = new UserDO();
+        userDO3.setId(999L);
+        conditionList.add(userDO3);
+
+        List<UserDO> dataList = dao.select(conditionList, UserDO.class);
+        System.out.println(JSON.toJSONString(dataList));
     }
 
 }
