@@ -15,6 +15,7 @@
         <module>rbac</module>
         <module>extp</module>
         <module>spring-utils</module>
+        <module>dao</module>
     </modules>
     <packaging>pom</packaging>
 
