@@ -1,5 +1,7 @@
 package com.xuan.dao;
 
+import java.util.List;
+
 import com.xuan.dao.model.BaseDO;
 
 /**
@@ -8,5 +10,9 @@ import com.xuan.dao.model.BaseDO;
  */
 public interface Dao {
 
-    int insert(BaseDO baseDO);
+    void insert(List<BaseDO> dataList);
+
+    void update(List<BaseDO> dataList);
+
+    void delete(List<BaseDO> dataList);
 }

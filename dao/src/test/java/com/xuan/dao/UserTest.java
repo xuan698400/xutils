@@ -1,7 +1,12 @@
 package com.xuan.dao;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import com.xuan.dao.model.BaseDO;
 import com.xuan.dao.model.UserDO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +26,73 @@ public class UserTest {
 
     @Test
     public void insert() {
-        UserDO userDO = new UserDO();
-        userDO.setId(13L);
-        userDO.setUsername("xuan");
+        List<BaseDO> dataList = new ArrayList<>();
 
-        dao.insert(userDO);
+        UserDO userDO1 = new UserDO();
+        userDO1.setId(15L);
+        userDO1.setUsername("xuan1");
+        userDO1.setName("徐工1");
+        userDO1.setPhone("15858178400");
+        userDO1.setEmail("ddd#163.com");
+        userDO1.setBiz_code("testbizcode");
+        userDO1.setCreate_time(new Date());
+        userDO1.setIcon("icon");
+        userDO1.setModify_time(new Date());
+        userDO1.setFeature("{}");
+        userDO1.setPassword("ddd");
+        userDO1.setType(1);
+        dataList.add(userDO1);
+
+        UserDO userDO2 = new UserDO();
+        userDO2.setId(16L);
+        userDO2.setUsername("xuan2");
+        userDO2.setName("徐工2");
+        userDO2.setPhone("15858178400");
+        userDO2.setEmail("ddd#163.com");
+        userDO2.setBiz_code("testbizcode");
+        userDO2.setCreate_time(new Date());
+        userDO2.setIcon("icon");
+        userDO2.setModify_time(new Date());
+        userDO2.setFeature("{}");
+        userDO2.setPassword("ddd");
+        userDO2.setType(1);
+        dataList.add(userDO2);
+
+        dao.insert(dataList);
+    }
+
+    @Test
+    public void update() {
+        List<BaseDO> dataList = new ArrayList<>();
+
+        UserDO userDO1 = new UserDO();
+        userDO1.setId(15L);
+        userDO1.setName("徐工1.update1");
+        userDO1.setPhone("123456.update1");
+        dataList.add(userDO1);
+
+        UserDO userDO2 = new UserDO();
+        userDO2.setId(16L);
+        userDO2.setName("徐工1.update2");
+        userDO2.setPhone("123456.update2");
+        dataList.add(userDO2);
+
+        dao.update(dataList);
+    }
+
+    @Test
+    public void delete() {
+        List<BaseDO> dataList = new ArrayList<>();
+
+        UserDO userDO1 = new UserDO();
+        userDO1.setId(15L);
+        dataList.add(userDO1);
+
+        UserDO userDO2 = new UserDO();
+        userDO2.setId(16L);
+        dataList.add(userDO2);
+
+        dao.delete(dataList);
     }
 
 }

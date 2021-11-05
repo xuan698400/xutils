@@ -18,5 +18,5 @@ public interface BaseDO {
      *
      * @return Long
      */
-    Long primaryKey();
+    String primaryKey();
 }

@@ -1,4 +1,4 @@
-package com.xuan.dao.utils;
+package com.xuan.dao.sql;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

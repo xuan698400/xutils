@@ -40,8 +40,8 @@ public class UserDO implements BaseDO {
     }
 
     @Override
-    public Long primaryKey() {
-        return id;
+    public String primaryKey() {
+        return "id";
     }
 
     public Long getId() {

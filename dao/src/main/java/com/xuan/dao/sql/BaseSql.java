@@ -1,11 +1,10 @@
-package com.xuan.dao.utils;
+package com.xuan.dao.sql;
 
 /**
  * @author xuan
  * @since 2021/11/5
  */
-public class InsertSql {
-
+public class BaseSql {
     private String sql;
 
     private Object[] params;
@@ -25,5 +24,4 @@ public class InsertSql {
     public void setParams(Object[] params) {
         this.params = params;
     }
-
 }

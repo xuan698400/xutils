@@ -3,7 +3,7 @@ package com.xuan.spring.utils.extp.model;
 import java.util.Set;
 
 /**
- * 业务扩展点模型
+ * 业锟斤拷锟斤拷展锟斤拷模锟斤拷
  *
  * @author xuan
  * @since 2019/11/5
@@ -13,25 +13,25 @@ public interface BizExt {
     String SUPPORTED_BIZ_CODE_ALL = "_ALL_";
     
     /**
-     * 执行优先级
+     * 执锟斤拷锟斤拷锟饺硷拷
      *
-     * @return 参考：com.xuan.spring.utils.extp.model.PriorityEnum
+     * @return 锟轿匡拷锟斤拷com.xuan.spring.sql.extp.model.PriorityEnum
      */
     default int priority() {
         return PriorityEnum.MIDDLE.getValue();
     }
 
     /**
-     * 所支持的业务，SUPPORTED_BIZ_CODE_ALL表示支持所有业务
+     * 锟斤拷支锟街碉拷业锟斤拷SUPPORTED_BIZ_CODE_ALL锟斤拷示支锟斤拷锟斤拷锟斤拷业锟斤拷
      *
      * @return set
      */
     Set<String> supportedBizCodes();
 
     /**
-     * 具体扩展点类Class
+     * 锟斤拷锟斤拷锟斤拷展锟斤拷锟斤拷Class
      *
-     * @return 扩展点接口Class
+     * @return 锟斤拷展锟斤拷涌锟紺lass
      */
     Class getExtClass();
 
