@@ -66,4 +66,14 @@ public class SimpleDao implements Dao {
         return dataList;
     }
 
+    @Override
+    public <T extends BaseDO> List<T> select(String sql, Object[] params, Class<T> elementType) {
+        return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(elementType));
+    }
+
+    @Override
+    public <T extends BaseDO> List<T> search(List<T> conditionList, Class<T> elementType) {
+        return null;
+    }
+
 }
