@@ -19,6 +19,4 @@ public interface Dao {
     <T extends BaseDO> List<T> select(List<T> conditionList, Class<T> elementType);
 
     <T extends BaseDO> List<T> select(String sql, Object[] params, Class<T> elementType);
-
-    <T extends BaseDO> List<T> search(List<T> conditionList, Class<T> elementType);
 }

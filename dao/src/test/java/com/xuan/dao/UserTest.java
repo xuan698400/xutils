@@ -117,4 +117,16 @@ public class UserTest {
         System.out.println(JSON.toJSONString(dataList));
     }
 
+    @Test
+    public void select2() {
+        List<UserDO> conditionList = new ArrayList<>();
+
+        UserDO condition = new UserDO();
+        condition.setBiz_code("testbizcode");
+        conditionList.add(condition);
+
+        List<UserDO> dataList = dao.select(conditionList, UserDO.class);
+        System.out.println(JSON.toJSONString(dataList));
+    }
+
 }

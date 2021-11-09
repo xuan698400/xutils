@@ -20,13 +20,4 @@ public interface BaseDO {
      */
     String primaryKey();
 
-    /**
-     * 搜索key
-     *
-     * @return
-     */
-    default String[] searchKeys() {
-        return new String[0];
-    }
-
 }
