@@ -10,7 +10,6 @@
     <modules>
         <module>mix</module>
         <module>user</module>
-        <module>common</module>
         <module>sequence</module>
         <module>rbac</module>
         <module>extp</module>
