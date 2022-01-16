@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import com.xuan.mix.bt.nodelog.spi.SpiManager;
 import com.xuan.spring.utils.nodelog.spi.BizResultSpi;
 import com.xuan.spring.utils.nodelog.spi.JsonSerializeSpi;
+import com.xuan.spring.utils.nodelog.spi.SimpleTraceSpi;
 import com.xuan.spring.utils.nodelog.spi.Slf4jLoggerSpi;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class NodeLogInitBean {
         SpiManager.registerLoggerSpi(new Slf4jLoggerSpi());
         SpiManager.registerResultSpi(new BizResultSpi());
         SpiManager.registerSerializeSpi(new JsonSerializeSpi());
+        SpiManager.registerTraceSpi(new SimpleTraceSpi());
         System.out.println("NodeLogInitBean_init");
     }
 

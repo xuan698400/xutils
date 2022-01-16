@@ -1,9 +1,11 @@
-package com.xuan.spring.utils.nodelog.aspect;
+package com.xuan.mix.bt.nodelog.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import com.xuan.mix.bt.nodelog.model.LogLine;
 
 /**
  * 节点跟踪日志
@@ -14,6 +16,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NodeLog {
+
+    String nodeName() default LogLine.PLACEHOLDER;
 
     int sample() default 10000;
 

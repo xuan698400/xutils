@@ -1,6 +1,6 @@
 package com.xuan.spring.utils.nodelog.testservice;
 
-import com.xuan.spring.utils.nodelog.aspect.NodeLog;
+import com.xuan.mix.bt.nodelog.annotation.NodeLog;
 
 /**
  * @author xuan
@@ -9,7 +9,7 @@ import com.xuan.spring.utils.nodelog.aspect.NodeLog;
 public class NodeLogServiceImpl implements NodeLogService {
 
     @Override
-    @NodeLog(printParams = false)
+    @NodeLog
     public TestResult callTest(TestRequest request) {
         TestResult ddd = new TestResult();
         ddd.setSuccess(true);

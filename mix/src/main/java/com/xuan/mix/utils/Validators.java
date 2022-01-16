@@ -69,7 +69,7 @@ public abstract class Validators {
             return true;
         }
         for (int i = 0; i < strLen; i++) {
-            if ((Character.isWhitespace(str.charAt(i)) == false)) {
+            if (!Character.isWhitespace(str.charAt(i))) {
                 return false;
             }
         }
@@ -182,7 +182,7 @@ public abstract class Validators {
      * @param <V>
      * @return 当Map对象为 <code>null</code> 或者元素为空是返回 <code>true</code>，否则返回 <code>false</code>。
      */
-    public static <K, V> boolean isEmptyMap(Map<K, V> map) {
+    public static <K, V> boolean isEmpty(Map<K, V> map) {
         return map == null || map.isEmpty();
     }
 
@@ -326,7 +326,7 @@ public abstract class Validators {
         }
 
         return !(!isNumber(items[0], 0, 23) || !isNumber(items[1], 0, 59) || (items.length == 3 && !isNumber(items[2],
-                0, 59)));
+            0, 59)));
     }
 
     /**

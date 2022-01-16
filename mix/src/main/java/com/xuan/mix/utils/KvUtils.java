@@ -9,7 +9,7 @@ import java.util.TreeSet;
  * @author xuan
  * @since 2020/11/17
  */
-public class FeatureUtil {
+public class KvUtils {
 
     private static final String SP = ";";
     private static final String SSP = ":";
@@ -75,10 +75,10 @@ public class FeatureUtil {
         featureMap.put("a", "e:5;5");
         featureMap.put("b", "v");
         featureMap.put("d", "{\"dd\":\"ff\"}");
-        String str = FeatureUtil.toString(featureMap);
+        String str = KvUtils.toString(featureMap);
         System.out.println(str);
 
-        System.out.println(FeatureUtil.toMap(str));
+        System.out.println(KvUtils.toMap(str));
     }
 
 }

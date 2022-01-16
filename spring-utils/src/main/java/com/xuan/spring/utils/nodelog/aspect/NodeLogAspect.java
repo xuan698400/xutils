@@ -1,6 +1,7 @@
 package com.xuan.spring.utils.nodelog.aspect;
 
 import com.xuan.mix.bt.nodelog.LogPrinter;
+import com.xuan.mix.bt.nodelog.annotation.NodeLog;
 import com.xuan.mix.bt.nodelog.config.NodeLogConfig;
 import com.xuan.mix.bt.nodelog.model.LogLine;
 import com.xuan.mix.bt.nodelog.model.NodeLogResult;
@@ -20,13 +21,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class NodeLogAspect {
 
-    @Pointcut("@annotation(com.xuan.spring.utils.nodelog.aspect.NodeLog)")
+    @Pointcut("@annotation(com.xuan.mix.bt.nodelog.annotation.NodeLog)")
     public void nodeLogPointcut() {
     }
 
     @Around("nodeLogPointcut() && @annotation(nodeLog)")
-    public Object process(ProceedingJoinPoint joinPoint, NodeLog nodeLog) throws Throwable {
-        LogPrinter logPrinter = LogPrinter.start(buildNodeName(joinPoint), buildConfig(nodeLog));
+    public Object process(ProceedingJoinPoint joinPoint, NodeLog nodeLog)
+        throws Throwable {
+        LogPrinter logPrinter = LogPrinter.start(
+            LogLine.PLACEHOLDER.equals(nodeLog.nodeName()) ? buildNodeName(joinPoint) : nodeLog.nodeName(),
+            buildConfig(nodeLog));
 
         Object result = null;
         Throwable throwable = null;

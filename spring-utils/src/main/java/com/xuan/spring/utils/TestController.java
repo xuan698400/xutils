@@ -40,10 +40,15 @@ public class TestController {
      * @return
      */
     @RequestMapping(value = "main")
-    public TestResult main() {
-        TestRequest testRequest = new TestRequest();
-        testRequest.setName("xuan");
-        return nodeLogService.callTest(testRequest);
+    public String main(Integer t) {
+        if (t == 1) {
+            TestRequest testRequest = new TestRequest();
+            testRequest.setName("xuan");
+            nodeLogService.callTest(testRequest);
+            return "1_ok";
+        }
+        return "default_ok";
+
     }
 
 }
