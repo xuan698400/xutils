@@ -1,19 +1,14 @@
 package com.xuan.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.xuan.dao.model.BaseDO;
-import com.xuan.dao.sql.DeleteBuilder;
-import com.xuan.dao.sql.DeleteSql;
-import com.xuan.dao.sql.InsertSql;
-import com.xuan.dao.sql.InsertSqlBuilder;
-import com.xuan.dao.sql.SelectSql;
-import com.xuan.dao.sql.SelectSqlBuilder;
-import com.xuan.dao.sql.UpdateSql;
-import com.xuan.dao.sql.UpdateSqlBuilder;
+import com.xuan.dao.common.DataModel;
+import com.xuan.dao.common.SqlSyntax;
+import com.xuan.dao.sqlbuilder.SqlBuilder;
+import com.xuan.dao.sqlbuilder.SqlBuilderFactory;
+import com.xuan.dao.sqlbuilder.SqlModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -28,47 +23,34 @@ public class SimpleDao implements Dao {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
+    private SqlBuilder insertSqlBuilder = SqlBuilderFactory.getInsertSqlBuilder(SqlSyntax.MYSQL);
+    private SqlBuilder updateSqlBuilder = SqlBuilderFactory.getUpdateSqlBuilder(SqlSyntax.MYSQL);
+    private SqlBuilder deleteSqlBuilder = SqlBuilderFactory.getDeleteSqlBuilder(SqlSyntax.MYSQL);
+    private SqlBuilder selectSqlBuilder = SqlBuilderFactory.getDeleteSqlBuilder(SqlSyntax.MYSQL);
+
     @Override
-    public void insert(List<BaseDO> dataList) {
-        for (BaseDO baseDO : dataList) {
-            InsertSql insertSql = InsertSqlBuilder.build(baseDO);
-            jdbcTemplate.update(insertSql.getSql(), insertSql.getParams());
-        }
+    public int insert(DataModel dataModel) {
+        SqlModel sqlModel = insertSqlBuilder.getSql(dataModel);
+        return jdbcTemplate.update(sqlModel.getSql(), sqlModel.getParams().toArray(new Object[0]));
     }
 
     @Override
-    public void update(List<BaseDO> dataList) {
-        for (BaseDO baseDO : dataList) {
-            UpdateSql updateSql = UpdateSqlBuilder.build(baseDO);
-            jdbcTemplate.update(updateSql.getSql(), updateSql.getParams());
-        }
+    public int update(DataModel dataModel) {
+        SqlModel sqlModel = updateSqlBuilder.getSql(dataModel);
+        return jdbcTemplate.update(sqlModel.getSql(), sqlModel.getParams().toArray(new Object[0]));
     }
 
     @Override
-    public void delete(List<BaseDO> dataList) {
-        for (BaseDO baseDO : dataList) {
-            DeleteSql deleteSql = DeleteBuilder.build(baseDO);
-            jdbcTemplate.update(deleteSql.getSql(), deleteSql.getParams());
-        }
+    public int delete(DataModel dataModel) {
+        SqlModel sqlModel = deleteSqlBuilder.getSql(dataModel);
+        return jdbcTemplate.update(sqlModel.getSql(), sqlModel.getParams().toArray(new Object[0]));
     }
 
     @Override
-    public <T extends BaseDO> List<T> select(List<T> conditionList, Class<T> elementType) {
-        List<T> dataList = new ArrayList<>();
-        for (T condition : conditionList) {
-            SelectSql selectSql = SelectSqlBuilder.build(condition);
-            List<T> tempList = jdbcTemplate.query(selectSql.getSql(), selectSql.getParams(),
-                new BeanPropertyRowMapper<>(elementType));
-            if (null != tempList) {
-                dataList.addAll(tempList);
-            }
-        }
-        return dataList;
-    }
-
-    @Override
-    public <T extends BaseDO> List<T> select(String sql, Object[] params, Class<T> elementType) {
-        return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(elementType));
+    public <T extends DataModel> List<T> select(DataModel dataModel, Class<T> elementType) {
+        SqlModel sqlModel = selectSqlBuilder.getSql(dataModel);
+        return jdbcTemplate.query(sqlModel.getSql(), sqlModel.getParams().toArray(new Object[0]),
+            new BeanPropertyRowMapper<>(elementType));
     }
 
 }

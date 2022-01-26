@@ -1,12 +1,15 @@
-package com.xuan.dao.model;
+package com.xuan.dao.sqlbuilder;
 
 import java.util.Date;
+
+import com.xuan.dao.common.DataModel;
+import com.xuan.dao.common.NameValuePair;
 
 /**
  * @author xuan
  * @since 2019/11/17
  */
-public class UserDO implements BaseDO {
+public class UserDO implements DataModel {
 
     private Long id;
 
@@ -28,11 +31,11 @@ public class UserDO implements BaseDO {
 
     private String feature;
 
-    private String biz_code;
+    private String bizCode;
 
-    private Date create_time;
+    private Date createTime;
 
-    private Date modify_time;
+    private Date modifyTime;
 
     @Override
     public String tableName() {
@@ -40,8 +43,8 @@ public class UserDO implements BaseDO {
     }
 
     @Override
-    public String primaryKey() {
-        return "id";
+    public NameValuePair primaryKey() {
+        return NameValuePair.of("id", id);
     }
 
     public Long getId() {
@@ -124,28 +127,28 @@ public class UserDO implements BaseDO {
         this.feature = feature;
     }
 
-    public String getBiz_code() {
-        return biz_code;
+    public String getBizCode() {
+        return bizCode;
     }
 
-    public void setBiz_code(String biz_code) {
-        this.biz_code = biz_code;
+    public void setBizCode(String bizCode) {
+        this.bizCode = bizCode;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getModify_time() {
-        return modify_time;
+    public Date getModifyTime() {
+        return modifyTime;
     }
 
-    public void setModify_time(Date modify_time) {
-        this.modify_time = modify_time;
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
 }

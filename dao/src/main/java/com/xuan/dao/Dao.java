@@ -2,7 +2,7 @@ package com.xuan.dao;
 
 import java.util.List;
 
-import com.xuan.dao.model.BaseDO;
+import com.xuan.dao.common.DataModel;
 
 /**
  * @author xuan
@@ -10,13 +10,12 @@ import com.xuan.dao.model.BaseDO;
  */
 public interface Dao {
 
-    void insert(List<BaseDO> dataList);
+    int insert(DataModel dataModel);
 
-    void update(List<BaseDO> dataList);
+    int update(DataModel dataModel);
 
-    void delete(List<BaseDO> dataList);
+    int delete(DataModel dataModel);
 
-    <T extends BaseDO> List<T> select(List<T> conditionList, Class<T> elementType);
+    <T extends DataModel> List<T> select(DataModel dataModel, Class<T> elementType);
 
-    <T extends BaseDO> List<T> select(String sql, Object[] params, Class<T> elementType);
 }

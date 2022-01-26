@@ -1,13 +1,15 @@
-package com.xuan.dao.sql;
+package com.xuan.dao.sqlbuilder;
+
+import java.util.List;
 
 /**
  * @author xuan
  * @since 2021/11/5
  */
-public class BaseSql {
+public class SqlModel {
     private String sql;
 
-    private Object[] params;
+    private List<Object> params;
 
     public String getSql() {
         return sql;
@@ -17,11 +19,12 @@ public class BaseSql {
         this.sql = sql;
     }
 
-    public Object[] getParams() {
+    public List<Object> getParams() {
         return params;
     }
 
-    public void setParams(Object[] params) {
+    public void setParams(List<Object> params) {
         this.params = params;
     }
+
 }
