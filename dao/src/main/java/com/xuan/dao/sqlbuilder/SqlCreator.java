@@ -6,16 +6,15 @@ import java.util.List;
 import com.xuan.dao.common.PageQuery;
 
 /**
- * 动态查询 SQL 语句生成工具类
+ * SQL生成工具类
  *
  * @author xuan
- * @version $Revision: 1.0 $, $Date: 2012-11-22 上午10:35:37 $
+ * @since 2021/11/5
  */
 public class SqlCreator {
 
     private final StringBuilder sql;
     private final List<Object> args;
-    private final List<Integer> argTypes;
     private boolean hasOrderBy = false;
     private boolean hasWhere;
     private boolean isFirst = true;
@@ -53,7 +52,6 @@ public class SqlCreator {
         }
 
         args = new ArrayList<>();
-        argTypes = new ArrayList<>();
         sql = new StringBuilder();
         sql.append(baseSql.trim());
         this.hasWhere = hasWhere;
@@ -79,19 +77,6 @@ public class SqlCreator {
      * @param precondition 先决条件，当为true时才会增加查询条件，比如 id != null
      */
     public SqlCreator addExpression(String operator, String expression, Object arg, boolean precondition) {
-        return addExpression(operator, expression, arg, Integer.MIN_VALUE, precondition);
-    }
-
-    /**
-     * 增加查询条件
-     *
-     * @param operator     操作，比如：AND、OR
-     * @param expression   表达式，比如：id=?
-     * @param arg          表达式中的参数的值
-     * @param argType      表达式中的参数的类型
-     * @param precondition 先决条件，当为true时才会增加查询条件，比如 id != null
-     */
-    public SqlCreator addExpression(String operator, String expression, Object arg, int argType, boolean precondition) {
         if (precondition) {
             if (isFirst) {
                 if (hasWhere) {
@@ -110,10 +95,6 @@ public class SqlCreator {
 
             if (arg != null) {
                 args.add(arg);
-            }
-
-            if (argType != Integer.MIN_VALUE) {
-                argTypes.add(argType);
             }
         }
         return this;
@@ -151,26 +132,13 @@ public class SqlCreator {
     }
 
     /**
-     * 增加AND查询条件
-     *
-     * @param expression   表达式
-     * @param arg          参数的值
-     * @param argType      参数的类型
-     * @param precondition 先决条件
-     */
-    public SqlCreator and(String expression, Object arg, int argType, boolean precondition) {
-        return addExpression("AND", expression, arg, argType, precondition);
-    }
-
-    /**
      * 增加 AND IN 查询条件，比如AND id IN (?, ?, ?);
      *
      * @param columnName   列名称，比如 id
      * @param argList      参数的值数组，比如 new String[] {"1", "2", "3"}
-     * @param argType      参数的类型
      * @param precondition 先决条件
      */
-    public <T> SqlCreator andIn(String columnName, List<T> argList, int argType, boolean precondition) {
+    public <T> SqlCreator andIn(String columnName, List<T> argList, boolean precondition) {
         if (precondition && null != argList && argList.size() > 0) {
             if (isFirst) {
                 if (hasWhere) {
@@ -191,14 +159,9 @@ public class SqlCreator {
             sql.append(getInSql(argList.size()));
             for (int i = 0; i < argList.size(); i++) {
                 this.args.add(argList.get(i));
-                argTypes.add(argType);
             }
         }
         return this;
-    }
-
-    public <T> SqlCreator andIn(String columnName, List<T> argList, int argType) {
-        return andIn(columnName, argList, argType, true);
     }
 
     /**
@@ -220,18 +183,6 @@ public class SqlCreator {
      */
     public SqlCreator or(String expression, Object arg, boolean precondition) {
         return addExpression("OR", expression, arg, precondition);
-    }
-
-    /**
-     * 增加OR查询条件
-     *
-     * @param expression   表达式
-     * @param arg          参数的值
-     * @param argType      参数的类型
-     * @param precondition 先决条件
-     */
-    public SqlCreator or(String expression, Object arg, int argType, boolean precondition) {
-        return addExpression("OR", expression, arg, argType, precondition);
     }
 
     /**
@@ -301,6 +252,15 @@ public class SqlCreator {
         if (!precondition) {
             return this;
         }
+
+        if (null == pageQuery) {
+            return this;
+        }
+
+        if (null == pageQuery.getOrderBy()) {
+            return limit(pageQuery.getOffset(), pageQuery.getPageSize());
+        }
+
         return orderBy(pageQuery.getOrderBy(), pageQuery.isDesc()).limit(pageQuery.getOffset(),
             pageQuery.getPageSize());
     }
@@ -315,25 +275,11 @@ public class SqlCreator {
     }
 
     /**
-     * 取得所有参数的类型数组
-     *
-     * @return 所有参数的类型数组
-     */
-    public int[] getArgTypes() {
-        Integer[] objectTypes = argTypes.toArray(new Integer[argTypes.size()]);
-        int[] intTypes = new int[objectTypes.length];
-        for (int i = 0; i < objectTypes.length; i++) {
-            intTypes[i] = objectTypes[i].intValue();
-        }
-        return intTypes;
-    }
-
-    /**
      * 取得最后生成查询sql
      *
      * @return 查询sql
      */
-    public String getSQL() {
+    public String getSql() {
         return sql.toString();
     }
 

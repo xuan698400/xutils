@@ -3,6 +3,9 @@ package com.xuan.dao;
 import java.util.List;
 
 import com.xuan.dao.common.DataModel;
+import com.xuan.dao.common.PageData;
+import com.xuan.dao.common.PageQuery;
+import com.xuan.dao.sqlbuilder.SqlCreator;
 
 /**
  * @author xuan
@@ -18,4 +21,9 @@ public interface Dao {
 
     <T extends DataModel> List<T> select(DataModel dataModel, Class<T> elementType);
 
+    <T extends DataModel> List<T> select(SqlCreator creator, Class<T> elementType);
+
+    Long count(SqlCreator sqlCreator);
+
+    <T extends DataModel> PageData<T> selectPage(SqlCreator creator, PageQuery pageQuery, Class<T> elementType);
 }

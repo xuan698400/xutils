@@ -1,4 +1,4 @@
-package com.xuan.dao.sqlbuilder;
+package com.xuan.dao;
 
 import java.util.Date;
 
