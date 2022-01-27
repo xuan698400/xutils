@@ -2,8 +2,30 @@
 作为一个Java开发者，在开发的过程中，总有一些代码是经常要用到的。有些可能是一些第三方JAR，但是总有一部分是我们自己造的轮子，而且自己造的用起来也比较顺畅，这个工具类就是这么而来的，也算是自己的一个积累，开源出来，有码同享嘛。
 
 # 原则
-不依赖任何第三方JAR。就是这么任性，不想受到别人的牵制。
+尽量不依赖任何第三方JAR。就是这么任性，不想受到别人的牵制。
 
+# lock模块
+利用数据库做了一个分布式锁。支持锁超时，可重入等。当项目流量不算很大时（这个大取决于数据库可以承受多少压力，一般单库1000QPS以下，感觉压力都不算大）稳定性还是很好的。以下是简单用法：
+```
+//连库数据源，这里使用Druid
+DruidDataSource dataSource = new DruidDataSource();
+dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/xxx?useUnicode=true&characterEncoding=utf8");
+dataSource.setUsername("xxx");
+dataSource.setPassword("xxx");
+//创建分布式可重入锁并初始化，可单例使用
+DbLock lock = new DbReentrantLock();
+lock.init(dataSource);
+//使用
+try{
+    //加锁，设置超时10S
+    lock.tryLock("testResource", 10 * 1000);
+}catch(Exception e){
+    //Ignore
+}finally{
+    //解锁
+    lock.unLock("testResource");
+}
+```
 # sequence模块说明
 开发过需要查询数据库表功能的同学都应该知道。数据需要一个主键。如果是单表，那一般我们还可以用mysql的自增来搞定。但是到了分库分表的时候，这个就不能用了。这个模块主要就是用来解决分布式连续id生成。
 
