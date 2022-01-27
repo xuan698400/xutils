@@ -9,7 +9,6 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 import com.mysql.jdbc.MysqlErrorNumbers;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 /**
  * @author xuan

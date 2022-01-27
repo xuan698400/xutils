@@ -3,8 +3,9 @@ package com.xuan.rbac.adapter.impl;
 import com.alibaba.druid.pool.DruidDataSource;
 
 import com.xuan.rbac.adapter.SeqAdapter;
-import com.xuan.seq.DbSeqBuilder;
-import com.xuan.seq.sequence.Sequence;
+import com.xuan.sequence.range.db.DbSeqRangeMgr;
+import com.xuan.sequence.Sequence;
+import com.xuan.sequence.core.DefaultRangeSequence;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -42,8 +43,18 @@ public class SeqAdapterImpl implements SeqAdapter, InitializingBean {
         dataSource.setInitialSize(2);
         dataSource.setMaxWait(500);
 
-        userSequence = DbSeqBuilder.create().dataSource(dataSource).step(10).stepStart(1000000).bizName("rbac_user")
-            .build();
+        //使用DB获取区间管理器
+        DbSeqRangeMgr dbSeqRangeMgr = new DbSeqRangeMgr();
+        dbSeqRangeMgr.setDataSource(dataSource);
+        dbSeqRangeMgr.setStep(1000);
+        dbSeqRangeMgr.setStepStart(0L);
+        dbSeqRangeMgr.init();
+
+        DefaultRangeSequence defaultRangeSequence = new DefaultRangeSequence();
+        defaultRangeSequence.setName("rbac_user");
+        defaultRangeSequence.setSeqRangeMgr(dbSeqRangeMgr);
+
+        userSequence = defaultRangeSequence;
     }
 
 }
