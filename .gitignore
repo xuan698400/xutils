@@ -11,3 +11,4 @@ rbac/target/*
 sequence/target/*
 user/target/*
 spring-utils/target/*
+lock/target/*

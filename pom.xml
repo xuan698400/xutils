@@ -15,6 +15,7 @@
         <module>extp</module>
         <module>spring-utils</module>
         <module>dao</module>
+        <module>lock</module>
     </modules>
     <packaging>pom</packaging>
 
