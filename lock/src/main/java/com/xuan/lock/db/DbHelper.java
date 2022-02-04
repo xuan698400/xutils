@@ -9,6 +9,7 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 import com.mysql.jdbc.MysqlErrorNumbers;
+import com.xuan.lock.common.DbLockModel;
 
 /**
  * @author xuan
@@ -33,6 +34,9 @@ public class DbHelper {
         LOCK_TABLE_NAME);
 
     private final static String SQL_DELETE_LOCK = String.format("DELETE FROM %s WHERE name=? AND create_time=?",
+        LOCK_TABLE_NAME);
+
+    private final static String SQL_DELETE_LOCK_UNCHECK = String.format("DELETE FROM %s WHERE name=?",
         LOCK_TABLE_NAME);
 
     private final static String SQL_SELECT_LOCK = String.format(
@@ -115,6 +119,24 @@ public class DbHelper {
             stmt = conn.prepareStatement(SQL_DELETE_LOCK);
             stmt.setString(1, name);
             stmt.setLong(2, createTime);
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            closeQuietly(stmt);
+            closeQuietly(conn);
+        }
+    }
+
+    public static boolean deleteLock(DataSource dataSource, String name) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = dataSource.getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE_LOCK_UNCHECK);
+            stmt.setString(1, name);
             int affectedRows = stmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException e) {

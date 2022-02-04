@@ -1,8 +1,15 @@
 package com.xuan.lock;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import com.alibaba.druid.pool.DruidDataSource;
 
 import com.xuan.lock.db.DbHelper;
+import com.xuan.lock.db.DbLock;
 import com.xuan.lock.db.DbReentrantLock;
 
 /**
@@ -33,6 +40,9 @@ public class Test {
     }
 
     private static void test() {
+        //强制清理锁
+        lock.forceUnLock("testResource");
+
         //主线程第1次获取锁，预期成功
         boolean success = lock.tryLock("testResource", 10 * 1000);
         if (success) {
