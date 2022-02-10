@@ -1,8 +1,6 @@
 package com.xuan.mix.bt.event;
 
 /**
- * 订阅者
- *
  * @author xuan
  * @since 2021/4/1
  */

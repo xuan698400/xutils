@@ -3,8 +3,6 @@ package com.xuan.mix.bt.event;
 import java.util.Map;
 
 /**
- * 事件模型
- *
  * @author xuan
  * @since 2021/9/6
  */
@@ -14,13 +12,8 @@ public class EventModel<EventBody> {
         this.eventBody = eventBody;
     }
 
-    /**
-     * 扩展属性MAP，方便扩展
-     */
     private Map<String, String> extAttrMap;
-    /**
-     * 事件内容
-     */
+    
     private EventBody eventBody;
 
     public EventBody getEventBody() {
