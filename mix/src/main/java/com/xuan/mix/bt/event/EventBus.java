@@ -18,7 +18,7 @@ public interface EventBus {
     /**
      * 重置，清空所有订阅者
      */
-    void reset();
+    void clearAllSubscriber();
 
     /**
      * 同步通知

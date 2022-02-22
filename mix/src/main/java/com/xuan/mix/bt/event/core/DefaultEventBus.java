@@ -54,7 +54,7 @@ public class DefaultEventBus implements EventBus {
     }
 
     @Override
-    public void reset() {
+    public void clearAllSubscriber() {
         subscribers.clear();
         subscriberMap.clear();
     }
