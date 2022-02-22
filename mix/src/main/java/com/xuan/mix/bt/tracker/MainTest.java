@@ -20,7 +20,7 @@ public class MainTest {
         sleep(450);
 
         Tracker.on("[Tracker-main-3]", "3");
-        
+
         //等调用结束后end,进行数据分析处理
         Tracker.end("[Tracker-main-end]", "end", new EndCallback() {
             @Override
@@ -32,6 +32,8 @@ public class MainTest {
 
     private static TkConfig getConfig() {
         TkConfig config = new TkConfig();
+        config.setTrace(true);
+        config.setLogGreaterInterval(500L);
         return config;
     }
 
