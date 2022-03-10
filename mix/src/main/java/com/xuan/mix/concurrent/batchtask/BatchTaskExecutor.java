@@ -28,7 +28,7 @@ public interface BatchTaskExecutor<T, R> {
      * @param originList        需要并行处理的原始数据List，并行执行
      * @param callable          具体处理原始数据的回调
      * @param subOriginListSize 设定多少个原始数据为一个子任务
-     * @param timeout           超时时间，单位秒
+     * @param timeout           超时时间，单位：秒
      * @return BatchTaskResult
      */
     BatchTaskResult<R> execute(List<T> originList, BatchTaskCallable<T, R> callable, int subOriginListSize,

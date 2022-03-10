@@ -34,7 +34,7 @@ public class Main {
         BatchTaskResult<TargetClass> targetList = listTaskExecutor.execute(originList,
             new AbstractSingleSizeBatchTaskCallable<OriginClass, TargetClass>() {
                 @Override
-                protected void call(OriginClass originClass,
+                protected void doSingleCall(OriginClass originClass,
                     BatchSubTaskResult<TargetClass> subTaskResult) {
                     sleep();
                     TargetClass tc = new TargetClass();

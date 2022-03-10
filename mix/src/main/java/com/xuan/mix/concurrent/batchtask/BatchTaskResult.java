@@ -78,21 +78,4 @@ public class BatchTaskResult<R> {
         return resultDataList;
     }
 
-    /**
-     * 把from的结果对象数据合并到this
-     *
-     * @param from
-     * @return to
-     */
-    //public BatchTaskResult<R> mergeFrom(BatchTaskResult<R> from) {
-    //    if (null == from || null == from.getSubTaskResultList() || from.getSubTaskResultList().size() == 0) {
-    //        return this;
-    //    }
-    //    if (null == this.getSubTaskResultList()) {
-    //        this.setSubTaskResultList(new CopyOnWriteArrayList<>());
-    //    }
-    //    this.getSubTaskResultList().addAll(from.getSubTaskResultList());
-    //    return this;
-    //}
-
 }

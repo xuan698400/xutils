@@ -13,9 +13,9 @@ import java.util.List;
 public abstract class AbstractSingleSizeBatchTaskCallable<T, R> extends AbstractBatchTaskCallable<T, R> {
 
     @Override
-    public void call(List<T> subList, BatchSubTaskResult<R> subTaskResult) {
+    public void doCall(List<T> subList, BatchSubTaskResult<R> subTaskResult) {
         for (T t : subList) {
-            call(t, subTaskResult);
+            doSingleCall(t, subTaskResult);
         }
     }
 
@@ -25,6 +25,6 @@ public abstract class AbstractSingleSizeBatchTaskCallable<T, R> extends Abstract
      * @param t             单个数据
      * @param subTaskResult 处理结果
      */
-    protected abstract void call(T t, BatchSubTaskResult<R> subTaskResult);
+    protected abstract void doSingleCall(T t, BatchSubTaskResult<R> subTaskResult);
 
 }

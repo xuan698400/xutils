@@ -26,7 +26,7 @@ public class BatchTaskExecutorParallelImpl<T, R> implements BatchTaskExecutor<T,
     /**
      * 当线程处理不过来时，主线程执行
      */
-    private static ExecutorService defaultExecutor = new ThreadPoolExecutor(4, 4, 4,
+    private static ExecutorService defaultExecutor = new ThreadPoolExecutor(10, 10, 4,
         TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000), new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {

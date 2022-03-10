@@ -11,15 +11,6 @@ import com.xuan.mix.concurrent.batchtask.executor.parallel.BatchTaskExecutorPara
  */
 public class BatchTaskExecutorFactory {
 
-    ///**
-    // * 获取ListTask执行器
-    // *
-    // * @return
-    // */
-    //public static <T, R> BatchTaskExecutor<T, R> getExecutor() {
-    //    return new BatchTaskExecutorForkJoinImpl<>(10);
-    //}
-
     /**
      * 获取ListTask执行器
      *
