@@ -471,7 +471,7 @@ public class DateUtils {
      * @return 时间
      */
     public static Date string2Date(String str, String pattern) {
-        if (Validators.isEmpty(str)) {
+        if (null == str || str.trim().length() == 0) {
             return null;
         }
 
