@@ -1,9 +1,13 @@
 package com.xuan.mix.net.http.client.core;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -12,7 +16,6 @@ import java.util.Map;
 import com.xuan.mix.net.http.client.HttpClient;
 import com.xuan.mix.net.http.client.HttpRequest;
 import com.xuan.mix.net.http.client.HttpResponse;
-import com.xuan.mix.file.FileUtils;
 
 /**
  * 用UrlConnect方式实现HTTP请求
@@ -261,7 +264,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             byte[] data = outStream.toByteArray();
 
             File file = new File(request.getDownloadFileName());
-            FileUtils.writeByteArrayToFile(file, data, false);
+            writeByteArrayToFile(file, data, false);
             response.setResultFile(file);
         } catch (Exception e) {
             response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
@@ -313,6 +316,43 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         }
 
         return response;
+    }
+
+    private static void writeByteArrayToFile(File file, byte[] data, boolean append) throws IOException {
+        OutputStream out = null;
+        try {
+            out = openOutputStream(file, append);
+            out.write(data);
+        } finally {
+            closeQuietly(out);
+        }
+    }
+
+    private static FileOutputStream openOutputStream(File file, boolean append) throws IOException {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                throw new IOException(String.format("file %s exists but is a directory.", file.getPath()));
+            }
+            if (!file.canWrite()) {
+                throw new IOException(String.format("file %s cannot be written to.", file.getPath()));
+            }
+        } else {
+            File parent = file.getParentFile();
+            if (null != parent && !parent.mkdirs() && !parent.isDirectory()) {
+                throw new IOException(String.format("directory %s could not be created.", parent.getPath()));
+            }
+        }
+        return new FileOutputStream(file, append);
+    }
+
+    private static void closeQuietly(Closeable closeable) {
+        try {
+            if (null != closeable) {
+                closeable.close();
+            }
+        } catch (IOException ioe) {
+            // ignore
+        }
     }
 
 }
