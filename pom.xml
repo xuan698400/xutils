@@ -16,8 +16,24 @@
         <module>spring-utils</module>
         <module>dao</module>
         <module>lock</module>
+        <module>common</module>
     </modules>
     <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.xuan</groupId>
+                <artifactId>common</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xuan</groupId>
+                <artifactId>mix</artifactId>
+                <version>1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

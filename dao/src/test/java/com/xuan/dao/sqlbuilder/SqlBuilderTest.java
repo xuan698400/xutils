@@ -36,6 +36,7 @@ public class SqlBuilderTest {
 
     @Test
     public void deleteTest() {
+        //
         UserDO updateModel = new UserDO();
         updateModel.setId(1L);
         updateModel.setBizCode("test11");

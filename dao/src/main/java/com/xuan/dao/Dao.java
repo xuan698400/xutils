@@ -2,9 +2,9 @@ package com.xuan.dao;
 
 import java.util.List;
 
+import com.xuan.common.model.page.PageData;
+import com.xuan.common.model.page.PageQuery;
 import com.xuan.dao.common.DataModel;
-import com.xuan.dao.common.PageData;
-import com.xuan.dao.common.PageQuery;
 import com.xuan.dao.sqlbuilder.SqlCreator;
 
 /**
@@ -12,6 +12,14 @@ import com.xuan.dao.sqlbuilder.SqlCreator;
  * @since 2021/11/5
  */
 public interface Dao {
+
+    /**
+     * 插入数据，并返回自动生产的ID
+     *
+     * @param dataModel 数据模型
+     * @return 返回自动生产的ID
+     */
+    long insertBackId(DataModel dataModel);
 
     /**
      * 插入数据
@@ -36,6 +44,14 @@ public interface Dao {
      * @return 成功返回1
      */
     int delete(DataModel dataModel);
+
+    /**
+     * 更新SQL（当上面的条件无法满足时，可以使用该方法）
+     *
+     * @param sqlCreator SQL
+     * @return 成功返回1
+     */
+    int update(SqlCreator sqlCreator);
 
     /**
      * 查找数据（根据设置的值拼装条件查询）

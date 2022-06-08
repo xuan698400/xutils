@@ -3,7 +3,9 @@ package com.xuan.dao.sqlbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xuan.dao.common.PageQuery;
+import com.xuan.common.model.page.PageOrderBy;
+import com.xuan.common.model.page.PageQuery;
+import com.xuan.common.utils.CollectionUtils;
 
 /**
  * SQL生成工具类
@@ -257,12 +259,13 @@ public class SqlCreator {
             return this;
         }
 
-        if (null == pageQuery.getOrderBy()) {
-            return limit(pageQuery.getOffset(), pageQuery.getPageSize());
+        if (CollectionUtils.isNotEmpty(pageQuery.getOrderByList())) {
+            for (PageOrderBy orderBy : pageQuery.getOrderByList()) {
+                orderBy(orderBy.getFieldName(), orderBy.getDesc());
+            }
         }
 
-        return orderBy(pageQuery.getOrderBy(), pageQuery.isDesc()).limit(pageQuery.getOffset(),
-            pageQuery.getPageSize());
+        return limit(pageQuery.getOffset(), pageQuery.getPageSize());
     }
 
     /**

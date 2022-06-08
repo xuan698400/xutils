@@ -3,28 +3,34 @@ package com.xuan.dao;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.JSON;
 
-import com.xuan.dao.common.PageData;
-import com.xuan.dao.common.PageQuery;
+import com.xuan.common.model.page.PageData;
+import com.xuan.common.model.page.PageOrderBy;
+import com.xuan.common.model.page.PageQuery;
+import com.xuan.common.utils.Lists;
 import com.xuan.dao.sqlbuilder.SqlCreator;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author xuan
  * @since 2021/11/5
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
 public class DaoTest {
 
-    @Resource
     private Dao dao;
+
+    @Before
+    public void initDao() {
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/bpmweb?useUnicode=true&characterEncoding=utf8");
+        dataSource.setUsername("bpmweb");
+        dataSource.setPassword("123456");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dao = new SimpleDao(dataSource);
+    }
 
     @Test
     public void test() {
@@ -57,11 +63,16 @@ public class DaoTest {
         u.setFeature("{}");
         u.setPassword("ddd");
         u.setType(1);
-        int num = dao.insert(u);
-        System.out.println("新增结果：" + num);
+        long newId = dao.insertBackId(u);
+        System.out.println("新增结果的ID：" + newId);
     }
 
     public void deleteTest() {
+        //删除所有
+        //SqlCreator sqlCreator = SqlCreator.deleteTable(new UserDO().tableName());
+        //int num2 = dao.update(sqlCreator);
+        //System.out.println("删除所有结果：" + num2);
+
         //先删除
         UserDO u = new UserDO();
         u.setId(1L);
@@ -92,7 +103,16 @@ public class DaoTest {
 
     public void selectPageTest() {
         SqlCreator creator = SqlCreator.selectTable(new UserDO().tableName());
-        PageQuery pageQuery = PageQuery.of(2, 1, "modify_time", true, true);
+        PageQuery pageQuery = new PageQuery();
+        pageQuery.setPageIndex(1);
+        pageQuery.setPageSize(2);
+        pageQuery.setNeedTotalCount(true);
+
+        PageOrderBy orderBy = new PageOrderBy();
+        orderBy.setFieldName("modify_time");
+        orderBy.setDesc(true);
+        pageQuery.setOrderByList(Lists.newList(orderBy));
+
         PageData<UserDO> pageData = dao.selectPage(creator, pageQuery, UserDO.class);
         System.out.println("分页结果：" + JSON.toJSONString(pageData));
     }

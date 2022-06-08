@@ -1,4 +1,4 @@
-package com.xuan.mix.common.exception;
+package com.xuan.common.exception;
 
 /**
  * 错误码枚举

@@ -9,24 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mix</artifactId>
-    <version>1.0</version>
-
-    <dependencies>
-        <!-- test解析excel的-->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.17</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.62</version>
-        </dependency>
-    </dependencies>
-
+    <artifactId>common</artifactId>
 
     <build>
         <plugins>
@@ -43,4 +26,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

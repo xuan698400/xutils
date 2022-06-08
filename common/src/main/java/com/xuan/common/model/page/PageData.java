@@ -1,15 +1,14 @@
-package com.xuan.dao.common;
+package com.xuan.common.model.page;
 
+import java.io.Serializable;
 import java.util.List;
 
-
 /**
- * 一些分页场景可以用这个模型来承载
- *
  * @author xuan
- * @since 2021/12/19
+ * @since 2022/6/1
  */
-public class PageData<T> {
+public class PageData<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Long totalCount;
 
@@ -37,4 +36,5 @@ public class PageData<T> {
     public void setData(List<T> data) {
         this.data = data;
     }
+
 }
