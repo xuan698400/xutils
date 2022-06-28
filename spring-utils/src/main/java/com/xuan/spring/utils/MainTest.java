@@ -1,5 +1,7 @@
 package com.xuan.spring.utils;
 
+import java.util.Currency;
+
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
@@ -10,6 +12,10 @@ public class MainTest {
     public static void main(String[] args) throws Exception {
         Thumbnails.of("/Users/xuan/Downloads/one_press.jpg").size(700, 990).toFile(
             "/Users/xuan/Downloads/one_press_done.jpg");
+
+        Currency c = Currency.getInstance("CNY");
+        System.out.println(c);
+
     }
 
 }

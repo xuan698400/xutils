@@ -1,7 +1,7 @@
 package com.xuan.dao.common;
 
 /**
- * 数据模型基类
+ * 数据模型
  *
  * @author xuan
  * @since 2021/11/5
@@ -9,14 +9,14 @@ package com.xuan.dao.common;
 public interface DataModel {
 
     /**
-     * 指定数据模型对应表的表名
+     * 表名
      *
      * @return String
      */
     String tableName();
 
     /**
-     * 设置对应表的主键
+     * 表主键
      *
      * @return NameValuePair
      */

@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xuan.common.exception.BizException;
 import com.xuan.dao.common.DataModel;
 import com.xuan.dao.sqlbuilder.SqlModel;
 
@@ -22,22 +23,25 @@ public class DeleteSqlBuilder extends BaseSqlBuilder {
         Field[] fields = dataModel.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
-            Object value = null;
+            Object value;
             try {
                 value = field.get(dataModel);
             } catch (IllegalAccessException e) {
-                //Ignore
+                throw new BizException("DeleteSqlBuilder_getSql_field_get", e.getMessage(), e);
             }
 
-            String fieldName = getFieldName(field);
             if (null == value) {
-                //没有设置值，不需要条件
                 continue;
             }
 
+            String fieldName = getFieldName(field);
             sb.append(fieldName);
             sb.append("=? AND ");
             valueList.add(value);
+        }
+
+        if (!sb.toString().endsWith(" AND ")) {
+            throw new BizException("DeleteSqlBuilder_getSql", "没有删除条件不允许操作");
         }
 
         SqlModel sqlModel = new SqlModel();

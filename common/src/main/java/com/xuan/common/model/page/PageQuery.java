@@ -52,5 +52,5 @@ public class PageQuery implements Serializable {
     public void setOrderByList(List<PageOrderBy> orderByList) {
         this.orderByList = orderByList;
     }
-    
+
 }

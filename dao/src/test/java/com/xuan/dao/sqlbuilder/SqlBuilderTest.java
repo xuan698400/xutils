@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.xuan.dao.UserDO;
 import com.xuan.dao.common.SqlSyntax;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -22,6 +23,9 @@ public class SqlBuilderTest {
         addModel.setCreateTime(new Date());
         SqlModel sqlModel = SqlBuilderFactory.getInsertSqlBuilder(SqlSyntax.MYSQL).getSql(addModel);
         System.out.println(JSON.toJSONString(sqlModel));
+
+        Assert.assertEquals("INSERT INTO bw_user(id,biz_code,create_time) VALUES(?,?,?)", sqlModel.getSql());
+        Assert.assertEquals(sqlModel.getParams().size(), 3);
     }
 
     @Test

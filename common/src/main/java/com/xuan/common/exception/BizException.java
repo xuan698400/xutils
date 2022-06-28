@@ -4,29 +4,28 @@ package com.xuan.common.exception;
  * @author xuan
  * @since 2021/7/12
  */
-public class BizException extends BaseException {
-
+public class BizException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public static final String DEFAULT_ERR_CODE = "BIZ_ERROR";
+    private String code;
 
-    public BizException(String message) {
-        super(DEFAULT_ERR_CODE, message);
+    public BizException(String code, String msg) {
+        super(msg);
+        this.code = code;
     }
 
-    public BizException(String code, String message) {
-        super(code, message);
+    public BizException(String code, String msg, Throwable e) {
+        super(msg, e);
+        this.code = code;
     }
 
-    public BizException(BizExceptionCode code, Object... params) {
-        super(code.getCode(), code.getMsg(params));
+    public BizException(BizExceptionCode code, Throwable e) {
+        super(code.getMsg(), e);
+        this.code = code.getCode();
     }
 
-    public BizException(String message, Throwable e) {
-        super(DEFAULT_ERR_CODE, message, e);
+    public String getCode() {
+        return code;
     }
 
-    public BizException(String code, String message, Throwable e) {
-        super(code, message, e);
-    }
 }

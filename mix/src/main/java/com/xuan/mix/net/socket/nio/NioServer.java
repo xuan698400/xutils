@@ -18,15 +18,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.xuan.mix.net.socket.Handler;
-import com.xuan.mix.net.socket.Server;
+import com.xuan.mix.net.socket.SocketHandler;
+import com.xuan.mix.net.socket.SocketServer;
 import com.xuan.mix.net.socket.SocketThreadFactory;
 
 /**
  * @author xuan
  * @since 2019/5/23
  */
-public class NioServer implements Server {
+public class NioServer implements SocketServer {
 
     private final Executor BOSS = new ThreadPoolExecutor(1, 1,
         0L, TimeUnit.MILLISECONDS,
@@ -42,7 +42,7 @@ public class NioServer implements Server {
 
     private volatile boolean stop = false;
 
-    private Handler handler;
+    private SocketHandler handler;
 
     public NioServer(int port) {
         try {
@@ -105,7 +105,7 @@ public class NioServer implements Server {
     }
 
     @Override
-    public void setHandler(Handler handler) {
+    public void setHandler(SocketHandler handler) {
         this.handler = handler;
     }
 

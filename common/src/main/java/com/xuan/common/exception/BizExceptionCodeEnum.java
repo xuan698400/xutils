@@ -1,8 +1,6 @@
 package com.xuan.common.exception;
 
 /**
- * 错误码枚举
- *
  * @author xuan
  * @since 2020/1/10
  */

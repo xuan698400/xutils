@@ -2,6 +2,8 @@ package com.xuan.dao.sqlbuilder.impl;
 
 import java.lang.reflect.Field;
 
+import com.xuan.common.exception.BizException;
+import com.xuan.common.utils.StringUtils;
 import com.xuan.dao.common.DataModel;
 import com.xuan.dao.common.NameValuePair;
 import com.xuan.dao.sqlbuilder.SqlBuilder;
@@ -14,8 +16,12 @@ public abstract class BaseSqlBuilder implements SqlBuilder {
 
     protected static NameValuePair getAndCheckPrimaryKey(DataModel dataModel) {
         NameValuePair primaryKey = dataModel.primaryKey();
-        if (null == primaryKey || null == primaryKey.getName() || null == primaryKey.getValue()) {
-            throw new IllegalArgumentException("primaryKey and primaryKey.name and primaryKey.value cannot be null.");
+        if (null == primaryKey) {
+            throw new BizException("BaseSqlBuilder_getAndCheckPrimaryKey.", "获取主键信息DataModel.primaryKey为null");
+        }
+
+        if (StringUtils.isEmpty(primaryKey.getName())) {
+            throw new BizException("BaseSqlBuilder_getAndCheckPrimaryKey.", "获取主键信息DataModel.primaryKey.getName为空");
         }
         return primaryKey;
     }

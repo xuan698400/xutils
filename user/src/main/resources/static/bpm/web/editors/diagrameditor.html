@@ -162,7 +162,7 @@
 			// NOTE: The old image export in mxEditor is not used, the urlImage is used for the new export.
 			if (editor.urlImage != null)
 			{
-				// Client-side code for image export
+				// SocketClient-side code for image export
 				var exportImage = function(editor)
 				{
 					var graph = editor.graph;
@@ -202,7 +202,7 @@
 				
 				editor.addAction('exportImage', exportImage);
 				
-				// Client-side code for SVG export
+				// SocketClient-side code for SVG export
 				var exportSvg = function(editor)
 				{
 					var graph = editor.graph;

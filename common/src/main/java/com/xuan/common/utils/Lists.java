@@ -22,6 +22,9 @@ public class Lists {
     }
 
     public static <E> List<E> newList(Set<E> set) {
+        if (null == set) {
+            return new ArrayList<>();
+        }
         return new ArrayList<>(set);
     }
 

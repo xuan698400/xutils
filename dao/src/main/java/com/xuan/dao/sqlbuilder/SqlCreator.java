@@ -33,26 +33,14 @@ public class SqlCreator {
         return new SqlCreator("DELETE FROM " + tableName, false);
     }
 
-    /**
-     * 构造方法。
-     *
-     * @param baseSql 带有 WHERE 关键字的原始 sql
-     */
     public SqlCreator(String baseSql) {
         this(baseSql, true);
     }
 
-    /**
-     * 构造方法。
-     *
-     * @param baseSql  原始 sql
-     * @param hasWhere 原始 sql 是否带有 WHERE 关键字
-     */
     public SqlCreator(String baseSql, boolean hasWhere) {
-        if (baseSql == null || baseSql.trim().length() == 0) {
+        if (null == baseSql || baseSql.trim().length() == 0) {
             throw new IllegalArgumentException("baseSql can't be null");
         }
-
         args = new ArrayList<>();
         sql = new StringBuilder();
         sql.append(baseSql.trim());

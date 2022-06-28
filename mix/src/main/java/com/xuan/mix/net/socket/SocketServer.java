@@ -4,13 +4,13 @@ package com.xuan.mix.net.socket;
  * @author xuan
  * @since 2019/5/23
  */
-public interface Server {
+public interface SocketServer {
 
     void start();
 
     void close();
 
-    void setHandler(Handler handler);
+    void setHandler(SocketHandler handler);
 
     void sendMessage(String message);
 }

@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
-import com.xuan.mix.net.socket.Handler;
+import com.xuan.mix.net.socket.SocketHandler;
 
 /**
  * @author xuan
@@ -16,7 +16,7 @@ public class AioClient {
     private final static int BUFFER_SIZE = 1024;
 
     private AsynchronousSocketChannel channel;
-    private Handler handler;
+    private SocketHandler handler;
 
     public void connect(String ip, int port) {
         try {
@@ -58,7 +58,7 @@ public class AioClient {
         }
     }
 
-    public void setHandler(Handler handler) {
+    public void setHandler(SocketHandler handler) {
         this.handler = handler;
     }
 

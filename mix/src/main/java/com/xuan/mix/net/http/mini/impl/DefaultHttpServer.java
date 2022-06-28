@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.mini;
+package com.xuan.mix.net.http.mini.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,88 +17,88 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.sun.net.httpserver.Headers;
-import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
+import com.xuan.mix.net.http.mini.HttpHandler;
+import com.xuan.mix.net.http.mini.HttpHandlerResponse;
+import com.xuan.mix.net.http.mini.HttpServer;
 
 /**
- * 一个超级简单的Http服务器，目前只支持GET请求
- *
  * @author xuan
- * @since 2020/10/16
+ * @since 2022/6/23
  */
-public class MiniHttpServer {
-    /**
-     * 表示是否已经启动了
-     */
+public class DefaultHttpServer implements HttpServer {
+
     private AtomicBoolean isStart = new AtomicBoolean(false);
-    /**
-     * 服务器开放端口
-     */
+
     private int port;
-    /**
-     * 线程池创建线程时，使用该计数器
-     */
+
     private AtomicInteger threadCounter = new AtomicInteger(1);
-    /**
-     * 创建线程池
-     */
+
     private Executor executor = new ThreadPoolExecutor(4, 4, 4,
         TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000),
-        (r) -> new Thread(r, "xUtils-MiniHttpServer-Thread" + threadCounter.get()), (r, executor) -> {
-        //这里是拒绝策略，默认抛弃
+        (r) -> new Thread(r, "xUtils-DefaultHttpServer-Thread" + threadCounter.get()), (r, executor) -> {
     });
-    /**
-     * 逻辑处理
-     */
-    private MiniHttpHandler httpHandler;
-    /**
-     * 内部正真使用的Server
-     */
-    private HttpServer innerHttpServer;
 
-    public MiniHttpServer(int port, MiniHttpHandler httpHandler) {
+    private Map<String, HttpHandler> handlerMap = new HashMap<>();
+
+    private com.sun.net.httpserver.HttpServer sunHttpServer;
+
+    public DefaultHttpServer(int port) {
         this.port = port;
-        this.httpHandler = httpHandler;
     }
 
+    @Override
     public void start() throws IOException {
         if (!isStart.compareAndSet(false, true)) {
             return;
         }
 
         HttpServerProvider httpServerProvider = HttpServerProvider.provider();
-        innerHttpServer = httpServerProvider.createHttpServer(new InetSocketAddress(this.port), 10);
+        sunHttpServer = httpServerProvider.createHttpServer(new InetSocketAddress(this.port), 10);
 
-        innerHttpServer.createContext("/", (httpExchange) -> {
-            String res = "no hander";
+        sunHttpServer.createContext("/", (httpExchange) -> {
+
+            HttpHandler httpHandler = handlerMap.get(httpExchange.getRequestURI().getPath().split("\\.")[1]);
+            HttpHandlerResponse response;
             if (null != httpHandler) {
-                res = httpHandler.handle(httpExchange.getRequestURI().getPath(),
+                response = httpHandler.handle(httpExchange.getRequestURI().getPath(),
                     buildGetParams(httpExchange.getRequestURI()));
+            } else {
+                HttpHandlerResponse error = new HttpHandlerResponse();
+                error.setContentType("text/plain;charset=utf-8");
+                error.setContent("NO_HTTP_HANDLER_FOUND");
+                response = error;
             }
 
-            Headers responseHeaders = httpExchange.getResponseHeaders();
-            responseHeaders.set("Content-Type", "text/plain;charset=utf-8");
+            Headers headers = httpExchange.getResponseHeaders();
+            headers.set("Content-Type", response.getContentType());
 
-            byte[] bytes = res.getBytes(Charset.forName("UTF-8"));
+            byte[] bytes = response.getContent().getBytes(Charset.forName("UTF-8"));
             httpExchange.sendResponseHeaders(200, bytes.length);
             OutputStream os = httpExchange.getResponseBody();
             os.write(bytes);
             os.close();
         });
 
-        innerHttpServer.setExecutor(this.executor);
+        sunHttpServer.setExecutor(this.executor);
 
-        innerHttpServer.start();
-        System.out.println("xUtils MiniHttpServer start. port=" + port);
+        sunHttpServer.start();
+        System.out.println("xUtils_DefaultHttpServer_started. port=" + port);
     }
 
+    @Override
     public void stop() {
         if (!isStart.compareAndSet(true, false)) {
             return;
         }
 
-        innerHttpServer.stop(1);
-        System.out.println("xUtils MiniHttpServer stop.");
+        sunHttpServer.stop(1);
+        System.out.println("xUtils_DefaultHttpServer_stop.");
+    }
+
+    @Override
+    public void registerHandler(String key, HttpHandler httpHandler) {
+        handlerMap.put(key, httpHandler);
     }
 
     private Map<String, String> buildGetParams(URI uri) throws UnsupportedEncodingException {

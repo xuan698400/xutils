@@ -10,7 +10,7 @@ import java.nio.channels.CompletionHandler;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
-import com.xuan.mix.net.socket.Handler;
+import com.xuan.mix.net.socket.SocketHandler;
 
 /**
  * @author xuan
@@ -20,7 +20,7 @@ public class AioServer {
     private final static int BUFFER_SIZE = 1024;
 
     private AsynchronousServerSocketChannel channel;
-    private Handler handler;
+    private SocketHandler handler;
 
     public void start(int port) {
         try {
@@ -41,7 +41,7 @@ public class AioServer {
         }
     }
 
-    public void setHandler(Handler handler) {
+    public void setHandler(SocketHandler handler) {
         this.handler = handler;
     }
 
@@ -49,9 +49,9 @@ public class AioServer {
     }
 
     private static class AcceptHandler implements CompletionHandler<AsynchronousSocketChannel, AioServer> {
-        private Handler handler;
+        private SocketHandler handler;
 
-        public AcceptHandler(Handler handler) {
+        public AcceptHandler(SocketHandler handler) {
             this.handler = handler;
         }
 
@@ -68,9 +68,9 @@ public class AioServer {
     }
 
     private static class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
-        private Handler handler;
+        private SocketHandler handler;
 
-        public ReadHandler(Handler handler) {
+        public ReadHandler(SocketHandler handler) {
             this.handler = handler;
         }
 

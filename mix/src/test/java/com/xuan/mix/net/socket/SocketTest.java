@@ -13,8 +13,8 @@ public class SocketTest {
     public void test() {
         new Thread(() -> {
             //mini
-            Server server = new NioServer(20000);
-            server.setHandler(new Handler() {
+            SocketServer server = new NioServer(20000);
+            server.setHandler(new SocketHandler() {
                 @Override
                 public void accept(String message) {
                     System.out.println("服务端收到消息：" + message);
@@ -31,7 +31,7 @@ public class SocketTest {
         //new Thread(() -> {
         //    //client
         //    AioClient client = new AioClient();
-        //    client.setHandler(new Handler() {
+        //    client.setHandler(new SocketHandler() {
         //        @Override
         //        public void accept(String message) {
         //            System.out.println("客户端收到消息：" + message);

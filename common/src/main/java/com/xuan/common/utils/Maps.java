@@ -13,6 +13,10 @@ public class Maps {
     }
 
     public static <K, V> Map<K, V> newMap(Map<? extends K, ? extends V> map) {
+        if (null == map) {
+            return new HashMap<>();
+        }
+
         return new HashMap<>(map);
     }
 

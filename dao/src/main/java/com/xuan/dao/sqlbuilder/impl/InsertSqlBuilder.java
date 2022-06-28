@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xuan.common.exception.BizException;
 import com.xuan.dao.common.DataModel;
 import com.xuan.dao.sqlbuilder.SqlModel;
 
@@ -23,19 +24,21 @@ public class InsertSqlBuilder extends BaseSqlBuilder {
         Field[] fields = dataModel.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
-            Object value = null;
+            Object value;
             try {
                 value = field.get(dataModel);
             } catch (IllegalAccessException e) {
-                //Ignore
+                throw new BizException("InsertSqlBuilder_getSql_field_get", e.getMessage(), e);
             }
 
-            if (null != value) {
-                sql.append(getFieldName(field));
-                sql.append(",");
-                valueList.add(value);
-                paramsSize++;
+            if (null == value) {
+                continue;
             }
+
+            sql.append(getFieldName(field));
+            sql.append(",");
+            valueList.add(value);
+            paramsSize++;
         }
 
         sql.deleteCharAt(sql.length() - 1);
