@@ -4,6 +4,8 @@
 .idea/*
 logs/*
 
+classes/*
+
 common/target/*
 extp/*/target/*
 mix/target/*
@@ -13,3 +15,4 @@ user/target/*
 spring-utils/target/*
 lock/target/*
 common/target/*
+dao/target/*
