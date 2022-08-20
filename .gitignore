@@ -16,3 +16,4 @@ spring-utils/target/*
 lock/target/*
 common/target/*
 dao/target/*
+hisql/target/*

@@ -17,6 +17,7 @@
         <module>dao</module>
         <module>lock</module>
         <module>common</module>
+        <module>hisql</module>
     </modules>
     <packaging>pom</packaging>
 

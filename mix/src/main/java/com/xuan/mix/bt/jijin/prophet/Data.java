@@ -9,4 +9,6 @@ public class Data {
     public String date;
 
     public Double price;
+
+
 }

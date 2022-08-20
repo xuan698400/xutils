@@ -12,6 +12,23 @@ import java.util.List;
  * @since 2022/3/13
  */
 public class TxtUtils {
+
+    public static List<Data> readData2(String fileName) {
+        List<Data> dataList = new ArrayList<>();
+        List<String> list = readStr(fileName);
+        for (String str : list) {
+            if (str.trim().length() == 0) {
+                continue;
+            }
+
+            Data data = new Data();
+            data.date = str.split("\t")[0];
+            data.price = Double.valueOf(str.split("\t")[1]);
+            dataList.add(data);
+        }
+        return dataList;
+    }
+
     public static List<Data> readData(String fileName) {
         List<Data> dataList = new ArrayList<>();
         List<String> list = readStr(fileName);
