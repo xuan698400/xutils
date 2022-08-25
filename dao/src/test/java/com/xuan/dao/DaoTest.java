@@ -70,7 +70,7 @@ public class DaoTest {
     public void deleteTest() {
         //删除所有
         //SqlCreator sqlCreator = SqlCreator.deleteTable(new UserDO().tableName());
-        //int num2 = dao.update(sqlCreator);
+        //int num2 = repository.update(sqlCreator);
         //System.out.println("删除所有结果：" + num2);
 
         //先删除

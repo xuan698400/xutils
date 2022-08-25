@@ -92,7 +92,7 @@ public abstract class SpellUtils {
         spellPut("dai", -19212);
         spellPut("dan", -19038);
         spellPut("dang", -19023);
-        spellPut("dao", -19018);
+        spellPut("repository", -19018);
         spellPut("de", -19006);
         spellPut("deng", -19003);
         spellPut("di", -18996);

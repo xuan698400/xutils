@@ -15,7 +15,7 @@ public class Result<T> implements Serializable {
 
     private String code;
 
-    private String message;
+    private String msg;
 
     private String traceId;
 
@@ -43,12 +43,12 @@ public class Result<T> implements Serializable {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getTraceId() {
@@ -57,6 +57,28 @@ public class Result<T> implements Serializable {
 
     public void setTraceId(String traceId) {
         this.traceId = traceId;
+    }
+
+    public static <T> Result<T> success(T value) {
+        Result<T> result = new Result<>();
+        result.setSuccess(true);
+        result.setValue(value);
+        return result;
+    }
+
+    public static <T> Result<T> fail(String msg) {
+        Result<T> result = new Result<>();
+        result.setSuccess(false);
+        result.setMsg(msg);
+        return result;
+    }
+
+    public static <T> Result<T> fail(String code, String msg) {
+        Result<T> result = new Result<>();
+        result.setSuccess(false);
+        result.setCode(code);
+        result.setMsg(msg);
+        return result;
     }
 
 }

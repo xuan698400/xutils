@@ -33,6 +33,11 @@
                 <artifactId>mix</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.xuan</groupId>
+                <artifactId>dao</artifactId>
+                <version>1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

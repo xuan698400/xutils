@@ -32,7 +32,7 @@ public class SimpleDao implements Dao {
     private JdbcTemplate jdbcTemplate;
 
     public SimpleDao(DataSource dataSource) {
-        Assert.notNull(dataSource, "数据源不能为空，请先配置数据源。");
+        Assert.notNull(dataSource, "PARAM_INVALID", "数据源不能为空，请先配置数据源。");
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -64,14 +64,14 @@ public class SimpleDao implements Dao {
                 } else if (obj instanceof Date) {
                     ps.setString(i++, DateUtils.date2String((Date)obj));
                 } else {
-                    throw new BizException("SimpleDao_insertBackId. 原因：不能识别字段类型。类型：" + obj.getClass());
+                    throw new BizException("DB_ERROR", "SimpleDao_insertBackId. 原因：不能识别字段类型。类型：" + obj.getClass());
                 }
             }
             return ps;
         }, keyHolder);
 
         if (null == keyHolder.getKey()) {
-            throw new BizException("SimpleDao_insertBackId. 原因：未能返回新ID");
+            throw new BizException("DB_ERROR", "SimpleDao_insertBackId. 原因：未能返回新ID");
         }
 
         return keyHolder.getKey().longValue();
