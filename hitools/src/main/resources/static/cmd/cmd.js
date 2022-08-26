@@ -15,6 +15,11 @@ $(function () {
         });
     };
 
+    var renderLineItem = function (fileName, fontColor, maxFileNameLength) {
+        var lineItem = '<div style="color:{color};width:{width}px;">{fileName}</div>';
+        return lineItem.replace("{color}", fontColor).replace("{fileName}", fileName).replace("{width}", maxFileNameLength * 10);
+    };
+
     var fn_appendResult = function (cmd, rs) {
         var d = '<div><div class="line">[<span style="color: #8ae234;">' + username + '</span><span style="color: #fce94f;">@</span><span style="color: #ad7fa8;">' + result.ip + '</span>&nbsp;&nbsp;&nbsp;<span>' + path + '</span>]</div>';
 
@@ -25,8 +30,8 @@ $(function () {
         if (cmd === 'ls') {
             d += '<div class="line">';
             for (var j = 0, m = rs.length; j < m; j++) {
-                var file = rs[j];
-                d += '<span style="color: ' + result.file2ColorMap[file] + ';">' + rs[j] + '&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                var fileName = rs[j];
+                d += renderLineItem(fileName, result['file2ColorMap'][fileName], result['maxFileNameLength']);
             }
             d += '</div>';
         } else {

@@ -31,38 +31,49 @@ public class CmdController {
         result.put("data", resultList);
         result.put("ip", getIp());
 
-        //如果是文件查看，需要识别文件类型
-        if ("ls".equals(cmd)) {
-            fillFileType(result, path, resultList);
-        }
+        fillFileColor(cmd, result, path, resultList);
+        fillFileWidth(cmd, result, resultList);
         return result;
     }
 
-    private void fillFileType(Map<String, Object> result, String path, List<String> fileList) {
-        if (null == fileList) {
+    private void fillFileWidth(String cmd, Map<String, Object> result, List<String> fileList) {
+        if ("!ls".equals(cmd) || null == fileList) {
+            return;
+        }
+
+        int maxFileNameLength = 0;
+        for (String fileName : fileList) {
+            if (getStringLength(fileName) > maxFileNameLength) {
+                maxFileNameLength = fileName.length();
+            }
+        }
+        result.put("maxFileNameLength", maxFileNameLength);
+    }
+
+    private void fillFileColor(String cmd, Map<String, Object> result, String path, List<String> fileList) {
+        if ("!ls".equals(cmd) || null == fileList) {
             return;
         }
 
         Map<String, String> file2ColorMap = new HashMap<>();
-        for (String file : fileList) {
-            if (file.endsWith(".sh")) {
-                file2ColorMap.put(file, "#8ae234");
+        for (String fileName : fileList) {
+            if (fileName.endsWith(".sh")) {
+                file2ColorMap.put(fileName, "#8ae234");
                 continue;
             }
 
             String sp = path.endsWith("/") ? "" : "/";
-            File f = new File(path + sp + file);
+            File f = new File(path + sp + fileName);
             if (f.isDirectory()) {
-                file2ColorMap.put(file, "#729fcf");
+                file2ColorMap.put(fileName, "#729fcf");
             } else {
-                file2ColorMap.put(file, "#ffffff");
+                file2ColorMap.put(fileName, "#ffffff");
             }
         }
         result.put("file2ColorMap", file2ColorMap);
     }
 
     private String getIp() {
-
         try {
             InetAddress ip = Inet4Address.getLocalHost();
             return ip.getHostAddress();
@@ -70,6 +81,32 @@ public class CmdController {
             e.printStackTrace();
         }
         return "unknown-host";
+    }
+
+    private int getStringLength(String str) {
+        String[] strs = str.split("\n");
+        String maxStr = "";
+        for (String s : strs) {
+            if ("".equals(maxStr)) {
+                maxStr = s;
+                continue;
+            }
+
+            if (s.length() > maxStr.length()) {
+                maxStr = s;
+            }
+        }
+
+        int length = 0;
+        for (int i = 0, n = maxStr.length(); i < n; i++) {
+            int c = (int)maxStr.charAt(i);
+            if (c < 40869 && c >= 19968) {
+                length += 2;
+            } else {
+                length++;
+            }
+        }
+        return Math.min(length, 40);
     }
 
 }

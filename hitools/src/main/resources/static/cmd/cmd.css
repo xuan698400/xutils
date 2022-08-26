@@ -17,6 +17,8 @@
 }
 
 .line {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 input {
