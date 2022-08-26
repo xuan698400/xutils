@@ -31,7 +31,7 @@ public class CmdController {
         result.put("data", resultList);
         result.put("ip", getIp());
 
-        fillFileColor(cmd, result, path, resultList);
+        fillFileTypeMap(cmd, result, path, resultList);
         fillFileWidth(cmd, result, resultList);
         return result;
     }
@@ -50,27 +50,27 @@ public class CmdController {
         result.put("maxFileNameLength", maxFileNameLength);
     }
 
-    private void fillFileColor(String cmd, Map<String, Object> result, String path, List<String> fileList) {
+    private void fillFileTypeMap(String cmd, Map<String, Object> result, String path, List<String> fileList) {
         if ("!ls".equals(cmd) || null == fileList) {
             return;
         }
 
-        Map<String, String> file2ColorMap = new HashMap<>();
+        Map<String, String> fileTypeMap = new HashMap<>();
         for (String fileName : fileList) {
             if (fileName.endsWith(".sh")) {
-                file2ColorMap.put(fileName, "#8ae234");
+                fileTypeMap.put(fileName, "sh");
                 continue;
             }
 
             String sp = path.endsWith("/") ? "" : "/";
             File f = new File(path + sp + fileName);
             if (f.isDirectory()) {
-                file2ColorMap.put(fileName, "#729fcf");
+                fileTypeMap.put(fileName, "dir");
             } else {
-                file2ColorMap.put(fileName, "#ffffff");
+                fileTypeMap.put(fileName, "file");
             }
         }
-        result.put("file2ColorMap", file2ColorMap);
+        result.put("fileTypeMap", fileTypeMap);
     }
 
     private String getIp() {

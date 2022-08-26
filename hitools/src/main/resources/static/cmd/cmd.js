@@ -15,9 +15,38 @@ $(function () {
         });
     };
 
-    var renderLineItem = function (fileName, fontColor, maxFileNameLength) {
+    var renderLineItem = function (fileName, fileType, maxFileNameLength) {
+        var fontColor = "#ffffff";
+        if ('dir' === fileType) {
+            fontColor = '#729fcf';
+        } else if ('sh' === fileType) {
+            fontColor = '#8ae234';
+        }
+
         var lineItem = '<div style="color:{color};width:{width}px;">{fileName}</div>';
         return lineItem.replace("{color}", fontColor).replace("{fileName}", fileName).replace("{width}", maxFileNameLength * 10);
+    };
+
+    var getTips = function (inputFile, fileNameList) {
+        var realInputFile = inputFile.replace('cd', '').trim();
+        for (var i in fileNameList) {
+            var fileName = fileNameList[i];
+            var fileType = result['fileTypeMap'][fileName];
+            console.log(fileName);
+            console.log(fileType);
+            if ('dir' === fileType) {
+                if (fileName.startsWith(realInputFile)) {
+                    return fileName;
+                }
+            }
+        }
+        return realInputFile;
+    };
+
+    var toBottom = function () {
+        var containerObj = $('.container');
+        var h = containerObj.prop('scrollHeight');
+        containerObj.scrollTop(h);
     };
 
     var fn_appendResult = function (cmd, rs) {
@@ -31,7 +60,7 @@ $(function () {
             d += '<div class="line">';
             for (var j = 0, m = rs.length; j < m; j++) {
                 var fileName = rs[j];
-                d += renderLineItem(fileName, result['file2ColorMap'][fileName], result['maxFileNameLength']);
+                d += renderLineItem(fileName, result['fileTypeMap'][fileName], result['maxFileNameLength']);
             }
             d += '</div>';
         } else {
@@ -42,13 +71,13 @@ $(function () {
 
         d += '</div>';
         $('#data').append(d);
+        toBottom();
     };
 
     var inputObj = $('#input');
-    inputObj.bind('keypress', function (event) {
+    inputObj.keydown(function (event) {
+        var cmd = inputObj.val();
         if (event.keyCode === 13) {
-            var inputObj = $('#input');
-            var cmd = inputObj.val();
             if (cmd.substr(0, 2) === "cd") {
                 var dir = cmd.substr(3);
 
@@ -58,6 +87,9 @@ $(function () {
                 } else if (dir === '..') {
                     //往上一级目录
                     path = path.substr(0, path.lastIndexOf('/'));
+                    if ('' === path) {
+                        path = '/';
+                    }
                 } else {
                     //相对目录
                     if (path === '/') {
@@ -75,6 +107,10 @@ $(function () {
                 fn_exec(cmd);
             }
             inputObj.val('');
+        } else if (event.keyCode === 9 && cmd.startsWith('cd ')) {
+            var fileName = getTips(cmd, result.data);
+            inputObj.val('cd ' + fileName);
+            return false;
         }
     });
 
