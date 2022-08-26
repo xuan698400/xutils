@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Microsoft YaHei, Arial, sans-serif;
+}
+
+.container {
+    background: black;
+    color: white;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    position: absolute;
+    overflow: auto;
+}
+
+.line {
+}
+
+input {
+    position: absolute;
+    width: 1000px;
+    height: 20px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    margin-left: 4px;
+}

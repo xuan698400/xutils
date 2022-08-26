@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOG_PATH" value="/Users/xuan/Desktop/code/github/xutils/logs"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern><![CDATA[%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c{2} - %m%n
+                ]]></pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <appender name="PROJECT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/project.log</file>
+        <encoder>
+            <pattern>
+                <![CDATA[%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c{2} - %m%n
+                ]]>
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/project.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>500MB</maxFileSize>
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <root level="warn">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="PROJECT"/>
+    </root>
+</configuration>

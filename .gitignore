@@ -17,3 +17,4 @@ lock/target/*
 common/target/*
 dao/target/*
 hisql/target/*
+hitools/target/*

@@ -18,6 +18,7 @@
         <module>lock</module>
         <module>common</module>
         <module>hisql</module>
+        <module>hitools</module>
     </modules>
     <packaging>pom</packaging>
 
