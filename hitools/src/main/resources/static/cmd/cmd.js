@@ -27,20 +27,21 @@ $(function () {
         return lineItem.replace("{color}", fontColor).replace("{fileName}", fileName).replace("{width}", maxFileNameLength * 10);
     };
 
-    var getTips = function (inputFile, fileNameList) {
-        var realInputFile = inputFile.replace('cd', '').trim();
+    var getTips = function (cmd, fileNameList) {
+        var part1 = cmd.substring(0, cmd.lastIndexOf(' '));
+        var part2 = cmd.substring(cmd.lastIndexOf(' ') + 1);
+
         for (var i in fileNameList) {
             var fileName = fileNameList[i];
             var fileType = result['fileTypeMap'][fileName];
-            console.log(fileName);
-            console.log(fileType);
-            if ('dir' === fileType) {
-                if (fileName.startsWith(realInputFile)) {
-                    return fileName;
+
+            if ((cmd.startsWith('cd') && 'dir' === fileType) || !cmd.startsWith('cd')) {
+                if (fileName.startsWith(part2)) {
+                    return part1 + ' ' + fileName;
                 }
             }
         }
-        return realInputFile;
+        return cmd;
     };
 
     var toBottom = function () {
@@ -107,9 +108,9 @@ $(function () {
                 fn_exec(cmd);
             }
             inputObj.val('');
-        } else if (event.keyCode === 9 && cmd.startsWith('cd ')) {
-            var fileName = getTips(cmd, result.data);
-            inputObj.val('cd ' + fileName);
+        } else if (event.keyCode === 9) {
+            var cmd = getTips(cmd, result.data);
+            inputObj.val(cmd);
             return false;
         }
     });
