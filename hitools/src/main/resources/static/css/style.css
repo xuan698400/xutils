@@ -1,0 +1,1774 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/***
+ * uimaker
+ * http://www.uimaker.com
+ * e-mail: admin@uimaker.com
+ */
+* {
+    font-size: 9pt;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: '微软雅黑';
+    margin: 0 auto;
+    min-width: 580px;
+}
+
+ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    border: 0;
+}
+
+dl, dt, dd, span {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+a, a:focus {
+    text-decoration: none;
+    color: #000;
+    outline: none;
+    blr: expression(this.onFocus=this.blur());
+}
+
+a:hover {
+    color: #F60;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+cite {
+    font-style: normal;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+input {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type="text"], input[type="password"], textarea {
+    height: 32px;
+    line-height: 32px;
+    text-indent: 10px;
+    background: #ffffff;
+    border: 1px solid #e7e9ed;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: #cccccc;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(127, 143, 164, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(127, 143, 164, 0.6)
+}
+
+.clr {
+    clear: both
+}
+
+.errorTips {
+    color: #ff0000
+}
+
+.red {
+    color: red
+}
+
+.green {
+    color: rgb(104, 186, 76);
+}
+
+/*cloud*/
+#loginBody {
+    background-image: url(../images/bglogin.jpg);
+    background-attachment: fixed;
+    background-repeat: repeat;
+    -moz-background-size: cover;
+    -webkit-background-size: cover
+}
+
+#mainBody {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.cloud {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url(../images/cloud.png) no-repeat;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+#cloud2 {
+    z-index: 2;
+}
+
+/*login*/
+.loginbody {
+    width: 100%;
+    height: 585px;
+    overflow: hidden;
+    position: absolute;
+    top: 47px;
+}
+
+.systemlogo {
+    width: 100%;
+    height: 71px;
+    margin-top: 75px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+}
+
+.loginbox {
+    width: 420px;
+    height: 250px;
+    margin: auto;
+}
+
+.loginbox ul {
+    margin-left: 40px;
+}
+
+.loginbox ul li {
+    margin-bottom: 25px;
+}
+
+.loginbox ul li label {
+    color: #ffffff;
+    float: left;
+    line-height: 50px;
+}
+
+.loginbox ul li label a {
+    color: #ffffff;
+}
+
+.loginbox ul li label a:hover {
+    text-decoration: underline;
+}
+
+.loginbox ul li label input {
+    margin-right: 5px;
+}
+
+input.loginuser {
+    width: 299px;
+    height: 48px;
+    background: url(../images/loginuser.png) no-repeat;
+    line-height: 48px;
+    padding-left: 44px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #90a2bc;
+}
+
+input.loginpwd {
+    width: 299px;
+    height: 48px;
+    background: url(../images/loginpassword.png) no-repeat;
+    line-height: 48px;
+    padding-left: 44px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #90a2bc;
+}
+
+.loginbtn {
+    width: 345px;
+    height: 35px;
+    background: #5faee3;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    line-height: 35px;
+    border-radius: 5px;
+}
+
+.loginbtn:hover {
+    background: #46A3E2;
+}
+
+.findpwd {
+    float: right;
+    margin-right: 34px;
+}
+
+.loginbm {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: url(../images/loginbg2.png) repeat-x;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #cdcdcd;
+}
+
+/*top.html*/
+.top {
+    height: 50px;
+    background: #507fac;
+    width: 100%;
+}
+
+.place {
+    height: 50px;
+    float: left;
+    margin-left: 20px;
+}
+
+.place span {
+    line-height: 50px;
+    font-weight: bold;
+    float: left;
+    color: #fff;
+}
+
+.placeul {
+    float: left;
+}
+
+.placeul li {
+    float: left;
+    line-height: 50px;
+    padding-left: 7px;
+    padding-right: 12px;
+    background: url(../images/rlist.gif) no-repeat right;
+}
+
+.placeul li:last-child {
+    background: none;
+}
+
+.placeul li a {
+    color: #fff;
+}
+
+.topright {
+    height: 50px;
+    background: #507fac;
+    float: right;
+}
+
+.user {
+    height: 30px;
+    background: url(../images/ub1.png) repeat-x;
+    clear: both;
+    margin-top: 10px;
+    float: right;
+    margin-right: 12px;
+    border-radius: 30px;
+    behavior: url(../js/pie.htc);
+    white-space: nowrap;
+    position: relative;
+}
+
+.user span {
+    display: inline-block;
+    padding-right: 10px;
+    background: url(../images/user.png) no-repeat 15px 8px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #b8ceda;
+    padding-left: 35px;
+}
+
+.user b {
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    background: url(../images/msg.png);
+    text-align: center;
+    font-weight: normal;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 13px;
+    margin-top: 7px;
+    line-height: 18px;
+}
+
+.user i {
+    display: inline-block;
+    margin-right: 5px;
+    font-style: normal;
+    line-height: 30px;
+    font-size: 14px;
+    color: #b8ceda;
+}
+
+/*left.html*/
+.lefttop {
+    height: 90px;
+    background: #467099;
+    width: 187px;
+}
+
+.lefttop a {
+    margin-top: 12px;
+    margin-left: 10px;
+    font-size: 40px;
+    color: white;
+    line-height: 90px;
+}
+
+.leftmenu {
+    width: 187px;
+    padding-bottom: 999px;
+    margin-bottom: -999px;
+    overflow: hidden;
+    background: #467099;
+    float: left;
+}
+
+.leftmenu dd {
+    line-height: 35px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #b8ceda;
+}
+
+.leftmenu dd span {
+    float: left;
+    margin: 0 8px 0 12px
+}
+
+.leftmenu dd .menuson {
+    display: none;
+    background: #365675;
+}
+
+.leftmenu dd:first-child .menuson {
+    display: block;
+}
+
+.menuson {
+    line-height: 30px;
+    font-weight: normal;
+}
+
+.menuson li {
+    cursor: pointer;
+}
+
+.menuson li.active {
+    position: relative;
+    background: url(../images/libg.png) repeat-x;
+    line-height: 30px;
+    color: #b8ceda;
+}
+
+.menuson li a {
+    display: block;
+    *display: inline;
+    *padding-top: 5px;
+    color: #c5d0de;
+    margin-left: 48px;
+}
+
+.menuson li.active a {
+    color: #fff;
+}
+
+.title {
+    cursor: pointer;
+}
+
+.bq {
+    position: absolute;
+    width: 187px;
+    text-align: center;
+    bottom: 0;
+    margin-bottom: 30px;
+    color: #758F9C
+}
+
+/*operateList.html*/
+.rightinfo {
+    padding: 8px;
+}
+
+.tools {
+    clear: both;
+    height: 35px;
+    margin-bottom: 8px;
+}
+
+.toolbar {
+    float: left;
+}
+
+.toolbar li {
+    line-height: 33px;
+    height: 33px;
+    border: solid 1px #d3dbde;
+    float: left;
+    padding-right: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    behavior: url(../js/pie.htc);
+    cursor: pointer;
+}
+
+.toolbar li:hover {
+    background: #EEF6FA
+}
+
+.toolbar li span {
+    float: left;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.toolbar1 {
+    float: right;
+}
+
+.toolbar1 li {
+    line-height: 33px;
+    height: 33px;
+    border: solid 1px #d3dbde;
+    float: left;
+    padding-right: 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+    behavior: url(../js/pie.htc);
+    cursor: pointer;
+}
+
+.toolbar1 li:hover {
+    background: #EEF6FA
+}
+
+.toolbar1 li span {
+    float: left;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.tablelist {
+    width: 100%;
+    clear: both;
+}
+
+.tablelist th {
+    background: #507fac;
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    border-bottom: solid 1px #b6cad2;
+    text-indent: 11px;
+    text-align: left;
+}
+
+.tablelist td {
+    line-height: 35px;
+    text-indent: 11px;
+}
+
+.tablelink {
+    color: #056dae;
+    padding: 0 2px;
+}
+
+.tablelist tbody tr.odd {
+    background: #f5f8fa;
+}
+
+.tablelist tbody tr:hover {
+    background: #e5ebee;
+}
+
+.sort {
+    padding-left: 3px;
+}
+
+/*right table info*/
+.tableinfo-title {
+    font-weight: bold;
+    margin: 5px 0
+}
+
+.tableinfo {
+    border: solid 1px #cbcbcb;
+    width: 100%;
+    clear: both;
+    margin-bottom: 10px
+}
+
+.tableinfo th {
+    background: #2c3e50;
+    height: 34px;
+    line-height: 34px;
+    border-bottom: solid 1px #b6cad2;
+    text-indent: 11px;
+    text-align: left;
+}
+
+.tableinfo td {
+    line-height: 35px;
+    text-indent: 11px;
+    border-right: dotted 1px #c7c7c7;
+    padding: 2px 0;
+}
+
+.tableinfo td label {
+    font-weight: bold;
+}
+
+.tableinfo input {
+    width: 90%;
+    text-indent: 0
+}
+
+.tableinfo input:read-only {
+    border: 0
+}
+
+.tableinfo textarea {
+    width: 94%;
+    height: 100%;
+    line-height: 25px
+}
+
+.tableinfo textarea:read-only {
+    border: 0
+}
+
+/*page*/
+.pagin {
+    position: relative;
+    margin-top: 10px;
+    padding: 0 12px;
+    text-align: center;
+}
+
+.pagin .message {
+    text-align: left
+}
+
+.pagin .blue {
+    color: #056dae;
+    font-style: normal;
+}
+
+.pagin .paginList {
+    position: absolute;
+    right: 12px;
+    top: 0;
+}
+
+.pagin .paginList .paginItem {
+    float: left;
+}
+
+.pagin .paginList .paginItem a {
+    float: left;
+    width: 31px;
+    height: 28px;
+    border: 1px solid #DDD;
+    text-align: center;
+    line-height: 30px;
+    border-left: none;
+    color: #3399d5;
+}
+
+.pagin .paginList .paginItem:first-child a {
+    border-left: 1px solid #DDD;
+}
+
+.pagin .paginList .paginItem:first-child a {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.pagin .paginList .paginItem:last-child a {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.pagin .paginList .paginItem.current, .pagin .paginList .paginItem.current a {
+    background: #f5f5f5;
+    cursor: default;
+    color: #737373;
+}
+
+.pagin .paginList .paginItem:hover {
+    background: #f5f5f5;
+}
+
+.pagin .paginList .paginItem.more a {
+    line-height: 23px
+}
+
+.pagepre {
+    background: url(../images/pre.gif) no-repeat center center;
+    width: 31px;
+    height: 28px;
+}
+
+.pagenxt {
+    background: url(../images/next.gif) no-repeat center center;
+    width: 31px;
+    height: 28px;
+}
+
+.pagepre_disabled {
+    background: url(../images/pre_disabled.gif) no-repeat center center;
+    width: 31px;
+    height: 28px;
+}
+
+.pagenxt_disabled {
+    background: url(../images/next_disabled.gif) no-repeat center center;
+    width: 31px;
+    height: 28px;
+}
+
+/*index*/
+.mainindex {
+    padding: 20px;
+    overflow: hidden;
+}
+
+.welinfo {
+    height: 32px;
+    line-height: 32px;
+    padding-bottom: 8px;
+}
+
+.welinfo span {
+    float: left;
+}
+
+.welinfo b {
+    padding-left: 8px;
+}
+
+.welinfo a {
+    padding-left: 15px;
+    color: #3186c8;
+}
+
+.welinfo a:hover {
+    color: #F60;
+}
+
+.welinfo i {
+    font-style: normal;
+    padding-left: 8px;
+}
+
+.xline {
+    border-bottom: solid 1px #dfe9ee;
+    height: 5px;
+}
+
+.iconlist {
+    padding-left: 40px;
+    overflow: hidden;
+}
+
+.iconlist li {
+    text-align: center;
+    float: left;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+
+.iconlist li p {
+    line-height: 30px;
+}
+
+.ibox {
+    clear: both;
+    padding-left: 40px;
+    padding-top: 18px;
+    overflow: hidden;
+    padding-bottom: 18px;
+}
+
+.ibtn {
+    background: #fff;
+    border: solid 1px #bfcfe1;
+    border-radius: 5px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    float: left;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.ibtn img {
+    margin-top: 7px;
+    float: left;
+    padding-right: 7px;
+}
+
+.box {
+    height: 15px;
+}
+
+.infolist {
+    padding-left: 40px;
+    padding-bottom: 15px;
+}
+
+.infolist li {
+    line-height: 30px;
+    height: 30px;
+    margin-bottom: 8px;
+}
+
+.infolist li span {
+    float: left;
+    display: block;
+    margin-right: 10px;
+}
+
+.uimakerinfo {
+    padding-left: 40px;
+    background: url(../images/search.png) no-repeat 10px 15px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.umlist {
+    padding-left: 40px;
+}
+
+.umlist li {
+    float: left;
+    background: url(../images/ulist.png) no-repeat 0 2px;
+    padding-left: 10px;
+    margin-right: 15px;
+}
+
+/*default*/
+.mainbox {
+    padding: 8px;
+    position: relative;
+}
+
+.mainleft {
+    padding-right: 298px;
+}
+
+.leftinfo {
+    border: #d3dbde solid 1px;
+    height: 290px;
+}
+
+.mainright {
+    width: 298px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.dflist {
+    border: #d3dbde solid 1px;
+    width: 288px;
+    height: 290px;
+    float: right;
+}
+
+.dflist1 {
+    border: #d3dbde solid 1px;
+    width: 288px;
+    height: 238px;
+    float: right;
+    margin-top: 8px;
+}
+
+.listtitle {
+    background: #ecf5fa;
+    height: 36px;
+    line-height: 36px;
+    border-bottom: solid 1px #d3dbde;
+    text-indent: 14px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.more1 {
+    float: right;
+    font-weight: normal;
+    color: #307fb1;
+    padding-right: 17px;
+}
+
+.maintj {
+    text-align: center;
+}
+
+.newlist {
+    padding-left: 14px;
+    padding-top: 15px;
+}
+
+.newlist li {
+    line-height: 25px;
+    text-indent: 11px;
+}
+
+.newlist i {
+    width: 80px;
+    display: block;
+    float: left;
+    font-style: normal;
+}
+
+.newlist b {
+    font-weight: normal;
+    color: #7b7b7b;
+    padding-left: 10px;
+}
+
+.leftinfos {
+    height: 238px;
+    margin-top: 8px;
+}
+
+.infoleft {
+    border: #d3dbde solid 1px;
+    float: left;
+    height: 238px;
+}
+
+.inforight {
+    border: #d3dbde solid 1px;
+    float: right;
+    height: 238px;
+}
+
+.tooli {
+    padding: 30px 20px;
+}
+
+.tooli li {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}
+
+.tooli li span {
+    text-align: center;
+}
+
+.tooli li p {
+    line-height: 35px;
+    text-align: center;
+}
+
+/*form*/
+.formbody {
+    padding: 10px 18px;
+}
+
+.formtitle {
+    border-bottom: solid 1px #d0dee5;
+    line-height: 35px;
+    position: relative;
+    height: 35px;
+    margin-bottom: 28px;
+}
+
+.formtitle span {
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: solid 3px #507fac;
+    float: left;
+    position: absolute;
+    z-index: 100;
+    bottom: -1px;
+    padding: 0 3px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.forminfo {
+    padding-left: 23px;
+}
+
+.forminfo li {
+    margin-bottom: 13px;
+}
+
+.forminfo.short li {
+    float: left;
+    width: 50%
+}
+
+.forminfo li label {
+    width: 85px;
+    line-height: 34px;
+    display: block;
+    float: left;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.forminfo li i {
+    color: #7f7f7f;
+    padding-left: 20px;
+    font-style: normal;
+}
+
+.forminfo li cite {
+    display: block;
+    padding-top: 10px;
+}
+
+.forminfo li.split {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #cdcdcd;
+}
+
+.long-input {
+    width: 400px;
+}
+
+.short-input {
+    width: 200px;
+}
+
+.smart-input {
+    width: 100px;
+}
+
+.short-input:disabled {
+    background: #F1F1F1;
+    border: solid 1px #ced9df
+}
+
+.textinput {
+    padding: 10px;
+    width: 504px;
+    height: 135px;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+.btn {
+    border-radius: 5px;
+    width: 137px;
+    height: 35px;
+    background: #507fac;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #365675;
+    border-radius: 5px;
+}
+
+.btn.btn-cancel {
+    background: #cdcdcd;
+    border-radius: 5px;
+}
+
+.btn.btn-cancel:hover {
+    background: #C0C0C0
+}
+
+.forminfo input.disabled {
+    background: #F5F5F5
+}
+
+.forminfo img {
+    vertical-align: middle;
+    margin-left: 5px
+}
+
+/*tip*/
+.tip {
+    width: 485px;
+    height: 260px;
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    background: #fcfdfd;
+    box-shadow: 1px 8px 10px 1px #9b9b9b;
+    border-radius: 5px;
+    behavior: url(../js/pie.htc);
+    display: none;
+    z-index: 111111;
+    border: 1px solid #c7c7c7;
+}
+
+.tiptop {
+    height: 40px;
+    line-height: 40px;
+    background: #467099;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.tiptop span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    float: left;
+    text-indent: 20px;
+}
+
+.tiptop a {
+    display: block;
+    background: url(../images/close.png) no-repeat;
+    width: 22px;
+    height: 22px;
+    float: right;
+    margin-right: 7px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.tiptop a:hover {
+    background: url(../images/close1.png) no-repeat;
+}
+
+.tipinfo {
+    padding-top: 30px;
+    margin-left: 65px;
+    height: 95px;
+}
+
+.tipinfo span {
+    width: 95px;
+    height: 95px;
+    float: left;
+}
+
+.tipright {
+    float: left;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.tipright p {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 35px;
+}
+
+.tipright cite {
+    color: #858686;
+}
+
+.tipbtn {
+    margin-top: 25px;
+    margin-left: 125px;
+}
+
+.sure, .cancel {
+    width: 96px;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    background: #507fac;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sure:hover {
+    background: #365675
+}
+
+.cancel {
+    background: #ddd;
+    color: #000;
+    font-weight: normal;
+}
+
+.cancel:hover {
+    background: #bbbbbb
+}
+
+/*tools*/
+.toolsli {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.toollist {
+    margin-left: 20px;
+    overflow: hidden;
+    float: left;
+}
+
+.toollist li {
+    width: 66px;
+    text-align: center;
+    float: left;
+    margin-right: 32px;
+}
+
+.toollist li a {
+    width: 65px;
+    height: 65px;
+    border-radius: 5px;
+    display: block;
+    border: 1px solid #fff;
+}
+
+.toollist li a:hover {
+    border: 1px solid #2c3e50;
+}
+
+.toollist li h2 {
+    line-height: 35px;
+}
+
+.tooladd {
+    margin-top: 25px;
+    width: 20px;
+    height: 20px;
+    float: left;
+    display: block;
+}
+
+/*error 404*/
+.error {
+    background: url(../images/404.png) no-repeat;
+    width: 490px;
+    height: 300px;
+    margin-top: 75px;
+    padding-top: 65px;
+}
+
+.error h2 {
+    font-size: 22px;
+    padding-left: 154px;
+}
+
+.error p {
+    padding-left: 154px;
+    line-height: 35px;
+    color: #717678;
+}
+
+.reindex {
+    padding-left: 154px;
+}
+
+.reindex a {
+    width: 115px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: #3c95c8;
+    display: block;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    behavior: url(../js/pie.htc);
+    margin-top: 20px;
+}
+
+/*computer*/
+.comtitle {
+    padding: 20px;
+    clear: both;
+}
+
+.comtitle span {
+    width: 10px;
+    height: 10px;
+    background: url(../images/clist.png) no-repeat;
+    float: left;
+    background: #fff;
+    padding-top: 3px;
+}
+
+.comtitle h2 {
+    font-size: 14px;
+    display: block;
+    float: left;
+    color: #2a3e93;
+    background: #fff;
+    padding-left: 5px;
+    padding-right: 8px;
+}
+
+.rline {
+    border-bottom: solid 1px #e5ecf0;
+    height: 10px;
+    margin-left: 50px;
+}
+
+.disklist {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.disklist li {
+    width: 275px;
+    _width: 270px;
+    float: left;
+    margin-right: 10px;
+    height: 70px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border: solid 1px #fff;
+}
+
+.disklist li a {
+    color: #000;
+}
+
+.disklist li:hover {
+    background: #fcfcfc;
+    border: solid 1px #e5ecf0;
+}
+
+.dleft {
+    background: url(../images/c02.png) no-repeat;
+    height: 50px;
+    margin-left: 12px;
+    float: left;
+    width: 50px;
+    margin-top: 15px;
+}
+
+.dleft1 {
+    background: url(../images/c01.png) no-repeat;
+    height: 50px;
+    margin-left: 12px;
+    float: left;
+    width: 50px;
+    margin-top: 15px;
+}
+
+.dleft2 {
+    background: url(../images/c03.png) no-repeat;
+    height: 50px;
+    margin-left: 12px;
+    float: left;
+    width: 50px;
+    margin-top: 15px;
+}
+
+.dright {
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.dright h3 {
+    font-weight: normal;
+    padding-top: 15px;
+}
+
+.dright p {
+    color: #949494;
+}
+
+.dinfo {
+    width: 189px;
+    height: 15px;
+    background: url(../images/diskbg.png) no-repeat;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dinfo span {
+    background: url(../images/cbg.png) repeat-x;
+    height: 15px;
+}
+
+.filetable {
+    width: 100%;
+}
+
+.filetable thead tr {
+    background: #f5f9fb;
+    line-height: 35px;
+}
+
+.filetable thead tr th {
+    text-align: left;
+    text-indent: 15px;
+    font-weight: normal;
+    color: #597190;
+}
+
+.filetable tbody tr td {
+    text-indent: 15px;
+    line-height: 23px;
+}
+
+.filetable tbody tr td img {
+    margin-right: 5px;
+}
+
+.tdlast {
+    text-align: right;
+}
+
+.filetable tbody tr:hover {
+    background: #f5f8fa;
+    cursor: pointer;
+}
+
+/*imglist*/
+.imglist {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+.imglist li {
+    width: 188px;
+    border: solid 1px #fff;
+    height: 199px;
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.imglist li:hover {
+    border: solid 1px #d7e4ea;
+}
+
+.imglist li span {
+    width: 168px;
+    height: 126px;
+    margin: 8px;
+    text-align: center;
+    vertical-align: middle
+}
+
+.imglist li span img {
+    max-width: 168px;
+    max-height: 126px;
+}
+
+.imglist li h2 {
+    text-align: center;
+    line-height: 25px;
+}
+
+.imglist li p {
+    text-align: center;
+    line-height: 17px;
+    background: url(../images/line1.png) center center no-repeat;
+}
+
+.imglist li p a {
+    color: #1f7cb6;
+}
+
+.imglist li p a:hover {
+    color: #F60;
+}
+
+/*imgtable*/
+.imgtable {
+    width: 100%;
+}
+
+.imgtable th {
+    background: #507fac;
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    border-bottom: solid 1px #b6cad2;
+    text-indent: 21px;
+    text-align: left;
+}
+
+.imgtable td {
+    line-height: 20px;
+    text-indent: 21px;
+}
+
+.imgtable td img {
+    margin: 10px 20px 10px 0;
+    max-width: 80px;
+    max-height: 60px;
+}
+
+.imgtable td p {
+    color: #919191;
+}
+
+.imgtable td i {
+    font-style: normal;
+    color: #ea2020;
+}
+
+.imgtd {
+    text-indent: 0;
+}
+
+.imgtable tbody tr.odd {
+    background: #f5f8fa;
+}
+
+.imgtable tbody tr:hover {
+    background: #e5ebee;
+}
+
+/*upload*/
+.upload-img {
+    width: 90px;
+    height: 90px;
+    float: left;
+    margin-right: 10px
+}
+
+.upload-img img {
+    max-height: 90px;
+    max-width: 90px;
+    margin: 0
+}
+
+/*tab*/
+.itab {
+    height: 36px;
+    border-bottom: solid 1px #d0dee5;
+    position: relative;
+    border-left: solid 1px #d3dbde;
+}
+
+.itab ul li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    border-top: 1px solid #d3dbde;
+    border-bottom: 1px solid #d3dbde;
+    background: #fff;
+    border-right: solid 1px #d3dbde;
+}
+
+.itab ul li a {
+    font-size: 14px;
+    color: #000;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.itab ul li a.selected {
+    height: 37px;
+    display: block;
+    background: url(../images/itabbg1.png) repeat-x;
+    font-weight: bold;
+    margin-top: -1px;
+}
+
+.tabson {
+    margin: 18px 0;
+}
+
+.formtext {
+    height: 45px;
+    padding-left: 25px;
+    line-height: 20px;
+    color: #848383;
+}
+
+.formtext b {
+    color: #d70101;
+}
+
+.forminfo b {
+    color: #ea2020;
+    padding-left: 3px;
+}
+
+/*class*/
+.classlist li {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 12px;
+    border: 1px solid #ebebeb;
+    background: #fcfcfc;
+}
+
+.classlist li:hover {
+    border: 1px solid #507fac;
+    cursor: pointer;
+}
+
+.classlist li span {
+    float: left;
+    margin-right: 18px;
+    border: 3px solid #fff;
+}
+
+.classlist li .lright {
+    float: left;
+    width: 150px;
+}
+
+.classlist li .lright h2 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.classlist li .lright p {
+    line-height: 20px;
+}
+
+.enter {
+    display: block;
+    margin-top: 5px;
+    width: 94px;
+    height: 30px;
+    color: #fff;
+    background: #507fac;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.enter:hover {
+    color: #fff;
+    background: #365675;
+}
+
+.clear {
+    clear: both;
+}
+
+/*seachform*/
+.seachform {
+    height: 42px;
+}
+
+.seachform li {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 8px;
+}
+
+.seachform li label {
+    width: 60px;
+    float: left;
+    line-height: 32px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.scinput {
+    width: 150px;
+}
+
+.scbtn {
+    width: 85px;
+    height: 35px;
+    background: #507fac;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    behavior: url(../js/pie.htc);
+}
+
+.scbtn:hover {
+    background: #365675
+}
+
+/*zxbox*/
+.zxxbox_list {
+    display: none;
+}
+
+.zxxbox_list .list {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 400px;
+}
+
+.zxxbox_list .list li {
+    width: 100%;
+    height: 50px;
+    min-width: 400px;
+    line-height: 50px;
+    border-bottom: 1px dashed #dedede
+}
+
+.zxxbox_list .list li:hover {
+    background: #e5ebee
+}
+
+.zxxbox_list .list li input {
+    margin: 0 15px;
+    vertical-align: middle;
+}
+
+.zxxbox_list .list li label {
+    margin-left: 10px;
+}
+
+.zxxbox_list .button {
+    text-align: center;
+    background: #F5F8FA;
+    padding: 5px 0;
+}
+
+.zxxbox_list .button .checkall {
+    float: left;
+    line-height: 35px;
+    height: 35px;
+    margin-left: 15px;
+    position: absolute;
+}
+
+/*autocomplete*/
+.select4_box {
+    border: 1px solid #e7e9ed;
+    position: absolute;
+    width: 250px;
+    background: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+    z-index: 9999;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto
+}
+
+.select4_box ul {
+    padding: 0;
+}
+
+.select4_box ul li {
+    list-style: none;
+    padding: 5px 10px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 0;
+    cursor: pointer;
+    clear: both;
+    width: 100% !important
+}
+
+.select4_box ul li:hover {
+    background: #EAF6FA;
+}
+
+.select4_box ul li.active {
+    background: #EAF6FA;
+}
+
+/*-------custom-------*/
+/*map*/
+.mapContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99997;
+    display: none;
+    top: 0
+}
+
+.mapContainer .wrap_bar {
+    text-align: center;
+    background: #828282
+}
+
+.mapContainer .wrap_bar span {
+    float: none
+}
+
+.mapLeft {
+    position: absolute;
+    width: 20%;
+    height: 95%;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ebebeb;
+    z-index: 99999
+}
+
+.mapLeft li {
+    min-height: 50px;
+    line-height: 50px;
+    border-bottom: 1px dashed #cdcdcd;
+    cursor: pointer
+}
+
+.mapLeft li:hover {
+    background: #f1f1f1
+}
+
+.mapLeft li.cur {
+    background: #f1f1f1;
+    color: #1e8cd9
+}
+
+#allmap {
+    width: 100%;
+    height: 95%;
+    overflow: hidden;
+    margin: 0;
+    position: absolute;
+    z-index: 99998
+}
+
+#poies {
+    height: 90%;
+    overflow: auto
+}
