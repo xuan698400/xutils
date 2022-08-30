@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="js/3rd/select/select.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/jquery/jquery.1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/3rd/select/select-ui.min.js"></script>
+    <script type="text/javascript" src="hisql/hisql.js"></script>
+</head>
+
+<body>
+
+
+<div class="rightinfo">
+    <ul class="forminfo short">
+        <li>
+            <label>选择数据源：</label>
+            <div class="vocation">
+                <select class="select1"></select>
+            </div>
+        </li>
+        <li style="width: 100%">
+            <label>输入SQL：</label>
+            <textarea id="sqlTextarea" name="" cols="" rows="" class="textinput"
+                      style="width: 800px;height: 250px;"></textarea>
+        </li>
+        <li style="width: 100%">
+            <label>&nbsp;</label>
+            <input name="" type="button" class="btn" value="执行"/>
+        </li>
+    </ul>
+
+    <div style="padding: 0 120px;">
+        <table class="tablelist">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
