@@ -1772,3 +1772,25 @@ input.loginpwd {
     height: 90%;
     overflow: auto
 }
+
+.table-new {
+    border-top: solid 1px #B2B2B2;
+    border-left: solid 1px #B2B2B2;
+    font-size: 12px;
+    width: 100%;
+}
+
+.table-new tr th {
+    height: 20px;
+    border-bottom: solid 1px #B2B2B2;
+    border-right: solid 1px #B2B2B2;
+    padding: 2px 5px;
+    background-color: #F2F2F2;
+}
+
+.table-new tr td {
+    height: 20px;
+    border-bottom: solid 1px #B2B2B2;
+    border-right: solid 1px #B2B2B2;
+    padding: 2px 5px;
+}

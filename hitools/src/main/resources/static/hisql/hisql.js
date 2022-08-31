@@ -1,5 +1,5 @@
 $(function () {
-    var m_tableObj = $('.tablelist');
+    var m_tableObj = $('#dataTable');
     var m_dataSourceSelectObj = $('.select1');
     var m_sqlTextareaObj = $('#sqlTextarea');
     var m_btn = $('.btn');
@@ -63,22 +63,24 @@ $(function () {
             } else {
                 if (r.data.length > 0) {
                     //表头处理
+                    m_tableObj.find('thead').html('');
                     var firstItem = r.data[0];
                     var theads = [];
                     for (var i in firstItem) {
                         theads.push({theadName: i});
                     }
-                    m_tableObj.find('thead').html('');
-                    m_tableObj.find('thead').append('<tr>' + renderList('<th>{theadName}</th>', theads) + '</tr>');
+                    m_tableObj.find('thead').append('<tr><th>序号</th>' + renderList('<th>{theadName}</th>', theads) + '</tr>');
                     //数据处理
+                    var index = 1;
+                    m_tableObj.find('tbody').html('');
                     for (var j in r.data) {
                         var lineObj = r.data[j];
-                        var tds;
+                        var tds = '';
                         for (var x in lineObj) {
                             tds += '<td>' + lineObj[x] + '</td>';
                         }
-                        m_tableObj.find('tbody').html('');
-                        m_tableObj.find('tbody').append('<tr>' + tds + '</tr>');
+                        m_tableObj.find('tbody').append('<tr><td>' + index + '</td>' + tds + '</tr>');
+                        index++;
                     }
                     //表单美化
                     $('.tablelist tbody tr:odd').addClass('odd');
