@@ -19,6 +19,7 @@
         <module>common</module>
         <module>hisql</module>
         <module>hitools</module>
+        <module>distributed-tools</module>
     </modules>
     <packaging>pom</packaging>
 
