@@ -1,4 +1,4 @@
-package com.xuan.mix.net.miniclient;
+package com.xuan.mix.an.httpclient;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xuan
  * @date 2019/5/19
  */
-public class MiniClientRequest {
+public class HttpRequest {
     private final static String URL_PARAM_DIVISION = "?";
     private final static String PARAM_PARAM_DIVISION = "&";
     private final static String EQUAL = "=";
@@ -54,13 +54,13 @@ public class MiniClientRequest {
     /**
      * 结果返回回调,只有下载文件时会被调用
      */
-    private MiniClientDownloadListener downloadListener;
+    private HttpDownloadListener downloadListener;
     /**
      * 下载时文件存放路径
      */
     private String downloadFileName;
 
-    public MiniClientRequest() {
+    public HttpRequest() {
         init();
     }
 
@@ -96,11 +96,11 @@ public class MiniClientRequest {
         this.readTimeout = readTimeout;
     }
 
-    public MiniClientDownloadListener getDownloadListener() {
+    public HttpDownloadListener getDownloadListener() {
         return downloadListener;
     }
 
-    public void setDownloadListener(MiniClientDownloadListener downloadListener) {
+    public void setDownloadListener(HttpDownloadListener downloadListener) {
         this.downloadListener = downloadListener;
     }
 

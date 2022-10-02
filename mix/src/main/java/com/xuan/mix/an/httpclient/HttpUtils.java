@@ -1,9 +1,9 @@
-package com.xuan.mix.net.miniclient;
+package com.xuan.mix.an.httpclient;
 
 import java.io.File;
 import java.util.Map;
 
-import com.xuan.mix.net.miniclient.impl.HttpClientUrlConnectionImpl;
+import com.xuan.mix.an.httpclient.impl.HttpClientUrlConnectionImpl;
 
 /**
  * HTTP快捷使用工具类
@@ -11,13 +11,13 @@ import com.xuan.mix.net.miniclient.impl.HttpClientUrlConnectionImpl;
  * @author xuan
  * @date 2019/5/19
  */
-public class MiniClientFacade {
+public class HttpUtils {
     public static final boolean DEBUG = false;
 
-    private static final MiniClient client = new HttpClientUrlConnectionImpl();
+    private static final HttpClient client = new HttpClientUrlConnectionImpl();
 
-    public static MiniClientResponse postJson(String url, String bodyJson) {
-        MiniClientRequest request = new MiniClientRequest();
+    public static HttpResponse postJson(String url, String bodyJson) {
+        HttpRequest request = new HttpRequest();
         request.setUrl(url);
         request.putBodyJson(bodyJson);
 
@@ -25,8 +25,8 @@ public class MiniClientFacade {
         return client.postJson(request);
     }
 
-    public static MiniClientResponse post(String url, Map<String, String> paramsMap) {
-        MiniClientRequest request = new MiniClientRequest();
+    public static HttpResponse post(String url, Map<String, String> paramsMap) {
+        HttpRequest request = new HttpRequest();
         request.setUrl(url);
         if (null != paramsMap) {
             for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
@@ -38,8 +38,8 @@ public class MiniClientFacade {
         return client.post(request);
     }
 
-    public static MiniClientResponse get(String url, Map<String, String> paramsMap) {
-        MiniClientRequest request = new MiniClientRequest();
+    public static HttpResponse get(String url, Map<String, String> paramsMap) {
+        HttpRequest request = new HttpRequest();
         request.setUrl(url);
         if (null != paramsMap) {
             for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
@@ -51,10 +51,10 @@ public class MiniClientFacade {
         return client.get(request);
     }
 
-    public static MiniClientResponse upload(String url,
+    public static HttpResponse upload(String url,
         Map<String, File> fileMap, Map<String, String> paramMap) {
 
-        MiniClientRequest request = new MiniClientRequest();
+        HttpRequest request = new HttpRequest();
         request.setUrl(url);
         if (null != fileMap) {
             for (Map.Entry<String, File> entry : fileMap.entrySet()) {
@@ -71,11 +71,11 @@ public class MiniClientFacade {
         return client.upload(request);
     }
 
-    public static MiniClientResponse getDownload(String url,
+    public static HttpResponse getDownload(String url,
         Map<String, String> paramsMap, String saveFileName,
-        MiniClientDownloadListener downloadListener) {
+        HttpDownloadListener downloadListener) {
 
-        MiniClientRequest request = new MiniClientRequest();
+        HttpRequest request = new HttpRequest();
         request.setUrl(url);
         request.setDownloadFileName(saveFileName);
         request.setDownloadListener(downloadListener);
@@ -89,11 +89,11 @@ public class MiniClientFacade {
         return client.getDowload(request);
     }
 
-    public static MiniClientResponse postDownload(String url,
+    public static HttpResponse postDownload(String url,
         Map<String, String> paramsMap, String saveFileName,
-        MiniClientDownloadListener downloadListener) {
+        HttpDownloadListener downloadListener) {
 
-        MiniClientRequest request = new MiniClientRequest();
+        HttpRequest request = new HttpRequest();
         request.setUrl(url);
         request.setDownloadFileName(saveFileName);
         request.setDownloadListener(downloadListener);
@@ -107,7 +107,7 @@ public class MiniClientFacade {
         return client.postDowload(request);
     }
 
-    private static void printLog(MiniClientRequest request) {
+    private static void printLog(HttpRequest request) {
         if (DEBUG) {
             System.out.println(request.toString());
         }
