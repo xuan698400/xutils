@@ -2,7 +2,7 @@
   Copyright (c) 2006-2013, JGraph Ltd
   
   Showregion example for mxGraph. This example demonstrates using a custom
-  rubberband handler to show the selected region in a new window.
+  rubberband handler2 to show the selected region in a new window.
 -->
 <html>
 <head>
@@ -59,7 +59,7 @@
 	<script type="text/javascript">
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
-		// from the onLoad event handler of the document (see below).
+		// from the onLoad event handler2 of the document (see below).
 		function main(container)
 		{
 			// Checks if the browser is supported
@@ -89,7 +89,7 @@
 					return mxRubberband.prototype.isForceRubberbandEvent.apply(this, arguments) || mxEvent.isPopupTrigger(me.getEvent()); 
 				}
 				
-				// Defines a new popup menu for region selection in the rubberband handler
+				// Defines a new popup menu for region selection in the rubberband handler2
 				rubberband.popupMenu = new mxPopupMenu(function(menu, cell, evt)
 				{
 					var rect = new mxRectangle(rubberband.x, rubberband.y, rubberband.width, rubberband.height);

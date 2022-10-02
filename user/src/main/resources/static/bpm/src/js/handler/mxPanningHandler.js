@@ -5,20 +5,20 @@
 /**
  * Class: mxPanningHandler
  * 
- * Event handler that pans and creates popupmenus. To use the left
+ * Event handler2 that pans and creates popupmenus. To use the left
  * mousebutton for panning without interfering with cell moving and
  * resizing, use <isUseLeftButton> and <isIgnoreCell>. For grid size
- * steps while panning, use <useGrid>. This handler is built-into
+ * steps while panning, use <useGrid>. This handler2 is built-into
  * <mxGraph.panningHandler> and enabled using <mxGraph.setPanning>.
  * 
  * Constructor: mxPanningHandler
  * 
- * Constructs an event handler that creates a <mxPopupMenu>
+ * Constructs an event handler2 that creates a <mxPopupMenu>
  * and pans the graph.
  *
  * Event: mxEvent.PAN_START
  *
- * Fires when the panning handler changes its <active> state to true. The
+ * Fires when the panning handler2 changes its <active> state to true. The
  * <code>event</code> property contains the corresponding <mxMouseEvent>.
  *
  * Event: mxEvent.PAN
@@ -28,7 +28,7 @@
  *
  * Event: mxEvent.PAN_END
  *
- * Fires when the panning handler changes its <active> state to false. The
+ * Fires when the panning handler2 changes its <active> state to false. The
  * <code>event</code> property contains the corresponding <mxMouseEvent>.
  */
 function mxPanningHandler(graph)
@@ -226,7 +226,7 @@ mxPanningHandler.prototype.startY = 0;
 /**
  * Function: isActive
  * 
- * Returns true if the handler is currently active.
+ * Returns true if the handler2 is currently active.
  */
 mxPanningHandler.prototype.isActive = function()
 {
@@ -305,7 +305,7 @@ mxPanningHandler.prototype.isForcePanningEvent = function(me)
  * Function: mouseDown
  * 
  * Handles the event by initiating the panning. By consuming the event all
- * subsequent events of the gesture are redirected to this handler.
+ * subsequent events of the gesture are redirected to this handler2.
  */
 mxPanningHandler.prototype.mouseDown = function(sender, me)
 {
@@ -474,7 +474,7 @@ mxPanningHandler.prototype.panGraph = function(dx, dy)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxPanningHandler.prototype.destroy = function()
 {

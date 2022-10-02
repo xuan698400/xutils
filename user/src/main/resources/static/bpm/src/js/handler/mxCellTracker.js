@@ -5,7 +5,7 @@
 /**
  * Class: mxCellTracker
  * 
- * Event handler that highlights cells. Inherits from <mxCellMarker>.
+ * Event handler2 that highlights cells. Inherits from <mxCellMarker>.
  * 
  * Example:
  * 
@@ -63,7 +63,7 @@
  * 
  * Constructor: mxCellTracker
  * 
- * Constructs an event handler that highlights cells.
+ * Constructs an event handler2 that highlights cells.
  * 
  * Parameters:
  * 

@@ -5,9 +5,9 @@
 /**
  * Class: mxConnectionHandler
  *
- * Graph event handler that creates new connections. Uses <mxTerminalMarker>
+ * Graph event handler2 that creates new connections. Uses <mxTerminalMarker>
  * for finding and highlighting the source and target vertices and
- * <factoryMethod> to create the edge instance. This handler is built-into
+ * <factoryMethod> to create the edge instance. This handler2 is built-into
  * <mxGraph.connectionHandler> and enabled using <mxGraph.setConnectable>.
  *
  * Example:
@@ -38,15 +38,15 @@
  * 
  * Using images to trigger connections:
  * 
- * This handler uses mxTerminalMarker to find the source and target cell for
+ * This handler2 uses mxTerminalMarker to find the source and target cell for
  * the new connection and creates a new edge using <connect>. The new edge is
  * created using <createEdge> which in turn uses <factoryMethod> or creates a
  * new default edge.
  * 
- * The handler uses a "highlight-paradigm" for indicating if a cell is being
+ * The handler2 uses a "highlight-paradigm" for indicating if a cell is being
  * used as a source or target terminal, as seen in other diagramming products.
  * In order to allow both, moving and connecting cells at the same time,
- * <mxConstants.DEFAULT_HOTSPOT> is used in the handler to determine the hotspot
+ * <mxConstants.DEFAULT_HOTSPOT> is used in the handler2 to determine the hotspot
  * of a cell, that is, the region of the cell which is used to trigger a new
  * connection. The constant is a value between 0 and 1 that specifies the
  * amount of the width and height around the center to be used for the hotspot
@@ -93,7 +93,7 @@
  * 
  * This will use the green-dot.gif with a width and height of 14 pixels as the
  * image to trigger new connections. In createIcons the icon field of the
- * handler will be set in order to remember the icon that has been clicked for
+ * handler2 will be set in order to remember the icon that has been clicked for
  * creating the new connection. This field will be available under selectedIcon
  * in the connect method, which may be overridden to take the icon that
  * triggered the new connection into account. This is useful if more than one
@@ -116,7 +116,7 @@
  * terminal if <createTarget> is enabled.
  * 
  * Note that the target is the cell under the mouse where the mouse button was released.
- * Depending on the logic in the handler, this doesn't necessarily have to be the target
+ * Depending on the logic in the handler2, this doesn't necessarily have to be the target
  * of the inserted edge. To print the source, target or any optional ports IDs that the
  * edge is connected to, the following code can be used. To get more details about the
  * actual connection point, <mxGraph.getConnectionConstraint> can be used. To resolve
@@ -144,7 +144,7 @@
  *
  * Constructor: mxConnectionHandler
  *
- * Constructs an event handler that connects vertices using the specified
+ * Constructs an event handler2 that connects vertices using the specified
  * factory method to create the new edges. Modify
  * <mxConstants.ACTIVE_REGION> to setup the region on a cell which triggers
  * the creation of a new connection or use connect icons as explained
@@ -213,7 +213,7 @@ mxConnectionHandler.prototype.moveIconFront = false;
  * Variable: moveIconBack
  * 
  * Specifies if icons should be moved to the back of the overlay pane. This can
- * be set to true if the icons of the connection handler conflict with other
+ * be set to true if the icons of the connection handler2 conflict with other
  * handles, such as the vertex label move handle. Default is false.
  */
 mxConnectionHandler.prototype.moveIconBack = false;
@@ -293,16 +293,16 @@ mxConnectionHandler.prototype.waypointsEnabled = false;
 /**
  * Variable: ignoreMouseDown
  * 
- * Specifies if the connection handler should ignore the state of the mouse
+ * Specifies if the connection handler2 should ignore the state of the mouse
  * button when highlighting the source. Default is false, that is, the
- * handler only highlights the source if no button is being pressed.
+ * handler2 only highlights the source if no button is being pressed.
  */
 mxConnectionHandler.prototype.ignoreMouseDown = false;
 
 /**
  * Variable: first
  * 
- * Holds the <mxPoint> where the mouseDown took place while the handler is
+ * Holds the <mxPoint> where the mouseDown took place while the handler2 is
  * active.
  */
 mxConnectionHandler.prototype.first = null;
@@ -321,7 +321,7 @@ mxConnectionHandler.prototype.connectIconOffset = new mxPoint(0, mxConstants.TOO
  * Variable: edgeState
  * 
  * Optional <mxCellState> that represents the preview edge while the
- * handler is active. This is created in <createEdgeState>.
+ * handler2 is active. This is created in <createEdgeState>.
  */
 mxConnectionHandler.prototype.edgeState = null;
 
@@ -376,7 +376,7 @@ mxConnectionHandler.prototype.livePreview = false;
 /**
  * Variable: cursor
  * 
- * Specifies the cursor to be used while the handler is active. Default is null.
+ * Specifies the cursor to be used while the handler2 is active. Default is null.
  */
 mxConnectionHandler.prototype.cursor = null;
 
@@ -482,9 +482,9 @@ mxConnectionHandler.prototype.createShape = function()
 /**
  * Function: init
  * 
- * Initializes the shapes required for this connection handler. This should
+ * Initializes the shapes required for this connection handler2. This should
  * be invoked if <mxGraph.container> is assigned after the connection
- * handler has been created.
+ * handler2 has been created.
  */
 mxConnectionHandler.prototype.init = function()
 {
@@ -700,7 +700,7 @@ mxConnectionHandler.prototype.isValidSource = function(cell, me)
  * 
  * Returns true. The call to <mxGraph.isValidTarget> is implicit by calling
  * <mxGraph.getEdgeValidationError> in <validateConnection>. This is an
- * additional hook for disabling certain targets in this specific handler.
+ * additional hook for disabling certain targets in this specific handler2.
  * 
  * Parameters:
  * 
@@ -926,7 +926,7 @@ mxConnectionHandler.prototype.destroyIcons = function()
 /**
  * Function: isStartEvent
  * 
- * Returns true if the given mouse down event should start this handler. The
+ * Returns true if the given mouse down event should start this handler2. The
  * This implementation returns true if the event does not force marquee
  * selection, and the currentConstraint and currentFocus of the
  * <constraintHandler> are not null, or <previous> and <error> are not null and
@@ -1233,7 +1233,7 @@ mxConnectionHandler.prototype.mouseMove = function(sender, me)
 {
 	if (!me.isConsumed() && (this.ignoreMouseDown || this.first != null || !this.graph.isMouseDown))
 	{
-		// Handles special case when handler is disabled during highlight
+		// Handles special case when handler2 is disabled during highlight
 		if (!this.isEnabled() && this.currentState != null)
 		{
 			this.destroyIcons();
@@ -1268,7 +1268,7 @@ mxConnectionHandler.prototype.mouseMove = function(sender, me)
 			var constraint = null;
 			var current = point;
 			
-			// Uses the current point from the constraint handler if available
+			// Uses the current point from the constraint handler2 if available
 			if (this.constraintHandler.currentConstraint != null &&
 				this.constraintHandler.currentFocus != null &&
 				this.constraintHandler.currentPoint != null)
@@ -1656,7 +1656,7 @@ mxConnectionHandler.prototype.updateIcons = function(state, icons, me)
 /**
  * Function: isStopEvent
  * 
- * Returns true if the given mouse up event should stop this handler. The
+ * Returns true if the given mouse up event should stop this handler2. The
  * connection will be created if <error> is null. Note that this is only
  * called if <waypointsEnabled> is true. This implemtation returns true
  * if there is a cell state in the given event.
@@ -1763,7 +1763,7 @@ mxConnectionHandler.prototype.mouseUp = function(sender, me)
 			}
 		}
 		
-		// Redraws the connect icons and resets the handler state
+		// Redraws the connect icons and resets the handler2 state
 		this.destroyIcons();
 		me.consume();
 	}
@@ -1777,7 +1777,7 @@ mxConnectionHandler.prototype.mouseUp = function(sender, me)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxConnectionHandler.prototype.reset = function()
 {
@@ -2192,7 +2192,7 @@ mxConnectionHandler.prototype.createEdge = function(value, source, target, style
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes. This should be
+ * Destroys the handler2 and all its resources and DOM nodes. This should be
  * called on all instances. It is called automatically for the built-in
  * instance created for each <mxGraph>.
  */

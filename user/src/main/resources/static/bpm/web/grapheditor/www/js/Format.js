@@ -470,7 +470,7 @@ Format.prototype.refresh = function()
 			
 			if (index == ((containsLabel) ? this.labelIndex : this.currentIndex))
 			{
-				// Invokes handler directly as a workaround for no click on DIV in KHTML.
+				// Invokes handler2 directly as a workaround for no click on DIV in KHTML.
 				clickHandler();
 			}
 		});
@@ -583,7 +583,7 @@ BaseFormatPanel.prototype.getSelectionState = function()
 };
 
 /**
- * Install input handler.
+ * Install input handler2.
  */
 BaseFormatPanel.prototype.installInputHandler = function(input, key, defaultValue, min, max, unit, textEditFallback, isFloat)
 {
@@ -3143,7 +3143,7 @@ TextFormatPanel.prototype.addFont = function(container)
 			input.value = value + ' %';
 		}, function(input)
 		{
-			// Used in CSS handler to update current value
+			// Used in CSS handler2 to update current value
 			lineHeightInput = input;
 			
 			// KNOWN: Arrow up/down clear selection text in quirks/IE 8
@@ -4093,7 +4093,7 @@ StyleFormatPanel.prototype.addFill = function(container)
 	gradientSelect.style.right = (mxClient.IS_QUIRKS) ? '52px' : '72px';
 	gradientSelect.style.width = '70px';
 	
-	// Stops events from bubbling to color option event handler
+	// Stops events from bubbling to color option event handler2
 	mxEvent.addListener(gradientSelect, 'click', function(evt)
 	{
 		mxEvent.consume(evt);
@@ -4267,7 +4267,7 @@ StyleFormatPanel.prototype.addStroke = function(container)
 		mxEvent.consume(evt);
 	});
 	
-	// Stops events from bubbling to color option event handler
+	// Stops events from bubbling to color option event handler2
 	mxEvent.addListener(styleSelect, 'click', function(evt)
 	{
 		mxEvent.consume(evt);
@@ -4952,7 +4952,7 @@ StyleFormatPanel.prototype.addLineJumps = function(container)
 			mxEvent.consume(evt);
 		});
 		
-		// Stops events from bubbling to color option event handler
+		// Stops events from bubbling to color option event handler2
 		mxEvent.addListener(styleSelect, 'click', function(evt)
 		{
 			mxEvent.consume(evt);

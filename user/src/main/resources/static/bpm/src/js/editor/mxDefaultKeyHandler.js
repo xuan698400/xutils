@@ -6,7 +6,7 @@
  * Class: mxDefaultKeyHandler
  *
  * Binds keycodes to actionnames in an editor. This aggregates an internal
- * <handler> and extends the implementation of <mxKeyHandler.escape> to not
+ * <handler2> and extends the implementation of <mxKeyHandler.escape> to not
  * only cancel the editing, but also hide the properties dialog and fire an
  * <mxEditor.escape> event via <editor>. An instance of this class is created
  * by <mxEditor> and stored in <mxEditor.keyHandler>.
@@ -35,7 +35,7 @@
  * 
  * Constructor: mxDefaultKeyHandler
  *
- * Constructs a new default key handler for the <mxEditor.graph> in the
+ * Constructs a new default key handler2 for the <mxEditor.graph> in the
  * given <mxEditor>. (The editor may be null if a prototypical instance for
  * a <mxDefaultKeyHandlerCodec> is created.)
  * 
@@ -72,7 +72,7 @@ function mxDefaultKeyHandler(editor)
 mxDefaultKeyHandler.prototype.editor = null;
 
 /**
- * Variable: handler
+ * Variable: handler2
  *
  * Holds the <mxKeyHandler> for key event handling.
  */
@@ -115,8 +115,8 @@ mxDefaultKeyHandler.prototype.bindAction = function (code, action, control)
 /**
  * Function: destroy
  *
- * Destroys the <handler> associated with this object. This does normally
- * not need to be called, the <handler> is destroyed automatically when the
+ * Destroys the <handler2> associated with this object. This does normally
+ * not need to be called, the <handler2> is destroyed automatically when the
  * window unloads (in IE) by <mxEditor>.
  */
 mxDefaultKeyHandler.prototype.destroy = function ()

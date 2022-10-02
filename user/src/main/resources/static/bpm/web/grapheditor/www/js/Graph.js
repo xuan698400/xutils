@@ -209,7 +209,7 @@ Graph = function(container, model, renderHint, stylesheet, themes)
 			mouseDown: function(sender, me) {},
 		    mouseMove: mxUtils.bind(this, function(sender, me)
 		    {
-		    	// Checks if any other handler is active
+		    	// Checks if any other handler2 is active
 		    	var handlerMap = this.selectionCellsHandler.handlers.map;
 		    	
 		    	for (var key in handlerMap)
@@ -334,7 +334,7 @@ Graph = function(container, model, renderHint, stylesheet, themes)
 				    					start.selected = false;
 				    					me.consume();
 	
-				    					// Removes preview rectangle in graph handler
+				    					// Removes preview rectangle in graph handler2
 				    					this.graphHandler.reset();
 				    				}
 	    						}
@@ -582,7 +582,7 @@ Graph = function(container, model, renderHint, stylesheet, themes)
 	    		return rubberband;
 	    };
 	    
-	    // Timer-based activation of outline connect in connection handler
+	    // Timer-based activation of outline connect in connection handler2
 	    var startTime = new Date().getTime();
 	    var timeOnTarget = 0;
 	    
@@ -890,7 +890,7 @@ Graph = function(container, model, renderHint, stylesheet, themes)
 			return source && state.view.graph.isCellSelected(state.cell);
 		};
 		
-		// Updates constraint handler if the selection changes
+		// Updates constraint handler2 if the selection changes
 		this.selectionModel.addListener(mxEvent.CHANGE, mxUtils.bind(this, function()
 		{
 			var ch = this.connectionHandler.constraintHandler;
@@ -3134,7 +3134,7 @@ Graph.prototype.zapGremlins = function(text)
 };
 
 /**
- * Hover icons are used for hover, vertex handler and drag from sidebar.
+ * Hover icons are used for hover, vertex handler2 and drag from sidebar.
  */
 HoverIcons = function(graph)
 {
@@ -3295,7 +3295,7 @@ HoverIcons.prototype.init = function()
 		}
 	});
 	
-	// Checks if connection handler was active in mouse move
+	// Checks if connection handler2 was active in mouse move
 	// as workaround for possible double connection inserted
 	var connectionHandlerActive = false;
 	
@@ -4765,7 +4765,7 @@ if (typeof mxVertexHandler != 'undefined')
 			return !mxEvent.isAltDown(evt);
 		};
 		
-		// Extends connection handler to enable ctrl+drag for cloning source cell
+		// Extends connection handler2 to enable ctrl+drag for cloning source cell
 		// since copyOnConnect is now disabled by default
 		var mxConnectionHandlerCreateTarget = mxConnectionHandler.prototype.isCreateTarget;
 		mxConnectionHandler.prototype.isCreateTarget = function(evt)
@@ -4818,7 +4818,7 @@ if (typeof mxVertexHandler != 'undefined')
 			// do not change color of preview
 		};
 		
-		// Overrides connection handler to ignore edges instead of not allowing connections
+		// Overrides connection handler2 to ignore edges instead of not allowing connections
 		var mxConnectionHandlerCreateMarker = mxConnectionHandler.prototype.createMarker;
 		mxConnectionHandler.prototype.createMarker = function()
 		{
@@ -5800,7 +5800,7 @@ if (typeof mxVertexHandler != 'undefined')
 		};
 
 		/**
-		 * Adds a handler for clicking on shapes with links. This replaces all links in labels.
+		 * Adds a handler2 for clicking on shapes with links. This replaces all links in labels.
 		 */
 		Graph.prototype.addClickHandler = function(highlight, beforeClick, onClick)
 		{
@@ -6968,7 +6968,7 @@ if (typeof mxVertexHandler != 'undefined')
 		};
 	
 		/**
-		 * Creates the keyboard event handler for the current graph and history.
+		 * Creates the keyboard event handler2 for the current graph and history.
 		 */
 		mxCellEditor.prototype.saveSelection = function()
 		{
@@ -6997,7 +6997,7 @@ if (typeof mxVertexHandler != 'undefined')
 		};
 	
 		/**
-		 * Creates the keyboard event handler for the current graph and history.
+		 * Creates the keyboard event handler2 for the current graph and history.
 		 */
 		mxCellEditor.prototype.restoreSelection = function(savedSel)
 		{
@@ -8113,7 +8113,7 @@ if (typeof mxVertexHandler != 'undefined')
 			mxRubberbandReset.apply(this, arguments);
 		};
 		
-	    // Timer-based activation of outline connect in connection handler
+	    // Timer-based activation of outline connect in connection handler2
 	    var startTime = new Date().getTime();
 	    var timeOnTarget = 0;
 	    
@@ -8590,7 +8590,7 @@ if (typeof mxVertexHandler != 'undefined')
 		var edgeHandlerRedrawHandles = mxEdgeHandler.prototype.redrawHandles;
 		mxEdgeHandler.prototype.redrawHandles = function()
 		{
-			// Workaround for special case where handler
+			// Workaround for special case where handler2
 			// is reset before this which leads to a NPE
 			if (this.marker != null)
 			{

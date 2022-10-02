@@ -72,7 +72,7 @@ public class ScheduledTaskExecutor extends ScheduledThreadPoolExecutor {
      * @throws IllegalArgumentException
      *             如果 <tt>corePoolSize &lt; 0</tt>
      * @throws NullPointerException
-     *             如果 handler 为null
+     *             如果 handler2 为null
      */
     public ScheduledTaskExecutor(int corePoolSize, RejectedExecutionHandler handler) {
         super(corePoolSize, handler);
@@ -90,7 +90,7 @@ public class ScheduledTaskExecutor extends ScheduledThreadPoolExecutor {
      * @throws IllegalArgumentException
      *             如果 <tt>corePoolSize &lt; 0</tt>
      * @throws NullPointerException
-     *             如果 threadFactory 或者 handler 为null
+     *             如果 threadFactory 或者 handler2 为null
      */
     public ScheduledTaskExecutor(int corePoolSize, ThreadFactory threadFactory, RejectedExecutionHandler handler) {
         super(corePoolSize, threadFactory, handler);

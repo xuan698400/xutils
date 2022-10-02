@@ -212,7 +212,7 @@ mxGraphHierarchyNode.prototype.isAncestor = function(otherNode)
 /**
  * Function: getCoreCell
  * 
- * Gets the impl vertex associated with this wrapper
+ * Gets the impl2 vertex associated with this wrapper
  */
 mxGraphHierarchyNode.prototype.getCoreCell = function()
 {

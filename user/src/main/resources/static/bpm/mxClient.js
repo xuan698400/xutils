@@ -353,7 +353,7 @@ var mxClient =
  * <script type="text/javascript">
  * 		var mxLoadResources = false;
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxLoadResources) == 'undefined')
@@ -372,7 +372,7 @@ if (typeof(mxLoadResources) == 'undefined')
  * <script type="text/javascript">
  * 		var mxLoadResources = true;
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxForceIncludes) == 'undefined')
@@ -390,7 +390,7 @@ if (typeof(mxForceIncludes) == 'undefined')
  * <script type="text/javascript">
  * 		var mxResourceExtension = '.txt';
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxResourceExtension) == 'undefined')
@@ -409,7 +409,7 @@ if (typeof(mxResourceExtension) == 'undefined')
  * <script type="text/javascript">
  * 		var mxLoadStylesheets = false;
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxLoadStylesheets) == 'undefined')
@@ -420,15 +420,15 @@ if (typeof(mxLoadStylesheets) == 'undefined')
 /**
  * Variable: basePath
  *
- * Basepath for all URLs in the impl without trailing slash. Default is '.'.
+ * Basepath for all URLs in the impl2 without trailing slash. Default is '.'.
  * Set mxBasePath prior to loading the mxClient library as follows to override
  * this setting:
  *
  * (code)
  * <script type="text/javascript">
- * 		mxBasePath = '/path/to/impl/directory';
+ * 		mxBasePath = '/path/to/impl2/directory';
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  * 
  * When using a relative path, the path is relative to the URL of the page that
@@ -452,7 +452,7 @@ else
 /**
  * Variable: imageBasePath
  *
- * Basepath for all images URLs in the impl without trailing slash. Default is
+ * Basepath for all images URLs in the impl2 without trailing slash. Default is
  * <mxClient.basePath> + '/images'. Set mxImageBasePath prior to loading the
  * mxClient library as follows to override this setting:
  *
@@ -460,7 +460,7 @@ else
  * <script type="text/javascript">
  * 		mxImageBasePath = '/path/to/image/directory';
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  * 
  * When using a relative path, the path is relative to the URL of the page that
@@ -1293,7 +1293,7 @@ var mxResources =
 	 * 
 	 * Asynchronous loading
 	 * 
-	 * By default, the impl adds two resource files synchronously at load time.
+	 * By default, the impl2 adds two resource files synchronously at load time.
 	 * To load these files asynchronously, set <mxLoadResources> to false
 	 * before loading mxClient.js and use <mxResources.loadResources> instead.
 	 * 
@@ -3318,7 +3318,7 @@ var mxUtils =
 	 * Function: button
 	 * 
 	 * Returns a new button with the given level and function as an onclick
-	 * event handler.
+	 * event handler2.
 	 * 
 	 * (code)
 	 * document.body.appendChild(mxUtils.button('Test', function(evt)
@@ -3618,7 +3618,7 @@ var mxUtils =
 	 * Function: getAll
 	 * 
 	 * Loads the URLs in the given array *asynchronously* and invokes the given function
-	 * if all requests returned with a valid 2xx status. The error handler is invoked
+	 * if all requests returned with a valid 2xx status. The error handler2 is invoked
 	 * once on the first error or invalid response.
 	 *
 	 * Parameters:
@@ -9710,7 +9710,7 @@ var mxEvent =
 	/**
 	 * Function: addMouseWheelListener
 	 * 
-	 * Installs the given function as a handler for mouse wheel events. The
+	 * Installs the given function as a handler2 for mouse wheel events. The
 	 * function has two arguments: the mouse event and a boolean that specifies
 	 * if the wheel was moved up or down.
 	 * 
@@ -11513,7 +11513,7 @@ var mxClipboard =
  * };
  * (end)
  * 
- * Or the following event handler can be used:
+ * Or the following event handler2 can be used:
  * 
  * (code)
  * wnd.addListener(mxEvent.MOVE, function(e)
@@ -14838,7 +14838,7 @@ mxUrlConverter.prototype.convert = function(url)
 /**
  * Class: mxPanningManager
  *
- * Implements a handler for panning.
+ * Implements a handler2 for panning.
  */
 function mxPanningManager(graph)
 {
@@ -15160,7 +15160,7 @@ mxPopupMenu.prototype.zIndex = 10006;
  * Variable: factoryMethod
  * 
  * Function that is used to create the popup menu. The function takes the
- * current panning handler, the <mxCell> under the mouse and the mouse
+ * current panning handler2, the <mxCell> under the mouse and the mouse
  * event that triggered the call as arguments.
  */
 mxPopupMenu.prototype.factoryMethod = null;
@@ -15212,7 +15212,7 @@ mxPopupMenu.prototype.labels = true;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxPopupMenu.prototype.init = function()
 {
@@ -15693,7 +15693,7 @@ mxPopupMenu.prototype.hideSubmenu = function(parent)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxPopupMenu.prototype.destroy = function()
 {
@@ -33153,7 +33153,7 @@ mxGraphHierarchyNode.prototype.isAncestor = function(otherNode)
 /**
  * Function: getCoreCell
  * 
- * Gets the impl vertex associated with this wrapper
+ * Gets the impl2 vertex associated with this wrapper
  */
 mxGraphHierarchyNode.prototype.getCoreCell = function()
 {
@@ -33335,7 +33335,7 @@ mxGraphHierarchyEdge.prototype.setGeneralPurposeVariable = function(layer, value
 /**
  * Function: getCoreCell
  * 
- * Gets the first impl edge associated with this wrapper
+ * Gets the first impl2 edge associated with this wrapper
  */
 mxGraphHierarchyEdge.prototype.getCoreCell = function()
 {
@@ -37138,7 +37138,7 @@ mxCoordinateAssignment.prototype.setEdgePosition = function(cell)
 			
 			if (realSource != source)
 			{
-				// The real edges include all impl model edges and these can go
+				// The real edges include all impl2 model edges and these can go
 				// in both directions. If the source of the hierarchical model edge
 				// isn't the source of the specific real edge in this iteration
 				// treat if as reversed
@@ -46712,7 +46712,7 @@ mxSelectionChange.prototype.execute = function()
  * 
  * To start editing on a key press event, the container of the graph
  * should have focus or a focusable parent should be used to add the
- * key press handler as follows.
+ * key press handler2 as follows.
  * 
  * (code)
  * mxEvent.addListener(graph.container, 'keypress', mxUtils.bind(this, function(evt)
@@ -46901,7 +46901,7 @@ mxCellEditor.prototype.initialValue = null;
 /**
  * Function: init
  *
- * Creates the <textarea> and installs the event listeners. The key handler
+ * Creates the <textarea> and installs the event listeners. The key handler2
  * updates the <modified> state.
  */
 mxCellEditor.prototype.init = function ()
@@ -47908,7 +47908,7 @@ mxCellRenderer.prototype.minSvgStrokeWidth = 1;
  * Variable: forceControlClickHandler
  * 
  * Specifies if the enabled state of the graph should be ignored in the control
- * click handler (to allow folding in disabled graphs). Default is false.
+ * click handler2 (to allow folding in disabled graphs). Default is false.
  */
 mxCellRenderer.prototype.forceControlClickHandler = false;
 
@@ -48469,11 +48469,11 @@ mxCellRenderer.prototype.createControl = function(state)
 /**
  * Function: createControlClickHandler
  * 
- * Hook for creating the click handler for the folding icon.
+ * Hook for creating the click handler2 for the folding icon.
  * 
  * Parameters:
  * 
- * state - <mxCellState> whose control click handler should be returned.
+ * state - <mxCellState> whose control click handler2 should be returned.
  */
 mxCellRenderer.prototype.createControlClickHandler = function(state)
 {
@@ -49307,7 +49307,7 @@ mxCellRenderer.prototype.redrawShape = function(state, force, rendering)
 			this.createCellOverlays(state);
 			this.installListeners(state);
 			
-			// Forces a refresh of the handler if one exists
+			// Forces a refresh of the handler2 if one exists
 			state.view.graph.selectionCellsHandler.updateHandler(state);
 		}
 	}
@@ -49999,7 +49999,7 @@ var mxEdgeStyle =
 	 * Function: SegmentConnector
 	 * 
 	 * Implements an orthogonal edge style. Use <mxEdgeSegmentHandler>
-	 * as an interactive handler for this style.
+	 * as an interactive handler2 for this style.
 	 */
 	SegmentConnector: function(state, source, target, hints, result)
 	{
@@ -53671,7 +53671,7 @@ mxGraphView.prototype.installListeners = function()
 		}));
 		
 		// Adds listener for double click handling on background, this does always
-		// use native event handler, we assume that the DOM of the background
+		// use native event handler2, we assume that the DOM of the background
 		// does not change during the double click
 		mxEvent.addListener(container, 'dblclick', mxUtils.bind(this, function(evt)
 		{
@@ -54402,7 +54402,7 @@ mxCurrentRootChange.prototype.execute = function()
  * This string can now be stored in a local persistent storage (for example
  * using Google Gears) or it can be passed to a backend using mxUtils.post as
  * follows. The url variable is the URL of the Java servlet, PHP page or HTTP
- * handler, depending on the mini.
+ * handler2, depending on the mini.
  * 
  * (code)
  * var xmlString = encodeURIComponent(mxUtils.getXml(node));
@@ -54416,7 +54416,7 @@ mxCurrentRootChange.prototype.execute = function()
  * 
  * To load an XML representation of a diagram into an existing graph object
  * mxUtils.load can be used as follows. The url variable is the URL of the Java
- * servlet, PHP page or HTTP handler that produces the XML string.
+ * servlet, PHP page or HTTP handler2 that produces the XML string.
  * 
  * (code)
  * var xmlDoc = mxUtils.load(url).getXml();
@@ -55141,7 +55141,7 @@ mxGraph.prototype.escapeEnabled = true;
  * 
  * If true, when editing is to be stopped by way of selection changing,
  * data in diagram changing or other means stopCellEditing is invoked, and
- * changes are saved. This is implemented in a focus handler in
+ * changes are saved. This is implemented in a focus handler2 in
  * <mxCellEditor>. Default is true.
  */
 mxGraph.prototype.invokesStopCellEditing = true;
@@ -55792,7 +55792,7 @@ mxGraph.prototype.init = function(container)
 /**
  * Function: createHandlers
  * 
- * Creates the tooltip-, panning-, connection- and graph-handler (in this
+ * Creates the tooltip-, panning-, connection- and graph-handler2 (in this
  * order). This is called in the constructor before <init> is called.
  */
 mxGraph.prototype.createHandlers = function()
@@ -56424,7 +56424,7 @@ mxGraph.prototype.setCellWarning = function(cell, warning, img, isSelect)
 		var overlay = new mxCellOverlay(img,
 			'<font color=red>'+warning+'</font>');
 		
-		// Adds a handler for single mouseclicks to select the cell
+		// Adds a handler2 for single mouseclicks to select the cell
 		if (isSelect)
 		{
 			overlay.addListener(mxEvent.CLICK,
@@ -56805,7 +56805,7 @@ mxGraph.prototype.tapAndHold = function(me)
 
 	if (mxe.isConsumed())
 	{
-		// Resets the state of the panning handler
+		// Resets the state of the panning handler2
 		this.panningHandler.panningTrigger = false;
 	}
 	
@@ -62987,7 +62987,7 @@ mxGraph.prototype.isLabelClipped = function(cell)
  * Returns the string or DOM node that represents the tooltip for the given
  * state, node and coordinate pair. This implementation checks if the given
  * node is a folding icon or overlay and returns the respective tooltip. If
- * this does not result in a tooltip, the handler for the cell is retrieved
+ * this does not result in a tooltip, the handler2 for the cell is retrieved
  * from <selectionCellsHandler> and the optional getTooltipForNode method is
  * called. If no special tooltip exists here then <getTooltipForCell> is used
  * with the cell in the given state as the argument to return a tooltip for the
@@ -66245,13 +66245,13 @@ mxGraph.prototype.selectCellsForEvent = function(cells, evt)
 /**
  * Function: createHandler
  * 
- * Creates a new handler for the given cell state. This implementation
+ * Creates a new handler2 for the given cell state. This implementation
  * returns a new <mxEdgeHandler> of the corresponding cell is an edge,
  * otherwise it returns an <mxVertexHandler>.
  * 
  * Parameters:
  * 
- * state - <mxCellState> whose handler should be created.
+ * state - <mxCellState> whose handler2 should be created.
  */
 mxGraph.prototype.createHandler = function(state)
 {
@@ -66284,7 +66284,7 @@ mxGraph.prototype.createHandler = function(state)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createVertexHandler = function(state)
 {
@@ -66298,7 +66298,7 @@ mxGraph.prototype.createVertexHandler = function(state)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createEdgeHandler = function(state, edgeStyle)
 {
@@ -66331,7 +66331,7 @@ mxGraph.prototype.createEdgeHandler = function(state, edgeStyle)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createEdgeSegmentHandler = function(state)
 {
@@ -66345,7 +66345,7 @@ mxGraph.prototype.createEdgeSegmentHandler = function(state)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createElbowEdgeHandler = function(state)
 {
@@ -66786,7 +66786,7 @@ mxGraph.prototype.fireMouseEvent = function(evtName, me, sender)
 				}
 			}
 			
-			// Invokes the click handler
+			// Invokes the click handler2
 			if (evtName == mxEvent.MOUSE_UP)
 			{
 				this.click(me);
@@ -67302,7 +67302,7 @@ mxOutline.prototype.border = 10;
 /**
  * Variable: enabled
  * 
- * Specifies the size of the sizer handler. Default is 8.
+ * Specifies the size of the sizer handler2. Default is 8.
  */
 mxOutline.prototype.sizerSize = 8;
 
@@ -67911,7 +67911,7 @@ mxOutline.prototype.mouseUp = function(sender, me)
 			me.consume();
 		}
 			
-		// Resets the state of the handler
+		// Resets the state of the handler2
 		this.index = null;
 		this.active = false;
 	}
@@ -69479,7 +69479,7 @@ mxConnectionConstraint.prototype.dy = null;
 /**
  * Class: mxGraphHandler
  * 
- * Graph event handler that handles selection. Individual cells are handled
+ * Graph event handler2 that handles selection. Individual cells are handled
  * separately using <mxVertexHandler> or one of the edge handlers. These
  * handlers are created using <mxGraph.createHandler> in
  * <mxGraphSelectionModel.cellAdded>.
@@ -69489,7 +69489,7 @@ mxConnectionConstraint.prototype.dy = null;
  * 
  * Constructor: mxGraphHandler
  * 
- * Constructs an event handler that creates handles for the
+ * Constructs an event handler2 that creates handles for the
  * selection cells.
  * 
  * Parameters:
@@ -69501,7 +69501,7 @@ function mxGraphHandler(graph)
 	this.graph = graph;
 	this.graph.addMouseListener(this);
 	
-	// Repaints the handler after autoscroll
+	// Repaints the handler2 after autoscroll
 	this.panHandler = mxUtils.bind(this, function()
 	{
 		this.updatePreviewShape();
@@ -69531,7 +69531,7 @@ function mxGraphHandler(graph)
 			}
 			catch (e)
 			{
-				// Resets the handler if cells have vanished
+				// Resets the handler2 if cells have vanished
 				this.reset();
 			}
 		}
@@ -69853,7 +69853,7 @@ mxGraphHandler.prototype.consumeMouseEvent = function(evtName, me)
  * 
  * Handles the event by selecing the given cell and creating a handle for
  * it. By consuming the event all subsequent events of the gesture are
- * redirected to this handler.
+ * redirected to this handler2.
  */
 mxGraphHandler.prototype.mouseDown = function(sender, me)
 {
@@ -69916,14 +69916,14 @@ mxGraphHandler.prototype.getGuideStates = function()
 /**
  * Function: getCells
  * 
- * Returns the cells to be modified by this handler. This implementation
+ * Returns the cells to be modified by this handler2. This implementation
  * returns all selection cells that are movable, or the given initial cell if
  * the given cell is not selected and movable. This handles the case of moving
  * unselectable or unselected cells.
  * 
  * Parameters:
  * 
- * initialCell - <mxCell> that triggered this handler.
+ * initialCell - <mxCell> that triggered this handler2.
  */
 mxGraphHandler.prototype.getCells = function(initialCell)
 {
@@ -70138,14 +70138,14 @@ mxGraphHandler.prototype.getDelta = function(me)
 /**
  * Function: updateHint
  * 
- * Hook for subclassers do show details while the handler is active.
+ * Hook for subclassers do show details while the handler2 is active.
  */
 mxGraphHandler.prototype.updateHint = function(me) { };
 
 /**
  * Function: removeHint
  * 
- * Hooks for subclassers to hide details when the handler gets inactive.
+ * Hooks for subclassers to hide details when the handler2 gets inactive.
  */
 mxGraphHandler.prototype.removeHint = function() { };
 
@@ -70433,7 +70433,7 @@ mxGraphHandler.prototype.selectDelayed = function(me)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxGraphHandler.prototype.reset = function()
 {
@@ -70553,7 +70553,7 @@ mxGraphHandler.prototype.destroyShapes = function()
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxGraphHandler.prototype.destroy = function()
 {
@@ -70582,20 +70582,20 @@ mxGraphHandler.prototype.destroy = function()
 /**
  * Class: mxPanningHandler
  * 
- * Event handler that pans and creates popupmenus. To use the left
+ * Event handler2 that pans and creates popupmenus. To use the left
  * mousebutton for panning without interfering with cell moving and
  * resizing, use <isUseLeftButton> and <isIgnoreCell>. For grid size
- * steps while panning, use <useGrid>. This handler is built-into
+ * steps while panning, use <useGrid>. This handler2 is built-into
  * <mxGraph.panningHandler> and enabled using <mxGraph.setPanning>.
  * 
  * Constructor: mxPanningHandler
  * 
- * Constructs an event handler that creates a <mxPopupMenu>
+ * Constructs an event handler2 that creates a <mxPopupMenu>
  * and pans the graph.
  *
  * Event: mxEvent.PAN_START
  *
- * Fires when the panning handler changes its <active> state to true. The
+ * Fires when the panning handler2 changes its <active> state to true. The
  * <code>event</code> property contains the corresponding <mxMouseEvent>.
  *
  * Event: mxEvent.PAN
@@ -70605,7 +70605,7 @@ mxGraphHandler.prototype.destroy = function()
  *
  * Event: mxEvent.PAN_END
  *
- * Fires when the panning handler changes its <active> state to false. The
+ * Fires when the panning handler2 changes its <active> state to false. The
  * <code>event</code> property contains the corresponding <mxMouseEvent>.
  */
 function mxPanningHandler(graph)
@@ -70803,7 +70803,7 @@ mxPanningHandler.prototype.startY = 0;
 /**
  * Function: isActive
  * 
- * Returns true if the handler is currently active.
+ * Returns true if the handler2 is currently active.
  */
 mxPanningHandler.prototype.isActive = function()
 {
@@ -70882,7 +70882,7 @@ mxPanningHandler.prototype.isForcePanningEvent = function(me)
  * Function: mouseDown
  * 
  * Handles the event by initiating the panning. By consuming the event all
- * subsequent events of the gesture are redirected to this handler.
+ * subsequent events of the gesture are redirected to this handler2.
  */
 mxPanningHandler.prototype.mouseDown = function(sender, me)
 {
@@ -71051,7 +71051,7 @@ mxPanningHandler.prototype.panGraph = function(dx, dy)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxPanningHandler.prototype.destroy = function()
 {
@@ -71067,11 +71067,11 @@ mxPanningHandler.prototype.destroy = function()
 /**
  * Class: mxPopupMenuHandler
  * 
- * Event handler that creates popupmenus.
+ * Event handler2 that creates popupmenus.
  * 
  * Constructor: mxPopupMenuHandler
  * 
- * Constructs an event handler that creates a <mxPopupMenu>.
+ * Constructs an event handler2 that creates a <mxPopupMenu>.
  */
 function mxPopupMenuHandler(graph, factoryMethod)
 {
@@ -71153,7 +71153,7 @@ mxPopupMenuHandler.prototype.screenY = null;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxPopupMenuHandler.prototype.init = function()
 {
@@ -71183,7 +71183,7 @@ mxPopupMenuHandler.prototype.isSelectOnPopup = function(me)
  * Function: mouseDown
  * 
  * Handles the event by initiating the panning. By consuming the event all
- * subsequent events of the gesture are redirected to this handler.
+ * subsequent events of the gesture are redirected to this handler2.
  */
 mxPopupMenuHandler.prototype.mouseDown = function(sender, me)
 {
@@ -71268,7 +71268,7 @@ mxPopupMenuHandler.prototype.getCellForPopupEvent = function(me)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxPopupMenuHandler.prototype.destroy = function()
 {
@@ -71700,7 +71700,7 @@ mxCellMarker.prototype.intersects = function(state, me)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxCellMarker.prototype.destroy = function()
 {
@@ -71715,7 +71715,7 @@ mxCellMarker.prototype.destroy = function()
 /**
  * Class: mxSelectionCellsHandler
  * 
- * An event handler that manages cell handlers and invokes their mouse event
+ * An event handler2 that manages cell handlers and invokes their mouse event
  * processing functions.
  * 
  * Group: Events
@@ -71822,7 +71822,7 @@ mxSelectionCellsHandler.prototype.setEnabled = function(value)
 /**
  * Function: getHandler
  * 
- * Returns the handler for the given cell.
+ * Returns the handler2 for the given cell.
  */
 mxSelectionCellsHandler.prototype.getHandler = function(cell)
 {
@@ -71906,7 +71906,7 @@ mxSelectionCellsHandler.prototype.refresh = function()
 /**
  * Function: isHandlerActive
  * 
- * Returns true if the given handler is active and should not be redrawn.
+ * Returns true if the given handler2 is active and should not be redrawn.
  */
 mxSelectionCellsHandler.prototype.isHandlerActive = function(handler)
 {
@@ -71916,7 +71916,7 @@ mxSelectionCellsHandler.prototype.isHandlerActive = function(handler)
 /**
  * Function: updateHandler
  * 
- * Updates the handler for the given shape if one exists.
+ * Updates the handler2 for the given shape if one exists.
  */
 mxSelectionCellsHandler.prototype.updateHandler = function(state)
 {
@@ -71991,7 +71991,7 @@ mxSelectionCellsHandler.prototype.mouseUp = function(sender, me)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxSelectionCellsHandler.prototype.destroy = function()
 {
@@ -72012,9 +72012,9 @@ mxSelectionCellsHandler.prototype.destroy = function()
 /**
  * Class: mxConnectionHandler
  *
- * Graph event handler that creates new connections. Uses <mxTerminalMarker>
+ * Graph event handler2 that creates new connections. Uses <mxTerminalMarker>
  * for finding and highlighting the source and target vertices and
- * <factoryMethod> to create the edge instance. This handler is built-into
+ * <factoryMethod> to create the edge instance. This handler2 is built-into
  * <mxGraph.connectionHandler> and enabled using <mxGraph.setConnectable>.
  *
  * Example:
@@ -72045,15 +72045,15 @@ mxSelectionCellsHandler.prototype.destroy = function()
  * 
  * Using images to trigger connections:
  * 
- * This handler uses mxTerminalMarker to find the source and target cell for
+ * This handler2 uses mxTerminalMarker to find the source and target cell for
  * the new connection and creates a new edge using <connect>. The new edge is
  * created using <createEdge> which in turn uses <factoryMethod> or creates a
  * new default edge.
  * 
- * The handler uses a "highlight-paradigm" for indicating if a cell is being
+ * The handler2 uses a "highlight-paradigm" for indicating if a cell is being
  * used as a source or target terminal, as seen in other diagramming products.
  * In order to allow both, moving and connecting cells at the same time,
- * <mxConstants.DEFAULT_HOTSPOT> is used in the handler to determine the hotspot
+ * <mxConstants.DEFAULT_HOTSPOT> is used in the handler2 to determine the hotspot
  * of a cell, that is, the region of the cell which is used to trigger a new
  * connection. The constant is a value between 0 and 1 that specifies the
  * amount of the width and height around the center to be used for the hotspot
@@ -72100,7 +72100,7 @@ mxSelectionCellsHandler.prototype.destroy = function()
  * 
  * This will use the green-dot.gif with a width and height of 14 pixels as the
  * image to trigger new connections. In createIcons the icon field of the
- * handler will be set in order to remember the icon that has been clicked for
+ * handler2 will be set in order to remember the icon that has been clicked for
  * creating the new connection. This field will be available under selectedIcon
  * in the connect method, which may be overridden to take the icon that
  * triggered the new connection into account. This is useful if more than one
@@ -72123,7 +72123,7 @@ mxSelectionCellsHandler.prototype.destroy = function()
  * terminal if <createTarget> is enabled.
  * 
  * Note that the target is the cell under the mouse where the mouse button was released.
- * Depending on the logic in the handler, this doesn't necessarily have to be the target
+ * Depending on the logic in the handler2, this doesn't necessarily have to be the target
  * of the inserted edge. To print the source, target or any optional ports IDs that the
  * edge is connected to, the following code can be used. To get more details about the
  * actual connection point, <mxGraph.getConnectionConstraint> can be used. To resolve
@@ -72151,7 +72151,7 @@ mxSelectionCellsHandler.prototype.destroy = function()
  *
  * Constructor: mxConnectionHandler
  *
- * Constructs an event handler that connects vertices using the specified
+ * Constructs an event handler2 that connects vertices using the specified
  * factory method to create the new edges. Modify
  * <mxConstants.ACTIVE_REGION> to setup the region on a cell which triggers
  * the creation of a new connection or use connect icons as explained
@@ -72220,7 +72220,7 @@ mxConnectionHandler.prototype.moveIconFront = false;
  * Variable: moveIconBack
  * 
  * Specifies if icons should be moved to the back of the overlay pane. This can
- * be set to true if the icons of the connection handler conflict with other
+ * be set to true if the icons of the connection handler2 conflict with other
  * handles, such as the vertex label move handle. Default is false.
  */
 mxConnectionHandler.prototype.moveIconBack = false;
@@ -72300,16 +72300,16 @@ mxConnectionHandler.prototype.waypointsEnabled = false;
 /**
  * Variable: ignoreMouseDown
  * 
- * Specifies if the connection handler should ignore the state of the mouse
+ * Specifies if the connection handler2 should ignore the state of the mouse
  * button when highlighting the source. Default is false, that is, the
- * handler only highlights the source if no button is being pressed.
+ * handler2 only highlights the source if no button is being pressed.
  */
 mxConnectionHandler.prototype.ignoreMouseDown = false;
 
 /**
  * Variable: first
  * 
- * Holds the <mxPoint> where the mouseDown took place while the handler is
+ * Holds the <mxPoint> where the mouseDown took place while the handler2 is
  * active.
  */
 mxConnectionHandler.prototype.first = null;
@@ -72328,7 +72328,7 @@ mxConnectionHandler.prototype.connectIconOffset = new mxPoint(0, mxConstants.TOO
  * Variable: edgeState
  * 
  * Optional <mxCellState> that represents the preview edge while the
- * handler is active. This is created in <createEdgeState>.
+ * handler2 is active. This is created in <createEdgeState>.
  */
 mxConnectionHandler.prototype.edgeState = null;
 
@@ -72383,7 +72383,7 @@ mxConnectionHandler.prototype.livePreview = false;
 /**
  * Variable: cursor
  * 
- * Specifies the cursor to be used while the handler is active. Default is null.
+ * Specifies the cursor to be used while the handler2 is active. Default is null.
  */
 mxConnectionHandler.prototype.cursor = null;
 
@@ -72489,9 +72489,9 @@ mxConnectionHandler.prototype.createShape = function()
 /**
  * Function: init
  * 
- * Initializes the shapes required for this connection handler. This should
+ * Initializes the shapes required for this connection handler2. This should
  * be invoked if <mxGraph.container> is assigned after the connection
- * handler has been created.
+ * handler2 has been created.
  */
 mxConnectionHandler.prototype.init = function()
 {
@@ -72707,7 +72707,7 @@ mxConnectionHandler.prototype.isValidSource = function(cell, me)
  * 
  * Returns true. The call to <mxGraph.isValidTarget> is implicit by calling
  * <mxGraph.getEdgeValidationError> in <validateConnection>. This is an
- * additional hook for disabling certain targets in this specific handler.
+ * additional hook for disabling certain targets in this specific handler2.
  * 
  * Parameters:
  * 
@@ -72933,7 +72933,7 @@ mxConnectionHandler.prototype.destroyIcons = function()
 /**
  * Function: isStartEvent
  * 
- * Returns true if the given mouse down event should start this handler. The
+ * Returns true if the given mouse down event should start this handler2. The
  * This implementation returns true if the event does not force marquee
  * selection, and the currentConstraint and currentFocus of the
  * <constraintHandler> are not null, or <previous> and <error> are not null and
@@ -73240,7 +73240,7 @@ mxConnectionHandler.prototype.mouseMove = function(sender, me)
 {
 	if (!me.isConsumed() && (this.ignoreMouseDown || this.first != null || !this.graph.isMouseDown))
 	{
-		// Handles special case when handler is disabled during highlight
+		// Handles special case when handler2 is disabled during highlight
 		if (!this.isEnabled() && this.currentState != null)
 		{
 			this.destroyIcons();
@@ -73275,7 +73275,7 @@ mxConnectionHandler.prototype.mouseMove = function(sender, me)
 			var constraint = null;
 			var current = point;
 			
-			// Uses the current point from the constraint handler if available
+			// Uses the current point from the constraint handler2 if available
 			if (this.constraintHandler.currentConstraint != null &&
 				this.constraintHandler.currentFocus != null &&
 				this.constraintHandler.currentPoint != null)
@@ -73663,7 +73663,7 @@ mxConnectionHandler.prototype.updateIcons = function(state, icons, me)
 /**
  * Function: isStopEvent
  * 
- * Returns true if the given mouse up event should stop this handler. The
+ * Returns true if the given mouse up event should stop this handler2. The
  * connection will be created if <error> is null. Note that this is only
  * called if <waypointsEnabled> is true. This implemtation returns true
  * if there is a cell state in the given event.
@@ -73770,7 +73770,7 @@ mxConnectionHandler.prototype.mouseUp = function(sender, me)
 			}
 		}
 		
-		// Redraws the connect icons and resets the handler state
+		// Redraws the connect icons and resets the handler2 state
 		this.destroyIcons();
 		me.consume();
 	}
@@ -73784,7 +73784,7 @@ mxConnectionHandler.prototype.mouseUp = function(sender, me)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxConnectionHandler.prototype.reset = function()
 {
@@ -74199,7 +74199,7 @@ mxConnectionHandler.prototype.createEdge = function(value, source, target, style
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes. This should be
+ * Destroys the handler2 and all its resources and DOM nodes. This should be
  * called on all instances. It is called automatically for the built-in
  * instance created for each <mxGraph>.
  */
@@ -74258,7 +74258,7 @@ mxConnectionHandler.prototype.destroy = function()
  *
  * Constructor: mxConstraintHandler
  *
- * Constructs an new constraint handler.
+ * Constructs an new constraint handler2.
  * 
  * Parameters:
  * 
@@ -74348,7 +74348,7 @@ mxConstraintHandler.prototype.setEnabled = function(enabled)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxConstraintHandler.prototype.reset = function()
 {
@@ -74497,14 +74497,14 @@ mxConstraintHandler.prototype.getCellForEvent = function(me, point)
 /**
  * Function: update
  * 
- * Updates the state of this handler based on the given <mxMouseEvent>.
+ * Updates the state of this handler2 based on the given <mxMouseEvent>.
  * Source is a boolean indicating if the cell is a source or target.
  */
 mxConstraintHandler.prototype.update = function(me, source, existingEdge, point)
 {
 	if (this.isEnabled() && !this.isEventIgnored(me))
 	{
-		// Lazy installation of mouseleave handler
+		// Lazy installation of mouseleave handler2
 		if (this.mouseleaveHandler == null && this.graph.container != null)
 		{
 			this.mouseleaveHandler = mxUtils.bind(this, function()
@@ -74602,7 +74602,7 @@ mxConstraintHandler.prototype.update = function(me, source, existingEdge, point)
  * Function: redraw
  * 
  * Transfers the focus to the given state as a source or target terminal. If
- * the handler is not enabled then the outline is painted, but the constraints
+ * the handler2 is not enabled then the outline is painted, but the constraints
  * are ignored.
  */
 mxConstraintHandler.prototype.redraw = function()
@@ -74632,7 +74632,7 @@ mxConstraintHandler.prototype.redraw = function()
  * Function: setFocus
  * 
  * Transfers the focus to the given state as a source or target terminal. If
- * the handler is not enabled then the outline is painted, but the constraints
+ * the handler2 is not enabled then the outline is painted, but the constraints
  * are ignored.
  */
 mxConstraintHandler.prototype.setFocus = function(me, state, source)
@@ -74742,7 +74742,7 @@ mxConstraintHandler.prototype.intersects = function(icon, mouse, source, existin
 /**
  * Function: destroy
  * 
- * Destroy this handler.
+ * Destroy this handler2.
  */
 mxConstraintHandler.prototype.destroy = function()
 {
@@ -74769,7 +74769,7 @@ mxConstraintHandler.prototype.destroy = function()
 /**
  * Class: mxRubberband
  * 
- * Event handler that selects rectangular regions. This is not built-into
+ * Event handler2 that selects rectangular regions. This is not built-into
  * <mxGraph>. To enable rubberband selection in a graph, use the following code.
  * 
  * Example:
@@ -74780,7 +74780,7 @@ mxConstraintHandler.prototype.destroy = function()
  * 
  * Constructor: mxRubberband
  * 
- * Constructs an event handler that selects rectangular regions in the graph
+ * Constructs an event handler2 that selects rectangular regions in the graph
  * using rubberband selection.
  */
 function mxRubberband(graph)
@@ -74929,7 +74929,7 @@ mxRubberband.prototype.isForceRubberbandEvent = function(me)
  * 
  * Handles the event by initiating a rubberband selection. By consuming the
  * event all subsequent events of the gesture are redirected to this
- * handler.
+ * handler2.
  */
 mxRubberband.prototype.mouseDown = function(sender, me)
 {
@@ -75054,7 +75054,7 @@ mxRubberband.prototype.createShape = function()
 /**
  * Function: isActive
  * 
- * Returns true if this handler is active.
+ * Returns true if this handler2 is active.
  */
 mxRubberband.prototype.isActive = function(sender, me)
 {
@@ -75082,7 +75082,7 @@ mxRubberband.prototype.mouseUp = function(sender, me)
 /**
  * Function: execute
  * 
- * Resets the state of this handler and selects the current region
+ * Resets the state of this handler2 and selects the current region
  * for the given event.
  */
 mxRubberband.prototype.execute = function(evt)
@@ -75171,7 +75171,7 @@ mxRubberband.prototype.repaint = function()
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes. This does
+ * Destroys the handler2 and all its resources and DOM nodes. This does
  * normally not need to be called, it is called automatically when the
  * window unloads.
  */
@@ -75549,12 +75549,12 @@ mxHandle.prototype.destroy = function()
 /**
  * Class: mxVertexHandler
  * 
- * Event handler for resizing cells. This handler is automatically created in
+ * Event handler2 for resizing cells. This handler2 is automatically created in
  * <mxGraph.createHandler>.
  * 
  * Constructor: mxVertexHandler
  * 
- * Constructs an event handler that allows to resize vertices
+ * Constructs an event handler2 that allows to resize vertices
  * and groups.
  * 
  * Parameters:
@@ -75720,7 +75720,7 @@ mxVertexHandler.prototype.verticalOffset = 0;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxVertexHandler.prototype.init = function()
 {
@@ -75786,7 +75786,7 @@ mxVertexHandler.prototype.init = function()
 		}
 	}
 	
-	// Adds the rotation handler
+	// Adds the rotation handler2
 	if (this.isRotationHandleVisible())
 	{
 		this.rotationShape = this.createSizer(this.rotationCursor, mxEvent.ROTATION_HANDLE,
@@ -75848,7 +75848,7 @@ mxVertexHandler.prototype.createCustomHandles = function()
 /**
  * Function: updateMinBounds
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxVertexHandler.prototype.updateMinBounds = function()
 {
@@ -76114,7 +76114,7 @@ mxVertexHandler.prototype.isCustomHandleEvent = function(me)
  * 
  * Handles the event if a handle has been clicked. By consuming the
  * event all subsequent events of the gesture are redirected to this
- * handler.
+ * handler2.
  */
 mxVertexHandler.prototype.mouseDown = function(sender, me)
 {
@@ -76285,14 +76285,14 @@ mxVertexHandler.prototype.checkTolerance = function(me)
 /**
  * Function: updateHint
  * 
- * Hook for subclassers do show details while the handler is active.
+ * Hook for subclassers do show details while the handler2 is active.
  */
 mxVertexHandler.prototype.updateHint = function(me) { };
 
 /**
  * Function: removeHint
  * 
- * Hooks for subclassers to hide details when the handler gets inactive.
+ * Hooks for subclassers to hide details when the handler2 gets inactive.
  */
 mxVertexHandler.prototype.removeHint = function() { };
 
@@ -76800,7 +76800,7 @@ mxVertexHandler.prototype.rotateCell = function(cell, angle, parent)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxVertexHandler.prototype.reset = function()
 {
@@ -76848,7 +76848,7 @@ mxVertexHandler.prototype.reset = function()
 		}
 	}
 	
-	// Checks if handler has been destroyed
+	// Checks if handler2 has been destroyed
 	if (this.selectionBorder != null)
 	{
 		this.selectionBorder.node.style.display = 'inline';
@@ -77457,7 +77457,7 @@ mxVertexHandler.prototype.drawPreview = function()
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxVertexHandler.prototype.destroy = function()
 {
@@ -77515,9 +77515,9 @@ mxVertexHandler.prototype.destroy = function()
 /**
  * Class: mxEdgeHandler
  *
- * Graph event handler that reconnects edges and modifies control points and
+ * Graph event handler2 that reconnects edges and modifies control points and
  * the edge label location. Uses <mxTerminalMarker> for finding and
- * highlighting new source and target vertices. This handler is automatically
+ * highlighting new source and target vertices. This handler2 is automatically
  * created in <mxGraph.createHandler> for each selected edge.
  * 
  * To enable adding/removing control points, the following code can be used:
@@ -77531,7 +77531,7 @@ mxVertexHandler.prototype.destroy = function()
  * 
  * Constructor: mxEdgeHandler
  *
- * Constructs an edge handler for the specified <mxCellState>.
+ * Constructs an edge handler2 for the specified <mxCellState>.
  * 
  * Parameters:
  * 
@@ -77748,7 +77748,7 @@ mxEdgeHandler.prototype.manageLabelHandle = false;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this edge handler.
+ * Initializes the shapes required for this edge handler2.
  */
 mxEdgeHandler.prototype.init = function()
 {
@@ -78047,7 +78047,7 @@ mxEdgeHandler.prototype.createMarker = function()
 		var source = (self.isSource) ? state.cell : otherCell;
 		var target = (self.isSource) ? otherCell : state.cell;
 		
-		// Updates the error message of the handler
+		// Updates the error message of the handler2
 		self.error = self.validateConnection(source, target);
 
 		return self.error == null;
@@ -78379,7 +78379,7 @@ mxEdgeHandler.prototype.isCustomHandleEvent = function(me)
 /**
  * Function: mouseDown
  * 
- * Handles the event by checking if a special element of the handler
+ * Handles the event by checking if a special element of the handler2
  * was clicked, in which case the index parameter is non-null. The
  * indices may be one of <LABEL_HANDLE> or the number of the respective
  * control point. The source and target points are used for reconnecting
@@ -78490,14 +78490,14 @@ mxEdgeHandler.prototype.getSnapToTerminalTolerance = function()
 /**
  * Function: updateHint
  * 
- * Hook for subclassers do show details while the handler is active.
+ * Hook for subclassers do show details while the handler2 is active.
  */
 mxEdgeHandler.prototype.updateHint = function(me, point) { };
 
 /**
  * Function: removeHint
  * 
- * Hooks for subclassers to hide details when the handler gets inactive.
+ * Hooks for subclassers to hide details when the handler2 gets inactive.
  */
 mxEdgeHandler.prototype.removeHint = function() { };
 
@@ -78604,7 +78604,7 @@ mxEdgeHandler.prototype.getPointForEvent = function(me)
 /**
  * Function: getPreviewTerminalState
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  */
 mxEdgeHandler.prototype.getPreviewTerminalState = function(me)
 {
@@ -78637,7 +78637,7 @@ mxEdgeHandler.prototype.getPreviewTerminalState = function(me)
 		var source = (this.isSource) ? this.constraintHandler.currentFocus.cell : otherCell;
 		var target = (this.isSource) ? otherCell : this.constraintHandler.currentFocus.cell;
 		
-		// Updates the error message of the handler
+		// Updates the error message of the handler2
 		this.error = this.validateConnection(source, target);
 		var result = null;
 		
@@ -78675,7 +78675,7 @@ mxEdgeHandler.prototype.getPreviewTerminalState = function(me)
 /**
  * Function: getPreviewPoints
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  * 
  * Parameters:
  * 
@@ -78827,7 +78827,7 @@ mxEdgeHandler.prototype.isOutlineConnectEvent = function(me)
 /**
  * Function: updatePreviewState
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  */
 mxEdgeHandler.prototype.updatePreviewState = function(edge, point, terminalState, me, outline)
 {
@@ -78944,7 +78944,7 @@ mxEdgeHandler.prototype.mouseMove = function(sender, me)
 		this.currentPoint = this.getPointForEvent(me);
 		this.error = null;
 		
-		// Uses the current point from the constraint handler if available
+		// Uses the current point from the constraint handler2 if available
 		if (!this.graph.isIgnoreTerminalEvent(me.getEvent()) && mxEvent.isShiftDown(me.getEvent()) && this.snapPoint != null)
 		{
 			if (Math.abs(this.snapPoint.x - this.currentPoint.x) < Math.abs(this.snapPoint.y - this.currentPoint.y))
@@ -79148,7 +79148,7 @@ mxEdgeHandler.prototype.mouseUp = function(sender, me)
 					pt.x -= this.graph.panDx / this.graph.view.scale;
 					pt.y -= this.graph.panDy / this.graph.view.scale;
 										
-					// Destroys and recreates this handler
+					// Destroys and recreates this handler2
 					edge = this.changeTerminalPoint(edge, pt, this.isSource, clone);
 				}
 			}
@@ -79163,8 +79163,8 @@ mxEdgeHandler.prototype.mouseUp = function(sender, me)
 			}
 		}
 		
-		// Resets the preview color the state of the handler if this
-		// handler has not been recreated
+		// Resets the preview color the state of the handler2 if this
+		// handler2 has not been recreated
 		if (this.marker != null)
 		{
 			this.reset();
@@ -79183,7 +79183,7 @@ mxEdgeHandler.prototype.mouseUp = function(sender, me)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxEdgeHandler.prototype.reset = function()
 {
@@ -79846,7 +79846,7 @@ mxEdgeHandler.prototype.drawPreview = function()
 /**
  * Function: refresh
  * 
- * Refreshes the bends of this handler.
+ * Refreshes the bends of this handler2.
  */
 mxEdgeHandler.prototype.refresh = function()
 {
@@ -79905,7 +79905,7 @@ mxEdgeHandler.prototype.destroyBends = function(bends)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes. This does
+ * Destroys the handler2 and all its resources and DOM nodes. This does
  * normally not need to be called as handlers are destroyed automatically
  * when the corresponding cell is deselected.
  */
@@ -79965,14 +79965,14 @@ mxEdgeHandler.prototype.destroy = function()
 /**
  * Class: mxElbowEdgeHandler
  *
- * Graph event handler that reconnects edges and modifies control points and
+ * Graph event handler2 that reconnects edges and modifies control points and
  * the edge label location. Uses <mxTerminalMarker> for finding and
- * highlighting new source and target vertices. This handler is automatically
+ * highlighting new source and target vertices. This handler2 is automatically
  * created in <mxGraph.createHandler>. It extends <mxEdgeHandler>.
  * 
  * Constructor: mxEdgeHandler
  *
- * Constructs an edge handler for the specified <mxCellState>.
+ * Constructs an edge handler2 for the specified <mxCellState>.
  * 
  * Parameters:
  * 
@@ -80232,7 +80232,7 @@ mxEdgeSegmentHandler.prototype.getCurrentPoints = function()
 /**
  * Function: getPreviewPoints
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  */
 mxEdgeSegmentHandler.prototype.getPreviewPoints = function(point)
 {
@@ -80607,18 +80607,18 @@ mxEdgeSegmentHandler.prototype.redrawInnerBends = function(p0, pe)
 /**
  * Class: mxKeyHandler
  *
- * Event handler that listens to keystroke events. This is not a singleton,
+ * Event handler2 that listens to keystroke events. This is not a singleton,
  * however, it is normally only required once if the target is the document
  * element (default).
  * 
- * This handler installs a key event listener in the topmost DOM node and
+ * This handler2 installs a key event listener in the topmost DOM node and
  * processes all events that originate from descandants of <mxGraph.container>
  * or from the topmost DOM node. The latter means that all unhandled keystrokes
  * are handled by this object regardless of the focused state of the <graph>.
  * 
  * Example:
  * 
- * The following example creates a key handler that listens to the delete key
+ * The following example creates a key handler2 that listens to the delete key
  * (46) and deletes the selection cells if the graph is enabled.
  * 
  * (code)
@@ -80655,7 +80655,7 @@ mxEdgeSegmentHandler.prototype.redrawInnerBends = function(p0, pe)
  * 
  * Constructor: mxKeyHandler
  *
- * Constructs an event handler that executes functions bound to specific
+ * Constructs an event handler2 that executes functions bound to specific
  * keystrokes.
  * 
  * Parameters:
@@ -80702,7 +80702,7 @@ function mxKeyHandler(graph, target)
 /**
  * Variable: graph
  * 
- * Reference to the <mxGraph> associated with this handler.
+ * Reference to the <mxGraph> associated with this handler2.
  */
 mxKeyHandler.prototype.graph = null;
 
@@ -80896,7 +80896,7 @@ mxKeyHandler.prototype.getFunction = function(evt)
 /**
  * Function: isGraphEvent
  * 
- * Returns true if the event should be processed by this handler, that is,
+ * Returns true if the event should be processed by this handler2, that is,
  * if the event source is either the target, one of its direct children, a
  * descendant of the <mxGraph.container>, or the <mxGraph.cellEditor> of the
  * <graph>.
@@ -80963,7 +80963,7 @@ mxKeyHandler.prototype.keyDown = function(evt)
  * Returns true if the given event should be handled. <isEventIgnored> is
  * called later if the event is not an escape key stroke, in which case
  * <escape> is called. This implementation returns true if <isEnabled>
- * returns true for both, this handler and <graph>, if the event is not
+ * returns true for both, this handler2 and <graph>, if the event is not
  * consumed and if <isGraphEvent> returns true.
  * 
  * Parameters:
@@ -81014,7 +81014,7 @@ mxKeyHandler.prototype.escape = function(evt)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its references into the DOM. This does
+ * Destroys the handler2 and all its references into the DOM. This does
  * normally not need to be called, it is called automatically when the
  * window unloads (in IE).
  */
@@ -81035,8 +81035,8 @@ mxKeyHandler.prototype.destroy = function()
 /**
  * Class: mxTooltipHandler
  * 
- * Graph event handler that displays tooltips. <mxGraph.getTooltip> is used to
- * get the tooltip for a cell or handle. This handler is built-into
+ * Graph event handler2 that displays tooltips. <mxGraph.getTooltip> is used to
+ * get the tooltip for a cell or handle. This handler2 is built-into
  * <mxGraph.tooltipHandler> and enabled using <mxGraph.setTooltips>.
  *
  * Example:
@@ -81047,7 +81047,7 @@ mxKeyHandler.prototype.destroy = function()
  * 
  * Constructor: mxTooltipHandler
  * 
- * Constructs an event handler that displays tooltips with the specified
+ * Constructs an event handler2 that displays tooltips with the specified
  * delay (in milliseconds). If no delay is specified then a default delay
  * of 500 ms (0.5 sec) is used.
  * 
@@ -81105,7 +81105,7 @@ mxTooltipHandler.prototype.hideOnHover = false;
 /**
  * Variable: destroyed
  * 
- * True if this handler was destroyed using <destroy>.
+ * True if this handler2 was destroyed using <destroy>.
  */
 mxTooltipHandler.prototype.destroyed = false;
 
@@ -81161,7 +81161,7 @@ mxTooltipHandler.prototype.setHideOnHover = function(value)
 /**
  * Function: init
  * 
- * Initializes the DOM nodes required for this tooltip handler.
+ * Initializes the DOM nodes required for this tooltip handler2.
  */
 mxTooltipHandler.prototype.init = function()
 {
@@ -81195,7 +81195,7 @@ mxTooltipHandler.prototype.getStateForEvent = function(me)
  * 
  * Handles the event by initiating a rubberband selection. By consuming the
  * event all subsequent events of the gesture are redirected to this
- * handler.
+ * handler2.
  */
 mxTooltipHandler.prototype.mouseDown = function(sender, me)
 {
@@ -81358,7 +81358,7 @@ mxTooltipHandler.prototype.show = function(tip, x, y)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxTooltipHandler.prototype.destroy = function()
 {
@@ -81383,7 +81383,7 @@ mxTooltipHandler.prototype.destroy = function()
 /**
  * Class: mxCellTracker
  * 
- * Event handler that highlights cells. Inherits from <mxCellMarker>.
+ * Event handler2 that highlights cells. Inherits from <mxCellMarker>.
  * 
  * Example:
  * 
@@ -81441,7 +81441,7 @@ mxTooltipHandler.prototype.destroy = function()
  * 
  * Constructor: mxCellTracker
  * 
- * Constructs an event handler that highlights cells.
+ * Constructs an event handler2 that highlights cells.
  * 
  * Parameters:
  * 
@@ -81618,7 +81618,7 @@ mxCellHighlight.prototype.spacing = 2;
 /**
  * Variable: resetHandler
  * 
- * Holds the handler that automatically invokes reset if the highlight
+ * Holds the handler2 that automatically invokes reset if the highlight
  * should be hidden.
  */
 mxCellHighlight.prototype.resetHandler = null;
@@ -81821,7 +81821,7 @@ mxCellHighlight.prototype.isHighlightAt = function(x, y)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxCellHighlight.prototype.destroy = function()
 {
@@ -81843,7 +81843,7 @@ mxCellHighlight.prototype.destroy = function()
  * Class: mxDefaultKeyHandler
  *
  * Binds keycodes to actionnames in an editor. This aggregates an internal
- * <handler> and extends the implementation of <mxKeyHandler.escape> to not
+ * <handler2> and extends the implementation of <mxKeyHandler.escape> to not
  * only cancel the editing, but also hide the properties dialog and fire an
  * <mxEditor.escape> event via <editor>. An instance of this class is created
  * by <mxEditor> and stored in <mxEditor.keyHandler>.
@@ -81872,7 +81872,7 @@ mxCellHighlight.prototype.destroy = function()
  * 
  * Constructor: mxDefaultKeyHandler
  *
- * Constructs a new default key handler for the <mxEditor.graph> in the
+ * Constructs a new default key handler2 for the <mxEditor.graph> in the
  * given <mxEditor>. (The editor may be null if a prototypical instance for
  * a <mxDefaultKeyHandlerCodec> is created.)
  * 
@@ -81909,7 +81909,7 @@ function mxDefaultKeyHandler(editor)
 mxDefaultKeyHandler.prototype.editor = null;
 
 /**
- * Variable: handler
+ * Variable: handler2
  *
  * Holds the <mxKeyHandler> for key event handling.
  */
@@ -81952,8 +81952,8 @@ mxDefaultKeyHandler.prototype.bindAction = function (code, action, control)
 /**
  * Function: destroy
  *
- * Destroys the <handler> associated with this object. This does normally
- * not need to be called, the <handler> is destroyed automatically when the
+ * Destroys the <handler2> associated with this object. This does normally
+ * not need to be called, the <handler2> is destroyed automatically when the
  * window unloads (in IE) by <mxEditor>.
  */
 mxDefaultKeyHandler.prototype.destroy = function ()
@@ -82605,7 +82605,7 @@ mxDefaultToolbar.prototype.addPrototype = function(title, icon, ptype, pressed, 
 	
 	var img = this.toolbar.addMode(title, icon, clickHandler, pressed, null, toggle);
 				
-	// Creates a wrapper function that calls the click handler without
+	// Creates a wrapper function that calls the click handler2 without
 	// the graph argument
 	var dropHandler = function(graph, evt, cell)
 	{
@@ -83370,7 +83370,7 @@ mxEditor.prototype.undoManager = null;
  * Variable: keyHandler
  *
  * Holds a <mxDefaultKeyHandler> for handling keyboard events.
- * The handler is created in <setGraphContainer>.
+ * The handler2 is created in <setGraphContainer>.
  */
 mxEditor.prototype.keyHandler = null;
 
@@ -84469,10 +84469,10 @@ mxEditor.prototype.createGraph = function ()
 	// Installs the handlers for the root event
 	this.installDrillHandler(graph);
 	
-	// Installs the handler for validation
+	// Installs the handler2 for validation
 	this.installChangeHandler(graph);
 
-	// Installs the handler for calling the
+	// Installs the handler2 for calling the
 	// insert function and consume the
 	// event if an insert function is defined
 	this.installInsertHandler(graph);
@@ -84590,7 +84590,7 @@ mxEditor.prototype.setGraphContainer = function (container)
 		this.graph.init(container);
 
 		// Install rubberband selection as the last
-		// action handler in the chain
+		// action handler2 in the chain
 		this.rubberband = new mxRubberband(this.graph);
 
 		// Disables the context menu
@@ -84721,7 +84721,7 @@ mxEditor.prototype.installChangeHandler = function (graph)
 /**
  * Function: installInsertHandler
  * 
- * Installs the handler for invoking <insertFunction> if
+ * Installs the handler2 for invoking <insertFunction> if
  * one is defined.
  */
 mxEditor.prototype.installInsertHandler = function (graph)
@@ -85690,7 +85690,7 @@ mxEditor.prototype.setMode = function(modename)
  * Function: createPopupMenu
  * 
  * Uses <popupHandler> to create the menu in the graph's
- * panning handler. The redirection is setup in
+ * panning handler2. The redirection is setup in
  * <setToolbarContainer>.
  */
 mxEditor.prototype.createPopupMenu = function (menu, cell, evt)
@@ -85702,7 +85702,7 @@ mxEditor.prototype.createPopupMenu = function (menu, cell, evt)
  * Function: createEdge
  * 
  * Uses <defaultEdge> as the prototype for creating new edges
- * in the connection handler of the graph. The style of the
+ * in the connection handler2 of the graph. The style of the
  * edge will be overridden with the value returned by
  * <getEdgeStyle>.
  */
@@ -86540,7 +86540,7 @@ mxCodec.prototype.decode = function(node, into)
 /**
  * Function: encodeCell
  *
- * Encoding of cell hierarchies is built-into the impl, but
+ * Encoding of cell hierarchies is built-into the impl2, but
  * is a higher-level function that needs to be explicitely
  * used by the respective object encoders (eg. <mxModelCodec>,
  * <mxChildChangeCodec> and <mxRootChangeCodec>). This

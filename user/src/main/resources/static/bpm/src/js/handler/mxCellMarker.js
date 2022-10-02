@@ -420,7 +420,7 @@ mxCellMarker.prototype.intersects = function(state, me)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxCellMarker.prototype.destroy = function()
 {

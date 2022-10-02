@@ -5,7 +5,7 @@
 /**
  * Class: mxRubberband
  * 
- * Event handler that selects rectangular regions. This is not built-into
+ * Event handler2 that selects rectangular regions. This is not built-into
  * <mxGraph>. To enable rubberband selection in a graph, use the following code.
  * 
  * Example:
@@ -16,7 +16,7 @@
  * 
  * Constructor: mxRubberband
  * 
- * Constructs an event handler that selects rectangular regions in the graph
+ * Constructs an event handler2 that selects rectangular regions in the graph
  * using rubberband selection.
  */
 function mxRubberband(graph)
@@ -165,7 +165,7 @@ mxRubberband.prototype.isForceRubberbandEvent = function(me)
  * 
  * Handles the event by initiating a rubberband selection. By consuming the
  * event all subsequent events of the gesture are redirected to this
- * handler.
+ * handler2.
  */
 mxRubberband.prototype.mouseDown = function(sender, me)
 {
@@ -290,7 +290,7 @@ mxRubberband.prototype.createShape = function()
 /**
  * Function: isActive
  * 
- * Returns true if this handler is active.
+ * Returns true if this handler2 is active.
  */
 mxRubberband.prototype.isActive = function(sender, me)
 {
@@ -318,7 +318,7 @@ mxRubberband.prototype.mouseUp = function(sender, me)
 /**
  * Function: execute
  * 
- * Resets the state of this handler and selects the current region
+ * Resets the state of this handler2 and selects the current region
  * for the given event.
  */
 mxRubberband.prototype.execute = function(evt)
@@ -407,7 +407,7 @@ mxRubberband.prototype.repaint = function()
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes. This does
+ * Destroys the handler2 and all its resources and DOM nodes. This does
  * normally not need to be called, it is called automatically when the
  * window unloads.
  */

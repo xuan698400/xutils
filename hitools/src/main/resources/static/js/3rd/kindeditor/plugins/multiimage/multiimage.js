@@ -1032,7 +1032,7 @@ SWFUpload.prototype.queueEvent = function (handlerName, argumentArray) {
 		}, 0);
 
 	} else if (this.settings[handlerName] !== null) {
-		throw "Event handler " + handlerName + " is unknown or is not a function";
+		throw "Event handler2 " + handlerName + " is unknown or is not a function";
 	}
 };
 
@@ -1220,7 +1220,7 @@ SWFUpload.prototype.debug = function (message) {
 
 	The console is automatically scrolled as messages appear.
 
-	If you are using your own debug handler or when you deploy to production and
+	If you are using your own debug handler2 or when you deploy to production and
 	have debug disabled you can remove these functions to reduce the file size
 	and complexity.
 ********************************** */
@@ -1292,7 +1292,7 @@ SWFUpload.Console.writeLine = function (message) {
 		*If false is returned from uploadComplete then the queue upload is stopped.
 		 If false is not returned (strict comparison) then the queue upload is continued.
 		*Adds a QueueComplete event that is fired when all the queued files have finished uploading.
-		 Set the event handler with the queue_complete_handler setting.
+		 Set the event handler2 with the queue_complete_handler setting.
 
 	*/
 

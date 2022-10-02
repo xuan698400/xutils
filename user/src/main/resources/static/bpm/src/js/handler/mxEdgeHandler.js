@@ -5,9 +5,9 @@
 /**
  * Class: mxEdgeHandler
  *
- * Graph event handler that reconnects edges and modifies control points and
+ * Graph event handler2 that reconnects edges and modifies control points and
  * the edge label location. Uses <mxTerminalMarker> for finding and
- * highlighting new source and target vertices. This handler is automatically
+ * highlighting new source and target vertices. This handler2 is automatically
  * created in <mxGraph.createHandler> for each selected edge.
  * 
  * To enable adding/removing control points, the following code can be used:
@@ -21,7 +21,7 @@
  * 
  * Constructor: mxEdgeHandler
  *
- * Constructs an edge handler for the specified <mxCellState>.
+ * Constructs an edge handler2 for the specified <mxCellState>.
  * 
  * Parameters:
  * 
@@ -238,7 +238,7 @@ mxEdgeHandler.prototype.manageLabelHandle = false;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this edge handler.
+ * Initializes the shapes required for this edge handler2.
  */
 mxEdgeHandler.prototype.init = function()
 {
@@ -537,7 +537,7 @@ mxEdgeHandler.prototype.createMarker = function()
 		var source = (self.isSource) ? state.cell : otherCell;
 		var target = (self.isSource) ? otherCell : state.cell;
 		
-		// Updates the error message of the handler
+		// Updates the error message of the handler2
 		self.error = self.validateConnection(source, target);
 
 		return self.error == null;
@@ -869,7 +869,7 @@ mxEdgeHandler.prototype.isCustomHandleEvent = function(me)
 /**
  * Function: mouseDown
  * 
- * Handles the event by checking if a special element of the handler
+ * Handles the event by checking if a special element of the handler2
  * was clicked, in which case the index parameter is non-null. The
  * indices may be one of <LABEL_HANDLE> or the number of the respective
  * control point. The source and target points are used for reconnecting
@@ -980,14 +980,14 @@ mxEdgeHandler.prototype.getSnapToTerminalTolerance = function()
 /**
  * Function: updateHint
  * 
- * Hook for subclassers do show details while the handler is active.
+ * Hook for subclassers do show details while the handler2 is active.
  */
 mxEdgeHandler.prototype.updateHint = function(me, point) { };
 
 /**
  * Function: removeHint
  * 
- * Hooks for subclassers to hide details when the handler gets inactive.
+ * Hooks for subclassers to hide details when the handler2 gets inactive.
  */
 mxEdgeHandler.prototype.removeHint = function() { };
 
@@ -1094,7 +1094,7 @@ mxEdgeHandler.prototype.getPointForEvent = function(me)
 /**
  * Function: getPreviewTerminalState
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  */
 mxEdgeHandler.prototype.getPreviewTerminalState = function(me)
 {
@@ -1127,7 +1127,7 @@ mxEdgeHandler.prototype.getPreviewTerminalState = function(me)
 		var source = (this.isSource) ? this.constraintHandler.currentFocus.cell : otherCell;
 		var target = (this.isSource) ? otherCell : this.constraintHandler.currentFocus.cell;
 		
-		// Updates the error message of the handler
+		// Updates the error message of the handler2
 		this.error = this.validateConnection(source, target);
 		var result = null;
 		
@@ -1165,7 +1165,7 @@ mxEdgeHandler.prototype.getPreviewTerminalState = function(me)
 /**
  * Function: getPreviewPoints
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  * 
  * Parameters:
  * 
@@ -1317,7 +1317,7 @@ mxEdgeHandler.prototype.isOutlineConnectEvent = function(me)
 /**
  * Function: updatePreviewState
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  */
 mxEdgeHandler.prototype.updatePreviewState = function(edge, point, terminalState, me, outline)
 {
@@ -1434,7 +1434,7 @@ mxEdgeHandler.prototype.mouseMove = function(sender, me)
 		this.currentPoint = this.getPointForEvent(me);
 		this.error = null;
 		
-		// Uses the current point from the constraint handler if available
+		// Uses the current point from the constraint handler2 if available
 		if (!this.graph.isIgnoreTerminalEvent(me.getEvent()) && mxEvent.isShiftDown(me.getEvent()) && this.snapPoint != null)
 		{
 			if (Math.abs(this.snapPoint.x - this.currentPoint.x) < Math.abs(this.snapPoint.y - this.currentPoint.y))
@@ -1638,7 +1638,7 @@ mxEdgeHandler.prototype.mouseUp = function(sender, me)
 					pt.x -= this.graph.panDx / this.graph.view.scale;
 					pt.y -= this.graph.panDy / this.graph.view.scale;
 										
-					// Destroys and recreates this handler
+					// Destroys and recreates this handler2
 					edge = this.changeTerminalPoint(edge, pt, this.isSource, clone);
 				}
 			}
@@ -1653,8 +1653,8 @@ mxEdgeHandler.prototype.mouseUp = function(sender, me)
 			}
 		}
 		
-		// Resets the preview color the state of the handler if this
-		// handler has not been recreated
+		// Resets the preview color the state of the handler2 if this
+		// handler2 has not been recreated
 		if (this.marker != null)
 		{
 			this.reset();
@@ -1673,7 +1673,7 @@ mxEdgeHandler.prototype.mouseUp = function(sender, me)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxEdgeHandler.prototype.reset = function()
 {
@@ -2336,7 +2336,7 @@ mxEdgeHandler.prototype.drawPreview = function()
 /**
  * Function: refresh
  * 
- * Refreshes the bends of this handler.
+ * Refreshes the bends of this handler2.
  */
 mxEdgeHandler.prototype.refresh = function()
 {
@@ -2395,7 +2395,7 @@ mxEdgeHandler.prototype.destroyBends = function(bends)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes. This does
+ * Destroys the handler2 and all its resources and DOM nodes. This does
  * normally not need to be called as handlers are destroyed automatically
  * when the corresponding cell is deselected.
  */

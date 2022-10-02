@@ -3154,7 +3154,7 @@ var Map = Evented.extend({
 				this._tryAnimatedPan(center, options.pan);
 
 			if (moved) {
-				// prevent resize handler call, the view will refresh after animation anyway
+				// prevent resize handler2 call, the view will refresh after animation anyway
 				clearTimeout(this._sizeTimer);
 				return this;
 			}
@@ -5613,7 +5613,7 @@ control.scale = scale;
 control.attribution = attribution;
 
 /*
-	L.Handler is a base class for handler classes that are used internally to inject
+	L.Handler is a base class for handler2 classes that are used internally to inject
 	interaction features like dragging to classes like Map and Marker.
 */
 
@@ -5627,7 +5627,7 @@ var Handler = Class.extend({
 	},
 
 	// @method enable(): this
-	// Enables the handler
+	// Enables the handler2
 	enable: function () {
 		if (this._enabled) { return this; }
 
@@ -5637,7 +5637,7 @@ var Handler = Class.extend({
 	},
 
 	// @method disable(): this
-	// Disables the handler
+	// Disables the handler2
 	disable: function () {
 		if (!this._enabled) { return this; }
 
@@ -5647,7 +5647,7 @@ var Handler = Class.extend({
 	},
 
 	// @method enabled(): Boolean
-	// Returns `true` if the handler is enabled
+	// Returns `true` if the handler2 is enabled
 	enabled: function () {
 		return !!this._enabled;
 	}
@@ -5655,9 +5655,9 @@ var Handler = Class.extend({
 	// @section Extension methods
 	// Classes inheriting from `Handler` must implement the two following methods:
 	// @method addHooks()
-	// Called when the handler is enabled, should add event hooks.
+	// Called when the handler2 is enabled, should add event hooks.
 	// @method removeHooks()
-	// Called when the handler is disabled, should remove the event hooks added previously.
+	// Called when the handler2 is disabled, should remove the event hooks added previously.
 });
 
 // @section There is static function which can be called without instantiating L.Handler:
@@ -6818,7 +6818,7 @@ var layerGroup = function (layers, options) {
  * Extended `LayerGroup` that makes it easier to do the same thing to all its member layers:
  *  * [`bindPopup`](#layer-bindpopup) binds a popup to all of the layers at once (likewise with [`bindTooltip`](#layer-bindtooltip))
  *  * Events are propagated to the `FeatureGroup`, so if the group has an event
- * handler, it will handle events from any of the layers. This includes mouse events
+ * handler2, it will handle events from any of the layers. This includes mouse events
  * and custom events.
  *  * Has `layeradd` and `layerremove` events
  *
@@ -7126,7 +7126,7 @@ var IconDefault = Icon.extend({
  * ```
  *
  * @property dragging: Handler
- * Marker dragging handler (by both mouse and touch). Only valid when the marker is on the map (Otherwise set [`marker.options.draggable`](#marker-draggable)).
+ * Marker dragging handler2 (by both mouse and touch). Only valid when the marker is on the map (Otherwise set [`marker.options.draggable`](#marker-draggable)).
  */
 
 var MarkerDrag = Handler.extend({
@@ -12901,7 +12901,7 @@ var BoxZoom = Handler.extend({
 
 // @section Handlers
 // @property boxZoom: Handler
-// Box (shift-drag with mouse) zoom handler.
+// Box (shift-drag with mouse) zoom handler2.
 Map.addInitHook('addHandler', 'boxZoom', BoxZoom);
 
 /*
@@ -12954,7 +12954,7 @@ var DoubleClickZoom = Handler.extend({
 // ```
 //
 // @property doubleClickZoom: Handler
-// Double click zoom handler.
+// Double click zoom handler2.
 Map.addInitHook('addHandler', 'doubleClickZoom', DoubleClickZoom);
 
 /*
@@ -13182,7 +13182,7 @@ var Drag = Handler.extend({
 
 // @section Handlers
 // @property dragging: Handler
-// Map dragging handler (by both mouse and touch).
+// Map dragging handler2 (by both mouse and touch).
 Map.addInitHook('addHandler', 'dragging', Drag);
 
 /*
@@ -13357,7 +13357,7 @@ var Keyboard = Handler.extend({
 // @section Handlers
 // @section Handlers
 // @property keyboard: Handler
-// Keyboard navigation handler.
+// Keyboard navigation handler2.
 Map.addInitHook('addHandler', 'keyboard', Keyboard);
 
 /*
@@ -13444,7 +13444,7 @@ var ScrollWheelZoom = Handler.extend({
 
 // @section Handlers
 // @property scrollWheelZoom: Handler
-// Scroll wheel zoom handler.
+// Scroll wheel zoom handler2.
 Map.addInitHook('addHandler', 'scrollWheelZoom', ScrollWheelZoom);
 
 /*
@@ -13570,7 +13570,7 @@ var Tap = Handler.extend({
 
 // @section Handlers
 // @property tap: Handler
-// Mobile touch hacks (quick tap and touch hold) handler.
+// Mobile touch hacks (quick tap and touch hold) handler2.
 if (touch && !pointer) {
 	Map.addInitHook('addHandler', 'tap', Tap);
 }
@@ -13696,7 +13696,7 @@ var TouchZoom = Handler.extend({
 
 // @section Handlers
 // @property touchZoom: Handler
-// Touch zoom handler.
+// Touch zoom handler2.
 Map.addInitHook('addHandler', 'touchZoom', TouchZoom);
 
 Map.BoxZoom = BoxZoom;

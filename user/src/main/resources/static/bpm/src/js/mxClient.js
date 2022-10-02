@@ -353,7 +353,7 @@ var mxClient =
  * <script type="text/javascript">
  * 		var mxLoadResources = false;
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxLoadResources) == 'undefined')
@@ -372,7 +372,7 @@ if (typeof(mxLoadResources) == 'undefined')
  * <script type="text/javascript">
  * 		var mxLoadResources = true;
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxForceIncludes) == 'undefined')
@@ -390,7 +390,7 @@ if (typeof(mxForceIncludes) == 'undefined')
  * <script type="text/javascript">
  * 		var mxResourceExtension = '.txt';
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxResourceExtension) == 'undefined')
@@ -409,7 +409,7 @@ if (typeof(mxResourceExtension) == 'undefined')
  * <script type="text/javascript">
  * 		var mxLoadStylesheets = false;
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxLoadStylesheets) == 'undefined')
@@ -420,15 +420,15 @@ if (typeof(mxLoadStylesheets) == 'undefined')
 /**
  * Variable: basePath
  *
- * Basepath for all URLs in the impl without trailing slash. Default is '.'.
+ * Basepath for all URLs in the impl2 without trailing slash. Default is '.'.
  * Set mxBasePath prior to loading the mxClient library as follows to override
  * this setting:
  *
  * (code)
  * <script type="text/javascript">
- * 		mxBasePath = '/path/to/impl/directory';
+ * 		mxBasePath = '/path/to/impl2/directory';
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  * 
  * When using a relative path, the path is relative to the URL of the page that
@@ -452,7 +452,7 @@ else
 /**
  * Variable: imageBasePath
  *
- * Basepath for all images URLs in the impl without trailing slash. Default is
+ * Basepath for all images URLs in the impl2 without trailing slash. Default is
  * <mxClient.basePath> + '/images'. Set mxImageBasePath prior to loading the
  * mxClient library as follows to override this setting:
  *
@@ -460,7 +460,7 @@ else
  * <script type="text/javascript">
  * 		mxImageBasePath = '/path/to/image/directory';
  * </script>
- * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl2/directory/js/mxClient.js"></script>
  * (end)
  * 
  * When using a relative path, the path is relative to the URL of the page that
@@ -732,23 +732,23 @@ if (mxForceIncludes || !(typeof module === 'object' && module.exports != null))
 	mxClient.include(mxClient.basePath+'/js/view/mxTemporaryCellStates.js');
 	mxClient.include(mxClient.basePath+'/js/view/mxCellStatePreview.js');
 	mxClient.include(mxClient.basePath+'/js/view/mxConnectionConstraint.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxGraphHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxPanningHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxPopupMenuHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxCellMarker.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxSelectionCellsHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxConnectionHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxConstraintHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxRubberband.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxHandle.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxVertexHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxEdgeHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxElbowEdgeHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxEdgeSegmentHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxKeyHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxTooltipHandler.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxCellTracker.js');
-	mxClient.include(mxClient.basePath+'/js/handler/mxCellHighlight.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxGraphHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxPanningHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxPopupMenuHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxCellMarker.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxSelectionCellsHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxConnectionHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxConstraintHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxRubberband.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxHandle.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxVertexHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxEdgeHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxElbowEdgeHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxEdgeSegmentHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxKeyHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxTooltipHandler.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxCellTracker.js');
+	mxClient.include(mxClient.basePath+'/js/handler2/mxCellHighlight.js');
 	mxClient.include(mxClient.basePath+'/js/editor/mxDefaultKeyHandler.js');
 	mxClient.include(mxClient.basePath+'/js/editor/mxDefaultPopupMenu.js');
 	mxClient.include(mxClient.basePath+'/js/editor/mxDefaultToolbar.js');

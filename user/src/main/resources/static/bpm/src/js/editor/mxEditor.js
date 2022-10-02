@@ -537,7 +537,7 @@ mxEditor.prototype.undoManager = null;
  * Variable: keyHandler
  *
  * Holds a <mxDefaultKeyHandler> for handling keyboard events.
- * The handler is created in <setGraphContainer>.
+ * The handler2 is created in <setGraphContainer>.
  */
 mxEditor.prototype.keyHandler = null;
 
@@ -1636,10 +1636,10 @@ mxEditor.prototype.createGraph = function ()
 	// Installs the handlers for the root event
 	this.installDrillHandler(graph);
 	
-	// Installs the handler for validation
+	// Installs the handler2 for validation
 	this.installChangeHandler(graph);
 
-	// Installs the handler for calling the
+	// Installs the handler2 for calling the
 	// insert function and consume the
 	// event if an insert function is defined
 	this.installInsertHandler(graph);
@@ -1757,7 +1757,7 @@ mxEditor.prototype.setGraphContainer = function (container)
 		this.graph.init(container);
 
 		// Install rubberband selection as the last
-		// action handler in the chain
+		// action handler2 in the chain
 		this.rubberband = new mxRubberband(this.graph);
 
 		// Disables the context menu
@@ -1888,7 +1888,7 @@ mxEditor.prototype.installChangeHandler = function (graph)
 /**
  * Function: installInsertHandler
  * 
- * Installs the handler for invoking <insertFunction> if
+ * Installs the handler2 for invoking <insertFunction> if
  * one is defined.
  */
 mxEditor.prototype.installInsertHandler = function (graph)
@@ -2857,7 +2857,7 @@ mxEditor.prototype.setMode = function(modename)
  * Function: createPopupMenu
  * 
  * Uses <popupHandler> to create the menu in the graph's
- * panning handler. The redirection is setup in
+ * panning handler2. The redirection is setup in
  * <setToolbarContainer>.
  */
 mxEditor.prototype.createPopupMenu = function (menu, cell, evt)
@@ -2869,7 +2869,7 @@ mxEditor.prototype.createPopupMenu = function (menu, cell, evt)
  * Function: createEdge
  * 
  * Uses <defaultEdge> as the prototype for creating new edges
- * in the connection handler of the graph. The style of the
+ * in the connection handler2 of the graph. The style of the
  * edge will be overridden with the value returned by
  * <getEdgeStyle>.
  */

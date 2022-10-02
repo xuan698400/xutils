@@ -55,7 +55,7 @@
 	<script type="text/javascript">
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
-		// from the onLoad event handler of the document (see below).
+		// from the onLoad event handler2 of the document (see below).
 		function main(container)
 		{
 			// Checks if the browser is supported
@@ -86,7 +86,7 @@
 				// Enables connect icons to appear on top of HTML
 				mxConnectionHandler.prototype.moveIconFront = true;
 				
-				// Defines an icon for creating new connections in the connection handler.
+				// Defines an icon for creating new connections in the connection handler2.
 				// This will automatically disable the highlighting of the source vertex.
 				mxConnectionHandler.prototype.connectImage = new mxImage('images/connector.gif', 16, 16);
 				
@@ -231,7 +231,7 @@
 							div.style.width = Math.max(1, Math.round(state.width / s)) + 'px';
 							div.style.height = Math.max(1, Math.round((state.height / s) - oh)) + 'px';
 							
-							// Installs the handler for updating connected edges
+							// Installs the handler2 for updating connected edges
 							if (div.scrollHandler == null)
 							{
 								div.scrollHandler = true;
@@ -353,7 +353,7 @@
 					var style = this.graph.getCellStyle(edge);
 					var state = new mxCellState(this.graph.view, edge, style);
 
-					// Stores the source row in the handler
+					// Stores the source row in the handler2
 					this.sourceRowNode = this.currentRowNode;
 					
 					return state;

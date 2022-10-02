@@ -5,7 +5,7 @@
 /**
  * Class: mxPanningManager
  *
- * Implements a handler for panning.
+ * Implements a handler2 for panning.
  */
 function mxPanningManager(graph)
 {

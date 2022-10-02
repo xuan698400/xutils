@@ -876,7 +876,7 @@ Menus.prototype.promptChange = function(menu, label, hint, defaultValue, key, pa
 };
 
 /**
- * Adds a handler for showing a menu in the given element.
+ * Adds a handler2 for showing a menu in the given element.
  */
 Menus.prototype.pickColor = function(key, cmd, defaultValue)
 {
@@ -933,7 +933,7 @@ Menus.prototype.pickColor = function(key, cmd, defaultValue)
 };
 
 /**
- * Adds a handler for showing a menu in the given element.
+ * Adds a handler2 for showing a menu in the given element.
  */
 Menus.prototype.toggleStyle = function(key, defaultValue)
 {
@@ -944,7 +944,7 @@ Menus.prototype.toggleStyle = function(key, defaultValue)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 Menus.prototype.addMenuItem = function(menu, key, parent, trigger, sprite, label)
 {
@@ -987,7 +987,7 @@ Menus.prototype.addShortcut = function(item, action)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 Menus.prototype.addMenuItems = function(menu, keys, parent, trigger, sprites)
 {
@@ -1005,7 +1005,7 @@ Menus.prototype.addMenuItems = function(menu, keys, parent, trigger, sprites)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 Menus.prototype.createPopupMenu = function(menu, cell, evt)
 {
@@ -1106,7 +1106,7 @@ Menus.prototype.createPopupMenu = function(menu, cell, evt)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 Menus.prototype.createMenubar = function(container)
 {
@@ -1131,7 +1131,7 @@ Menus.prototype.createMenubar = function(container)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 Menus.prototype.menuCreated = function(menu, elt, className)
 {
@@ -1205,7 +1205,7 @@ Menubar.prototype.addMenu = function(label, funct, before)
 };
 
 /**
- * Adds a handler for showing a menu in the given element.
+ * Adds a handler2 for showing a menu in the given element.
  */
 Menubar.prototype.addMenuHandler = function(elt, funct)
 {
@@ -1267,7 +1267,7 @@ Menubar.prototype.addMenuHandler = function(elt, funct)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 Menubar.prototype.destroy = function()
 {

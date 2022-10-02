@@ -5,11 +5,11 @@
 /**
  * Class: mxPopupMenuHandler
  * 
- * Event handler that creates popupmenus.
+ * Event handler2 that creates popupmenus.
  * 
  * Constructor: mxPopupMenuHandler
  * 
- * Constructs an event handler that creates a <mxPopupMenu>.
+ * Constructs an event handler2 that creates a <mxPopupMenu>.
  */
 function mxPopupMenuHandler(graph, factoryMethod)
 {
@@ -91,7 +91,7 @@ mxPopupMenuHandler.prototype.screenY = null;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxPopupMenuHandler.prototype.init = function()
 {
@@ -121,7 +121,7 @@ mxPopupMenuHandler.prototype.isSelectOnPopup = function(me)
  * Function: mouseDown
  * 
  * Handles the event by initiating the panning. By consuming the event all
- * subsequent events of the gesture are redirected to this handler.
+ * subsequent events of the gesture are redirected to this handler2.
  */
 mxPopupMenuHandler.prototype.mouseDown = function(sender, me)
 {
@@ -206,7 +206,7 @@ mxPopupMenuHandler.prototype.getCellForPopupEvent = function(me)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxPopupMenuHandler.prototype.destroy = function()
 {

@@ -109,7 +109,7 @@ mxOutline.prototype.border = 10;
 /**
  * Variable: enabled
  * 
- * Specifies the size of the sizer handler. Default is 8.
+ * Specifies the size of the sizer handler2. Default is 8.
  */
 mxOutline.prototype.sizerSize = 8;
 
@@ -718,7 +718,7 @@ mxOutline.prototype.mouseUp = function(sender, me)
 			me.consume();
 		}
 			
-		// Resets the state of the handler
+		// Resets the state of the handler2
 		this.index = null;
 		this.active = false;
 	}

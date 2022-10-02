@@ -43,7 +43,7 @@ mxEdgeSegmentHandler.prototype.getCurrentPoints = function()
 /**
  * Function: getPreviewPoints
  * 
- * Updates the given preview state taking into account the state of the constraint handler.
+ * Updates the given preview state taking into account the state of the constraint handler2.
  */
 mxEdgeSegmentHandler.prototype.getPreviewPoints = function(point)
 {

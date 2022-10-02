@@ -44,7 +44,7 @@
  * };
  * (end)
  * 
- * Or the following event handler can be used:
+ * Or the following event handler2 can be used:
  * 
  * (code)
  * wnd.addListener(mxEvent.MOVE, function(e)

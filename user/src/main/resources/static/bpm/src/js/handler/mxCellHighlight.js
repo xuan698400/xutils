@@ -95,7 +95,7 @@ mxCellHighlight.prototype.spacing = 2;
 /**
  * Variable: resetHandler
  * 
- * Holds the handler that automatically invokes reset if the highlight
+ * Holds the handler2 that automatically invokes reset if the highlight
  * should be hidden.
  */
 mxCellHighlight.prototype.resetHandler = null;
@@ -298,7 +298,7 @@ mxCellHighlight.prototype.isHighlightAt = function(x, y)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxCellHighlight.prototype.destroy = function()
 {

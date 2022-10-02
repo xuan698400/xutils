@@ -577,7 +577,7 @@ var mxEdgeStyle =
 	 * Function: SegmentConnector
 	 * 
 	 * Implements an orthogonal edge style. Use <mxEdgeSegmentHandler>
-	 * as an interactive handler for this style.
+	 * as an interactive handler2 for this style.
 	 */
 	SegmentConnector: function(state, source, target, hints, result)
 	{

@@ -402,10 +402,10 @@ EditorUi = function(editor, container, lightbox)
 		graph.popupMenuHandler.hideMenu();
 	}));
 
-    // Create handler for key events
+    // Create handler2 for key events
 	this.keyHandler = this.createKeyHandler(editor);
     
-	// Getter for key handler
+	// Getter for key handler2
 	this.getKeyHandler = function()
 	{
 		return keyHandler;
@@ -484,7 +484,7 @@ EditorUi = function(editor, container, lightbox)
 	};
 
 	// Keys that should be ignored if the cell has a value (known: new default for all cells is html=1 so
-    // for the html key this effecticely only works for edges inserted via the connection handler)
+    // for the html key this effecticely only works for edges inserted via the connection handler2)
 	var valueStyles = ['fontFamily', 'fontSize', 'fontColor'];
 	
 	// Keys that always update the current edge style regardless of selection
@@ -602,7 +602,7 @@ EditorUi = function(editor, container, lightbox)
 	
 						if (styleValue != null && (key != 'shape' || edge))
 						{
-							// Special case: Connect styles are not applied here but in the connection handler
+							// Special case: Connect styles are not applied here but in the connection handler2
 							if (!edge || mxUtils.indexOf(connectStyles, key) < 0)
 							{
 								newStyle = mxUtils.setStyle(newStyle, key, styleValue);
@@ -859,7 +859,7 @@ EditorUi = function(editor, container, lightbox)
 		}
 	});
 	
-	// Global handler to hide the current menu
+	// Global handler2 to hide the current menu
 	this.gestureHandler = mxUtils.bind(this, function(evt)
 	{
 		if (this.currentMenu != null && mxEvent.getSource(evt) != this.currentMenu.div)
@@ -1055,7 +1055,7 @@ EditorUi.prototype.init = function()
 		ui.updateActionStates();
 	};
 	
-	// Hack to make editLink available in vertex handler
+	// Hack to make editLink available in vertex handler2
 	graph.editLink = ui.actions.get('editLink').funct;
 	
 	this.updateActionStates();
@@ -1963,7 +1963,7 @@ EditorUi.prototype.initCanvas = function()
 				var min = graph.minimumGraphSize;
 				
 				// LATER: Fix flicker of scrollbar size in IE quirks mode
-				// after delayed call in window.resize event handler
+				// after delayed call in window.resize event handler2
 				if (min == null || min.width != minw || min.height != minh)
 				{
 					graph.minimumGraphSize = new mxRectangle(0, 0, minw, minh);
@@ -3760,7 +3760,7 @@ EditorUi.prototype.setBackgroundImage = function(image)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 EditorUi.prototype.confirm = function(msg, okFn, cancelFn)
 {
@@ -3778,7 +3778,7 @@ EditorUi.prototype.confirm = function(msg, okFn, cancelFn)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 EditorUi.prototype.createOutline = function(wnd)
 {
@@ -3809,7 +3809,7 @@ EditorUi.prototype.altShiftActions = {67: 'clearWaypoints', // Alt+Shift+C
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 EditorUi.prototype.createKeyHandler = function(editor)
 {
@@ -3989,7 +3989,7 @@ EditorUi.prototype.createKeyHandler = function(editor)
 	{
 		if (graph.isEnabled())
 		{
-			// TODO: Add alt modified state in impl API, here are some specific cases
+			// TODO: Add alt modified state in impl2 API, here are some specific cases
 			if (mxEvent.isShiftDown(evt) && mxEvent.isAltDown(evt))
 			{
 				var action = editorUi.actions.get(editorUi.altShiftActions[evt.keyCode]);
@@ -4198,7 +4198,7 @@ EditorUi.prototype.createKeyHandler = function(editor)
 };
 
 /**
- * Creates the keyboard event handler for the current graph and history.
+ * Creates the keyboard event handler2 for the current graph and history.
  */
 EditorUi.prototype.destroy = function()
 {

@@ -11,7 +11,7 @@
  *
  * Constructor: mxConstraintHandler
  *
- * Constructs an new constraint handler.
+ * Constructs an new constraint handler2.
  * 
  * Parameters:
  * 
@@ -101,7 +101,7 @@ mxConstraintHandler.prototype.setEnabled = function(enabled)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxConstraintHandler.prototype.reset = function()
 {
@@ -250,14 +250,14 @@ mxConstraintHandler.prototype.getCellForEvent = function(me, point)
 /**
  * Function: update
  * 
- * Updates the state of this handler based on the given <mxMouseEvent>.
+ * Updates the state of this handler2 based on the given <mxMouseEvent>.
  * Source is a boolean indicating if the cell is a source or target.
  */
 mxConstraintHandler.prototype.update = function(me, source, existingEdge, point)
 {
 	if (this.isEnabled() && !this.isEventIgnored(me))
 	{
-		// Lazy installation of mouseleave handler
+		// Lazy installation of mouseleave handler2
 		if (this.mouseleaveHandler == null && this.graph.container != null)
 		{
 			this.mouseleaveHandler = mxUtils.bind(this, function()
@@ -355,7 +355,7 @@ mxConstraintHandler.prototype.update = function(me, source, existingEdge, point)
  * Function: redraw
  * 
  * Transfers the focus to the given state as a source or target terminal. If
- * the handler is not enabled then the outline is painted, but the constraints
+ * the handler2 is not enabled then the outline is painted, but the constraints
  * are ignored.
  */
 mxConstraintHandler.prototype.redraw = function()
@@ -385,7 +385,7 @@ mxConstraintHandler.prototype.redraw = function()
  * Function: setFocus
  * 
  * Transfers the focus to the given state as a source or target terminal. If
- * the handler is not enabled then the outline is painted, but the constraints
+ * the handler2 is not enabled then the outline is painted, but the constraints
  * are ignored.
  */
 mxConstraintHandler.prototype.setFocus = function(me, state, source)
@@ -495,7 +495,7 @@ mxConstraintHandler.prototype.intersects = function(icon, mouse, source, existin
 /**
  * Function: destroy
  * 
- * Destroy this handler.
+ * Destroy this handler2.
  */
 mxConstraintHandler.prototype.destroy = function()
 {

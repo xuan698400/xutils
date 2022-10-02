@@ -32,7 +32,7 @@
 	}
 
 	/**
-	 * ### jsTree impl functionality
+	 * ### jsTree impl2 functionality
 	 */
 
 	// internal variables
@@ -125,7 +125,7 @@
 	/**
 	 * the jstree class constructor, used only internally
 	 * @private
-	 * @name $.jstree.impl(id)
+	 * @name $.jstree.impl2(id)
 	 * @param {Number} id this instance's index
 	 */
 	$.jstree.core = function (id) {
@@ -267,7 +267,7 @@
 	});
 
 	/**
-	 * stores all defaults for the impl
+	 * stores all defaults for the impl2
 	 * @name $.jstree.defaults.core
 	 */
 	$.jstree.defaults.core = {
@@ -287,7 +287,7 @@
 		 *
 		 *	// AJAX
 		 *	$('#tree').jstree({
-		 *		'impl' : {
+		 *		'impl2' : {
 		 *			'data' : {
 		 *				'url' : '/get/children/',
 		 *				'data' : function (node) {
@@ -298,7 +298,7 @@
 		 *
 		 *	// direct data
 		 *	$('#tree').jstree({
-		 *		'impl' : {
+		 *		'impl2' : {
 		 *			'data' : [
 		 *				'Simple root node',
 		 *				{
@@ -312,7 +312,7 @@
 		 *
 		 *	// function
 		 *	$('#tree').jstree({
-		 *		'impl' : {
+		 *		'impl2' : {
 		 *			'data' : function (obj, callback) {
 		 *				callback.call(this, ['Root 1', 'Root 2']);
 		 *			}
@@ -331,7 +331,7 @@
 		 * __Examples__
 		 *
 		 *	$('#tree').jstree({
-		 *		'impl' : {
+		 *		'impl2' : {
 		 *			'strings' : {
 		 *				'Loading ...' : 'Please wait ...'
 		 *			}
@@ -349,7 +349,7 @@
 		 * __Examples__
 		 *
 		 *	$('#tree').jstree({
-		 *		'impl' : {
+		 *		'impl2' : {
 		 *			'check_callback' : function (operation, node, node_parent, node_position, more) {
 		 *				// operation can be 'create_node', 'rename_node', 'delete_node', 'move_node' or 'copy_node'
 		 *				// in case of 'rename_node' node_position is filled with the new node name
@@ -1168,7 +1168,7 @@
 			return !this.is_parent(obj);
 		},
 		/**
-		 * loads a node (fetches its children using the `impl.data` setting). Multiple nodes can be passed to by using an array.
+		 * loads a node (fetches its children using the `impl2.data` setting). Multiple nodes can be passed to by using an array.
 		 * @name load_node(obj [, callback])
 		 * @param  {mixed} obj
 		 * @param  {function} callback a function to be executed once loading is complete, the function is executed in the instance's scope and receives two arguments - the node and a boolean status
@@ -1322,7 +1322,7 @@
 				else {
 					return callback.call(this, false);
 				}
-				// return callback.call(this, obj.id === '#' ? this._append_html_data(obj, this._data.impl.original_container_html.clone(true)) : false);
+				// return callback.call(this, obj.id === '#' ? this._append_html_data(obj, this._data.impl2.original_container_html.clone(true)) : false);
 			}
 			if($.isFunction(s)) {
 				return s.call(this, obj, $.proxy(function (d) {
@@ -2457,7 +2457,7 @@
 		 * @name open_node(obj [, callback, animation])
 		 * @param {mixed} obj the node to open
 		 * @param {Function} callback a function to execute once the node is opened
-		 * @param {Number} animation the animation duration in milliseconds when opening the node (overrides the `impl.animation` setting). Use `false` for no animation.
+		 * @param {Number} animation the animation duration in milliseconds when opening the node (overrides the `impl2.animation` setting). Use `false` for no animation.
 		 * @trigger open_node.jstree, after_open.jstree, before_open.jstree
 		 */
 		open_node : function (obj, callback, animation) {
@@ -2572,7 +2572,7 @@
 		 * closes a node, hiding its children
 		 * @name close_node(obj [, animation])
 		 * @param {mixed} obj the node to close
-		 * @param {Number} animation the animation duration in milliseconds when closing the node (overrides the `impl.animation` setting). Use `false` for no animation.
+		 * @param {Number} animation the animation duration in milliseconds when closing the node (overrides the `impl2.animation` setting). Use `false` for no animation.
 		 * @trigger close_node.jstree, after_close.jstree
 		 */
 		close_node : function (obj, animation) {
@@ -3132,8 +3132,8 @@
 					/*!
 					'themes' : {
 						'name' : this.get_theme(),
-						'icons' : this._data.impl.themes.icons,
-						'dots' : this._data.impl.themes.dots
+						'icons' : this._data.impl2.themes.icons,
+						'dots' : this._data.impl2.themes.dots
 					},
 					*/
 					'selected' : []
@@ -3661,7 +3661,7 @@
 				return tmp.functions[chk];
 			}
 			if(chc === false || ($.isFunction(chc) && chc.call(this, chk, obj, par, pos, more) === false) || (chc && chc[chk] === false)) {
-				this._data.core.last_error = { 'error' : 'check', 'plugin' : 'core', 'id' : 'core_03', 'reason' : 'User config for impl.check_callback prevents function: ' + chk, 'data' : JSON.stringify({ 'chk' : chk, 'pos' : pos, 'obj' : obj && obj.id ? obj.id : false, 'par' : par && par.id ? par.id : false }) };
+				this._data.core.last_error = { 'error' : 'check', 'plugin' : 'core', 'id' : 'core_03', 'reason' : 'User config for impl2.check_callback prevents function: ' + chk, 'data' : JSON.stringify({ 'chk' : chk, 'pos' : pos, 'obj' : obj && obj.id ? obj.id : false, 'par' : par && par.id ? par.id : false }) };
 				return false;
 			}
 			return true;
@@ -4196,7 +4196,7 @@
 		 * changes the theme
 		 * @name set_theme(theme_name [, theme_url])
 		 * @param {String} theme_name the name of the new theme to apply
-		 * @param {mixed} theme_url  the location of the CSS file for this theme. Omit or set to `false` if you manually included the file. Set to `true` to autoload from the `impl.themes.dir` directory.
+		 * @param {mixed} theme_url  the location of the CSS file for this theme. Omit or set to `false` if you manually included the file. Set to `true` to autoload from the `impl2.themes.dir` directory.
 		 * @trigger set_theme.jstree
 		 */
 		set_theme : function (theme_name, theme_url) {
@@ -4701,7 +4701,7 @@
 			if(this.settings.checkbox.cascade.indexOf('up') !== -1) {
 				this.element
 					.on('delete_node.jstree', $.proxy(function (e, data) {
-							// apply up (whole handler)
+							// apply up (whole handler2)
 							var p = this.get_node(data.parent),
 								m = this._model.data,
 								i, j, c, tmp, t = this.settings.checkbox.tie_selection;
@@ -4725,7 +4725,7 @@
 							}
 						}, this))
 					.on('move_node.jstree', $.proxy(function (e, data) {
-							// apply up (whole handler)
+							// apply up (whole handler2)
 							var is_multi = data.is_multi,
 								old_par = data.old_parent,
 								new_par = this.get_node(data.parent),
@@ -7322,7 +7322,7 @@
 						this.hide_dots();
 					}, this))
 				.on("init.jstree loading.jstree ready.jstree", $.proxy(function () {
-						//div.style.height = this._data.impl.li_height + 'px';
+						//div.style.height = this._data.impl2.li_height + 'px';
 						this.get_container_ul().addClass('jstree-wholerow-ul');
 					}, this))
 				.on("deselect_all.jstree", $.proxy(function (e, data) {
@@ -7390,7 +7390,7 @@
 			obj = parent.redraw_node.apply(this, arguments);
 			if(obj) {
 				var tmp = div.cloneNode(true);
-				//tmp.style.height = this._data.impl.li_height + 'px';
+				//tmp.style.height = this._data.impl2.li_height + 'px';
 				if($.inArray(obj.id, this._data.core.selected) !== -1) { tmp.className += ' jstree-wholerow-clicked'; }
 				if(this._data.core.focused && this._data.core.focused === obj.id) { tmp.className += ' jstree-wholerow-hovered'; }
 				obj.insertBefore(tmp, obj.childNodes[0]);

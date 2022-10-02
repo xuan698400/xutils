@@ -20,7 +20,7 @@
 	<script type="text/javascript">
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
-		// from the onLoad event handler of the document (see below).
+		// from the onLoad event handler2 of the document (see below).
 		function main(container)
 		{
 			// Checks if the browser is supported
@@ -158,7 +158,7 @@
 						var min = graph.minimumGraphSize;
 						
 						// LATER: Fix flicker of scrollbar size in IE quirks mode
-						// after delayed call in window.resize event handler
+						// after delayed call in window.resize event handler2
 						if (min == null || min.width != minw || min.height != minh)
 						{
 							graph.minimumGraphSize = new mxRectangle(0, 0, minw, minh);

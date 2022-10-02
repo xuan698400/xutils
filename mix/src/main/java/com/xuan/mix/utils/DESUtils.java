@@ -507,7 +507,7 @@ public abstract class DESUtils {
     }
 
     /**
-     * The 64 bit des impl arithmetic.
+     * The 64 bit des impl2 arithmetic.
      */
     private static int[] enc(int[] dataByte, int[] keyByte) {
         int[][] keys = generateKeys(keyByte);

@@ -2609,7 +2609,7 @@ mxGraphView.prototype.installListeners = function()
 		}));
 		
 		// Adds listener for double click handling on background, this does always
-		// use native event handler, we assume that the DOM of the background
+		// use native event handler2, we assume that the DOM of the background
 		// does not change during the double click
 		mxEvent.addListener(container, 'dblclick', mxUtils.bind(this, function(evt)
 		{

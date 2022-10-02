@@ -5,18 +5,18 @@
 /**
  * Class: mxKeyHandler
  *
- * Event handler that listens to keystroke events. This is not a singleton,
+ * Event handler2 that listens to keystroke events. This is not a singleton,
  * however, it is normally only required once if the target is the document
  * element (default).
  * 
- * This handler installs a key event listener in the topmost DOM node and
+ * This handler2 installs a key event listener in the topmost DOM node and
  * processes all events that originate from descandants of <mxGraph.container>
  * or from the topmost DOM node. The latter means that all unhandled keystrokes
  * are handled by this object regardless of the focused state of the <graph>.
  * 
  * Example:
  * 
- * The following example creates a key handler that listens to the delete key
+ * The following example creates a key handler2 that listens to the delete key
  * (46) and deletes the selection cells if the graph is enabled.
  * 
  * (code)
@@ -53,7 +53,7 @@
  * 
  * Constructor: mxKeyHandler
  *
- * Constructs an event handler that executes functions bound to specific
+ * Constructs an event handler2 that executes functions bound to specific
  * keystrokes.
  * 
  * Parameters:
@@ -100,7 +100,7 @@ function mxKeyHandler(graph, target)
 /**
  * Variable: graph
  * 
- * Reference to the <mxGraph> associated with this handler.
+ * Reference to the <mxGraph> associated with this handler2.
  */
 mxKeyHandler.prototype.graph = null;
 
@@ -294,7 +294,7 @@ mxKeyHandler.prototype.getFunction = function(evt)
 /**
  * Function: isGraphEvent
  * 
- * Returns true if the event should be processed by this handler, that is,
+ * Returns true if the event should be processed by this handler2, that is,
  * if the event source is either the target, one of its direct children, a
  * descendant of the <mxGraph.container>, or the <mxGraph.cellEditor> of the
  * <graph>.
@@ -361,7 +361,7 @@ mxKeyHandler.prototype.keyDown = function(evt)
  * Returns true if the given event should be handled. <isEventIgnored> is
  * called later if the event is not an escape key stroke, in which case
  * <escape> is called. This implementation returns true if <isEnabled>
- * returns true for both, this handler and <graph>, if the event is not
+ * returns true for both, this handler2 and <graph>, if the event is not
  * consumed and if <isGraphEvent> returns true.
  * 
  * Parameters:
@@ -412,7 +412,7 @@ mxKeyHandler.prototype.escape = function(evt)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its references into the DOM. This does
+ * Destroys the handler2 and all its references into the DOM. This does
  * normally not need to be called, it is called automatically when the
  * window unloads (in IE).
  */

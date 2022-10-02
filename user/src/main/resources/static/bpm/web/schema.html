@@ -20,7 +20,7 @@
 	<script type="text/javascript">
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
-		// from the onLoad event handler of the document (see below).
+		// from the onLoad event handler2 of the document (see below).
 		function main(container, outline, toolbar, sidebar, status)
 		{
 			// Checks if the browser is supported
@@ -48,7 +48,7 @@
 					return new mxRectangle(x + this.imageDx, y + this.imageDy, this.imageSize, this.imageSize);
 				};
 				
-				// Defines an icon for creating new connections in the connection handler.
+				// Defines an icon for creating new connections in the connection handler2.
 				// This will automatically disable the highlighting of the source vertex.
 				mxConnectionHandler.prototype.connectImage = new mxImage('images/connector.gif', 16, 16);
 
@@ -248,7 +248,7 @@
 					return this.isSwimlane(cell);
 				};
 
-				// Installs a popupmenu handler using local function (see below).
+				// Installs a popupmenu handler2 using local function (see below).
 				graph.popupMenuHandler.factoryMethod = function(menu, cell, evt)
 				{
 					createPopupMenu(editor, graph, menu, cell, evt);

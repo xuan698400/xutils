@@ -1,10 +1,10 @@
-package com.xuan.mix.net.miniserver;
+package com.xuan.mix.an.httpserver;
 
 /**
  * @author xuan
  * @since 2022/6/28
  */
-public class MiniServerResponse {
+public class HttpResponse {
 
     private String contentType = "text/plain;charset=utf-8";
 

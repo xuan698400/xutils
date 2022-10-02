@@ -336,7 +336,7 @@ mxDefaultToolbar.prototype.addPrototype = function(title, icon, ptype, pressed, 
 	
 	var img = this.toolbar.addMode(title, icon, clickHandler, pressed, null, toggle);
 				
-	// Creates a wrapper function that calls the click handler without
+	// Creates a wrapper function that calls the click handler2 without
 	// the graph argument
 	var dropHandler = function(graph, evt, cell)
 	{

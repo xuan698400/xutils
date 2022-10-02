@@ -5,12 +5,12 @@
 /**
  * Class: mxVertexHandler
  * 
- * Event handler for resizing cells. This handler is automatically created in
+ * Event handler2 for resizing cells. This handler2 is automatically created in
  * <mxGraph.createHandler>.
  * 
  * Constructor: mxVertexHandler
  * 
- * Constructs an event handler that allows to resize vertices
+ * Constructs an event handler2 that allows to resize vertices
  * and groups.
  * 
  * Parameters:
@@ -176,7 +176,7 @@ mxVertexHandler.prototype.verticalOffset = 0;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxVertexHandler.prototype.init = function()
 {
@@ -242,7 +242,7 @@ mxVertexHandler.prototype.init = function()
 		}
 	}
 	
-	// Adds the rotation handler
+	// Adds the rotation handler2
 	if (this.isRotationHandleVisible())
 	{
 		this.rotationShape = this.createSizer(this.rotationCursor, mxEvent.ROTATION_HANDLE,
@@ -304,7 +304,7 @@ mxVertexHandler.prototype.createCustomHandles = function()
 /**
  * Function: updateMinBounds
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxVertexHandler.prototype.updateMinBounds = function()
 {
@@ -570,7 +570,7 @@ mxVertexHandler.prototype.isCustomHandleEvent = function(me)
  * 
  * Handles the event if a handle has been clicked. By consuming the
  * event all subsequent events of the gesture are redirected to this
- * handler.
+ * handler2.
  */
 mxVertexHandler.prototype.mouseDown = function(sender, me)
 {
@@ -741,14 +741,14 @@ mxVertexHandler.prototype.checkTolerance = function(me)
 /**
  * Function: updateHint
  * 
- * Hook for subclassers do show details while the handler is active.
+ * Hook for subclassers do show details while the handler2 is active.
  */
 mxVertexHandler.prototype.updateHint = function(me) { };
 
 /**
  * Function: removeHint
  * 
- * Hooks for subclassers to hide details when the handler gets inactive.
+ * Hooks for subclassers to hide details when the handler2 gets inactive.
  */
 mxVertexHandler.prototype.removeHint = function() { };
 
@@ -1256,7 +1256,7 @@ mxVertexHandler.prototype.rotateCell = function(cell, angle, parent)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxVertexHandler.prototype.reset = function()
 {
@@ -1304,7 +1304,7 @@ mxVertexHandler.prototype.reset = function()
 		}
 	}
 	
-	// Checks if handler has been destroyed
+	// Checks if handler2 has been destroyed
 	if (this.selectionBorder != null)
 	{
 		this.selectionBorder.node.style.display = 'inline';
@@ -1913,7 +1913,7 @@ mxVertexHandler.prototype.drawPreview = function()
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxVertexHandler.prototype.destroy = function()
 {

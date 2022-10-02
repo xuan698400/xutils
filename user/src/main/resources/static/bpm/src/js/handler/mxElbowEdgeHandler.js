@@ -5,14 +5,14 @@
 /**
  * Class: mxElbowEdgeHandler
  *
- * Graph event handler that reconnects edges and modifies control points and
+ * Graph event handler2 that reconnects edges and modifies control points and
  * the edge label location. Uses <mxTerminalMarker> for finding and
- * highlighting new source and target vertices. This handler is automatically
+ * highlighting new source and target vertices. This handler2 is automatically
  * created in <mxGraph.createHandler>. It extends <mxEdgeHandler>.
  * 
  * Constructor: mxEdgeHandler
  *
- * Constructs an edge handler for the specified <mxCellState>.
+ * Constructs an edge handler2 for the specified <mxCellState>.
  * 
  * Parameters:
  * 

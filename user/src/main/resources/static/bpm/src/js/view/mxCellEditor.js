@@ -65,7 +65,7 @@
  * 
  * To start editing on a key press event, the container of the graph
  * should have focus or a focusable parent should be used to add the
- * key press handler as follows.
+ * key press handler2 as follows.
  * 
  * (code)
  * mxEvent.addListener(graph.container, 'keypress', mxUtils.bind(this, function(evt)
@@ -254,7 +254,7 @@ mxCellEditor.prototype.initialValue = null;
 /**
  * Function: init
  *
- * Creates the <textarea> and installs the event listeners. The key handler
+ * Creates the <textarea> and installs the event listeners. The key handler2
  * updates the <modified> state.
  */
 mxCellEditor.prototype.init = function ()

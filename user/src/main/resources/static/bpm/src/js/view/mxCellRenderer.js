@@ -98,7 +98,7 @@ mxCellRenderer.prototype.minSvgStrokeWidth = 1;
  * Variable: forceControlClickHandler
  * 
  * Specifies if the enabled state of the graph should be ignored in the control
- * click handler (to allow folding in disabled graphs). Default is false.
+ * click handler2 (to allow folding in disabled graphs). Default is false.
  */
 mxCellRenderer.prototype.forceControlClickHandler = false;
 
@@ -659,11 +659,11 @@ mxCellRenderer.prototype.createControl = function(state)
 /**
  * Function: createControlClickHandler
  * 
- * Hook for creating the click handler for the folding icon.
+ * Hook for creating the click handler2 for the folding icon.
  * 
  * Parameters:
  * 
- * state - <mxCellState> whose control click handler should be returned.
+ * state - <mxCellState> whose control click handler2 should be returned.
  */
 mxCellRenderer.prototype.createControlClickHandler = function(state)
 {
@@ -1497,7 +1497,7 @@ mxCellRenderer.prototype.redrawShape = function(state, force, rendering)
 			this.createCellOverlays(state);
 			this.installListeners(state);
 			
-			// Forces a refresh of the handler if one exists
+			// Forces a refresh of the handler2 if one exists
 			state.view.graph.selectionCellsHandler.updateHandler(state);
 		}
 	}

@@ -452,7 +452,7 @@ mxCodec.prototype.decode = function(node, into)
 /**
  * Function: encodeCell
  *
- * Encoding of cell hierarchies is built-into the impl, but
+ * Encoding of cell hierarchies is built-into the impl2, but
  * is a higher-level function that needs to be explicitely
  * used by the respective object encoders (eg. <mxModelCodec>,
  * <mxChildChangeCodec> and <mxRootChangeCodec>). This

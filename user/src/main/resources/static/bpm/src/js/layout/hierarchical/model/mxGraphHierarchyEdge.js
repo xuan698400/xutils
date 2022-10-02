@@ -174,7 +174,7 @@ mxGraphHierarchyEdge.prototype.setGeneralPurposeVariable = function(layer, value
 /**
  * Function: getCoreCell
  * 
- * Gets the first impl edge associated with this wrapper
+ * Gets the first impl2 edge associated with this wrapper
  */
 mxGraphHierarchyEdge.prototype.getCoreCell = function()
 {

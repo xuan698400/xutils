@@ -2068,7 +2068,7 @@ var hljs = (function () {
 
           // edge case for when illegal matches $ (end of line) which is technically
           // a 0 width match but not a begin/end match so it's not caught by the
-          // first handler (when ignoreIllegals is true)
+          // first handler2 (when ignoreIllegals is true)
           if (match.type === "illegal" && lexeme === "") {
             // advance so we aren't stuck in an infinite loop
             return 1;

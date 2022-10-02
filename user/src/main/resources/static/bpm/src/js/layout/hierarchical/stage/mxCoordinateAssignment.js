@@ -1500,7 +1500,7 @@ mxCoordinateAssignment.prototype.setEdgePosition = function(cell)
 			
 			if (realSource != source)
 			{
-				// The real edges include all impl model edges and these can go
+				// The real edges include all impl2 model edges and these can go
 				// in both directions. If the source of the hierarchical model edge
 				// isn't the source of the specific real edge in this iteration
 				// treat if as reversed

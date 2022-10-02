@@ -62,7 +62,7 @@ mxPopupMenu.prototype.zIndex = 10006;
  * Variable: factoryMethod
  * 
  * Function that is used to create the popup menu. The function takes the
- * current panning handler, the <mxCell> under the mouse and the mouse
+ * current panning handler2, the <mxCell> under the mouse and the mouse
  * event that triggered the call as arguments.
  */
 mxPopupMenu.prototype.factoryMethod = null;
@@ -114,7 +114,7 @@ mxPopupMenu.prototype.labels = true;
 /**
  * Function: init
  * 
- * Initializes the shapes required for this vertex handler.
+ * Initializes the shapes required for this vertex handler2.
  */
 mxPopupMenu.prototype.init = function()
 {
@@ -595,7 +595,7 @@ mxPopupMenu.prototype.hideSubmenu = function(parent)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxPopupMenu.prototype.destroy = function()
 {

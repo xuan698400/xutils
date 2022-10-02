@@ -18,7 +18,7 @@ window.CSS_PATH = window.CSS_PATH || 'styles';
 window.OPEN_FORM = window.OPEN_FORM || 'open.html';
 
 // Sets the base path, the UI language via URL param and configures the
-// supported languages to avoid 404s. The loading of all impl language
+// supported languages to avoid 404s. The loading of all impl2 language
 // resources is disabled as all required resources are in grapheditor.
 // properties. Note that in this example the loading of two resource
 // files (the special bundle and the default bundle) is disabled to

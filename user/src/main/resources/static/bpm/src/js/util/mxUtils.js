@@ -1184,7 +1184,7 @@ var mxUtils =
 	 * Function: button
 	 * 
 	 * Returns a new button with the given level and function as an onclick
-	 * event handler.
+	 * event handler2.
 	 * 
 	 * (code)
 	 * document.body.appendChild(mxUtils.button('Test', function(evt)
@@ -1484,7 +1484,7 @@ var mxUtils =
 	 * Function: getAll
 	 * 
 	 * Loads the URLs in the given array *asynchronously* and invokes the given function
-	 * if all requests returned with a valid 2xx status. The error handler is invoked
+	 * if all requests returned with a valid 2xx status. The error handler2 is invoked
 	 * once on the first error or invalid response.
 	 *
 	 * Parameters:

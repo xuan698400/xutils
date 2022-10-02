@@ -5,8 +5,8 @@
 /**
  * Class: mxTooltipHandler
  * 
- * Graph event handler that displays tooltips. <mxGraph.getTooltip> is used to
- * get the tooltip for a cell or handle. This handler is built-into
+ * Graph event handler2 that displays tooltips. <mxGraph.getTooltip> is used to
+ * get the tooltip for a cell or handle. This handler2 is built-into
  * <mxGraph.tooltipHandler> and enabled using <mxGraph.setTooltips>.
  *
  * Example:
@@ -17,7 +17,7 @@
  * 
  * Constructor: mxTooltipHandler
  * 
- * Constructs an event handler that displays tooltips with the specified
+ * Constructs an event handler2 that displays tooltips with the specified
  * delay (in milliseconds). If no delay is specified then a default delay
  * of 500 ms (0.5 sec) is used.
  * 
@@ -75,7 +75,7 @@ mxTooltipHandler.prototype.hideOnHover = false;
 /**
  * Variable: destroyed
  * 
- * True if this handler was destroyed using <destroy>.
+ * True if this handler2 was destroyed using <destroy>.
  */
 mxTooltipHandler.prototype.destroyed = false;
 
@@ -131,7 +131,7 @@ mxTooltipHandler.prototype.setHideOnHover = function(value)
 /**
  * Function: init
  * 
- * Initializes the DOM nodes required for this tooltip handler.
+ * Initializes the DOM nodes required for this tooltip handler2.
  */
 mxTooltipHandler.prototype.init = function()
 {
@@ -165,7 +165,7 @@ mxTooltipHandler.prototype.getStateForEvent = function(me)
  * 
  * Handles the event by initiating a rubberband selection. By consuming the
  * event all subsequent events of the gesture are redirected to this
- * handler.
+ * handler2.
  */
 mxTooltipHandler.prototype.mouseDown = function(sender, me)
 {
@@ -328,7 +328,7 @@ mxTooltipHandler.prototype.show = function(tip, x, y)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxTooltipHandler.prototype.destroy = function()
 {

@@ -378,7 +378,7 @@ var FilenameDialog = function (editorUi, filename, buttonText, fn, label, valida
             document.execCommand('selectAll', false, null);
         }
 
-        // Installs drag and drop handler for links
+        // Installs drag and drop handler2 for links
         if (Graph.fileSupport) {
             // Setup the dnd listeners
             var dlg = table.parentNode;

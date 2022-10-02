@@ -315,7 +315,7 @@ var mxEvent =
 	/**
 	 * Function: addMouseWheelListener
 	 * 
-	 * Installs the given function as a handler for mouse wheel events. The
+	 * Installs the given function as a handler2 for mouse wheel events. The
 	 * function has two arguments: the mouse event and a boolean that specifies
 	 * if the wheel was moved up or down.
 	 * 

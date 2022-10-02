@@ -1912,7 +1912,7 @@ Sidebar.prototype.createItem = function(cells, title, showLabel, showTitle, widt
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.updateShapes = function(source, targets)
 {
@@ -1987,7 +1987,7 @@ Sidebar.prototype.updateShapes = function(source, targets)
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createDropHandler = function(cells, allowSplit, allowCellsInserted, bounds)
 {
@@ -3093,7 +3093,7 @@ Sidebar.prototype.createDragSource = function(elt, dropHandler, preview, cells, 
 };
 
 /**
- * Adds a handler for inserting the cell with a single click.
+ * Adds a handler2 for inserting the cell with a single click.
  */
 Sidebar.prototype.itemClicked = function(cells, ds, evt, elt)
 {
@@ -3151,7 +3151,7 @@ Sidebar.prototype.itemClicked = function(cells, ds, evt, elt)
 };
 
 /**
- * Adds a handler for inserting the cell with a single click.
+ * Adds a handler2 for inserting the cell with a single click.
  */
 Sidebar.prototype.addClickHandler = function(elt, ds, cells)
 {
@@ -3206,7 +3206,7 @@ Sidebar.prototype.addClickHandler = function(elt, ds, cells)
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createVertexTemplateEntry = function(style, width, height, value, title, showLabel, showTitle, tags)
 {
@@ -3219,7 +3219,7 @@ Sidebar.prototype.createVertexTemplateEntry = function(style, width, height, val
 }
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createVertexTemplate = function(style, width, height, value, title, showLabel, showTitle, allowCellsInserted)
 {
@@ -3230,7 +3230,7 @@ Sidebar.prototype.createVertexTemplate = function(style, width, height, value, t
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createVertexTemplateFromData = function(data, width, height, title, showLabel, showTitle, allowCellsInserted)
 {
@@ -3246,7 +3246,7 @@ Sidebar.prototype.createVertexTemplateFromData = function(data, width, height, t
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createVertexTemplateFromCells = function(cells, width, height, title, showLabel, showTitle, allowCellsInserted)
 {
@@ -3269,7 +3269,7 @@ Sidebar.prototype.createEdgeTemplateEntry = function(style, width, height, value
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createEdgeTemplate = function(style, width, height, value, title, showLabel, allowCellsInserted)
 {
@@ -3283,7 +3283,7 @@ Sidebar.prototype.createEdgeTemplate = function(style, width, height, value, tit
 };
 
 /**
- * Creates a drop handler for inserting the given cells.
+ * Creates a drop handler2 for inserting the given cells.
  */
 Sidebar.prototype.createEdgeTemplateFromCells = function(cells, width, height, title, showLabel, allowCellsInserted)
 {	

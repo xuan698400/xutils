@@ -324,7 +324,7 @@
  * This string can now be stored in a local persistent storage (for example
  * using Google Gears) or it can be passed to a backend using mxUtils.post as
  * follows. The url variable is the URL of the Java servlet, PHP page or HTTP
- * handler, depending on the mini.
+ * handler2, depending on the mini.
  * 
  * (code)
  * var xmlString = encodeURIComponent(mxUtils.getXml(node));
@@ -338,7 +338,7 @@
  * 
  * To load an XML representation of a diagram into an existing graph object
  * mxUtils.load can be used as follows. The url variable is the URL of the Java
- * servlet, PHP page or HTTP handler that produces the XML string.
+ * servlet, PHP page or HTTP handler2 that produces the XML string.
  * 
  * (code)
  * var xmlDoc = mxUtils.load(url).getXml();
@@ -1063,7 +1063,7 @@ mxGraph.prototype.escapeEnabled = true;
  * 
  * If true, when editing is to be stopped by way of selection changing,
  * data in diagram changing or other means stopCellEditing is invoked, and
- * changes are saved. This is implemented in a focus handler in
+ * changes are saved. This is implemented in a focus handler2 in
  * <mxCellEditor>. Default is true.
  */
 mxGraph.prototype.invokesStopCellEditing = true;
@@ -1714,7 +1714,7 @@ mxGraph.prototype.init = function(container)
 /**
  * Function: createHandlers
  * 
- * Creates the tooltip-, panning-, connection- and graph-handler (in this
+ * Creates the tooltip-, panning-, connection- and graph-handler2 (in this
  * order). This is called in the constructor before <init> is called.
  */
 mxGraph.prototype.createHandlers = function()
@@ -2346,7 +2346,7 @@ mxGraph.prototype.setCellWarning = function(cell, warning, img, isSelect)
 		var overlay = new mxCellOverlay(img,
 			'<font color=red>'+warning+'</font>');
 		
-		// Adds a handler for single mouseclicks to select the cell
+		// Adds a handler2 for single mouseclicks to select the cell
 		if (isSelect)
 		{
 			overlay.addListener(mxEvent.CLICK,
@@ -2727,7 +2727,7 @@ mxGraph.prototype.tapAndHold = function(me)
 
 	if (mxe.isConsumed())
 	{
-		// Resets the state of the panning handler
+		// Resets the state of the panning handler2
 		this.panningHandler.panningTrigger = false;
 	}
 	
@@ -8909,7 +8909,7 @@ mxGraph.prototype.isLabelClipped = function(cell)
  * Returns the string or DOM node that represents the tooltip for the given
  * state, node and coordinate pair. This implementation checks if the given
  * node is a folding icon or overlay and returns the respective tooltip. If
- * this does not result in a tooltip, the handler for the cell is retrieved
+ * this does not result in a tooltip, the handler2 for the cell is retrieved
  * from <selectionCellsHandler> and the optional getTooltipForNode method is
  * called. If no special tooltip exists here then <getTooltipForCell> is used
  * with the cell in the given state as the argument to return a tooltip for the
@@ -12167,13 +12167,13 @@ mxGraph.prototype.selectCellsForEvent = function(cells, evt)
 /**
  * Function: createHandler
  * 
- * Creates a new handler for the given cell state. This implementation
+ * Creates a new handler2 for the given cell state. This implementation
  * returns a new <mxEdgeHandler> of the corresponding cell is an edge,
  * otherwise it returns an <mxVertexHandler>.
  * 
  * Parameters:
  * 
- * state - <mxCellState> whose handler should be created.
+ * state - <mxCellState> whose handler2 should be created.
  */
 mxGraph.prototype.createHandler = function(state)
 {
@@ -12206,7 +12206,7 @@ mxGraph.prototype.createHandler = function(state)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createVertexHandler = function(state)
 {
@@ -12220,7 +12220,7 @@ mxGraph.prototype.createVertexHandler = function(state)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createEdgeHandler = function(state, edgeStyle)
 {
@@ -12253,7 +12253,7 @@ mxGraph.prototype.createEdgeHandler = function(state, edgeStyle)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createEdgeSegmentHandler = function(state)
 {
@@ -12267,7 +12267,7 @@ mxGraph.prototype.createEdgeSegmentHandler = function(state)
  * 
  * Parameters:
  * 
- * state - <mxCellState> to create the handler for.
+ * state - <mxCellState> to create the handler2 for.
  */
 mxGraph.prototype.createElbowEdgeHandler = function(state)
 {
@@ -12708,7 +12708,7 @@ mxGraph.prototype.fireMouseEvent = function(evtName, me, sender)
 				}
 			}
 			
-			// Invokes the click handler
+			// Invokes the click handler2
 			if (evtName == mxEvent.MOUSE_UP)
 			{
 				this.click(me);

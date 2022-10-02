@@ -5,7 +5,7 @@
 /**
  * Class: mxGraphHandler
  * 
- * Graph event handler that handles selection. Individual cells are handled
+ * Graph event handler2 that handles selection. Individual cells are handled
  * separately using <mxVertexHandler> or one of the edge handlers. These
  * handlers are created using <mxGraph.createHandler> in
  * <mxGraphSelectionModel.cellAdded>.
@@ -15,7 +15,7 @@
  * 
  * Constructor: mxGraphHandler
  * 
- * Constructs an event handler that creates handles for the
+ * Constructs an event handler2 that creates handles for the
  * selection cells.
  * 
  * Parameters:
@@ -27,7 +27,7 @@ function mxGraphHandler(graph)
 	this.graph = graph;
 	this.graph.addMouseListener(this);
 	
-	// Repaints the handler after autoscroll
+	// Repaints the handler2 after autoscroll
 	this.panHandler = mxUtils.bind(this, function()
 	{
 		this.updatePreviewShape();
@@ -57,7 +57,7 @@ function mxGraphHandler(graph)
 			}
 			catch (e)
 			{
-				// Resets the handler if cells have vanished
+				// Resets the handler2 if cells have vanished
 				this.reset();
 			}
 		}
@@ -379,7 +379,7 @@ mxGraphHandler.prototype.consumeMouseEvent = function(evtName, me)
  * 
  * Handles the event by selecing the given cell and creating a handle for
  * it. By consuming the event all subsequent events of the gesture are
- * redirected to this handler.
+ * redirected to this handler2.
  */
 mxGraphHandler.prototype.mouseDown = function(sender, me)
 {
@@ -442,14 +442,14 @@ mxGraphHandler.prototype.getGuideStates = function()
 /**
  * Function: getCells
  * 
- * Returns the cells to be modified by this handler. This implementation
+ * Returns the cells to be modified by this handler2. This implementation
  * returns all selection cells that are movable, or the given initial cell if
  * the given cell is not selected and movable. This handles the case of moving
  * unselectable or unselected cells.
  * 
  * Parameters:
  * 
- * initialCell - <mxCell> that triggered this handler.
+ * initialCell - <mxCell> that triggered this handler2.
  */
 mxGraphHandler.prototype.getCells = function(initialCell)
 {
@@ -664,14 +664,14 @@ mxGraphHandler.prototype.getDelta = function(me)
 /**
  * Function: updateHint
  * 
- * Hook for subclassers do show details while the handler is active.
+ * Hook for subclassers do show details while the handler2 is active.
  */
 mxGraphHandler.prototype.updateHint = function(me) { };
 
 /**
  * Function: removeHint
  * 
- * Hooks for subclassers to hide details when the handler gets inactive.
+ * Hooks for subclassers to hide details when the handler2 gets inactive.
  */
 mxGraphHandler.prototype.removeHint = function() { };
 
@@ -959,7 +959,7 @@ mxGraphHandler.prototype.selectDelayed = function(me)
 /**
  * Function: reset
  * 
- * Resets the state of this handler.
+ * Resets the state of this handler2.
  */
 mxGraphHandler.prototype.reset = function()
 {
@@ -1079,7 +1079,7 @@ mxGraphHandler.prototype.destroyShapes = function()
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxGraphHandler.prototype.destroy = function()
 {

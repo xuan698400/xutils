@@ -11,7 +11,7 @@ function Toolbar(editorUi, container)
 	this.staticElements = [];
 	this.init();
 
-	// Global handler to hide the current menu
+	// Global handler2 to hide the current menu
 	this.gestureHandler = mxUtils.bind(this, function(evt)
 	{
 		if (this.editorUi.currentMenu != null && mxEvent.getSource(evt) != this.editorUi.currentMenu.div)
@@ -877,7 +877,7 @@ Toolbar.prototype.createLabel = function(label, tooltip)
 };
 
 /**
- * Adds a handler for showing a menu in the given element.
+ * Adds a handler2 for showing a menu in the given element.
  */
 Toolbar.prototype.addMenuHandler = function(elt, showLabels, funct, showAll)
 {
@@ -937,7 +937,7 @@ Toolbar.prototype.addMenuHandler = function(elt, showLabels, funct, showAll)
 };
 
 /**
- * Adds a handler for showing a menu in the given element.
+ * Adds a handler2 for showing a menu in the given element.
  */
 Toolbar.prototype.destroy = function()
 {

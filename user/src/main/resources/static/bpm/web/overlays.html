@@ -22,7 +22,7 @@
 
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
-		// from the onLoad event handler of the document (see below).
+		// from the onLoad event handler2 of the document (see below).
 		function main(container)
 		{
 			// Checks if browser is supported
@@ -46,7 +46,7 @@
 				// Enables tooltips for the overlays
 				graph.setTooltips(true);
 
-				// Installs a handler for click events in the graph
+				// Installs a handler2 for click events in the graph
 				// that toggles the overlay for the respective cell
 				graph.addListener(mxEvent.CLICK, function(sender, evt)
 				{
@@ -63,7 +63,7 @@
 								new mxImage('editors/images/overlays/check.png', 16, 16),
 								'Overlay tooltip');
 
-							// Installs a handler for clicks on the overlay							
+							// Installs a handler2 for clicks on the overlay
 							overlay.addListener(mxEvent.CLICK, function(sender, evt2)
 							{
 								mxUtils.alert('Overlay clicked');
@@ -79,7 +79,7 @@
 					}
 				});
 				
-				// Installs a handler for double click events in the graph
+				// Installs a handler2 for double click events in the graph
 				// that shows an alert box
 				graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt)
 				{

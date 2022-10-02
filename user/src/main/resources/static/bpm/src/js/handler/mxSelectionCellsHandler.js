@@ -5,7 +5,7 @@
 /**
  * Class: mxSelectionCellsHandler
  * 
- * An event handler that manages cell handlers and invokes their mouse event
+ * An event handler2 that manages cell handlers and invokes their mouse event
  * processing functions.
  * 
  * Group: Events
@@ -112,7 +112,7 @@ mxSelectionCellsHandler.prototype.setEnabled = function(value)
 /**
  * Function: getHandler
  * 
- * Returns the handler for the given cell.
+ * Returns the handler2 for the given cell.
  */
 mxSelectionCellsHandler.prototype.getHandler = function(cell)
 {
@@ -196,7 +196,7 @@ mxSelectionCellsHandler.prototype.refresh = function()
 /**
  * Function: isHandlerActive
  * 
- * Returns true if the given handler is active and should not be redrawn.
+ * Returns true if the given handler2 is active and should not be redrawn.
  */
 mxSelectionCellsHandler.prototype.isHandlerActive = function(handler)
 {
@@ -206,7 +206,7 @@ mxSelectionCellsHandler.prototype.isHandlerActive = function(handler)
 /**
  * Function: updateHandler
  * 
- * Updates the handler for the given shape if one exists.
+ * Updates the handler2 for the given shape if one exists.
  */
 mxSelectionCellsHandler.prototype.updateHandler = function(state)
 {
@@ -281,7 +281,7 @@ mxSelectionCellsHandler.prototype.mouseUp = function(sender, me)
 /**
  * Function: destroy
  * 
- * Destroys the handler and all its resources and DOM nodes.
+ * Destroys the handler2 and all its resources and DOM nodes.
  */
 mxSelectionCellsHandler.prototype.destroy = function()
 {
