@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.client;
+package com.xuan.mix.net.miniclient;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -13,10 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xuan
  * @date 2019/5/19
  */
-public class HttpRequest {
-    private final static int DEFAULT_CONNECTIONTIMEOUT = 1000 * 30;
-    private final static int DEFAULT_READTIMEOUT = 1000 * 30;
-    private final static String DEFAULT_ENCODE = "utf-8";
+public class MiniClientRequest {
     private final static String URL_PARAM_DIVISION = "?";
     private final static String PARAM_PARAM_DIVISION = "&";
     private final static String EQUAL = "=";
@@ -25,94 +22,94 @@ public class HttpRequest {
     /**
      * 请求地址. 例如:http://xuanner.com
      */
-    private String mUrl;
+    private String url;
     /**
      * 普通参数
      */
-    private Map<String, String> mParamMap;
+    private Map<String, String> paramMap;
     /**
      * 文件参数
      */
-    private Map<String, File> mFileParamMap;
+    private Map<String, File> fileParamMap;
     /**
      * 头部参数
      */
-    private Map<String, String> mHeaderMap;
+    private Map<String, String> headerMap;
     /**
      * 用请求体Json方式提交的Json内容
      */
-    private String mBodyJson;
+    private String bodyJson;
     /**
-     * 提交或者获取的编码方式
+     * 提交或者获取的编码方式，默认：utf-8
      */
-    private String mEncode = DEFAULT_ENCODE;
+    private String encode = "utf-8";
     /**
-     * 连接超时
+     * 连接超时，默认30S
      */
-    private int mConnectionTimeout = DEFAULT_CONNECTIONTIMEOUT;
+    private int connectionTimeout = 1000 * 30;
     /**
-     * 读取超时
+     * 读取超时，默认30S
      */
-    private int mReadTimeout = DEFAULT_READTIMEOUT;
+    private int readTimeout = 1000 * 30;
     /**
      * 结果返回回调,只有下载文件时会被调用
      */
-    private HttpDownloadListener mDownloadListener;
+    private MiniClientDownloadListener downloadListener;
     /**
      * 下载时文件存放路径
      */
-    private String mDownloadFileName;
+    private String downloadFileName;
 
-    public HttpRequest() {
+    public MiniClientRequest() {
         init();
     }
 
     public int getConnectionTimeout() {
-        return mConnectionTimeout;
+        return connectionTimeout;
     }
 
     public void setConnectionTimeout(int connectionTimeout) {
-        this.mConnectionTimeout = connectionTimeout;
+        this.connectionTimeout = connectionTimeout;
     }
 
     public String getDownloadFileName() {
-        return mDownloadFileName;
+        return downloadFileName;
     }
 
     public void setDownloadFileName(String downloadFileName) {
-        this.mDownloadFileName = downloadFileName;
+        this.downloadFileName = downloadFileName;
     }
 
     public String getEncode() {
-        return mEncode;
+        return encode;
     }
 
     public void setEncode(String encode) {
-        this.mEncode = encode;
+        this.encode = encode;
     }
 
     public int getReadTimeout() {
-        return mReadTimeout;
+        return readTimeout;
     }
 
     public void setReadTimeout(int readTimeout) {
-        this.mReadTimeout = readTimeout;
+        this.readTimeout = readTimeout;
     }
 
-    public HttpDownloadListener getDownloadListener() {
-        return mDownloadListener;
+    public MiniClientDownloadListener getDownloadListener() {
+        return downloadListener;
     }
 
-    public void setDownloadListener(HttpDownloadListener downloadListener) {
-        this.mDownloadListener = downloadListener;
+    public void setDownloadListener(MiniClientDownloadListener downloadListener) {
+        this.downloadListener = downloadListener;
     }
 
     public String getUrl() {
-        return mUrl;
+        return url;
     }
 
     public void setUrl(String url) {
-        this.mUrl = url;
+        this.url = url;
     }
 
     /**
@@ -122,7 +119,7 @@ public class HttpRequest {
      */
     public void putBodyJson(String bodyJson) {
         if (null != bodyJson) {
-            this.mBodyJson = bodyJson;
+            this.bodyJson = bodyJson;
         }
     }
 
@@ -134,7 +131,7 @@ public class HttpRequest {
      */
     public void putParam(String key, String value) {
         if (key != null && value != null) {
-            mParamMap.put(key, value);
+            paramMap.put(key, value);
         }
     }
 
@@ -145,7 +142,7 @@ public class HttpRequest {
      * @param file 文件对象
      */
     public void putFile(String key, File file) {
-        mFileParamMap.put(key, file);
+        fileParamMap.put(key, file);
     }
 
     /**
@@ -155,7 +152,7 @@ public class HttpRequest {
      * @param value 参数值
      */
     public void putHeader(String key, String value) {
-        mHeaderMap.put(key, value);
+        headerMap.put(key, value);
     }
 
     /**
@@ -164,7 +161,7 @@ public class HttpRequest {
      * @param key 参数key
      */
     public void removeParam(String key) {
-        mParamMap.remove(key);
+        paramMap.remove(key);
     }
 
     /**
@@ -173,7 +170,7 @@ public class HttpRequest {
      * @param key 参数key
      */
     public void removeFile(String key) {
-        mFileParamMap.remove(key);
+        fileParamMap.remove(key);
     }
 
     /**
@@ -182,7 +179,7 @@ public class HttpRequest {
      * @param key 参数key
      */
     public void removeHeader(String key) {
-        mHeaderMap.remove(key);
+        headerMap.remove(key);
     }
 
     /**
@@ -193,10 +190,10 @@ public class HttpRequest {
      */
     public String getParamsStr() {
         StringBuilder sb = new StringBuilder();
-        for (Entry<String, String> entry : mParamMap.entrySet()) {
+        for (Entry<String, String> entry : paramMap.entrySet()) {
             String encodeValue = null;
             try {
-                encodeValue = URLEncoder.encode(entry.getValue(), DEFAULT_ENCODE);
+                encodeValue = URLEncoder.encode(entry.getValue(), encode);
             } catch (UnsupportedEncodingException e) {
                 //Ignore
             }
@@ -227,47 +224,43 @@ public class HttpRequest {
     }
 
     public Map<String, String> getParamMap() {
-        return mParamMap;
+        return paramMap;
     }
 
     public Map<String, File> getFileParamMap() {
-        return mFileParamMap;
+        return fileParamMap;
     }
 
     public Map<String, String> getHeaderMap() {
-        return mHeaderMap;
+        return headerMap;
     }
 
     public String getBodyJson() {
-        return mBodyJson;
+        return bodyJson;
     }
 
     private void init() {
-        mParamMap = new ConcurrentHashMap<>(16);
-        mFileParamMap = new ConcurrentHashMap<>(16);
-        mHeaderMap = new ConcurrentHashMap<>(16);
+        paramMap = new ConcurrentHashMap<>(16);
+        fileParamMap = new ConcurrentHashMap<>(16);
+        headerMap = new ConcurrentHashMap<>(16);
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Entry<String, String> entry : mParamMap
-            .entrySet()) {
+        for (Entry<String, String> entry : paramMap.entrySet()) {
             if (result.length() > 0) {
                 result.append(PARAM_PARAM_DIVISION);
             }
-
             result.append(entry.getKey());
             result.append(EQUAL);
             result.append(entry.getValue());
         }
 
-        for (Entry<String, File> entry : mFileParamMap
-            .entrySet()) {
+        for (Entry<String, File> entry : fileParamMap.entrySet()) {
             if (result.length() > 0) {
                 result.append(PARAM_PARAM_DIVISION);
             }
-
             result.append(entry.getKey());
             result.append(EQUAL);
             result.append(FILE_STR);

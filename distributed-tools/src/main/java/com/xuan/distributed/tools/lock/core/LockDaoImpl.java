@@ -5,17 +5,20 @@ import java.util.Date;
 
 import javax.sql.DataSource;
 
-import com.xuan.distributed.tools.BaseDao;
+import com.xuan.distributed.tools.dao.Dao;
+import com.xuan.distributed.tools.dao.impl.SimpleDao;
 import com.xuan.distributed.tools.lock.LockException;
 
 /**
  * @author xuan
  * @since 2022/9/9
  */
-public class LockDaoImpl extends BaseDao implements LockDao {
+public class LockDaoImpl implements LockDao {
+
+    private Dao dao;
 
     public LockDaoImpl(DataSource dataSource) {
-        super(dataSource);
+        dao = new SimpleDao(dataSource);
     }
 
     private final static String TABLE_NAME = "dt_lock";
@@ -59,12 +62,12 @@ public class LockDaoImpl extends BaseDao implements LockDao {
 
     @Override
     public void createTable() {
-        update(SQL_CREATE_TABLE);
+        dao.update(SQL_CREATE_TABLE);
     }
 
     @Override
     public String selectLockName(String name) throws LockException {
-        return query(SELECT_SQL, (rs) -> {
+        return dao.query(SELECT_SQL, (rs) -> {
             try {
                 if (!rs.next()) {
                     return null;
@@ -78,27 +81,27 @@ public class LockDaoImpl extends BaseDao implements LockDao {
 
     @Override
     public void insertIgnore(String name) {
-        update(INSERT_IGNORE_SQL, name);
+        dao.update(INSERT_IGNORE_SQL, name);
     }
 
     @Override
     public int updateByHolder(String name, String holder, Date expireTime) {
-        return update(UPDATE_BY_HOLDER_SQL, holder, expireTime, name, holder);
+        return dao.update(UPDATE_BY_HOLDER_SQL, holder, expireTime, name, holder);
     }
 
     @Override
     public int releaseByHolder(String name, String holder) {
-        return update(RELEASE_BY_HOLDER_SQL, name, holder);
+        return dao.update(RELEASE_BY_HOLDER_SQL, name, holder);
     }
 
     @Override
     public int update(String name, Date expireTime) {
-        return update(UPDATE_SQL, expireTime, name);
+        return dao.update(UPDATE_SQL, expireTime, name);
     }
 
     @Override
     public int release(String name) {
-        return update(RELEASE_SQL, name);
+        return dao.update(RELEASE_SQL, name);
     }
 
 }

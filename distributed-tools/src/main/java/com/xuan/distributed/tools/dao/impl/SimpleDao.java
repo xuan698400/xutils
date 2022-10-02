@@ -1,4 +1,4 @@
-package com.xuan.distributed.tools;
+package com.xuan.distributed.tools.dao.impl;
 
 import java.io.StringWriter;
 import java.sql.Connection;
@@ -9,20 +9,23 @@ import java.util.Calendar;
 
 import javax.sql.DataSource;
 
+import com.xuan.distributed.tools.dao.Dao;
+import com.xuan.distributed.tools.dao.ResultSetExtractor;
 import com.xuan.distributed.tools.sequence.SequenceException;
 
 /**
  * @author xuan
  * @since 2022/9/9
  */
-public abstract class BaseDao {
+public class SimpleDao implements Dao {
     private DataSource dataSource;
 
-    public BaseDao(DataSource dataSource) {
+    public SimpleDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    protected int update(String sql, Object... args) throws SequenceException {
+    @Override
+    public int update(String sql, Object... args) throws SequenceException {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
@@ -38,7 +41,8 @@ public abstract class BaseDao {
         }
     }
 
-    protected <T> T query(String sql, ResultSetExtractor<T> dataExtract, Object... args) throws SequenceException {
+    @Override
+    public <T> T query(String sql, ResultSetExtractor<T> dataExtract, Object... args) throws SequenceException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -57,17 +61,15 @@ public abstract class BaseDao {
         }
     }
 
-    protected interface ResultSetExtractor<T> {
-        T extract(ResultSet resultSet);
-    }
-
     private void setValues(PreparedStatement ps, Object... args) throws SQLException {
-        if (null != args) {
-            int paramIndex = 1;
-            for (Object arg : args) {
-                setValue(ps, paramIndex, arg);
-                paramIndex++;
-            }
+        if (null == args) {
+            return;
+        }
+
+        int paramIndex = 1;
+        for (Object arg : args) {
+            setValue(ps, paramIndex, arg);
+            paramIndex++;
         }
     }
 
@@ -85,15 +87,14 @@ public abstract class BaseDao {
     }
 
     private boolean isStringValue(Class<?> argClazz) {
-        return (CharSequence.class.isAssignableFrom(argClazz) ||
-            StringWriter.class.isAssignableFrom(argClazz));
+        return CharSequence.class.isAssignableFrom(argClazz) || StringWriter.class.isAssignableFrom(argClazz);
     }
 
     private boolean isDateValue(Class<?> argClazz) {
-        return (java.util.Date.class.isAssignableFrom(argClazz) &&
-            !(java.sql.Date.class.isAssignableFrom(argClazz) ||
-                java.sql.Time.class.isAssignableFrom(argClazz) ||
-                java.sql.Timestamp.class.isAssignableFrom(argClazz)));
+        return java.util.Date.class.isAssignableFrom(argClazz) &&
+            !(java.sql.Date.class.isAssignableFrom(argClazz)
+                || java.sql.Time.class.isAssignableFrom(argClazz)
+                || java.sql.Timestamp.class.isAssignableFrom(argClazz));
     }
 
     private static void closeQuietly(AutoCloseable closeable) {

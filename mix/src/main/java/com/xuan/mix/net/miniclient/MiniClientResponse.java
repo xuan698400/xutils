@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.client;
+package com.xuan.mix.net.miniclient;
 
 import java.io.File;
 
@@ -8,17 +8,15 @@ import java.io.File;
  * @author xuan
  * @date 2019/5/19
  */
-public class HttpResponse {
+public class MiniClientResponse {
     /**
      * 成功的状态码
      */
     public static final int STATUS_CODE_SUCCESS = 200;
-
     /**
      * 失败的状态码
      */
     public static final int STATUS_CODE_FAIL = -1;
-
     /**
      * 返回状态码；成功200
      */
@@ -36,15 +34,15 @@ public class HttpResponse {
      */
     private File resultFile;
 
-    public HttpResponse() {
+    public MiniClientResponse() {
         this(STATUS_CODE_FAIL, null);
     }
 
-    public HttpResponse(int statusCode) {
+    public MiniClientResponse(int statusCode) {
         this(statusCode, null);
     }
 
-    public HttpResponse(int statusCode, String reasonPhrase) {
+    public MiniClientResponse(int statusCode, String reasonPhrase) {
         this.statusCode = statusCode;
         this.reasonPhrase = reasonPhrase;
     }

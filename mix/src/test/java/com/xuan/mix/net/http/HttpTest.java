@@ -1,8 +1,8 @@
 package com.xuan.mix.net.http;
 
-import com.xuan.mix.net.http.client.HttpDownloadListener;
-import com.xuan.mix.net.http.client.HttpResponse;
-import com.xuan.mix.net.http.client.HttpUtils;
+import com.xuan.mix.net.miniclient.MiniClientDownloadListener;
+import com.xuan.mix.net.miniclient.MiniClientResponse;
+import com.xuan.mix.net.miniclient.MiniClientFacade;
 import org.junit.Test;
 
 /**
@@ -14,7 +14,7 @@ public class HttpTest {
 
     @Test
     public void testGet() {
-        HttpResponse httpResponse = HttpUtils.get("http://www.baidu.com", null);
+        MiniClientResponse httpResponse = MiniClientFacade.get("http://www.baidu.com", null);
         if (httpResponse.isStatusOk()) {
             System.out.println("请求成功");
         }
@@ -23,7 +23,7 @@ public class HttpTest {
 
     @Test
     public void testGetDowload() {
-        HttpResponse httpResponse = HttpUtils.getDownload("http://www.baidu.com", null, "/Users/xuan/Desktop/baidu.html", new HttpDownloadListener() {
+        MiniClientResponse httpResponse = MiniClientFacade.getDownload("http://www.baidu.com", null, "/Users/xuan/Desktop/baidu.html", new MiniClientDownloadListener() {
             @Override
             public void callBack(long count, long current, boolean isFinish) {
                 System.out.println("++++++++++进度:count[" + count + "]current[" + current + "]isFinish[" + isFinish + "]");

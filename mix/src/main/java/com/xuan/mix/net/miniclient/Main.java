@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.client;
+package com.xuan.mix.net.miniclient;
 
 /**
  * @author xuan
@@ -8,10 +8,11 @@ public class Main {
 
     public static void main(String[] args) {
         testGet();
+        testGetDowload();
     }
 
     public static void testGet() {
-        HttpResponse httpResponse = HttpUtils.get("http://www.baidu.com", null);
+        MiniClientResponse httpResponse = MiniClientFacade.get("http://www.baidu.com", null);
         if (httpResponse.isStatusOk()) {
             System.out.println("请求成功");
         }
@@ -19,8 +20,8 @@ public class Main {
     }
 
     public static void testGetDowload() {
-        HttpResponse httpResponse = HttpUtils.getDownload("http://www.baidu.com", null,
-            "/Users/xuan/Desktop/baidu.html", new HttpDownloadListener() {
+        MiniClientResponse httpResponse = MiniClientFacade.getDownload("http://www.baidu.com", null,
+            "/Users/xuan/Desktop/baidu222222.html", new MiniClientDownloadListener() {
                 @Override
                 public void callBack(long count, long current, boolean isFinish) {
                     System.out.println(

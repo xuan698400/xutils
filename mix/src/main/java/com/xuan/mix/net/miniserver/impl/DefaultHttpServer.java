@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.mini.impl;
+package com.xuan.mix.net.miniserver.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,15 +18,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.spi.HttpServerProvider;
-import com.xuan.mix.net.http.mini.HttpHandler;
-import com.xuan.mix.net.http.mini.HttpHandlerResponse;
-import com.xuan.mix.net.http.mini.HttpServer;
+import com.xuan.mix.net.miniserver.MiniServerHandler;
+import com.xuan.mix.net.miniserver.MiniServerResponse;
+import com.xuan.mix.net.miniserver.MiniServer;
 
 /**
  * @author xuan
  * @since 2022/6/23
  */
-public class DefaultHttpServer implements HttpServer {
+public class DefaultHttpServer implements MiniServer {
 
     private AtomicBoolean isStart = new AtomicBoolean(false);
 
@@ -39,7 +39,7 @@ public class DefaultHttpServer implements HttpServer {
         (r) -> new Thread(r, "xUtils-DefaultHttpServer-Thread" + threadCounter.get()), (r, executor) -> {
     });
 
-    private Map<String, HttpHandler> handlerMap = new HashMap<>();
+    private Map<String, MiniServerHandler> handlerMap = new HashMap<>();
 
     private com.sun.net.httpserver.HttpServer sunHttpServer;
 
@@ -58,21 +58,22 @@ public class DefaultHttpServer implements HttpServer {
 
         sunHttpServer.createContext("/", (httpExchange) -> {
 
-            HttpHandler httpHandler = handlerMap.get(httpExchange.getRequestURI().getPath().split("\\.")[1]);
-            HttpHandlerResponse response;
+            MiniServerHandler httpHandler = handlerMap.get(httpExchange.getRequestURI().getPath().split("\\.")[1]);
+            MiniServerResponse response;
             if (null != httpHandler) {
                 response = httpHandler.handle(httpExchange.getRequestURI().getPath(),
                     buildGetParams(httpExchange.getRequestURI()));
             } else {
-                HttpHandlerResponse error = new HttpHandlerResponse();
+                MiniServerResponse error = new MiniServerResponse();
                 error.setContentType("text/plain;charset=utf-8");
                 error.setContent("NO_HTTP_HANDLER_FOUND");
                 response = error;
             }
 
+            //设置Content-Type
             Headers headers = httpExchange.getResponseHeaders();
             headers.set("Content-Type", response.getContentType());
-
+            //设置返回内容，默认UTF-8
             byte[] bytes = response.getContent().getBytes(Charset.forName("UTF-8"));
             httpExchange.sendResponseHeaders(200, bytes.length);
             OutputStream os = httpExchange.getResponseBody();
@@ -97,7 +98,7 @@ public class DefaultHttpServer implements HttpServer {
     }
 
     @Override
-    public void registerHandler(String key, HttpHandler httpHandler) {
+    public void registerHandler(String key, MiniServerHandler httpHandler) {
         handlerMap.put(key, httpHandler);
     }
 

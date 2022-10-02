@@ -3989,7 +3989,7 @@ EditorUi.prototype.createKeyHandler = function(editor)
 	{
 		if (graph.isEnabled())
 		{
-			// TODO: Add alt modified state in core API, here are some specific cases
+			// TODO: Add alt modified state in impl API, here are some specific cases
 			if (mxEvent.isShiftDown(evt) && mxEvent.isAltDown(evt))
 			{
 				var action = editorUi.actions.get(editorUi.altShiftActions[evt.keyCode]);

@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.client.core;
+package com.xuan.mix.net.miniclient.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -13,29 +13,28 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
 
-import com.xuan.mix.net.http.client.HttpClient;
-import com.xuan.mix.net.http.client.HttpRequest;
-import com.xuan.mix.net.http.client.HttpResponse;
+import com.xuan.mix.net.miniclient.MiniClient;
+import com.xuan.mix.net.miniclient.MiniClientRequest;
+import com.xuan.mix.net.miniclient.MiniClientResponse;
 
 /**
  * 用UrlConnect方式实现HTTP请求
  * <p>
  * Created by xuan on 16/2/24.
  */
-public class HttpClientUrlConnectionImpl implements HttpClient {
+public class HttpClientUrlConnectionImpl implements MiniClient {
 
     /**
      * 缓存字节数
      */
     private static final int BUFFER_SIZE = 1024;
-
     /**
      * 表单POST提交
      */
     private static final String METHOD_POST = "POST";
 
     @Override
-    public HttpResponse getDowload(HttpRequest request) {
+    public MiniClientResponse getDowload(MiniClientRequest request) {
         try {
             URL url = new URL(request.getGetUrl());
 
@@ -45,15 +44,15 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             return readResponseForFile(conn, request);
         } catch (Exception e) {
             e.printStackTrace();
-            HttpResponse response = new HttpResponse();
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            MiniClientResponse response = new MiniClientResponse();
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
             return response;
         }
     }
 
     @Override
-    public HttpResponse postDowload(HttpRequest request) {
+    public MiniClientResponse postDowload(MiniClientRequest request) {
         try {
             URL url = new URL(request.getUrl());
 
@@ -70,15 +69,15 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
 
             return readResponseForFile(conn, request);
         } catch (Exception e) {
-            HttpResponse response = new HttpResponse();
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            MiniClientResponse response = new MiniClientResponse();
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
             return response;
         }
     }
 
     @Override
-    public HttpResponse get(HttpRequest request) {
+    public MiniClientResponse get(MiniClientRequest request) {
         try {
             URL url = new URL(request.getGetUrl());
 
@@ -87,15 +86,15 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
 
             return readResponseForString(conn, request.getEncode());
         } catch (Exception e) {
-            HttpResponse response = new HttpResponse();
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            MiniClientResponse response = new MiniClientResponse();
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
             return response;
         }
     }
 
     @Override
-    public HttpResponse post(HttpRequest request) {
+    public MiniClientResponse post(MiniClientRequest request) {
         try {
             URL url = new URL(request.getUrl());
 
@@ -112,15 +111,15 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
 
             return readResponseForString(conn, request.getEncode());
         } catch (Exception e) {
-            HttpResponse response = new HttpResponse();
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            MiniClientResponse response = new MiniClientResponse();
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
             return response;
         }
     }
 
     @Override
-    public HttpResponse postJson(HttpRequest request) {
+    public MiniClientResponse postJson(MiniClientRequest request) {
         try {
             URL url = new URL(request.getUrl());
 
@@ -135,15 +134,15 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
 
             return readResponseForString(conn, request.getEncode());
         } catch (Exception e) {
-            HttpResponse response = new HttpResponse();
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            MiniClientResponse response = new MiniClientResponse();
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
             return response;
         }
     }
 
     @Override
-    public HttpResponse upload(HttpRequest request) {
+    public MiniClientResponse upload(MiniClientRequest request) {
         try {
             URL url = new URL(request.getUrl());
 
@@ -154,14 +153,14 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
 
             return readResponseForString(conn, request.getEncode());
         } catch (Exception e) {
-            HttpResponse response = new HttpResponse();
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            MiniClientResponse response = new MiniClientResponse();
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
             return response;
         }
     }
 
-    private void initRequest(URLConnection conn, HttpRequest request) {
+    private void initRequest(URLConnection conn, MiniClientRequest request) {
         //头部设置
         for (Map.Entry<String, String> entry : request.getHeaderMap().entrySet()) {
             conn.addRequestProperty(entry.getKey(), entry.getValue());
@@ -172,7 +171,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         conn.setReadTimeout(request.getReadTimeout());
     }
 
-    private static void putBodyEntityToOutputStream(HttpURLConnection conn, HttpRequest request) {
+    private static void putBodyEntityToOutputStream(HttpURLConnection conn, MiniClientRequest request) {
         try {
             UrlMultipartEntity bodyEntity = new UrlMultipartEntity();
             bodyEntity.writeDataToBody(conn, request);
@@ -181,7 +180,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         }
     }
 
-    private static void putParamsToOutputStreamForJson(HttpURLConnection conn, HttpRequest request) {
+    private static void putParamsToOutputStreamForJson(HttpURLConnection conn, MiniClientRequest request) {
         String bodyJson = request.getBodyJson();
         DataOutputStream dos = null;
         try {
@@ -201,7 +200,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         }
     }
 
-    private static void putParamsToOutputStream(HttpURLConnection conn, HttpRequest request) {
+    private static void putParamsToOutputStream(HttpURLConnection conn, MiniClientRequest request) {
         String paramStr = request.getParamsStr();
         DataOutputStream dos = null;
         try {
@@ -222,14 +221,14 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         }
     }
 
-    private static HttpResponse readResponseForFile(HttpURLConnection conn, HttpRequest request) {
+    private static MiniClientResponse readResponseForFile(HttpURLConnection conn, MiniClientRequest request) {
         boolean hasListener = false;
         if (null != request.getDownloadListener()) {
             //设置了下载监听,需要非压缩的方式下载,这样可以提前计算出文件大小
             hasListener = true;
         }
 
-        HttpResponse response = new HttpResponse();
+        MiniClientResponse response = new MiniClientResponse();
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
         InputStream inStream = null;
@@ -267,7 +266,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             writeByteArrayToFile(file, data, false);
             response.setResultFile(file);
         } catch (Exception e) {
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
         } finally {
             try {
@@ -283,8 +282,8 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
         return response;
     }
 
-    private static HttpResponse readResponseForString(HttpURLConnection conn, String encode) {
-        HttpResponse response = new HttpResponse();
+    private static MiniClientResponse readResponseForString(HttpURLConnection conn, String encode) {
+        MiniClientResponse response = new MiniClientResponse();
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
         InputStream inStream = null;
@@ -302,7 +301,7 @@ public class HttpClientUrlConnectionImpl implements HttpClient {
             response.setReasonPhrase(conn.getResponseMessage());
             response.setResultStr(new String(data, encode));
         } catch (Exception e) {
-            response.setStatusCode(HttpResponse.STATUS_CODE_FAIL);
+            response.setStatusCode(MiniClientResponse.STATUS_CODE_FAIL);
             response.setReasonPhrase(e.getMessage());
         } finally {
             try {

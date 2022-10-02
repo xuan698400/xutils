@@ -1,10 +1,10 @@
-package com.xuan.mix.net.http.mini;
+package com.xuan.mix.net.miniserver;
 
 /**
  * @author xuan
  * @since 2022/6/28
  */
-public class HttpHandlerResponse {
+public class MiniServerResponse {
 
     private String contentType = "text/plain;charset=utf-8";
 

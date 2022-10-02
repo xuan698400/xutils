@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.client.core;
+package com.xuan.mix.net.miniclient.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.net.URLConnection;
 import java.util.Map;
 import java.util.Random;
 
-import com.xuan.mix.net.http.client.HttpRequest;
+import com.xuan.mix.net.miniclient.MiniClientRequest;
 
 /**
  * 基于URLConnection实现的文件上传请求实体
@@ -36,7 +36,7 @@ public class UrlMultipartEntity {
      */
     private static final String BOUNDARY_START = "---------------------------HttpAPIFormBoundary";
     
-    public void writeDataToBody(HttpURLConnection connection, HttpRequest request) throws Exception {
+    public void writeDataToBody(HttpURLConnection connection, MiniClientRequest request) throws Exception {
         String boundary = BOUNDARY_START + new Random().nextLong();
 
         // Open the connection and set the correct header

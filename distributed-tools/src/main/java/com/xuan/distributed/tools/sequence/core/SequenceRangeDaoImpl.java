@@ -4,17 +4,20 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import com.xuan.distributed.tools.BaseDao;
+import com.xuan.distributed.tools.dao.Dao;
+import com.xuan.distributed.tools.dao.impl.SimpleDao;
 import com.xuan.distributed.tools.sequence.SequenceException;
 
 /**
  * @author xuan
  * @date 2018/4/29
  */
-public class SequenceRangeDaoImpl extends BaseDao implements SequenceRangeDao {
+public class SequenceRangeDaoImpl implements SequenceRangeDao {
+
+    private Dao dao;
 
     public SequenceRangeDaoImpl(DataSource dataSource) {
-        super(dataSource);
+        dao = new SimpleDao(dataSource);
     }
 
     private final static String SEQUENCE_TABLE_NAME = "dt_sequence_range";
@@ -43,22 +46,22 @@ public class SequenceRangeDaoImpl extends BaseDao implements SequenceRangeDao {
 
     @Override
     public void createRangeTable() throws SequenceException {
-        update(SQL_CREATE_TABLE);
+        dao.update(SQL_CREATE_TABLE);
     }
 
     @Override
     public void initRange(String name, long value) throws SequenceException {
-        update(SQL_INSERT_RANGE, name, value);
+        dao.update(SQL_INSERT_RANGE, name, value);
     }
 
     @Override
     public boolean updateRange(String name, Long newValue, Long oldValue) throws SequenceException {
-        return update(SQL_UPDATE_RANGE, newValue, name, oldValue) > 0;
+        return dao.update(SQL_UPDATE_RANGE, newValue, name, oldValue) > 0;
     }
 
     @Override
     public Long selectRange(String name) throws SequenceException {
-        return query(SQL_SELECT_RANGE, (rs) -> {
+        return dao.query(SQL_SELECT_RANGE, (rs) -> {
             try {
                 if (!rs.next()) {
                     //第一次时没有初始化记录，外部调用时有重试机制

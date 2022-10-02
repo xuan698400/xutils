@@ -1,4 +1,4 @@
-package com.xuan.mix.net.http.client;
+package com.xuan.mix.net.miniclient;
 
 /**
  * 下载文件时的进度监听
@@ -6,7 +6,7 @@ package com.xuan.mix.net.http.client;
  * @author xuan
  * @date 2019/5/19
  */
-public interface HttpDownloadListener {
+public interface MiniClientDownloadListener {
     /**
      * 处理结果时回调
      *

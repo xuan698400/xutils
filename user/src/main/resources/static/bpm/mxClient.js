@@ -353,7 +353,7 @@ var mxClient =
  * <script type="text/javascript">
  * 		var mxLoadResources = false;
  * </script>
- * <script type="text/javascript" src="/path/to/core/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxLoadResources) == 'undefined')
@@ -372,7 +372,7 @@ if (typeof(mxLoadResources) == 'undefined')
  * <script type="text/javascript">
  * 		var mxLoadResources = true;
  * </script>
- * <script type="text/javascript" src="/path/to/core/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxForceIncludes) == 'undefined')
@@ -390,7 +390,7 @@ if (typeof(mxForceIncludes) == 'undefined')
  * <script type="text/javascript">
  * 		var mxResourceExtension = '.txt';
  * </script>
- * <script type="text/javascript" src="/path/to/core/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxResourceExtension) == 'undefined')
@@ -409,7 +409,7 @@ if (typeof(mxResourceExtension) == 'undefined')
  * <script type="text/javascript">
  * 		var mxLoadStylesheets = false;
  * </script>
- * <script type="text/javascript" src="/path/to/core/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
  * (end)
  */
 if (typeof(mxLoadStylesheets) == 'undefined')
@@ -420,15 +420,15 @@ if (typeof(mxLoadStylesheets) == 'undefined')
 /**
  * Variable: basePath
  *
- * Basepath for all URLs in the core without trailing slash. Default is '.'.
+ * Basepath for all URLs in the impl without trailing slash. Default is '.'.
  * Set mxBasePath prior to loading the mxClient library as follows to override
  * this setting:
  *
  * (code)
  * <script type="text/javascript">
- * 		mxBasePath = '/path/to/core/directory';
+ * 		mxBasePath = '/path/to/impl/directory';
  * </script>
- * <script type="text/javascript" src="/path/to/core/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
  * (end)
  * 
  * When using a relative path, the path is relative to the URL of the page that
@@ -452,7 +452,7 @@ else
 /**
  * Variable: imageBasePath
  *
- * Basepath for all images URLs in the core without trailing slash. Default is
+ * Basepath for all images URLs in the impl without trailing slash. Default is
  * <mxClient.basePath> + '/images'. Set mxImageBasePath prior to loading the
  * mxClient library as follows to override this setting:
  *
@@ -460,7 +460,7 @@ else
  * <script type="text/javascript">
  * 		mxImageBasePath = '/path/to/image/directory';
  * </script>
- * <script type="text/javascript" src="/path/to/core/directory/js/mxClient.js"></script>
+ * <script type="text/javascript" src="/path/to/impl/directory/js/mxClient.js"></script>
  * (end)
  * 
  * When using a relative path, the path is relative to the URL of the page that
@@ -1293,7 +1293,7 @@ var mxResources =
 	 * 
 	 * Asynchronous loading
 	 * 
-	 * By default, the core adds two resource files synchronously at load time.
+	 * By default, the impl adds two resource files synchronously at load time.
 	 * To load these files asynchronously, set <mxLoadResources> to false
 	 * before loading mxClient.js and use <mxResources.loadResources> instead.
 	 * 
@@ -33153,7 +33153,7 @@ mxGraphHierarchyNode.prototype.isAncestor = function(otherNode)
 /**
  * Function: getCoreCell
  * 
- * Gets the core vertex associated with this wrapper
+ * Gets the impl vertex associated with this wrapper
  */
 mxGraphHierarchyNode.prototype.getCoreCell = function()
 {
@@ -33335,7 +33335,7 @@ mxGraphHierarchyEdge.prototype.setGeneralPurposeVariable = function(layer, value
 /**
  * Function: getCoreCell
  * 
- * Gets the first core edge associated with this wrapper
+ * Gets the first impl edge associated with this wrapper
  */
 mxGraphHierarchyEdge.prototype.getCoreCell = function()
 {
@@ -37138,7 +37138,7 @@ mxCoordinateAssignment.prototype.setEdgePosition = function(cell)
 			
 			if (realSource != source)
 			{
-				// The real edges include all core model edges and these can go
+				// The real edges include all impl model edges and these can go
 				// in both directions. If the source of the hierarchical model edge
 				// isn't the source of the specific real edge in this iteration
 				// treat if as reversed
@@ -86540,7 +86540,7 @@ mxCodec.prototype.decode = function(node, into)
 /**
  * Function: encodeCell
  *
- * Encoding of cell hierarchies is built-into the core, but
+ * Encoding of cell hierarchies is built-into the impl, but
  * is a higher-level function that needs to be explicitely
  * used by the respective object encoders (eg. <mxModelCodec>,
  * <mxChildChangeCodec> and <mxRootChangeCodec>). This

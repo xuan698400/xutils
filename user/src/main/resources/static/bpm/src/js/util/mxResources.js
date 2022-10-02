@@ -53,7 +53,7 @@ var mxResources =
 	 * 
 	 * Asynchronous loading
 	 * 
-	 * By default, the core adds two resource files synchronously at load time.
+	 * By default, the impl adds two resource files synchronously at load time.
 	 * To load these files asynchronously, set <mxLoadResources> to false
 	 * before loading mxClient.js and use <mxResources.loadResources> instead.
 	 * 
