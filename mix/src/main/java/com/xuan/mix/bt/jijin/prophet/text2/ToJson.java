@@ -9,6 +9,8 @@ import com.xuan.mix.bt.jijin.prophet.Data;
 import com.xuan.mix.bt.jijin.prophet.TxtUtils;
 
 /**
+ * http://fundf10.eastmoney.com/jjjz_005918.html
+ *
  * @author xuan
  * @since 2022/8/26
  */

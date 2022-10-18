@@ -1,14 +1,21 @@
 package com.xuan.mix.an.httpclient;
 
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author xuan
  * @since 2022/3/28
  */
 public class Main {
-
+    
     public static void main(String[] args) {
-        testGet();
-        testGetDowload();
+        //testGet();
+        testGetDowload2();
     }
 
     public static void testGet() {
@@ -33,6 +40,32 @@ public class Main {
             System.out.println("下载成功");
         }
         System.out.println("++++++++++httpResponse:" + httpResponse);
+    }
+
+    public static void testGetDowload2() {
+        int m = 202111;
+        for (int i = 5851; i < 6900; i++) {
+            final int ii = i;
+
+            HttpResponse httpResponse = HttpUtils.getDownload(
+                "https://downsc.chinaz.net/Files/DownLoad/moban/" + m + "/moban" + ii + ".rar", null,
+                "/Users/xuan/Desktop/code/github/html_market/" + m + "/moban" + ii + ".rar",
+                new HttpDownloadListener() {
+                    @Override
+                    public void callBack(long count, long current, boolean isFinish) {
+                        //System.out.println(
+                        //    "下载[" + ii + "]++++++++++进度:count[" + count + "]current[" + current + "]isFinish["
+                        //        + isFinish
+                        //        + "]");
+                    }
+                });
+
+            if (httpResponse.isStatusOk()) {
+                System.out.println("下载成功[" + ii + "]");
+            } else {
+                System.out.println("下载失败[" + ii + "]");
+            }
+        }
     }
 
 }
