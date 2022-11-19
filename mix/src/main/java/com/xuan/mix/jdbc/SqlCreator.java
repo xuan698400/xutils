@@ -12,36 +12,36 @@ import java.util.List;
 public class SqlCreator {
 
     private final StringBuilder sql;
-    private final List<Object>  args;
+    private final List<Object> args;
     private final List<Integer> argTypes;
     private boolean hasOrderBy = false;
-    private boolean hasWhere   = true;
-    private boolean isFirst    = true;
+    private boolean hasWhere;
+    private boolean isFirst = true;
 
     /**
-     * 构造方法。
+     * 构造方法
      *
-     * @param baseSQL 带有 WHERE 关键字的原始 sql
+     * @param baseSql 默认是带有where关键字的原始sql
      */
-    public SqlCreator(String baseSQL) {
-        this(baseSQL, true);
+    public SqlCreator(String baseSql) {
+        this(baseSql, true);
     }
 
     /**
-     * 构造方法。
+     * 构造方法
      *
-     * @param baseSQL  原始 sql
-     * @param hasWhere 原始 sql 是否带有 WHERE 关键字
+     * @param baseSql  原始sql
+     * @param hasWhere 原始sql是否带有where关键字
      */
-    public SqlCreator(String baseSQL, boolean hasWhere) {
-        if (baseSQL == null || baseSQL.trim().length() == 0) {
-            throw new IllegalArgumentException("baseSQL can't be null");
+    public SqlCreator(String baseSql, boolean hasWhere) {
+        if (null == baseSql || baseSql.trim().length() == 0) {
+            throw new IllegalArgumentException("baseSql can't be empty");
         }
 
-        args = new ArrayList<Object>();
-        argTypes = new ArrayList<Integer>();
-        sql = new StringBuilder();
-        sql.append(baseSQL.trim());
+        this.args = new ArrayList<>();
+        this.argTypes = new ArrayList<>();
+        this.sql = new StringBuilder();
+        this.sql.append(baseSql.trim());
         this.hasWhere = hasWhere;
     }
 

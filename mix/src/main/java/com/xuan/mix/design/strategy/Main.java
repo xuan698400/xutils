@@ -15,4 +15,5 @@ public class Main {
         context = new StrategyContext(new StrategyImpl2());
         context.doSomething();
     }
+
 }

@@ -1,18 +1,11 @@
 package com.xuan.mix.an.httpclient;
 
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * @author xuan
  * @since 2022/3/28
  */
 public class Main {
-    
+
     public static void main(String[] args) {
         //testGet();
         testGetDowload2();
@@ -43,7 +36,7 @@ public class Main {
     }
 
     public static void testGetDowload2() {
-        int m = 202111;
+        int m = 202110;
         for (int i = 5851; i < 6900; i++) {
             final int ii = i;
 
