@@ -27,7 +27,10 @@ public class DdlBuilderTest {
 
     @Test
     public void testCreateSql() {
+        System.out.println(getCreateTableSql());
+    }
 
+    public String getCreateTableSql() {
         ColumnSpec bigIntT = ColumnSpec.builder()
             .name("bigint_t")
             .autoIncrement(true)
@@ -93,8 +96,7 @@ public class DdlBuilderTest {
             .charset("utf-8")
             .comment("ddl测试表")
             .build();
-
-        System.out.println(tableSpec.buildCreateSql(SqlSyntax.MYSQL));
+        return tableSpec.buildCreateSql(SqlSyntax.MYSQL);
     }
 
 }
