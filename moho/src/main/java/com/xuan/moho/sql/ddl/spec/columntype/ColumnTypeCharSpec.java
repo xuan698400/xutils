@@ -2,7 +2,7 @@ package com.xuan.moho.sql.ddl.spec.columntype;
 
 import com.xuan.moho.base.exception.Assert;
 import com.xuan.moho.base.exception.BizExceptionCodeEnum;
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 import com.xuan.moho.sql.ddl.spec.ColumnTypeSpec;
 
 /**
@@ -14,7 +14,7 @@ public class ColumnTypeCharSpec implements ColumnTypeSpec {
     private Integer size;
 
     @Override
-    public String buildSqlFragment(SqlSyntax sqlSyntax) {
+    public String buildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax) {
         return String.format("CHAR(%s)", size);
     }
 

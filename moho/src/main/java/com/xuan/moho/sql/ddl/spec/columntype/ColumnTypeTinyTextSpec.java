@@ -1,6 +1,6 @@
 package com.xuan.moho.sql.ddl.spec.columntype;
 
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 import com.xuan.moho.sql.ddl.spec.ColumnTypeSpec;
 
 /**
@@ -10,7 +10,7 @@ import com.xuan.moho.sql.ddl.spec.ColumnTypeSpec;
 public class ColumnTypeTinyTextSpec implements ColumnTypeSpec {
 
     @Override
-    public String buildSqlFragment(SqlSyntax sqlSyntax) {
+    public String buildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax) {
         return "TINYTEXT";
     }
 

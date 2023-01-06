@@ -1,6 +1,6 @@
 package com.xuan.moho.sql.ddl.spec.columntype;
 
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 import com.xuan.moho.sql.ddl.spec.ColumnTypeSpec;
 
 /**
@@ -19,7 +19,7 @@ public class ColumnTypeDecimalSpec implements ColumnTypeSpec {
     private Integer d;
 
     @Override
-    public String buildSqlFragment(SqlSyntax sqlSyntax) {
+    public String buildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax) {
         return String.format("DECIMAL(%s,%s)", m, d);
     }
 

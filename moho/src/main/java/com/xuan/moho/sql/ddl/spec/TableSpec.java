@@ -6,14 +6,14 @@ import com.xuan.moho.base.exception.Assert;
 import com.xuan.moho.base.exception.BizExceptionCodeEnum;
 import com.xuan.moho.base.utils.CollectionUtils;
 import com.xuan.moho.base.utils.StringUtils;
-import com.xuan.moho.sql.common.SqlSyntax;
-import com.xuan.moho.sql.ddl.DdlBuilder;
+import com.xuan.moho.sql.common.SQLSyntax;
+import com.xuan.moho.sql.ddl.DDLBuilder;
 
 /**
  * @author xuan
  * @since 2023/1/6
  */
-public class TableSpec implements DdlBuilder {
+public class TableSpec implements DDLBuilder {
     private final static String CREATE_SQL_TEMPLATE
         = "CREATE TABLE #tableName# (#columns# #primaryKey# #uniqueKey# #key#) ENGINE=InnoDB #charset# #comment#;";
 
@@ -47,7 +47,7 @@ public class TableSpec implements DdlBuilder {
     private List<List<ColumnSpec>> keysList;
 
     @Override
-    public String buildCreateSql(SqlSyntax sqlSyntax) {
+    public String createTableSQL(SQLSyntax sqlSyntax) {
         Assert.notEmpty(name, BizExceptionCodeEnum.PARAM_EMPTY.getCode(), "name is empty.");
         Assert.notEmpty(columnList, BizExceptionCodeEnum.PARAM_EMPTY.getCode(), "columnList is empty.");
         Assert.notNull(primaryKey, BizExceptionCodeEnum.PARAM_EMPTY.getCode(), "primaryKey is empty.");
@@ -62,7 +62,7 @@ public class TableSpec implements DdlBuilder {
             .replace("#comment#", StringUtils.isNotEmpty(comment) ? "COMMENT='" + comment + "'" : "");
     }
 
-    private String buildCreateSqlForKey(SqlSyntax sqlSyntax) {
+    private String buildCreateSqlForKey(SQLSyntax sqlSyntax) {
         if (CollectionUtils.isEmpty(keysList)) {
             return "";
         }
@@ -76,7 +76,7 @@ public class TableSpec implements DdlBuilder {
         return sb.substring(0, sb.length() - 1);
     }
 
-    private String buildCreateSqlForUniqueKey(SqlSyntax sqlSyntax) {
+    private String buildCreateSqlForUniqueKey(SQLSyntax sqlSyntax) {
         if (CollectionUtils.isEmpty(uniqueKeysList)) {
             return "";
         }
@@ -94,7 +94,7 @@ public class TableSpec implements DdlBuilder {
         return sb.toString();
     }
 
-    private String buildCreateSqlForPrimaryKey(SqlSyntax sqlSyntax) {
+    private String buildCreateSqlForPrimaryKey(SQLSyntax sqlSyntax) {
         String primaryKeySql = String.format("PRIMARY KEY (%s)", primaryKey.getName());
         if (CollectionUtils.isNotEmpty(uniqueKeysList) || CollectionUtils.isNotEmpty(keysList)) {
             primaryKeySql += ",";
@@ -102,9 +102,9 @@ public class TableSpec implements DdlBuilder {
         return primaryKeySql;
     }
 
-    private String buildCreateSqlForColumns(SqlSyntax sqlSyntax) {
+    private String buildCreateSqlForColumns(SQLSyntax sqlSyntax) {
         StringBuilder sb = new StringBuilder();
-        columnList.forEach(columnSpec -> sb.append(columnSpec.getCreateSql(sqlSyntax)).append(","));
+        columnList.forEach(columnSpec -> sb.append(columnSpec.buildCreateTableColumnSQL(sqlSyntax)).append(","));
         return sb.toString();
     }
 

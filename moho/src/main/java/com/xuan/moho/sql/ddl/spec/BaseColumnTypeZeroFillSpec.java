@@ -1,6 +1,6 @@
 package com.xuan.moho.sql.ddl.spec;
 
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 
 /**
  * 是否可以进行补充0操作
@@ -23,10 +23,11 @@ public abstract class BaseColumnTypeZeroFillSpec implements ColumnTypeSpec {
     }
 
     @Override
-    public String buildSqlFragment(SqlSyntax sqlSyntax) {
-        return doBuildSqlFragment(sqlSyntax) + (null != zeroFillNum ? String.format("(%s) zerofill", zeroFillNum) : "");
+    public String buildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax) {
+        return doBuildCreateTableColumnTypeSQL(sqlSyntax) + (null != zeroFillNum ? String.format("(%s) zerofill",
+            zeroFillNum) : "");
     }
 
-    abstract protected String doBuildSqlFragment(SqlSyntax sqlSyntax);
+    abstract protected String doBuildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax);
 
 }

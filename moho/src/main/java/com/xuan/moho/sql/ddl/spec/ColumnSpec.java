@@ -4,7 +4,7 @@ import com.xuan.moho.base.exception.Assert;
 import com.xuan.moho.base.exception.BizExceptionCodeEnum;
 import com.xuan.moho.base.utils.BooleanUtils;
 import com.xuan.moho.base.utils.StringUtils;
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 
 /**
  * @author xuan
@@ -19,13 +19,13 @@ public class ColumnSpec {
     private Boolean autoIncrement;
     private String comment;
 
-    public String getCreateSql(SqlSyntax sqlSyntax) {
+    public String buildCreateTableColumnSQL(SQLSyntax sqlSyntax) {
         Assert.notEmpty(name, BizExceptionCodeEnum.PARAM_EMPTY.getCode(), "name is empty.");
         Assert.notNull(columnType, BizExceptionCodeEnum.PARAM_NULL.getCode(), "name is null.");
 
         StringBuilder sb = new StringBuilder();
         sb.append(name).append(" ")
-            .append(columnType.buildSqlFragment(sqlSyntax)).append(" ")
+            .append(columnType.buildCreateTableColumnTypeSQL(sqlSyntax)).append(" ")
             .append(BooleanUtils.isTure(unsigned) ? "unsigned" : "").append(" ")
             .append(BooleanUtils.isTure(notNull) ? "NOT NULL" : "DEFAULT NULL").append(" ")
             .append(BooleanUtils.isTure(autoIncrement) ? "AUTO_INCREMENT" : "").append(" ")

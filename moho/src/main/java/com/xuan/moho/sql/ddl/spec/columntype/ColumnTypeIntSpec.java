@@ -1,6 +1,6 @@
 package com.xuan.moho.sql.ddl.spec.columntype;
 
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 import com.xuan.moho.sql.ddl.spec.BaseColumnTypeZeroFillSpec;
 
 /**
@@ -10,7 +10,7 @@ import com.xuan.moho.sql.ddl.spec.BaseColumnTypeZeroFillSpec;
 public class ColumnTypeIntSpec extends BaseColumnTypeZeroFillSpec {
 
     @Override
-    protected String doBuildSqlFragment(SqlSyntax sqlSyntax) {
+    protected String doBuildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax) {
         return "INT";
     }
 

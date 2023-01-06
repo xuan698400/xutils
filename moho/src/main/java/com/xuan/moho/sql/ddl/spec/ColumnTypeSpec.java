@@ -1,6 +1,6 @@
 package com.xuan.moho.sql.ddl.spec;
 
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 
 /**
  * @author xuan
@@ -8,6 +8,6 @@ import com.xuan.moho.sql.common.SqlSyntax;
  */
 public interface ColumnTypeSpec {
 
-    String buildSqlFragment(SqlSyntax sqlSyntax);
+    String buildCreateTableColumnTypeSQL(SQLSyntax sqlSyntax);
 
 }

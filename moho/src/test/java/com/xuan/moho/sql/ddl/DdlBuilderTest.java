@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xuan.moho.base.utils.Lists;
-import com.xuan.moho.sql.common.SqlSyntax;
+import com.xuan.moho.sql.common.SQLSyntax;
 import com.xuan.moho.sql.ddl.spec.ColumnSpec;
 import com.xuan.moho.sql.ddl.spec.TableSpec;
 import com.xuan.moho.sql.ddl.spec.columntype.ColumnTypeBigIntSpec;
@@ -96,7 +96,7 @@ public class DdlBuilderTest {
             .charset("utf-8")
             .comment("ddl测试表")
             .build();
-        return tableSpec.buildCreateSql(SqlSyntax.MYSQL);
+        return tableSpec.createTableSQL(SQLSyntax.MYSQL);
     }
 
 }

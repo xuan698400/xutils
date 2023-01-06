@@ -6,7 +6,7 @@ package com.xuan.moho.sql.common;
  * @author xuan
  * @since 2021/12/26
  */
-public enum SqlSyntax {
+public enum SQLSyntax {
     /**
      * MYSQL
      */
@@ -17,7 +17,7 @@ public enum SqlSyntax {
 
     private String msg;
 
-    SqlSyntax(String code, String msg) {
+    SQLSyntax(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
