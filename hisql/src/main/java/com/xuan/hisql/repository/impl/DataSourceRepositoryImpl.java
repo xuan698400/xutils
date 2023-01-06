@@ -4,19 +4,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.xuan.common.model.page.PageData;
-import com.xuan.common.model.page.PageQuery;
-import com.xuan.common.utils.CollectionUtils;
-import com.xuan.common.utils.StringUtils;
-import com.xuan.dao.Dao;
-import com.xuan.dao.SimpleDao;
-import com.xuan.dao.sqlbuilder.SqlCreator;
 import com.xuan.hisql.config.DataSourceConfig;
 import com.xuan.hisql.repository.contertor.DataSourceDoToPoConvertor;
 import com.xuan.hisql.repository.DataSourceRepository;
 import com.xuan.hisql.service.model.DataSourceCondition;
 import com.xuan.hisql.repository.model.DataSourcePO;
 import com.xuan.hisql.service.model.DataSource;
+import com.xuan.mix.an.common.model.page.PageData;
+import com.xuan.mix.an.common.model.page.PageQuery;
+import com.xuan.mix.an.common.utils.CollectionUtils;
+import com.xuan.mix.an.common.utils.StringUtils;
+import com.xuan.mix.an.dao.Dao;
+import com.xuan.mix.an.dao.sql.SqlCreator;
+import com.xuan.spring.utils.jdbctemplate.JdbcTemplateDao;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +34,7 @@ public class DataSourceRepositoryImpl implements DataSourceRepository, Initializ
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        dao = new SimpleDao(dataSourceConfig.getDataSource());
+        dao = new JdbcTemplateDao(dataSourceConfig.getDataSource());
     }
 
     @Override

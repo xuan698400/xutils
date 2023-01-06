@@ -6,7 +6,6 @@ logs/*
 
 classes/*
 
-common/target/*
 extp/*/target/*
 mix/target/*
 rbac/target/*
@@ -15,7 +14,7 @@ user/target/*
 spring-utils/target/*
 lock/target/*
 common/target/*
-dao/target/*
 hisql/target/*
 hitools/target/*
 distributed-tools/target/*
+db-console/target/*

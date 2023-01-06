@@ -1,9 +1,9 @@
 package com.xuan.hisql.repository;
 
-import com.xuan.common.model.page.PageData;
-import com.xuan.common.model.page.PageQuery;
 import com.xuan.hisql.service.model.DataSourceCondition;
 import com.xuan.hisql.service.model.DataSource;
+import com.xuan.mix.an.common.model.page.PageData;
+import com.xuan.mix.an.common.model.page.PageQuery;
 
 /**
  * @author xuan

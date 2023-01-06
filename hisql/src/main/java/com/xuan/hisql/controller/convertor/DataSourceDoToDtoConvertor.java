@@ -2,7 +2,6 @@ package com.xuan.hisql.controller.convertor;
 
 import java.util.List;
 
-import com.xuan.common.utils.DateUtils;
 import com.xuan.hisql.controller.model.DataSourceAddDTO;
 import com.xuan.hisql.controller.model.DataSourceInfoDTO;
 import com.xuan.hisql.controller.model.DataSourceModifyDTO;
@@ -10,6 +9,7 @@ import com.xuan.hisql.controller.model.MySqlInfo;
 import com.xuan.hisql.service.model.DataSource;
 import com.xuan.hisql.service.model.DataSourceFeatureMySql;
 import com.xuan.hisql.service.model.DataSourceType;
+import com.xuan.mix.an.common.utils.DateUtils;
 
 /**
  * @author xuan

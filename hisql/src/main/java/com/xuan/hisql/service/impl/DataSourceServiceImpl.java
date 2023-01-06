@@ -2,12 +2,12 @@ package com.xuan.hisql.service.impl;
 
 import javax.annotation.Resource;
 
-import com.xuan.common.model.page.PageData;
-import com.xuan.common.model.page.PageQuery;
 import com.xuan.hisql.repository.DataSourceRepository;
 import com.xuan.hisql.service.DataSourceService;
 import com.xuan.hisql.service.model.DataSource;
 import com.xuan.hisql.service.model.DataSourceCondition;
+import com.xuan.mix.an.common.model.page.PageData;
+import com.xuan.mix.an.common.model.page.PageQuery;
 import org.springframework.stereotype.Service;
 
 /**

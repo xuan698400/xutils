@@ -14,12 +14,12 @@
         <module>rbac</module>
         <module>extp</module>
         <module>spring-utils</module>
-        <module>dao</module>
         <module>lock</module>
-        <module>common</module>
         <module>hisql</module>
         <module>hitools</module>
         <module>distributed-tools</module>
+        <module>db-console</module>
+        <module>moho</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -27,17 +27,12 @@
         <dependencies>
             <dependency>
                 <groupId>com.xuan</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>spring-utils</artifactId>
                 <version>1.0</version>
             </dependency>
             <dependency>
                 <groupId>com.xuan</groupId>
                 <artifactId>mix</artifactId>
-                <version>1.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.xuan</groupId>
-                <artifactId>dao</artifactId>
                 <version>1.0</version>
             </dependency>
         </dependencies>

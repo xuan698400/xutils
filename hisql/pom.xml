@@ -19,11 +19,11 @@
         </dependency>
         <dependency>
             <groupId>com.xuan</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>mix</artifactId>
         </dependency>
         <dependency>
             <groupId>com.xuan</groupId>
-            <artifactId>dao</artifactId>
+            <artifactId>spring-utils</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

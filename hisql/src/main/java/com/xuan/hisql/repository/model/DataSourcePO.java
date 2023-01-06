@@ -2,8 +2,8 @@ package com.xuan.hisql.repository.model;
 
 import java.util.Date;
 
-import com.xuan.dao.common.DataModel;
-import com.xuan.dao.common.NameValuePair;
+import com.xuan.mix.an.dao.common.DataModel;
+import com.xuan.mix.an.dao.common.NameValuePair;
 import lombok.Data;
 
 /**

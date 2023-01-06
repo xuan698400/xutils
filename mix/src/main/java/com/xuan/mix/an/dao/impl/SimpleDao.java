@@ -9,14 +9,14 @@ import java.util.Calendar;
 
 import javax.sql.DataSource;
 
-import com.xuan.mix.an.dao.Dao;
+import com.xuan.mix.an.dao.Dao2;
 import com.xuan.mix.an.dao.ResultSetExtractor;
 
 /**
  * @author xuan
  * @since 2022/9/9
  */
-public class SimpleDao implements Dao {
+public class SimpleDao implements Dao2 {
     private DataSource dataSource;
 
     public SimpleDao(DataSource dataSource) {

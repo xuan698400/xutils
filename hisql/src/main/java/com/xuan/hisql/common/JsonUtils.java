@@ -2,7 +2,7 @@ package com.xuan.hisql.common;
 
 import com.alibaba.fastjson.JSON;
 
-import com.xuan.common.utils.StringUtils;
+import com.xuan.mix.an.common.utils.StringUtils;
 
 /**
  * @author xuan
