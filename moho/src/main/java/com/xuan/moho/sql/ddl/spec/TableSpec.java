@@ -7,13 +7,12 @@ import com.xuan.moho.base.exception.BizExceptionCodeEnum;
 import com.xuan.moho.base.utils.CollectionUtils;
 import com.xuan.moho.base.utils.StringUtils;
 import com.xuan.moho.sql.common.SQLSyntax;
-import com.xuan.moho.sql.ddl.DDLBuilder;
 
 /**
  * @author xuan
  * @since 2023/1/6
  */
-public class TableSpec implements DDLBuilder {
+public class TableSpec {
     private final static String CREATE_SQL_TEMPLATE
         = "CREATE TABLE #tableName# (#columns# #primaryKey# #uniqueKey# #key#) ENGINE=InnoDB #charset# #comment#;";
 
@@ -46,7 +45,6 @@ public class TableSpec implements DDLBuilder {
      */
     private List<List<ColumnSpec>> keysList;
 
-    @Override
     public String createTableSQL(SQLSyntax sqlSyntax) {
         Assert.notEmpty(name, BizExceptionCodeEnum.PARAM_EMPTY.getCode(), "name is empty.");
         Assert.notEmpty(columnList, BizExceptionCodeEnum.PARAM_EMPTY.getCode(), "columnList is empty.");
