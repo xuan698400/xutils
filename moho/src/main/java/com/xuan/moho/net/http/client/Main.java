@@ -1,4 +1,4 @@
-package com.xuan.moho.net.httpclient;
+package com.xuan.moho.net.http.client;
 
 /**
  * @author xuan

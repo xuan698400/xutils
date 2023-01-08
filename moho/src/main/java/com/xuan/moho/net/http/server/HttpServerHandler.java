@@ -1,4 +1,4 @@
-package com.xuan.moho.net.httpserver;
+package com.xuan.moho.net.http.server;
 
 /**
  * HTTP处理器

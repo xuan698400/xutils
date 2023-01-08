@@ -1,10 +1,9 @@
-package com.xuan.moho.net.httpserver;
+package com.xuan.moho.net.http.server;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
-import com.xuan.moho.net.httpserver.core.DefaultHttpServer;
+import com.xuan.moho.net.http.server.core.DefaultHttpServer;
 
 /**
  * @author xuan

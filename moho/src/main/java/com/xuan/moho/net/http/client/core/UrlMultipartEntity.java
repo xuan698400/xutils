@@ -1,4 +1,4 @@
-package com.xuan.moho.net.httpclient.core;
+package com.xuan.moho.net.http.client.core;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.net.URLConnection;
 import java.util.Map;
 import java.util.Random;
 
-import com.xuan.moho.net.httpclient.HttpRequest;
+import com.xuan.moho.net.http.client.HttpRequest;
 
 /**
  * 基于URLConnection实现的文件上传请求实体

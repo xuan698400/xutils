@@ -1,7 +1,10 @@
-package com.xuan.moho.net.httpclient;
+package com.xuan.moho.net.http.server;
 
 import java.io.File;
 
+import com.xuan.moho.net.http.client.HttpDownloadListener;
+import com.xuan.moho.net.http.client.HttpResponse;
+import com.xuan.moho.net.http.client.HttpUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

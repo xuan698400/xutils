@@ -1,4 +1,4 @@
-package com.xuan.moho.net.httpclient.core;
+package com.xuan.moho.net.http.client.core;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -13,9 +13,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
 
-import com.xuan.moho.net.httpclient.HttpClient;
-import com.xuan.moho.net.httpclient.HttpRequest;
-import com.xuan.moho.net.httpclient.HttpResponse;
+import com.xuan.moho.net.http.client.HttpClient;
+import com.xuan.moho.net.http.client.HttpRequest;
+import com.xuan.moho.net.http.client.HttpResponse;
 
 /**
  * 用UrlConnect方式实现HTTP请求

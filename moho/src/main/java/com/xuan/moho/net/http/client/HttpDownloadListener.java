@@ -1,4 +1,4 @@
-package com.xuan.moho.net.httpclient;
+package com.xuan.moho.net.http.client;
 
 /**
  * 下载文件时的进度监听

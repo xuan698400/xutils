@@ -1,9 +1,9 @@
-package com.xuan.moho.net.httpclient;
+package com.xuan.moho.net.http.client;
 
 import java.io.File;
 import java.util.Map;
 
-import com.xuan.moho.net.httpclient.core.HttpClientUrlConnectionImpl;
+import com.xuan.moho.net.http.client.core.HttpClientUrlConnectionImpl;
 
 /**
  * HTTP快捷使用工具类
