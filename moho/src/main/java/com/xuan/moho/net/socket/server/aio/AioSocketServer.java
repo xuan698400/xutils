@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
 import com.xuan.moho.net.socket.server.SocketServer;
+import com.xuan.moho.net.socket.server.SocketServerException;
 import com.xuan.moho.net.socket.server.SocketServerHandler;
 
 /**
@@ -31,7 +32,7 @@ public class AioSocketServer implements SocketServer {
             channel = AsynchronousServerSocketChannel.open().bind(new InetSocketAddress("0.0.0.0", port));
             channel.accept(this, new AcceptHandler(handler));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new SocketServerException(e);
         }
     }
 
