@@ -103,15 +103,33 @@ public class JdbcUtils {
     }
 
     public static String underlineToCamel(String str) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0, len = str.length(); i < len; i++) {
-            char c = str.charAt(i);
-            if (Character.isUpperCase(c)) {
-                builder.append("_");
-            }
-            builder.append(Character.toLowerCase(c));
+        if (null == str || str.trim().length() == 0) {
+            return "";
         }
-        return builder.toString();
+
+        if (!str.contains("_")) {
+            return str;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        String[] words = str.split("_");
+        boolean first = true;
+        for (String s : words) {
+            if (null == s || s.trim().length() == 0) {
+                continue;
+            }
+
+            if (first) {
+                sb.append(s);
+            } else {
+                //非首个词，首字母大写
+                sb.append(s.substring(0, 1).toUpperCase());
+                sb.append(s.substring(1));
+            }
+            first = false;
+        }
+
+        return sb.toString();
     }
 
 }
