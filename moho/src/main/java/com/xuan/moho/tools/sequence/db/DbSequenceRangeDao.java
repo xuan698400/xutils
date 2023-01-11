@@ -1,12 +1,12 @@
 package com.xuan.moho.tools.sequence.db;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import com.xuan.moho.sql.executer.SQLExecuter;
 import com.xuan.moho.sql.executer.core.DefaultSQLExecuter;
+import com.xuan.moho.sql.orm.resultsetmapping.LongResultSetMapping;
 import com.xuan.moho.tools.sequence.SequenceException;
 import com.xuan.moho.tools.sequence.core.SequenceRangeDao;
 
@@ -76,11 +76,7 @@ public class DbSequenceRangeDao implements SequenceRangeDao {
     @Override
     public Long selectRange(String name) throws SequenceException {
         try {
-            List<Long> valueList = sqlExecuter.query(SQL_SELECT_RANGE, (rs) -> rs.getLong(1), name);
-            if (null != valueList && valueList.size() > 0) {
-                return valueList.get(0);
-            }
-            return null;
+            return sqlExecuter.queryObject(SQL_SELECT_RANGE, new LongResultSetMapping(), name);
         } catch (SQLException e) {
             throw new SequenceException(e);
         }

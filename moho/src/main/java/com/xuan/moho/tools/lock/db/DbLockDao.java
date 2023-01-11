@@ -2,12 +2,12 @@ package com.xuan.moho.tools.lock.db;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import com.xuan.moho.sql.executer.SQLExecuter;
 import com.xuan.moho.sql.executer.core.DefaultSQLExecuter;
+import com.xuan.moho.sql.orm.resultsetmapping.StringResultSetMapping;
 import com.xuan.moho.tools.lock.LockException;
 import com.xuan.moho.tools.lock.core.LockDao;
 
@@ -74,11 +74,7 @@ public class DbLockDao implements LockDao {
     @Override
     public String selectLockName(String name) throws LockException {
         try {
-            List<String> nameList = sqlExecuter.query(SELECT_SQL, rs -> rs.getString(1), name);
-            if (null != nameList && nameList.size() > 0) {
-                return nameList.get(0);
-            }
-            return null;
+            return sqlExecuter.queryObject(SELECT_SQL, new StringResultSetMapping(), name);
         } catch (SQLException e) {
             throw new LockException(e);
         }

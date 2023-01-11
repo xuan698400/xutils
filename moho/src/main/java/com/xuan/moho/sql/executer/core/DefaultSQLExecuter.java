@@ -4,13 +4,10 @@ import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -45,7 +42,7 @@ public class DefaultSQLExecuter implements SQLExecuter {
     }
 
     @Override
-    public <T> List<T> query(String sql, ResultSetMapping<T> dataExtract, Object... args) throws SQLException {
+    public <T> List<T> queryList(String sql, ResultSetMapping<T> dataExtract, Object... args) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -69,8 +66,9 @@ public class DefaultSQLExecuter implements SQLExecuter {
     }
 
     @Override
-    public List<Map<String, Object>> query(String sql, Object... args) throws SQLException {
-        return query(sql, new DefaultResultSetMapping(), args);
+    public <T> T queryObject(String sql, ResultSetMapping<T> dataExtract, Object... args) throws SQLException {
+        List<T> dataList = queryList(sql, dataExtract, args);
+        return null != dataList && dataList.size() > 0 ? dataList.get(0) : null;
     }
 
     private void setValues(PreparedStatement ps, Object... args) throws SQLException {
@@ -116,23 +114,6 @@ public class DefaultSQLExecuter implements SQLExecuter {
             } catch (Throwable e) {
                 //Ignore
             }
-        }
-    }
-
-    private static final class DefaultResultSetMapping implements ResultSetMapping<Map<String, Object>> {
-        @Override
-        public Map<String, Object> extract(ResultSet rs) throws SQLException {
-            ResultSetMetaData me = rs.getMetaData();
-            int size = me.getColumnCount();
-            Map<String, Object> dataMap = new HashMap<>();
-            for (int i = 0; i < size; i++) {
-                int index = i + 1;
-
-                String columnName = me.getColumnName(index);
-                Object value = rs.getObject(index);
-                dataMap.put(columnName, value);
-            }
-            return dataMap;
         }
     }
 

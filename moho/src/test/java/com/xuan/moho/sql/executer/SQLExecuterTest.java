@@ -9,6 +9,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.JSON;
 
 import com.xuan.moho.sql.executer.core.DefaultSQLExecuter;
+import com.xuan.moho.sql.orm.resultsetmapping.MapResultSetMapping;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +61,7 @@ public class SQLExecuterTest {
     @Test
     public void testSelect() throws SQLException {
         String sql = "SELECT * FROM bw_user WHERE id=?";
-        List<Map<String, Object>> dataList = sqlExecuter.query(sql, 1L);
+        List<Map<String, Object>> dataList = sqlExecuter.queryList(sql, new MapResultSetMapping(), 1L);
         System.out.println("查询结果：" + JSON.toJSONString(dataList));
         Assert.assertEquals(dataList.size(), 1);
     }
