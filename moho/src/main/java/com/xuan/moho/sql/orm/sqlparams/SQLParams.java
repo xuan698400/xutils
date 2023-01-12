@@ -18,6 +18,10 @@ public class SQLParams {
      */
     private List<Object> params;
 
+    public Object[] buildParamsArray() {
+        return null == params ? null : params.toArray(new Object[0]);
+    }
+
     public String getSql() {
         return sql;
     }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -24,6 +25,28 @@ public class DefaultSQLExecuter implements SQLExecuter {
 
     public DefaultSQLExecuter(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Override
+    public long insertBackId(String sql, Object... args) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = dataSource.getConnection();
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            setValues(ps, args);
+            ps.executeUpdate();
+            //获取自增ID
+            long id = -1;
+            ResultSet resultSet = ps.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+            return id;
+        } finally {
+            closeQuietly(ps);
+            closeQuietly(conn);
+        }
     }
 
     @Override

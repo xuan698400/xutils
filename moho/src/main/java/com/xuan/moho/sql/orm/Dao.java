@@ -1,5 +1,6 @@
 package com.xuan.moho.sql.orm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.xuan.moho.base.model.page.PageData;
@@ -18,7 +19,7 @@ public interface Dao {
      * @param dataModel 数据模型
      * @return 返回自动生产的ID
      */
-    long insertBackId(DataModel dataModel);
+    long insertBackId(DataModel dataModel) throws SQLException;
 
     /**
      * 插入数据
@@ -26,7 +27,7 @@ public interface Dao {
      * @param dataModel 数据模型
      * @return 成功返回1
      */
-    int insert(DataModel dataModel);
+    int insert(DataModel dataModel) throws SQLException;
 
     /**
      * 更新数据（根据主键更新）
@@ -34,7 +35,7 @@ public interface Dao {
      * @param dataModel 数据模型
      * @return 成功返回1
      */
-    int update(DataModel dataModel);
+    int update(DataModel dataModel) throws SQLException;
 
     /**
      * 删除数据（根据设置的值拼装条件删除）
@@ -42,7 +43,7 @@ public interface Dao {
      * @param dataModel 数据模型
      * @return 成功返回1
      */
-    int delete(DataModel dataModel);
+    int delete(DataModel dataModel) throws SQLException;
 
     /**
      * 更新SQL（当上面的条件无法满足时，可以使用该方法）
@@ -50,7 +51,7 @@ public interface Dao {
      * @param sqlCreator SQL
      * @return 成功返回1
      */
-    int update(SQLParamsQueryCreator sqlCreator);
+    int update(SQLParamsQueryCreator sqlCreator) throws SQLException;
 
     /**
      * 查找数据（根据设置的值拼装条件查询）
@@ -60,7 +61,7 @@ public interface Dao {
      * @param <T>         返回的类范型
      * @return 数据列表
      */
-    <T extends DataModel> List<T> select(DataModel dataModel, Class<T> elementType);
+    <T extends DataModel> List<T> select(DataModel dataModel, Class<T> elementType) throws SQLException;
 
     /**
      * 查找数据（使用SqlCreator自己拼接SQL）
@@ -70,7 +71,7 @@ public interface Dao {
      * @param <T>         返回的类范型
      * @return 数据列表
      */
-    <T extends DataModel> List<T> select(SQLParamsQueryCreator creator, Class<T> elementType);
+    <T extends DataModel> List<T> select(SQLParamsQueryCreator creator, Class<T> elementType) throws SQLException;
 
     /**
      * 统计数据库条数
@@ -78,7 +79,7 @@ public interface Dao {
      * @param sqlCreator SqlCreator实例
      * @return 条数
      */
-    Long count(SQLParamsQueryCreator sqlCreator);
+    Long count(SQLParamsQueryCreator sqlCreator) throws SQLException;
 
     /**
      * 分页查询
@@ -89,5 +90,6 @@ public interface Dao {
      * @param <T>         返回的类范型
      * @return 分页数据，含总条数
      */
-    <T extends DataModel> PageData<T> selectPage(SQLParamsQueryCreator creator, PageQuery pageQuery, Class<T> elementType);
+    <T extends DataModel> PageData<T> selectPage(SQLParamsQueryCreator creator, PageQuery pageQuery,
+        Class<T> elementType) throws SQLException;
 }

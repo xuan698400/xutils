@@ -10,6 +10,16 @@ import java.util.List;
 public interface SQLExecuter {
 
     /**
+     * 插入数据操作，并返回自增ID
+     *
+     * @param sql  SQL
+     * @param args 参数
+     * @return 自增ID
+     * @throws SQLException SQLException
+     */
+    long insertBackId(String sql, Object... args) throws SQLException;
+
+    /**
      * 更新数据操作
      *
      * @param sql  SQL

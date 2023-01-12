@@ -3,6 +3,7 @@ package com.xuan.moho.sql.orm.sqlparams.core;
 import java.lang.reflect.Field;
 
 import com.xuan.moho.base.exception.ExceptionFactory;
+import com.xuan.moho.sql.orm.core.CamelUtils;
 import com.xuan.moho.sql.orm.model.DataModel;
 import com.xuan.moho.sql.orm.model.NameValuePair;
 import com.xuan.moho.sql.orm.sqlparams.SQLParamsBuilder;
@@ -38,19 +39,7 @@ public abstract class BaseSQLParamsBuilder implements SQLParamsBuilder {
     }
 
     protected static String getFieldName(Field field) {
-        return camelTounderline(field.getName());
-    }
-
-    private static String camelTounderline(String str) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0, len = str.length(); i < len; i++) {
-            char c = str.charAt(i);
-            if (Character.isUpperCase(c)) {
-                builder.append("_");
-            }
-            builder.append(Character.toLowerCase(c));
-        }
-        return builder.toString();
+        return CamelUtils.camelToUnderline(field.getName());
     }
 
 }

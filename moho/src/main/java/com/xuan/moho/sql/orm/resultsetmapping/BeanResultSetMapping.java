@@ -1,13 +1,13 @@
 package com.xuan.moho.sql.orm.resultsetmapping;
 
+import java.lang.reflect.Field;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.xuan.moho.base.exception.ExceptionFactory;
 import com.xuan.moho.sql.executer.ResultSetMapping;
+import com.xuan.moho.sql.orm.core.CamelUtils;
+import com.xuan.moho.sql.orm.core.JdbcUtils;
 
 /**
  * @author xuan
@@ -24,10 +24,7 @@ public class BeanResultSetMapping<T> implements ResultSetMapping<T> {
     @Override
     public T extract(ResultSet rs) throws SQLException {
 
-        ResultSetMetaData me = rs.getMetaData();
-        int size = me.getColumnCount();
-        Map<String, Object> dataMap = new HashMap<>();
-
+        //创建实例对象
         Object bean;
         try {
             bean = beanClass.newInstance();
@@ -35,15 +32,21 @@ public class BeanResultSetMapping<T> implements ResultSetMapping<T> {
             throw ExceptionFactory.bizException("beanClass newInstance exception", e);
         }
 
-        for (int i = 0; i < size; i++) {
-            int index = i + 1;
-            String columnName = me.getColumnName(index);
-            Object value = rs.getObject(index);
-            dataMap.put(columnName, value);
+        //遍历对象属性，从rs获取值
+        Field[] fields = beanClass.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            Class<?> fieldClazzType = field.getType();
+            String columnName = CamelUtils.camelToUnderline(fieldName);
+            try {
+                field.set(bean, JdbcUtils.getResultSetValue(rs, columnName, fieldClazzType));
+            } catch (IllegalAccessException e) {
+                throw ExceptionFactory.bizException("field set IllegalAccessException", e);
+            }
         }
-        //return dataMap;
 
-        return null;
+        return (T)bean;
     }
 
 }

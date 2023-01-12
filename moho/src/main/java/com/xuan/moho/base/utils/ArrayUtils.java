@@ -101,8 +101,18 @@ public class ArrayUtils {
      * @param list 字符串List
      * @return 字符串数组
      */
-    public static String[] toArray(List<String> list) {
+    public static String[] toArrayString(List<String> list) {
+        if (CollectionUtils.isEmpty(list)) {
+            return new String[0];
+        }
         return list.toArray(new String[0]);
+    }
+
+    public static Object[] toArrayObject(List<Object> list) {
+        if (CollectionUtils.isEmpty(list)) {
+            return new String[0];
+        }
+        return list.toArray(new Object[0]);
     }
 
     /**
@@ -198,7 +208,7 @@ public class ArrayUtils {
                 list.add(str);
             }
         }
-        return toArray(list);
+        return toArrayString(list);
     }
 
 }
