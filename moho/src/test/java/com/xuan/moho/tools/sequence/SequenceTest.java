@@ -2,7 +2,7 @@ package com.xuan.moho.tools.sequence;
 
 import java.util.concurrent.CountDownLatch;
 
-import com.xuan.moho.BaseTest;
+import com.xuan.moho.BaseDbTest;
 import com.xuan.moho.tools.sequence.db.DbSequence;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author xuan
  * @since 2023/1/7
  */
-public class SequenceTest extends BaseTest {
+public class SequenceTest extends BaseDbTest {
 
     private Sequence sequence;
 

@@ -2,7 +2,7 @@ package com.xuan.moho.tools.lock;
 
 import java.util.concurrent.CountDownLatch;
 
-import com.xuan.moho.BaseTest;
+import com.xuan.moho.BaseDbTest;
 import com.xuan.moho.tools.lock.db.DbNonReentrantLock;
 import com.xuan.moho.tools.lock.db.DbReentrantLock;
 import org.junit.Before;
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author xuan
  * @since 2023/1/7
  */
-public class LockTest extends BaseTest {
+public class LockTest extends BaseDbTest {
 
     private Lock reentrantLock;
     private Lock nonReentrantLock;

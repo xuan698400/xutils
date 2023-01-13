@@ -1,4 +1,4 @@
-package com.xuan.moho.tools.compiler.core;
+package com.xuan.moho.tools.compiler.java;
 
 import java.net.MalformedURLException;
 import java.net.URL;

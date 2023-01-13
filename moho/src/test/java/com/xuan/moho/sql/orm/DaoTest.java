@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 
-import com.xuan.moho.BaseTest;
+import com.xuan.moho.BaseDbTest;
 import com.xuan.moho.base.model.page.PageData;
 import com.xuan.moho.base.model.page.PageQuery;
 import com.xuan.moho.sql.executer.SQLExecuter;
@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author xuan
  * @since 2023/1/12
  */
-public class DaoTest extends BaseTest {
+public class DaoTest extends BaseDbTest {
 
     private Dao dao;
 

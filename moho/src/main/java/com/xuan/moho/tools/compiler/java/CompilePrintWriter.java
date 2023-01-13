@@ -1,4 +1,4 @@
-package com.xuan.moho.tools.compiler.core;
+package com.xuan.moho.tools.compiler.java;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 
 import com.xuan.moho.tools.compiler.CompileException;
+import com.xuan.moho.tools.compiler.core.FileUtil;
 
 /**
  * @author xuan
