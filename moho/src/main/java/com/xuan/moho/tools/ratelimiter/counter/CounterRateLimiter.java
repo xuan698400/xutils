@@ -21,20 +21,24 @@ public class CounterRateLimiter implements RateLimiter {
      */
     private long interval;
     /**
-     * 监视器
-     */
-    private Monitor monitor;
-    /**
      * 没区间内可通过数
      */
     private long limitQps;
     /**
-     * 当前计数器
+     * 总调用量
      */
-    private AtomicLong count;
+    private AtomicLong totalCount;
+    /**
+     * 通过的数量
+     */
+    private AtomicLong passedCount;
+    /**
+     * 被阻塞的数量
+     */
+    private AtomicLong blockedCount;
 
     @Override
-    public boolean tryAcquire() {
+    public boolean tryPass() {
         long now = System.currentTimeMillis();
         if (now >= start + interval) {
             //不在区间内进行重置
@@ -43,22 +47,38 @@ public class CounterRateLimiter implements RateLimiter {
         return doTryAcquire(start, now);
     }
 
+    @Override
+    public double getTotalQps() {
+        return 0;
+    }
+
+    @Override
+    public double getPassedQps() {
+        return 0;
+    }
+
+    @Override
+    public double getBlockedQps() {
+        return 0;
+    }
+
     private void doReset(long now) {
         synchronized (this) {
             if (now >= start + interval) {
-                count.set(0);
+                totalCount.set(0L);
+                passedCount.set(0L);
+                blockedCount.set(0L);
                 start = now;
-                if (null != monitor) {
-                    monitor.reset(now);
-                }
             }
         }
     }
 
     private boolean doTryAcquire(long start, long now) {
-        boolean isAcquired = count.incrementAndGet() <= limitQps;
-        if (null != monitor) {
-            monitor.acquire(start, now, isAcquired);
+        boolean isAcquired = totalCount.incrementAndGet() <= limitQps;
+        if (isAcquired) {
+            passedCount.incrementAndGet();
+        } else {
+            blockedCount.incrementAndGet();
         }
         return isAcquired;
     }
@@ -66,7 +86,6 @@ public class CounterRateLimiter implements RateLimiter {
     public static class Builder {
         private long interval;
         private long limitQps;
-        private Monitor monitor;
 
         public Builder interval(long interval) {
             this.interval = interval;
@@ -78,19 +97,15 @@ public class CounterRateLimiter implements RateLimiter {
             return this;
         }
 
-        public Builder monitor(Monitor monitor) {
-            this.monitor = monitor;
-            return this;
-        }
-
         public CounterRateLimiter build() {
             checkParams();
             CounterRateLimiter limiter = new CounterRateLimiter();
             limiter.interval = this.interval;
             limiter.limitQps = this.limitQps;
-            limiter.monitor = monitor;
             limiter.start = System.currentTimeMillis();
-            limiter.count = new AtomicLong(0);
+            limiter.totalCount = new AtomicLong(0);
+            limiter.passedCount = new AtomicLong(0);
+            limiter.blockedCount = new AtomicLong(0L);
             return limiter;
         }
 
@@ -106,25 +121,6 @@ public class CounterRateLimiter implements RateLimiter {
 
     public static Builder builder() {
         return new Builder();
-    }
-
-    public interface Monitor {
-
-        /**
-         * 触发获取操作，并得到是否成功
-         *
-         * @param start      当前区间开始时间
-         * @param now        当前时间
-         * @param isAcquired 是否成功
-         */
-        void acquire(long start, long now, boolean isAcquired);
-
-        /**
-         * 超出区间，进行重置
-         *
-         * @param newStart 重置开始时间
-         */
-        void reset(long newStart);
     }
 
 }

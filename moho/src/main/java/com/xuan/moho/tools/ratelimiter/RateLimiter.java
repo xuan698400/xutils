@@ -10,5 +10,26 @@ public interface RateLimiter {
      *
      * @return true/false
      */
-    boolean tryAcquire();
+    boolean tryPass();
+
+    /**
+     * 平均每秒调用次数
+     *
+     * @return
+     */
+    double getTotalQps();
+
+    /**
+     * 平均每秒通过次数
+     *
+     * @return
+     */
+    double getPassedQps();
+
+    /**
+     * 平均每秒阻塞次数
+     *
+     * @return
+     */
+    double getBlockedQps();
 }
