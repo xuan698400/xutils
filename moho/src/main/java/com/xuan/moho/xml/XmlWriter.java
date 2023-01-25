@@ -8,5 +8,11 @@ import com.xuan.moho.xml.model.XmlModel;
  */
 public interface XmlWriter {
 
+    /**
+     * 根据xml写成xml文件
+     *
+     * @param xmlModel xml模型
+     * @return xml文件
+     */
     String write(XmlModel xmlModel);
 }
