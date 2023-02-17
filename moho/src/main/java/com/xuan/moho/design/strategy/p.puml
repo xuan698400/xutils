@@ -1,0 +1,34 @@
+@startuml
+
+class Strategy{
+    int calculate(int num1, int num2);
+}
+class StrategyAdd{
+    int calculate(int num1, int num2);
+}
+class StrategySub{
+    int calculate(int num1, int num2);
+}
+class StrategyMul{
+    int calculate(int num1, int num2);
+}
+class StrategyDiv{
+    int calculate(int num1, int num2);
+}
+
+class Context{
+    + Strategy
+    int calculate(int num1, int num2);
+}
+
+class Client{
+    void main();
+}
+
+Strategy <|.. StrategyAdd
+Strategy <|.. StrategySub
+Strategy <|.. StrategyMul
+Strategy <|.. StrategyDiv
+Context o-- Strategy
+Client --> Context : use
+@enduml

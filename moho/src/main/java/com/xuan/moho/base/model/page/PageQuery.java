@@ -4,15 +4,32 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 分页查询
+ *
  * @author xuan
  * @since 2022/6/1
  */
 public class PageQuery implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 是否需要返回总页数
+     */
     private boolean needTotalCount = false;
-    private int pageSize = 10;
-    private int pageIndex = 1;
+
+    /**
+     * 分页数量
+     */
+    private Integer pageSize = 10;
+
+    /**
+     * 分页页数，从1开始表示第一页
+     */
+    private Integer pageIndex = 1;
+
+    /**
+     * 排序
+     */
     private List<PageOrderBy> orderByList;
 
     public Integer getOffset() {
@@ -29,19 +46,19 @@ public class PageQuery implements Serializable {
         this.needTotalCount = needTotalCount;
     }
 
-    public int getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    public int getPageIndex() {
+    public Integer getPageIndex() {
         return pageIndex;
     }
 
-    public void setPageIndex(int pageIndex) {
+    public void setPageIndex(Integer pageIndex) {
         this.pageIndex = pageIndex;
     }
 

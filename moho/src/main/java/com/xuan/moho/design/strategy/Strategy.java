@@ -7,5 +7,8 @@ package com.xuan.moho.design.strategy;
  * @since 2021/8/15
  */
 public interface Strategy {
-    void doSomething();
+    /**
+     * 计算
+     */
+    int calculate(int num1, int num2);
 }

@@ -34,6 +34,12 @@
             <scope>test</scope>
         </dependency>
         <!--END 测试相关 END-->
+
+        <dependency>
+            <groupId>com.xuan</groupId>
+            <artifactId>moho</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 

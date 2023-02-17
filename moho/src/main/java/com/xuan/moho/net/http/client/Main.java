@@ -8,7 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
         //testGet();
-        testGetDowload2();
+        //testGetDowload2();
+        HttpResponse response = HttpUtils.get("https://www.runoob.com/design-pattern/factory-pattern.html", null);
+        System.out.println(response.getResultStr());
     }
 
     public static void testGet() {

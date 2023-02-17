@@ -4,14 +4,22 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 分页数据
+ *
  * @author xuan
  * @since 2022/6/1
  */
 public class PageData<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 总条数
+     */
     private Long totalCount;
 
+    /**
+     * 数据列表
+     */
     private List<T> data;
 
     public static <T> PageData<T> of(List<T> data, Long totalCount) {
