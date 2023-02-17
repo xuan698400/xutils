@@ -11,16 +11,15 @@ public class Client {
     public static void main(String[] args) {
         //相加
         Context context = new Context(new StrategyAdd());
-        System.out.println(context.calculate(20, 10));
+        System.out.println("20 + 10 = " + context.calculate(20, 10));
         //相减
         context = new Context(new StrategySub());
-        System.out.println(context.calculate(20, 10));
+        System.out.println("20 - 10 = " + context.calculate(20, 10));
         //相乘
         context = new Context(new StrategyMul());
-        System.out.println(context.calculate(20, 10));
+        System.out.println("20 * 10 = " + context.calculate(20, 10));
         //相除
         context = new Context(new StrategyDiv());
-        System.out.println(context.calculate(20, 10));
+        System.out.println("20 / 10 = " + context.calculate(20, 10));
     }
-
 }
