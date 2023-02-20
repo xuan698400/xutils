@@ -1,0 +1,24 @@
+@startuml
+
+class Game{
+    public void play();
+
+    protected abstract void doPlay();
+
+    private void playApply();
+    private void goHome()
+}
+class GameMovie{
+    protected void doPlay();
+}
+class GameCamping{
+    protected void doPlay();
+}
+class Client{
+    void main();
+}
+
+Game <|-- GameMovie
+Game <|-- GameCamping
+Client --> Game : use
+@enduml
