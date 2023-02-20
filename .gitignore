@@ -18,3 +18,4 @@ hisql/target/*
 hitools/target/*
 distributed-tools/target/*
 db-console/target/*
+moho/target/*
