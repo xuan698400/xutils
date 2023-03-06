@@ -20,5 +20,5 @@ class Client{
 
 Game <|-- GameMovie
 Game <|-- GameCamping
-Client --> Game : use
+Client -- Game : use
 @enduml

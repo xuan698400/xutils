@@ -6,10 +6,11 @@ import java.util.Objects;
  * @author xuan
  * @since 2023/3/6
  */
-public abstract class BaseSayHelloFilter {
+public abstract class BaseSayHelloFilter implements SayHelloFilter {
 
     private BaseSayHelloFilter next;
 
+    @Override
     public final Response handle(Request request) {
         if (Objects.equals(supportLang(), request.getLang())) {
             return doHandle(request);

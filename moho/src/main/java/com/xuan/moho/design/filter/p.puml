@@ -1,0 +1,46 @@
+@startuml
+class Request{
+    String name;
+    String lang;
+}
+class Response{
+    String message;
+}
+class SayHelloFilter{
+    Response handle(Request request);
+}
+class BaseSayHelloFilter{
+    BaseSayHelloFilter next;
+    Response handle(Request request);
+    abstract String supportLang();
+    abstract Response doHandle(Request request);
+}
+class ChineseSayHelloFilter{
+      String supportLang();
+      Response doHandle(Request request);
+}
+class EnglishSayHelloFiter{
+      String supportLang();
+      Response doHandle(Request request);
+}
+class JapaneseSayHelloFilter{
+      String supportLang();
+      Response doHandle(Request request);
+}
+class SayHelloFilterChain{
+    SayHelloFilter head;
+    SayHelloFilter getHead();
+}
+class Client{
+    void main();
+}
+
+SayHelloFilter <|.. BaseSayHelloFilter : impl
+SayHelloFilter -- Request : use
+SayHelloFilter -- Response : use
+SayHelloFilterChain -- SayHelloFilter : use
+Client -- SayHelloFilterChain : use
+BaseSayHelloFilter <|-- ChineseSayHelloFilter : extends
+BaseSayHelloFilter <|-- EnglishSayHelloFiter : extends
+BaseSayHelloFilter <|-- JapaneseSayHelloFilter : extends
+@enduml

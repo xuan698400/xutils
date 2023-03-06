@@ -6,7 +6,7 @@ package com.xuan.moho.design.filter;
  */
 public class SayHelloFilterChain {
 
-    private BaseSayHelloFilter head;
+    private SayHelloFilter head;
 
     public SayHelloFilterChain() {
         ChineseSayHelloFilter chineseSayHelloFilter = new ChineseSayHelloFilter();
@@ -17,7 +17,7 @@ public class SayHelloFilterChain {
         head = chineseSayHelloFilter;
     }
 
-    public BaseSayHelloFilter getHead() {
+    public SayHelloFilter getHead() {
         return head;
     }
 
