@@ -8,7 +8,7 @@ public class Client {
 
     public static void main(String[] args) {
         SayHelloFilterChain chain = new SayHelloFilterChain();
-        BaseSayHelloFilter head = chain.getHead();
+        SayHelloFilter head = chain.getHead();
 
         //
         Request request = new Request();
