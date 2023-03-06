@@ -6,7 +6,7 @@ package com.xuan.moho.design.template;
  */
 public abstract class Game {
 
-    public void play() {
+    public final void play() {
 
         //1、玩之前需要申请，例如跟老婆汇报
         playApply();
