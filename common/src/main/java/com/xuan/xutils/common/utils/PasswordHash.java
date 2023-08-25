@@ -182,7 +182,7 @@ public class PasswordHash {
     }
 
     /**
-     * Converts a string of hexadecimal characters into a byte array.
+     * Converts a string of hexadecimal characters into a byte array. 1
      *
      * @param hex the hex string
      * @return the hex string decoded into a byte array
