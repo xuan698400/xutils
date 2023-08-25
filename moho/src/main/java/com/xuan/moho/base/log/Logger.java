@@ -11,4 +11,10 @@ public interface Logger {
     void error(String msg);
 
     void info(String msg);
+
+    void error(LogModel logModel, Throwable t);
+
+    void error(LogModel logModel);
+
+    void info(LogModel logModel);
 }

@@ -35,6 +35,12 @@
             <version>1.2.62</version>
         </dependency>
         <!--END 测试相关 END-->
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2.2</version>
+        </dependency>
     </dependencies>
 
 

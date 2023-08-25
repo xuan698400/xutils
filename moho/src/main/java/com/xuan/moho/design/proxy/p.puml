@@ -1,0 +1,25 @@
+@startuml
+class Person{
+    void sayHello();
+}
+class ChildPerson{
+    void sayHello();
+}
+class ManPerson{
+    void sayHello();
+}
+class PersonProxy{
+    void sayHello();
+}
+class Client{
+    void main();
+}
+
+Person <|.. ChildPerson : impl
+Person <|.. ManPerson : impl
+Person <|.. PersonProxy : impl
+PersonProxy *.. Person : has
+PersonProxy -- Client : use
+ChildPerson -- Client : use
+ManPerson -- Client : use
+@enduml

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         //testGet();
         //testGetDowload2();
-        HttpResponse response = HttpUtils.get("https://www.runoob.com/design-pattern/factory-pattern.html", null);
+        HttpResponse response = HttpUtils.get("https://workbench2.dw.alibaba-inc.com/workbench/cwf/node/code?projectId=22289&env=prod&tenantId=1&nodeId=184817219", null);
         System.out.println(response.getResultStr());
     }
 

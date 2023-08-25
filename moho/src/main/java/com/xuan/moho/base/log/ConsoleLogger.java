@@ -20,4 +20,19 @@ public class ConsoleLogger implements Logger {
         System.out.println("info:" + msg);
     }
 
+    @Override
+    public void error(LogModel logModel, Throwable t) {
+        System.out.println("error:" + logModel.toString() + ", t=" + t);
+    }
+
+    @Override
+    public void error(LogModel logModel) {
+        System.out.println("error:" + logModel.toString());
+    }
+
+    @Override
+    public void info(LogModel logModel) {
+        System.out.println("info:" + logModel.toString());
+    }
+
 }

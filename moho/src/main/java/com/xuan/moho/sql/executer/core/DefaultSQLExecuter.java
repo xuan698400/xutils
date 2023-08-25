@@ -65,7 +65,7 @@ public class DefaultSQLExecuter implements SQLExecuter {
     }
 
     @Override
-    public <T> List<T> queryList(String sql, ResultSetMapping<T> dataExtract, Object... args) throws SQLException {
+    public <T> List<T> queryList(String sql, ResultSetMapping<T> resultSetMapping, Object... args) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -77,7 +77,7 @@ public class DefaultSQLExecuter implements SQLExecuter {
 
             List<T> dataList = new ArrayList<>();
             while (rs.next()) {
-                T data = dataExtract.extract(rs);
+                T data = resultSetMapping.extract(rs);
                 dataList.add(data);
             }
             return dataList;
@@ -89,8 +89,8 @@ public class DefaultSQLExecuter implements SQLExecuter {
     }
 
     @Override
-    public <T> T queryObject(String sql, ResultSetMapping<T> dataExtract, Object... args) throws SQLException {
-        List<T> dataList = queryList(sql, dataExtract, args);
+    public <T> T queryObject(String sql, ResultSetMapping<T> resultSetMapping, Object... args) throws SQLException {
+        List<T> dataList = queryList(sql, resultSetMapping, args);
         return null != dataList && dataList.size() > 0 ? dataList.get(0) : null;
     }
 
