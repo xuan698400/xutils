@@ -19,6 +19,7 @@ moho/target/*
 
 base/target/*
 design/target/*
+net/target/*
 distributed-sequence/target/*
 tools-compiler/target/*
 tools-sql/target/*

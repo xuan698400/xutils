@@ -23,6 +23,7 @@
         <module>tools-compiler</module>
         <module>tools-sql</module>
         <module>design</module>
+        <module>net</module>
     </modules>
     <packaging>pom</packaging>
 
