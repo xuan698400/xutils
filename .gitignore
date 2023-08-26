@@ -22,4 +22,6 @@ design/target/*
 net/target/*
 distributed-sequence/target/*
 tools-compiler/target/*
+tools-compiler/.xutils_compiler_cache_dir/*
+
 tools-sql/target/*
