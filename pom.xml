@@ -22,6 +22,7 @@
         <module>distributed-sequence</module>
         <module>tools-compiler</module>
         <module>tools-sql</module>
+        <module>design</module>
     </modules>
     <packaging>pom</packaging>
 
