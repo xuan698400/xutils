@@ -75,8 +75,8 @@
 
         <!-- 序列号生产器 -->
         <dependency>
-            <groupId>com.xuan</groupId>
-            <artifactId>sequence</artifactId>
+            <groupId>com.xuan.xutils</groupId>
+            <artifactId>distributed-sequence</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

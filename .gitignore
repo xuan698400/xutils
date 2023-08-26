@@ -20,3 +20,4 @@ moho/target/*
 base/target/*
 distributed-sequence/target/*
 tools-compiler/target/*
+tools-sql/target/*
