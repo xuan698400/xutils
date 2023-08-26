@@ -19,7 +19,7 @@
         <module>distributed-tools</module>
         <module>moho</module>
         <module>tools-cmd</module>
-        <module>common</module>
+        <module>base</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -38,6 +38,16 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 所有模块都需要junit来做单元测试 -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -53,14 +63,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <!-- 用来单元测试 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-    </dependencies>
 
 </project>
