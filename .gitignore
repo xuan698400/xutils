@@ -19,3 +19,5 @@ hitools/target/*
 distributed-tools/target/*
 db-console/target/*
 moho/target/*
+
+base/target/*
