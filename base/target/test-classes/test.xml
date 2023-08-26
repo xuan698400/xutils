@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bpm code="bpm.ktvExample\" name="属性中文测试">
-    <subNode1 a="111" b="222"/>"
-    <subNode2 aa="111aaa" bb="222aaa"><![CDATA[cdata中文测试]]><![CDATA[cdata-english-test]]>文本Test</subNode2>"
-    <subNode3 ddd="vvv">noCData</subNode3>
-</bpm>
