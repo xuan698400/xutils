@@ -6,8 +6,6 @@ import java.net.UnknownHostException;
 import javax.sql.DataSource;
 
 import com.xuan.moho.tools.lock.LockException;
-import com.xuan.moho.tools.sequence.db.DbSequence;
-import com.xuan.moho.tools.sequence.db.DbSequence.Builder;
 
 /**
  * 可重入锁
