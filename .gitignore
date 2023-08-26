@@ -8,8 +8,6 @@ classes/*
 
 extp/*/target/*
 mix/target/*
-rbac/target/*
-sequence/target/*
 user/target/*
 spring-utils/target/*
 lock/target/*
@@ -17,7 +15,7 @@ common/target/*
 hisql/target/*
 hitools/target/*
 distributed-tools/target/*
-db-console/target/*
 moho/target/*
 
 base/target/*
+distributed-sequence/target/*

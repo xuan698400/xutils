@@ -10,7 +10,6 @@
     <modules>
         <module>mix</module>
         <module>user</module>
-        <module>sequence</module>
         <module>extp</module>
         <module>spring-utils</module>
         <module>lock</module>
@@ -20,6 +19,7 @@
         <module>moho</module>
         <module>tools-cmd</module>
         <module>base</module>
+        <module>distributed-sequence</module>
     </modules>
     <packaging>pom</packaging>
 
