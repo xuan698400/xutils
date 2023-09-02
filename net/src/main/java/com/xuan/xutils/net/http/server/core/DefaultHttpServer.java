@@ -31,7 +31,7 @@ import com.xuan.xutils.net.http.server.HttpServerHandler;
  */
 public class DefaultHttpServer implements HttpServer {
 
-    private static final Logger log = LoggerFactory.getConsoleLogger(DefaultHttpServer.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultHttpServer.class);
 
     private AtomicBoolean isStart = new AtomicBoolean(false);
 

@@ -14,7 +14,7 @@ public class LoggerFactory {
      * @param clazz 类
      * @return Logger
      */
-    public static Logger getConsoleLogger(Class<?> clazz) {
+    public static Logger getLogger(Class<?> clazz) {
         return new ConsoleLogger();
     }
 

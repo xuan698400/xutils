@@ -14,14 +14,14 @@ lock/target/*
 common/target/*
 hisql/target/*
 hitools/target/*
-distributed-tools/target/*
-moho/target/*
 
 base/target/*
 design/target/*
 net/target/*
 distributed-sequence/target/*
+distributed-lock/target/*
 tools-compiler/target/*
 tools-compiler/.xutils_compiler_cache_dir/*
 
 tools-sql/target/*
+tools-cache/target/*

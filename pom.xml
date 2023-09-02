@@ -15,8 +15,6 @@
         <module>lock</module>
         <module>hisql</module>
         <module>hitools</module>
-        <module>distributed-tools</module>
-        <module>moho</module>
         <module>tools-cmd</module>
         <module>base</module>
         <module>distributed-sequence</module>
@@ -24,6 +22,8 @@
         <module>tools-sql</module>
         <module>design</module>
         <module>net</module>
+        <module>tools-cache</module>
+        <module>distributed-lock</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -42,6 +42,11 @@
             <dependency>
                 <groupId>com.xuan.xutils</groupId>
                 <artifactId>base</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xuan.xutils</groupId>
+                <artifactId>tools-sql</artifactId>
                 <version>1.0</version>
             </dependency>
         </dependencies>
