@@ -24,6 +24,7 @@
         <module>net</module>
         <module>tools-cache</module>
         <module>distributed-lock</module>
+        <module>geek-code</module>
     </modules>
     <packaging>pom</packaging>
 
