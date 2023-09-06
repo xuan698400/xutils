@@ -1,4 +1,4 @@
-package com.xuan.xutils.geek.code;
+package com.xuan.xutils.geek.code.sequence;
 
 import java.util.concurrent.CountDownLatch;
 
