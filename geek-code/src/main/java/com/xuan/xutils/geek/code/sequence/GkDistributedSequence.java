@@ -19,7 +19,7 @@ import javafx.util.Pair;
  * @author xuan
  * @since 2023/9/5
  */
-public class GkDistributeSequence {
+public class GkDistributedSequence {
 
     /**
      * 获取区间失败重试次数
@@ -45,7 +45,7 @@ public class GkDistributeSequence {
     /**
      * 区间表名
      */
-    private final static String TABLE_NAME = "gk_distribute_sequence";
+    private final static String TABLE_NAME = "gk_distributed_sequence";
 
     /**
      * 表是否初始化过

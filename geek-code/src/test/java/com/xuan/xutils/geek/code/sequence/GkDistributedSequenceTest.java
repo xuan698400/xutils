@@ -8,7 +8,7 @@ import com.alibaba.druid.pool.DruidDataSource;
  * @author xuan
  * @since 2023/9/5
  */
-public class GkDistributeSequenceTest {
+public class GkDistributedSequenceTest {
 
     public static void main(String[] args) {
 
@@ -24,7 +24,7 @@ public class GkDistributeSequenceTest {
         for (int i = 0; i < 20; i++) {
             Thread thread = new Thread(() -> {
                 for (int j = 0; j < 100; j++) {
-                    long sequenceNo = GkDistributeSequence.getSequenceNo(dataSource, "GkDistributeSequenceTest6");
+                    long sequenceNo = GkDistributedSequence.getSequenceNo(dataSource, "GkDistributeSequenceTest6");
                     System.out.println(
                         "++++++++++id:" + sequenceNo + ", thread:" + Thread.currentThread().getName());
                 }
