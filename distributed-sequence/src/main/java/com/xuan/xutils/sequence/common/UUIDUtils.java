@@ -109,4 +109,8 @@ public class UUIDUtils {
         return uuid.generateHex();
     }
 
+    public static void main(String[] args) throws Exception {
+        System.out.println(new String(InetAddress.getLocalHost().getAddress()));
+    }
+
 }

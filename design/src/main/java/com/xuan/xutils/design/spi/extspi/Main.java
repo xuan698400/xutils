@@ -1,4 +1,4 @@
-package com.xuan.xutils.design.spi;
+package com.xuan.xutils.design.spi.extspi;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;

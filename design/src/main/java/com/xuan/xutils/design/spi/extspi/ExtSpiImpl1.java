@@ -1,4 +1,4 @@
-package com.xuan.xutils.design.spi;
+package com.xuan.xutils.design.spi.extspi;
 
 /**
  * 实现1
