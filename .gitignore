@@ -10,9 +10,7 @@ extp/*/target/*
 mix/target/*
 user/target/*
 spring-utils/target/*
-lock/target/*
 common/target/*
-hisql/target/*
 hitools/target/*
 
 base/target/*

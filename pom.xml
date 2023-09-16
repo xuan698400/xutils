@@ -12,8 +12,6 @@
         <module>user</module>
         <module>extp</module>
         <module>spring-utils</module>
-        <module>lock</module>
-        <module>hisql</module>
         <module>hitools</module>
         <module>tools-cmd</module>
         <module>base</module>
