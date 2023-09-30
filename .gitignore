@@ -23,3 +23,5 @@ tools-compiler/.xutils_compiler_cache_dir/*
 
 tools-sql/target/*
 tools-cache/target/*
+
+geek-code/target/*
