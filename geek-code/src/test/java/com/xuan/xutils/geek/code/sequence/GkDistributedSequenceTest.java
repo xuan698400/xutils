@@ -7,7 +7,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * @author xuan
- * @since 2023/9/5
+ * @since 2018/1/10
  */
 public class GkDistributedSequenceTest {
 

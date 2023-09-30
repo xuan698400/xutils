@@ -10,7 +10,7 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 /**
- * 可重入分布式锁
+ * 分布式锁
  *
  * @author xuan
  * @since 2023/9/7

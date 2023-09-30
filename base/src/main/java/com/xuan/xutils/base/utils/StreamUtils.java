@@ -42,14 +42,6 @@ public class StreamUtils {
     /**
      * 从InputStream流里面读取String
      *
-     * @param input
-     * @return
-     * @throws IOException
-     */
-
-    /**
-     * 从InputStream流里面读取String
-     *
      * @param inputStream 输入流
      * @param charset     编码
      * @return 字符串

@@ -12,10 +12,10 @@ import javax.sql.DataSource;
 import javafx.util.Pair;
 
 /**
- * 分布式序号生成工具
+ * 分布式序列号生成器
  *
  * @author xuan
- * @since 2023/9/5
+ * @since 2018/1/10
  */
 public class GkDistributedSequence {
 
@@ -62,28 +62,28 @@ public class GkDistributedSequence {
     public GkDistributedSequence(DataSource dataSource, String name, int retryTimes, int step, int stepStart) {
         this.dataSource = dataSource;
         if (null == dataSource) {
-            throw new RuntimeException("dataSource is null");
+            throw new RuntimeException("dataSource cannot be null");
         }
 
         this.name = name;
         if (null == name || name.trim().length() == 0) {
-            throw new RuntimeException("name is empty");
+            throw new RuntimeException("name cannot be empty");
         }
 
         this.retryTimes = retryTimes;
         if (retryTimes < 1) {
-            throw new RuntimeException("retryTimes csannot be less than 1");
+            throw new RuntimeException("retryTimes cannot be less than 1");
         }
 
         this.step = step;
         if (step < 1) {
-            throw new RuntimeException("step csannot be less than 1");
+            throw new RuntimeException("step cannot be less than 1");
         }
 
         this.stepStart = stepStart;
 
         if (stepStart < 0) {
-            throw new RuntimeException("stepStart csannot be less than 0");
+            throw new RuntimeException("stepStart cannot be less than 0");
         }
     }
 
