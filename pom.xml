@@ -23,6 +23,7 @@
         <module>tools-cache</module>
         <module>distributed-lock</module>
         <module>geek-code</module>
+        <module>crud-boy</module>
     </modules>
     <packaging>pom</packaging>
 

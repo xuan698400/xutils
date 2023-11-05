@@ -1,0 +1,68 @@
+{
+  "tables": [
+    {
+      "name": "cb_user",
+      "fields": [
+        {
+          "name": "id",
+          "desc": "主键ID",
+          "type": "long",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "name",
+          "desc": "用户姓名",
+          "type": "string",
+          "maxLength": "20",
+          "required": true
+        },
+        {
+          "name": "sex",
+          "desc": "性别",
+          "type": "string",
+          "maxLength": "20",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "desc": "手机号码",
+          "type": "string",
+          "maxLength": "20",
+          "required": true
+        },
+        {
+          "name": "mark",
+          "desc": "备注",
+          "type": "string",
+          "maxLength": "500"
+        },
+        {
+          "name": "createTime",
+          "desc": "创建时间",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "creator",
+          "desc": "创建人姓名",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "modifyTime",
+          "desc": "修改时间",
+          "type": "date",
+          "required": true,
+          "primary": false
+        },
+        {
+          "name": "modifier",
+          "desc": "修改人姓名",
+          "type": "string",
+          "required": true
+        }
+      ]
+    }
+  ]
+}
