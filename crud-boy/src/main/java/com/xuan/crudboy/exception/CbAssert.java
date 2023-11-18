@@ -50,6 +50,10 @@ public class CbAssert {
         }
     }
 
+    public static void notNull(Object obj, String msg) {
+        notNull(obj, CbExceptionCodeEnum.BIZ_COMMON_EXCEPTION, msg);
+    }
+
     /**
      * 字符串不能为空，如果为空就抛出异常
      *
@@ -61,6 +65,10 @@ public class CbAssert {
         if (null == str || str.trim().length() == 0) {
             throw CbExceptionFactory.exception(code, msg);
         }
+    }
+
+    public static void notEmpty(String str, String msg) {
+        notEmpty(str, CbExceptionCodeEnum.BIZ_COMMON_EXCEPTION, msg);
     }
 
     /**
@@ -76,6 +84,10 @@ public class CbAssert {
         }
     }
 
+    public static void notEmpty(Collection<?> collection, String msg) {
+        notEmpty(collection, CbExceptionCodeEnum.BIZ_COMMON_EXCEPTION, msg);
+    }
+
     /**
      * MAP不能为空，如果为空就抛出异常
      *
@@ -87,6 +99,10 @@ public class CbAssert {
         if (null == map || map.isEmpty()) {
             throw CbExceptionFactory.exception(code, msg);
         }
+    }
+
+    public static void notEmpty(Map<?, ?> map, String msg) {
+        notEmpty(map, CbExceptionCodeEnum.BIZ_COMMON_EXCEPTION, msg);
     }
 
 }

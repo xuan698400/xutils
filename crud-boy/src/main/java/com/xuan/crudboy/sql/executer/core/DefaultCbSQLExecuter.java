@@ -13,17 +13,17 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.xuan.crudboy.sql.mapping.CbResultSetMapping;
-import com.xuan.crudboy.sql.executer.CbSqlExecuter;
+import com.xuan.crudboy.sql.executer.CbSQLExecuter;
 
 /**
  * @author xuan
  * @since 2022/9/9
  */
-public class DefaultCbSqlExecuter implements CbSqlExecuter {
+public class DefaultCbSQLExecuter implements CbSQLExecuter {
 
     private DataSource dataSource;
 
-    public DefaultCbSqlExecuter(DataSource dataSource) {
+    public DefaultCbSQLExecuter(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

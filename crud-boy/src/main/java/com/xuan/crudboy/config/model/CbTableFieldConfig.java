@@ -1,10 +1,10 @@
-package com.xuan.crudboy.config;
+package com.xuan.crudboy.config.model;
 
 /**
  * @author xuan
  * @since 2023/11/5
  */
-public class CbTableField {
+public class CbTableFieldConfig {
 
     /**
      * 字段名称
@@ -17,7 +17,7 @@ public class CbTableField {
     private String desc;
 
     /**
-     * 字段类型，参考：com.xuan.crudboy.config.CbTableFieldType
+     * 字段类型，参考：com.xuan.crudboy.config.model.CbTableFieldTypeEnum
      */
     private String type;
 

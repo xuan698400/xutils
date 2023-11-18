@@ -1,10 +1,12 @@
-package com.xuan.crudboy.sql.builder.core;
+package com.xuan.crudboy.utils;
 
 /**
+ * 驼峰格式的字符串和下划线格式的字符串互转
+ *
  * @author xuan
- * @since 2023/11/6
+ * @since 2023/1/12
  */
-public class CbSqlHelper {
+public class CbCamelUtils {
 
     /**
      * 驼峰格式转下划线格式
@@ -59,5 +61,5 @@ public class CbSqlHelper {
 
         return sb.toString();
     }
-    
+
 }

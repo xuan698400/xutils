@@ -12,8 +12,8 @@ import com.xuan.crudboy.api.CbResult;
 public class DefaultCbApi implements CbApi {
 
     @Override
-    public CbResult<Long> add(Map<String, Object> data) {
+    public CbResult<Long> add(Map<String, String> data) {
         return null;
     }
-    
+
 }

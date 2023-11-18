@@ -14,5 +14,5 @@ public interface CbApi {
      * @param data 新增数据
      * @return result
      */
-    CbResult<Long> add(Map<String, Object> data);
+    CbResult<Long> add(Map<String, String> data);
 }

@@ -9,7 +9,7 @@ import com.xuan.crudboy.sql.mapping.CbResultSetMapping;
  * @author xuan
  * @since 2022/9/21
  */
-public interface CbSqlExecuter {
+public interface CbSQLExecuter {
 
     /**
      * 插入数据操作，并返回自增ID

@@ -1,4 +1,4 @@
-package com.xuan.crudboy.sql.builder;
+package com.xuan.crudboy.domain;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import java.util.List;
  * @since 2021/11/5
  */
 public class CbSqlParams {
+
     /**
      * 带问号的SQL
      */
@@ -17,10 +18,6 @@ public class CbSqlParams {
      * 参数
      */
     private List<Object> params;
-
-    public Object[] buildParamsArray() {
-        return null == params ? null : params.toArray(new Object[0]);
-    }
 
     public String getSql() {
         return sql;
