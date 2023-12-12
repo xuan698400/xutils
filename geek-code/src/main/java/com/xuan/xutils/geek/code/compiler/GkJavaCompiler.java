@@ -266,7 +266,6 @@ public class GkJavaCompiler {
         public Class<?> defineClass(String name, byte[] classBytes) {
             return defineClass(name, classBytes, 0, classBytes.length);
         }
-
     }
 
 }

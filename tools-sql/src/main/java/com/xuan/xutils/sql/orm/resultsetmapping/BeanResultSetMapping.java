@@ -4,12 +4,13 @@ import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.xuan.xutils.base.exception.ExceptionFactory;
 import com.xuan.xutils.sql.executer.ResultSetMapping;
 import com.xuan.xutils.sql.orm.core.CamelUtils;
 import com.xuan.xutils.sql.orm.core.JdbcUtils;
 
 /**
+ * 返回JavaBean结果映射实现
+ *
  * @author xuan
  * @since 2023/1/11
  */
@@ -29,7 +30,7 @@ public class BeanResultSetMapping<T> implements ResultSetMapping<T> {
         try {
             bean = beanClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw ExceptionFactory.bizException("beanClass newInstance exception", e);
+            throw new RuntimeException("beanClass newInstance exception", e);
         }
 
         //遍历对象属性，从rs获取值
@@ -42,7 +43,7 @@ public class BeanResultSetMapping<T> implements ResultSetMapping<T> {
             try {
                 field.set(bean, JdbcUtils.getResultSetValue(rs, columnName, fieldClazzType));
             } catch (IllegalAccessException e) {
-                throw ExceptionFactory.bizException("field set IllegalAccessException", e);
+                throw new RuntimeException("field set IllegalAccessException", e);
             }
         }
 

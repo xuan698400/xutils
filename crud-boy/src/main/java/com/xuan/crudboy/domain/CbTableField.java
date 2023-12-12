@@ -12,6 +12,13 @@ public class CbTableField {
 
     private CbTableFieldConfig config;
 
+    public static CbTableField of(CbTableFieldConfig config, Object value) {
+        CbTableField field = new CbTableField();
+        field.setConfig(config);
+        field.setValue(value);
+        return field;
+    }
+
     public Object getValue() {
         return value;
     }
@@ -27,5 +34,5 @@ public class CbTableField {
     public void setConfig(CbTableFieldConfig config) {
         this.config = config;
     }
-    
+
 }

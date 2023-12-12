@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import com.xuan.xutils.sql.executer.ResultSetMapping;
 
 /**
+ * 返回int数字结果映射实现
+ *
  * @author xuan
  * @since 2023/1/11
  */

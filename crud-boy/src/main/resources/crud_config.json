@@ -1,8 +1,8 @@
 {
-  "tables": [
+  "tableConfigs": [
     {
       "name": "cb_user",
-      "fields": [
+      "fieldConfigs": [
         {
           "name": "id",
           "desc": "主键ID",
@@ -11,8 +11,15 @@
           "primary": true
         },
         {
-          "name": "name",
-          "desc": "用户姓名",
+          "name": "username",
+          "desc": "用户名",
+          "type": "string",
+          "maxLength": "20",
+          "required": true
+        },
+        {
+          "name": "nickname",
+          "desc": "昵称",
           "type": "string",
           "maxLength": "20",
           "required": true

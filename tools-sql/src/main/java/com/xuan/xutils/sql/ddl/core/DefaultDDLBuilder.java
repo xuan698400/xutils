@@ -3,7 +3,6 @@ package com.xuan.xutils.sql.ddl.core;
 import com.xuan.xutils.sql.common.SQLSyntax;
 import com.xuan.xutils.sql.ddl.DDLBuilder;
 import com.xuan.xutils.sql.ddl.spec.TableSpec;
-import com.xuan.xutils.sql.ddl.DDLBuilder;
 
 /**
  * @author xuan

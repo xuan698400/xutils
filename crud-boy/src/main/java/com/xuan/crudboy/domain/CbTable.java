@@ -13,7 +13,14 @@ public class CbTable {
 
     private CbTableConfig config;
 
-    private List<CbTableField> fields;
+    private List<CbTableField> fieldConfigs;
+
+    public static CbTable of(CbTableConfig config, List<CbTableField> fieldConfigs) {
+        CbTable table = new CbTable();
+        table.setConfig(config);
+        table.setFieldConfigs(fieldConfigs);
+        return table;
+    }
 
     public CbSqlParams buildInsertSqlParams() {
 
@@ -21,12 +28,12 @@ public class CbTable {
         StringBuilder sql = new StringBuilder("INSERT INTO " + config.getName() + "(");
         int paramsSize = 0;
 
-        for (CbTableField field : fields) {
-            Object value = field.getValue();
+        for (CbTableField fieldConfig : fieldConfigs) {
+            Object value = fieldConfig.getValue();
             if (null == value) {
                 continue;
             }
-            sql.append(camelToUnderline(field.getConfig().getName()));
+            sql.append(camelToUnderline(fieldConfig.getConfig().getName()));
             sql.append(",");
             valueList.add(value);
             paramsSize++;
@@ -66,12 +73,12 @@ public class CbTable {
         this.config = config;
     }
 
-    public List<CbTableField> getFields() {
-        return fields;
+    public List<CbTableField> getFieldConfigs() {
+        return fieldConfigs;
     }
 
-    public void setFields(List<CbTableField> fields) {
-        this.fields = fields;
+    public void setFieldConfigs(List<CbTableField> fieldConfigs) {
+        this.fieldConfigs = fieldConfigs;
     }
 
 }

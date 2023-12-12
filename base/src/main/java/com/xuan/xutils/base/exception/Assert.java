@@ -3,10 +3,6 @@ package com.xuan.xutils.base.exception;
 import java.util.Collection;
 import java.util.Map;
 
-import com.xuan.xutils.base.utils.CollectionUtils;
-import com.xuan.xutils.base.utils.MapUtils;
-import com.xuan.xutils.base.utils.StringUtils;
-
 /**
  * 断言工具类
  *
@@ -62,7 +58,7 @@ public class Assert {
      * @param msg  错误提示
      */
     public static void notEmpty(String str, BizExceptionCode code, String msg) {
-        if (StringUtils.isEmpty(str)) {
+        if (null == str || str.trim().length() == 0) {
             throw ExceptionFactory.exception(code, msg);
         }
     }
@@ -75,7 +71,7 @@ public class Assert {
      * @param msg        错误提示
      */
     public static void notEmpty(Collection<?> collection, BizExceptionCode code, String msg) {
-        if (CollectionUtils.isEmpty(collection)) {
+        if (null == collection || collection.isEmpty()) {
             throw ExceptionFactory.exception(code, msg);
         }
     }
@@ -88,7 +84,7 @@ public class Assert {
      * @param msg  错误提示
      */
     public static void notEmpty(Map<?, ?> map, BizExceptionCode code, String msg) {
-        if (MapUtils.isEmpty(map)) {
+        if (null == map || map.isEmpty()) {
             throw ExceptionFactory.exception(code, msg);
         }
     }

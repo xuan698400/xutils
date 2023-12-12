@@ -31,41 +31,55 @@ public class DdlBuilderTest {
     }
 
     public String getCreateTableSql() {
-        ColumnSpec bigIntT = ColumnSpec.builder()
-            .name("bigint_t")
-            .autoIncrement(true)
-            .columnType(ColumnTypeBigIntSpec.of())
-            .comment("bigint_t_描述")
-            .notNull(true)
-            .unsigned(true)
-            .build();
+        ColumnSpec bigIntT = new ColumnSpec();
+        bigIntT.setName("bigint_t");
+        bigIntT.setAutoIncrement(true);
+        bigIntT.setColumnType(ColumnTypeBigIntSpec.of());
+        bigIntT.setComment("bigint_t_描述");
+        bigIntT.setNotNull(true);
+        bigIntT.setUnsigned(true);
 
-        ColumnSpec charT = ColumnSpec.builder()
-            .name("char_t").comment("char_t_描述").columnType(ColumnTypeCharSpec.of(32)).build();
+        ColumnSpec charT = new ColumnSpec();
+        charT.setName("char_t");
+        charT.setComment("char_t_描述");
+        charT.setColumnType(ColumnTypeCharSpec.of(32));
 
-        ColumnSpec createTimeT = ColumnSpec.builder()
-            .name("create_time_t").comment("create_time_t_描述").columnType(ColumnTypeDatetimeSpec.of()).build();
+        ColumnSpec createTimeT = new ColumnSpec();
+        createTimeT.setName("create_time_t");
+        createTimeT.setComment("create_time_t_描述");
+        createTimeT.setColumnType(ColumnTypeDatetimeSpec.of());
 
-        ColumnSpec decimalT = ColumnSpec.builder()
-            .name("decimal_t").comment("decimal_t_描述").columnType(ColumnTypeDecimalSpec.of(7, 4)).build();
+        ColumnSpec decimalT = new ColumnSpec();
+        decimalT.setName("decimal_t");
+        decimalT.setComment("decimal_t_描述");
+        decimalT.setColumnType(ColumnTypeDecimalSpec.of(7, 4));
 
-        ColumnSpec intT = ColumnSpec.builder()
-            .name("int_t").comment("int_t_描述").columnType(ColumnTypeIntSpec.of()).build();
+        ColumnSpec intT = new ColumnSpec();
+        intT.setName("int_t");
+        intT.setComment("int_t_描述");
+        intT.setColumnType(ColumnTypeIntSpec.of());
 
-        ColumnSpec longTextT = ColumnSpec.builder()
-            .name("long_text_t").comment("long_text_t_描述").columnType(ColumnTypeLongTextSpec.of()).build();
+        ColumnSpec longTextT = new ColumnSpec();
+        longTextT.setName("long_text_t");
+        longTextT.setComment("long_text_t_描述");
+        longTextT.setColumnType(ColumnTypeLongTextSpec.of());
 
-        ColumnSpec textT = ColumnSpec.builder()
-            .name("text_t").comment("text_t_描述").columnType(ColumnTypeTextSpec.of()).build();
+        ColumnSpec textT = new ColumnSpec();
+        textT.setName("text_t");
+        textT.setComment("text_t_描述");
+        textT.setColumnType(ColumnTypeTextSpec.of());
 
-        ColumnSpec tinyIntT = ColumnSpec.builder()
-            .name("tiny_int_t").columnType(ColumnTypeTinyIntSpec.of()).build();
+        ColumnSpec tinyIntT = new ColumnSpec();
+        tinyIntT.setName("tiny_int_t");
+        tinyIntT.setColumnType(ColumnTypeTinyIntSpec.of());
 
-        ColumnSpec tinyTextT = ColumnSpec.builder()
-            .name("tiny_text_t").columnType(ColumnTypeTinyTextSpec.of()).build();
+        ColumnSpec tinyTextT = new ColumnSpec();
+        tinyTextT.setName("tiny_text_t");
+        tinyTextT.setColumnType(ColumnTypeTinyTextSpec.of());
 
-        ColumnSpec varcharT = ColumnSpec.builder()
-            .name("varchar_t").columnType(ColumnTypeVarcharSpec.of(512)).build();
+        ColumnSpec varcharT = new ColumnSpec();
+        varcharT.setName("varchar_t");
+        varcharT.setColumnType(ColumnTypeVarcharSpec.of(512));
 
         List<ColumnSpec> columnList = new ArrayList<>();
         columnList.add(bigIntT);
@@ -87,15 +101,14 @@ public class DdlBuilderTest {
         keysList.add(newList(varcharT, textT));
         keysList.add(newList(charT));
 
-        TableSpec tableSpec = TableSpec.builder()
-            .name("ddl_table_test")
-            .columnList(columnList)
-            .primaryKey(bigIntT)
-            .uniqueKeysList(uniqueKeysList)
-            .keysList(keysList)
-            .charset("utf-8")
-            .comment("ddl测试表")
-            .build();
+        TableSpec tableSpec = new TableSpec();
+        tableSpec.setName("ddl_table_test");
+        tableSpec.setColumnList(columnList);
+        tableSpec.setPrimaryKey(bigIntT);
+        tableSpec.setUniqueKeysList(uniqueKeysList);
+        tableSpec.setKeysList(keysList);
+        tableSpec.setCharset("utf-8");
+        tableSpec.setComment("ddl测试表");
         return tableSpec.createTableSQL(SQLSyntax.MYSQL);
     }
 

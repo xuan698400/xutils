@@ -9,6 +9,8 @@ import java.util.Map;
 import com.xuan.xutils.sql.executer.ResultSetMapping;
 
 /**
+ * 返回map集合结果映射实现
+ *
  * @author xuan
  * @since 2023/1/11
  */

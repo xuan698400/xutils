@@ -6,8 +6,6 @@ import java.sql.Clob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.xuan.xutils.base.exception.ExceptionFactory;
-
 /**
  * @author xuan
  * @since 2023/1/11
@@ -48,7 +46,7 @@ public class JdbcUtils {
         } else if (Clob.class == requiredType) {
             return rs.getClob(columnName);
         } else {
-            throw ExceptionFactory.bizException("数据模型类型不支持, requiredType:" + requiredType);
+            throw new RuntimeException("数据模型类型不支持, requiredType:" + requiredType);
         }
         return value;
     }

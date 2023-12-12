@@ -3,9 +3,9 @@ package com.xuan.xutils.sql.orm;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.xuan.xutils.base.model.page.PageData;
-import com.xuan.xutils.base.model.page.PageQuery;
 import com.xuan.xutils.sql.orm.model.DataModel;
+import com.xuan.xutils.sql.orm.model.page.PageData;
+import com.xuan.xutils.sql.orm.model.page.PageQuery;
 import com.xuan.xutils.sql.orm.sqlparams.SQLParamsQueryCreator;
 
 /**

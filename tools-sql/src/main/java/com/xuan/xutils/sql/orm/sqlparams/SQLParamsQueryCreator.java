@@ -3,9 +3,8 @@ package com.xuan.xutils.sql.orm.sqlparams;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xuan.xutils.base.model.page.PageOrderBy;
-import com.xuan.xutils.base.model.page.PageQuery;
-import com.xuan.xutils.base.utils.CollectionUtils;
+import com.xuan.xutils.sql.orm.model.page.PageOrderBy;
+import com.xuan.xutils.sql.orm.model.page.PageQuery;
 
 /**
  * 查询SQL生成器
@@ -247,7 +246,7 @@ public class SQLParamsQueryCreator {
             return this;
         }
 
-        if (CollectionUtils.isNotEmpty(pageQuery.getOrderByList())) {
+        if (null != pageQuery.getOrderByList()) {
             for (PageOrderBy orderBy : pageQuery.getOrderByList()) {
                 orderBy(orderBy.getFieldName(), orderBy.isDesc());
             }

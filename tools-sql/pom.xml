@@ -13,10 +13,10 @@
     <artifactId>tools-sql</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.xuan.xutils</groupId>
-            <artifactId>base</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.xuan.xutils</groupId>-->
+            <!--<artifactId>base</artifactId>-->
+        <!--</dependency>-->
 
         <!--START 测试相关 START-->
         <dependency>

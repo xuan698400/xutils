@@ -47,8 +47,8 @@ public class CbResourceConfigLoader implements CbConfigLoader {
         config.getTables().forEach(table -> {
             CbAssert.notNull(table, "table不能为空");
             CbAssert.notEmpty(table.getName(), "table.name不能为空");
-            CbAssert.notEmpty(table.getFields(), "table.fields不能为空");
-            table.getFields().forEach(field -> {
+            CbAssert.notEmpty(table.getFieldConfigs(), "table.fieldConfigs不能为空");
+            table.getFieldConfigs().forEach(field -> {
                 CbAssert.notNull(field, "field不能为空");
                 CbAssert.notNull(field.getName(), "field.name不能为空");
                 CbAssert.notNull(field.getType(), "field.type不能为空");

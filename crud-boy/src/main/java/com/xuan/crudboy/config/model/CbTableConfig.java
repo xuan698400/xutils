@@ -16,7 +16,7 @@ public class CbTableConfig {
     /**
      * 字段列表
      */
-    private List<CbTableFieldConfig> fields;
+    private List<CbTableFieldConfig> fieldConfigs;
 
     /**
      * 唯一键
@@ -31,12 +31,12 @@ public class CbTableConfig {
         this.name = name;
     }
 
-    public List<CbTableFieldConfig> getFields() {
-        return fields;
+    public List<CbTableFieldConfig> getFieldConfigs() {
+        return fieldConfigs;
     }
 
-    public void setFields(List<CbTableFieldConfig> fields) {
-        this.fields = fields;
+    public void setFieldConfigs(List<CbTableFieldConfig> fieldConfigs) {
+        this.fieldConfigs = fieldConfigs;
     }
 
     public List<CbTableUkConfig> getUks() {

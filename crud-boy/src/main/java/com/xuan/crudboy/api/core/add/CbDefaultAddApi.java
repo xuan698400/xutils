@@ -9,7 +9,9 @@ import com.xuan.crudboy.api.CbResult;
 import com.xuan.crudboy.api.core.BaseCbApiImpl;
 import com.xuan.crudboy.config.CbConfigManager;
 import com.xuan.crudboy.config.model.CbTableConfig;
+import com.xuan.crudboy.config.model.CbTableFieldConfig;
 import com.xuan.crudboy.domain.CbSqlParams;
+import com.xuan.crudboy.domain.CbTable;
 import com.xuan.crudboy.domain.CbTableField;
 import com.xuan.crudboy.exception.CbAssert;
 
@@ -28,45 +30,18 @@ public class CbDefaultAddApi extends BaseCbApiImpl implements CbAddApi {
         CbConfigManager cbConfigManager = CrudBoy.getInstance().getConfigManager();
         CbTableConfig tableConfig = cbConfigManager.getTableConfig(request.getApiCode());
 
-        //
-        List<CbTableField> fieldList = new ArrayList<>();
+        List<CbTableFieldConfig> fieldConfigList = tableConfig.getFieldConfigs();
         Map<String, String> data = request.getData();
-        data.forEach((fieldName, value) -> {
-
+        List<CbTableField> fieldList = new ArrayList<>();
+        fieldConfigList.forEach(fieldConfig -> {
+            CbTableField field = CbTableField.of(fieldConfig, data.get(fieldConfig.getName()));
+            fieldList.add(field);
         });
 
-        return null;
-    }
+        CbTable table = CbTable.of(tableConfig, fieldList);
 
-    public CbSqlParams build(List<CbTableField> fieldList) {
+        CbSqlParams sqlParams = table.buildInsertSqlParams();
 
-        //List<Object> valueList = new ArrayList<>();
-        //StringBuilder sql = new StringBuilder("INSERT INTO " + config.getName() + "(");
-        //int paramsSize = 0;
-        //
-        //for (CbTableField field : fields) {
-        //    Object value = field.getValue();
-        //    if (null == value) {
-        //        continue;
-        //    }
-        //    sql.append(CbCamelUtils.camelToUnderline(field.getConfig().getName()));
-        //    sql.append(",");
-        //    valueList.add(value);
-        //    paramsSize++;
-        //}
-        //
-        //sql.deleteCharAt(sql.length() - 1);
-        //sql.append(") VALUES(");
-        //for (int i = 0; i < paramsSize; i++) {
-        //    sql.append("?,");
-        //}
-        //sql.deleteCharAt(sql.length() - 1);
-        //sql.append(")");
-        //
-        //CbSqlParams sqlParams = new CbSqlParams();
-        //sqlParams.setSql(sql.toString());
-        //sqlParams.setParams(valueList);
-        //return sqlParams;
         return null;
     }
 

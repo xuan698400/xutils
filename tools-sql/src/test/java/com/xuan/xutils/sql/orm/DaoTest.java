@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 
-import com.xuan.xutils.base.model.page.PageData;
-import com.xuan.xutils.base.model.page.PageQuery;
 import com.xuan.xutils.sql.BaseDbTest;
 import com.xuan.xutils.sql.executer.SQLExecuter;
 import com.xuan.xutils.sql.executer.core.DefaultSQLExecuter;
 import com.xuan.xutils.sql.orm.core.DefaultDao;
+import com.xuan.xutils.sql.orm.model.page.PageData;
+import com.xuan.xutils.sql.orm.model.page.PageQuery;
 import com.xuan.xutils.sql.orm.sqlparams.SQLParamsQueryCreator;
 import org.junit.Assert;
 import org.junit.Before;

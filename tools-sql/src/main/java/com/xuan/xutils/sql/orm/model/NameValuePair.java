@@ -1,7 +1,6 @@
 package com.xuan.xutils.sql.orm.model;
 
-import com.xuan.xutils.base.exception.ExceptionFactory;
-import com.xuan.xutils.base.utils.StringUtils;
+import java.security.InvalidParameterException;
 
 /**
  * 键值对模型
@@ -39,17 +38,17 @@ public class NameValuePair {
     }
 
     public void checkValid() {
-        if (StringUtils.isEmpty(name)) {
-            throw ExceptionFactory.bizException("primaryKey name is null");
+        if (null == name || name.trim().length() == 0) {
+            throw new InvalidParameterException("primaryKey name is empty.");
         }
 
         if (null == value) {
-            throw ExceptionFactory.bizException("primaryKey value is null");
+            throw new InvalidParameterException("primaryKey value is null.");
         }
     }
 
     public boolean isValid() {
-        return StringUtils.isNotEmpty(name) && null != value;
+        return (null != name && name.trim().length() > 0) && null != value;
     }
 
 }

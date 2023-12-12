@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xuan.xutils.base.exception.ExceptionFactory;
 import com.xuan.xutils.sql.orm.model.DataModel;
 import com.xuan.xutils.sql.orm.sqlparams.SQLParams;
 
@@ -26,7 +25,7 @@ public class SelectSQLParamsBuilder extends BaseSQLParamsBuilder {
             try {
                 value = field.get(dataModel);
             } catch (IllegalAccessException e) {
-                throw ExceptionFactory.bizException("field get IllegalAccessException", e);
+                throw new RuntimeException("field get IllegalAccessException", e);
             }
 
             if (null == value) {

@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xuan.xutils.base.exception.ExceptionFactory;
 import com.xuan.xutils.sql.orm.model.DataModel;
 import com.xuan.xutils.sql.orm.sqlparams.SQLParams;
 
@@ -27,7 +26,7 @@ public class DeleteSQLParamsBuilder extends BaseSQLParamsBuilder {
             try {
                 value = field.get(dataModel);
             } catch (IllegalAccessException e) {
-                throw ExceptionFactory.bizException("field get IllegalAccessException", e);
+                throw new RuntimeException("field get IllegalAccessException", e);
             }
 
             if (null == value) {
@@ -42,7 +41,7 @@ public class DeleteSQLParamsBuilder extends BaseSQLParamsBuilder {
 
         //无条件删除，如果需要可以去掉
         if (!sb.toString().endsWith(" AND ")) {
-            throw ExceptionFactory.bizException("It is not allowed to delete without deletion conditions.");
+            throw new RuntimeException("It is not allowed to delete without deletion conditions.");
         }
 
         SQLParams sqlParams = new SQLParams();

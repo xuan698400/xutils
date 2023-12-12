@@ -1,7 +1,6 @@
 package com.xuan.xutils.sql.ddl.spec.columntype;
 
-import com.xuan.xutils.base.exception.Assert;
-import com.xuan.xutils.base.exception.BizExceptionCodeEnum;
+import com.xuan.xutils.sql.common.Assert;
 import com.xuan.xutils.sql.common.SQLSyntax;
 import com.xuan.xutils.sql.ddl.spec.ColumnTypeSpec;
 
@@ -19,7 +18,7 @@ public class ColumnTypeVarcharSpec implements ColumnTypeSpec {
     }
 
     public static ColumnTypeVarcharSpec of(Integer size) {
-        Assert.notNull(size, BizExceptionCodeEnum.BIZ_PARAM_NULL, "size is null.");
+        Assert.notNull(size, "列类型varchar长度[size]不能为空");
         ColumnTypeVarcharSpec spec = new ColumnTypeVarcharSpec();
         spec.size = size;
         return spec;

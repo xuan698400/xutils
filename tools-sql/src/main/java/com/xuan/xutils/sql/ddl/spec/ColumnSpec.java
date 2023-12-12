@@ -1,27 +1,51 @@
 package com.xuan.xutils.sql.ddl.spec;
 
-import com.xuan.xutils.base.exception.Assert;
-import com.xuan.xutils.base.exception.BizExceptionCodeEnum;
-import com.xuan.xutils.base.utils.BooleanUtils;
-import com.xuan.xutils.base.utils.StringUtils;
+import com.xuan.xutils.sql.common.Assert;
+import com.xuan.xutils.sql.common.BooleanUtils;
 import com.xuan.xutils.sql.common.SQLSyntax;
+import com.xuan.xutils.sql.common.StringUtils;
 
 /**
+ * 数据库列元数据
+ *
  * @author xuan
  * @since 2023/1/6
  */
 public class ColumnSpec {
 
+    /**
+     * 列名
+     */
     private String name;
+
+    /**
+     * 列类型
+     */
     private ColumnTypeSpec columnType;
+
+    /**
+     * 是否无符号数
+     */
     private Boolean unsigned;
+
+    /**
+     * 是否不为空
+     */
     private Boolean notNull;
+
+    /**
+     * 是否自增
+     */
     private Boolean autoIncrement;
+
+    /**
+     * 描述
+     */
     private String comment;
 
     public String buildCreateTableColumnSQL(SQLSyntax sqlSyntax) {
-        Assert.notEmpty(name, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "name is empty.");
-        Assert.notNull(columnType, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "name is null.");
+        Assert.notEmpty(name, "字段[name]不能为空");
+        Assert.notNull(columnType, "字段类型[columnType]不能为空");
 
         StringBuilder sb = new StringBuilder();
         sb.append(name).append(" ")
@@ -37,58 +61,48 @@ public class ColumnSpec {
         return name;
     }
 
-    public static class Builder {
-        private String name;
-        private ColumnTypeSpec columnType;
-        private Boolean unsigned;
-        private Boolean notNull;
-        private Boolean autoIncrement;
-        private String comment;
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder columnType(ColumnTypeSpec columnType) {
-            this.columnType = columnType;
-            return this;
-        }
-
-        public Builder unsigned(Boolean unsigned) {
-            this.unsigned = unsigned;
-            return this;
-        }
-
-        public Builder notNull(Boolean notNull) {
-            this.notNull = notNull;
-            return this;
-        }
-
-        public Builder autoIncrement(Boolean autoIncrement) {
-            this.autoIncrement = autoIncrement;
-            return this;
-        }
-
-        public Builder comment(String comment) {
-            this.comment = comment;
-            return this;
-        }
-
-        public ColumnSpec build() {
-            ColumnSpec columnSpec = new ColumnSpec();
-            columnSpec.name = this.name;
-            columnSpec.columnType = this.columnType;
-            columnSpec.unsigned = this.unsigned;
-            columnSpec.notNull = this.notNull;
-            columnSpec.autoIncrement = this.autoIncrement;
-            columnSpec.comment = this.comment;
-            return columnSpec;
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public ColumnTypeSpec getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(ColumnTypeSpec columnType) {
+        this.columnType = columnType;
+    }
+
+    public Boolean getUnsigned() {
+        return unsigned;
+    }
+
+    public void setUnsigned(Boolean unsigned) {
+        this.unsigned = unsigned;
+    }
+
+    public Boolean getNotNull() {
+        return notNull;
+    }
+
+    public void setNotNull(Boolean notNull) {
+        this.notNull = notNull;
+    }
+
+    public Boolean getAutoIncrement() {
+        return autoIncrement;
+    }
+
+    public void setAutoIncrement(Boolean autoIncrement) {
+        this.autoIncrement = autoIncrement;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }

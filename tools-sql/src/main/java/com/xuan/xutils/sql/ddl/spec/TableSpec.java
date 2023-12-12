@@ -2,11 +2,10 @@ package com.xuan.xutils.sql.ddl.spec;
 
 import java.util.List;
 
-import com.xuan.xutils.base.exception.Assert;
-import com.xuan.xutils.base.exception.BizExceptionCodeEnum;
-import com.xuan.xutils.base.utils.CollectionUtils;
-import com.xuan.xutils.base.utils.StringUtils;
+import com.xuan.xutils.sql.common.Assert;
+import com.xuan.xutils.sql.common.CollectionUtils;
 import com.xuan.xutils.sql.common.SQLSyntax;
+import com.xuan.xutils.sql.common.StringUtils;
 
 /**
  * @author xuan
@@ -46,9 +45,9 @@ public class TableSpec {
     private List<List<ColumnSpec>> keysList;
 
     public String createTableSQL(SQLSyntax sqlSyntax) {
-        Assert.notEmpty(name, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "name is empty.");
-        Assert.notEmpty(columnList, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "columnList is empty.");
-        Assert.notNull(primaryKey, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "primaryKey is empty.");
+        Assert.notEmpty(name, "表名[name]不能为空");
+        Assert.notEmpty(columnList, "表列[columnList]不能为空");
+        Assert.notNull(primaryKey, "表主键[primaryKey]不能为空");
 
         return CREATE_SQL_TEMPLATE
             .replace("#tableName#", name)
@@ -117,67 +116,59 @@ public class TableSpec {
         return sb.toString();
     }
 
-    public static class Builder {
-        private String name;
-        private List<ColumnSpec> columnList;
-        private String comment;
-        private String charset;
-        private ColumnSpec primaryKey;
-        private List<List<ColumnSpec>> uniqueKeysList;
-        private List<List<ColumnSpec>> keysList;
-
-        public Builder name(String name) {
-            Assert.notEmpty(name, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "name is empty.");
-            this.name = name;
-            return this;
-        }
-
-        public Builder columnList(List<ColumnSpec> columnList) {
-            Assert.notEmpty(columnList, BizExceptionCodeEnum.BIZ_PARAM_EMPTY, "columnList is empty.");
-            this.columnList = columnList;
-            return this;
-        }
-
-        public Builder comment(String comment) {
-            this.comment = comment;
-            return this;
-        }
-
-        public Builder charset(String charset) {
-            this.charset = charset;
-            return this;
-        }
-
-        public Builder primaryKey(ColumnSpec primaryKey) {
-            this.primaryKey = primaryKey;
-            return this;
-        }
-
-        public Builder uniqueKeysList(List<List<ColumnSpec>> uniqueKeysList) {
-            this.uniqueKeysList = uniqueKeysList;
-            return this;
-        }
-
-        public Builder keysList(List<List<ColumnSpec>> keysList) {
-            this.keysList = keysList;
-            return this;
-        }
-
-        public TableSpec build() {
-            TableSpec tableSpec = new TableSpec();
-            tableSpec.name = this.name;
-            tableSpec.columnList = this.columnList;
-            tableSpec.comment = this.comment;
-            tableSpec.charset = this.charset;
-            tableSpec.primaryKey = this.primaryKey;
-            tableSpec.uniqueKeysList = this.uniqueKeysList;
-            tableSpec.keysList = this.keysList;
-            return tableSpec;
-        }
+    public String getName() {
+        return name;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public List<ColumnSpec> getColumnList() {
+        return columnList;
+    }
+
+    public void setColumnList(List<ColumnSpec> columnList) {
+        this.columnList = columnList;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getCharset() {
+        return charset;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset;
+    }
+
+    public ColumnSpec getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(ColumnSpec primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public List<List<ColumnSpec>> getUniqueKeysList() {
+        return uniqueKeysList;
+    }
+
+    public void setUniqueKeysList(List<List<ColumnSpec>> uniqueKeysList) {
+        this.uniqueKeysList = uniqueKeysList;
+    }
+
+    public List<List<ColumnSpec>> getKeysList() {
+        return keysList;
+    }
+
+    public void setKeysList(List<List<ColumnSpec>> keysList) {
+        this.keysList = keysList;
+    }
 }

@@ -24,6 +24,7 @@
         <module>distributed-lock</module>
         <module>geek-code</module>
         <module>crud-boy</module>
+        <module>demo</module>
     </modules>
     <packaging>pom</packaging>
 
